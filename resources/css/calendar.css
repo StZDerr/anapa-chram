@@ -1,0 +1,184 @@
+/* Стили для страницы календаря */
+:root {
+    --calendar-main: #4a5b6f;
+    --calendar-beige: #efe9e0;
+    --calendar-dark: #222222;
+    --calendar-muted: #666666;
+    --calendar-accent: #cbbd91;
+    --calendar-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --calendar-shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.15);
+    --font-title: "Tenor Sans", sans-serif;
+    --font-ui: "Montserrat", sans-serif;
+}
+
+.calendar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.calendar-title {
+    font-family: var(--font-title);
+    font-weight: 400;
+    color: var(--calendar-main);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: clamp(2rem, 4vw, 3rem);
+}
+
+#calendar {
+    background: linear-gradient(135deg, var(--calendar-beige) 0%, #f9f7f4 100%);
+    border-radius: 15px;
+    box-shadow: var(--calendar-shadow);
+    padding: 20px;
+    font-family: var(--font-ui);
+    color: var(--calendar-dark);
+}
+
+/* FullCalendar переопределения */
+.fc {
+    font-family: var(--font-ui) !important;
+}
+
+.fc-header-toolbar {
+    margin-bottom: 1.5em !important;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.fc-button {
+    background: var(--calendar-main) !important;
+    border: none !important;
+    color: white !important;
+    border-radius: 8px !important;
+    padding: 8px 12px !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+    box-shadow: var(--calendar-shadow) !important;
+}
+
+.fc-button:hover {
+    background: var(--calendar-accent) !important;
+    transform: translateY(-2px);
+    box-shadow: var(--calendar-shadow-hover) !important;
+}
+
+.fc-button:not(:disabled).fc-button-active {
+    background: var(--calendar-accent) !important;
+    color: var(--calendar-dark) !important;
+}
+
+.fc-today-button {
+    background: var(--calendar-accent) !important;
+    color: var(--calendar-dark) !important;
+}
+
+.fc-today-button:hover {
+    background: var(--calendar-main) !important;
+    color: white !important;
+}
+
+/* Заголовки дней для недельного вида */
+.fc-col-header {
+    background: var(--calendar-beige) !important;
+    color: var(--calendar-main) !important;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--calendar-accent) !important;
+}
+
+.fc-col-header-cell {
+    padding: 10px !important;
+    text-align: center !important;
+}
+
+/* Часы слева */
+.fc-timegrid-slot {
+    border-top: 1px solid #e0e0e0 !important;
+}
+
+.fc-timegrid-slot-label {
+    font-size: 0.9rem !important;
+    color: var(--calendar-dark) !important;
+    padding: 5px !important;
+}
+
+/* Сетка времени */
+.fc-timegrid-divider {
+    border-color: var(--calendar-accent) !important;
+}
+
+.fc-timegrid-col {
+    border-left: 1px solid #e0e0e0 !important;
+}
+
+/* События */
+.fc-event {
+    border-radius: 6px !important;
+    border: none !important;
+    background: var(--calendar-main) !important;
+    color: white !important;
+    font-size: 0.85em !important;
+    padding: 2px 4px !important;
+    box-shadow: var(--calendar-shadow) !important;
+    transition: all 0.3s ease !important;
+}
+
+.fc-event:hover {
+    background: var(--calendar-accent) !important;
+    color: var(--calendar-dark) !important;
+    transform: scale(1.05);
+}
+
+/* Текущий день */
+.fc-day-today {
+    background: rgba(74, 91, 111, 0.1) !important;
+}
+
+/* Индикатор текущего времени */
+.fc-timegrid-now-indicator-line {
+    border-color: var(--calendar-main) !important;
+    border-width: 2px !important;
+}
+
+.fc-view-harness {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .calendar-container {
+        padding: 10px;
+    }
+
+    .calendar-title {
+        font-size: 1.8rem;
+    }
+
+    #calendar {
+        padding: 10px;
+    }
+
+    .fc-header-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .fc-button {
+        margin: 2px 0 !important;
+    }
+
+    .fc-col-header-cell {
+        font-size: 0.8rem !important;
+        padding: 5px !important;
+    }
+
+    .fc-timegrid-slot-label {
+        font-size: 0.8rem !important;
+    }
+}

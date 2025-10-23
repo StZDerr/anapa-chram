@@ -1,0 +1,513 @@
+/* ---------- Переменные ---------- */
+:root {
+    --main-color: #4a5b6f;
+    --beige-color: #e2daca;
+    --font-title: "Tenor Sans", sans-serif;
+    --font-text: "Montserrat", sans-serif;
+    --font-size-title: clamp(1rem, 0.5962rem + 1.8149vw, 3.5rem);
+    --font-size-details: clamp(0.75rem, 0.5481rem + 0.9074vw, 2rem);
+}
+
+/* ---------- Temple Title ---------- */
+.temple-title {
+    font-family: var(--font-title);
+    font-weight: 400;
+    font-size: var(--font-size-title);
+    color: var(--main-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 3rem;
+}
+
+/* ---------- Gallery Swiper ---------- */
+.swiper-container-wrapper {
+    display: flex;
+}
+.gallery-top {
+    width: 80%;
+    height: 25rem;
+    position: relative;
+    padding: 0.5rem;
+    border-radius: 3rem;
+}
+.gallery-top .swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+}
+.gallery-top img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.gallery-thumbs {
+    padding: 0.5rem;
+    width: 20%;
+    height: 33.5rem;
+}
+.gallery-thumbs .swiper-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+.gallery-thumbs .swiper-slide {
+    height: 20%;
+    opacity: 0.5;
+    cursor: pointer;
+}
+.gallery-thumbs .swiper-slide-thumb-active {
+    opacity: 1;
+}
+.gallery-thumbs img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1rem;
+}
+.swiper-button-next,
+.swiper-button-prev {
+    color: #fff;
+}
+.gallery-top-2 {
+    width: 80%;
+    height: 25rem;
+    position: relative;
+    padding: 0.5rem;
+    border-radius: 3rem;
+}
+.gallery-top-2 .swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+}
+.gallery-top-2 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.gallery-thumbs-2 {
+    padding: 0.5rem;
+    width: 20%;
+    height: 33.5rem;
+}
+.gallery-thumbs-2 .swiper-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+.gallery-thumbs-2 .swiper-slide {
+    height: 20%;
+    opacity: 0.5;
+    cursor: pointer;
+}
+.gallery-thumbs-2 .swiper-slide-thumb-active {
+    opacity: 1;
+}
+.gallery-thumbs-2 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1rem;
+}
+
+/* ---------- Temple Content ---------- */
+.temple-content .title {
+    font-family: Tenor Sans;
+    font-weight: 400;
+    font-size: var(--font-size-title);
+    line-height: 100%;
+    font-variant: small-caps;
+    color: #4a5b6f;
+}
+.temple-content .details,
+.temple-content .more-details {
+    margin-top: 1rem;
+    font-family: Montserrat;
+    font-weight: 500;
+    line-height: 24px;
+    font-variant: small-caps;
+    color: #25282f;
+}
+
+/* ---------- Clergy ---------- */
+.clergy {
+    padding: 3rem 0;
+}
+.clergy .title {
+    font-size: var(--font-size-title);
+    font-family: Tenor Sans;
+    font-weight: 400;
+    line-height: 64px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #4a5b6f;
+    margin-bottom: 1rem;
+}
+.clergy .details {
+    font-family: Tenor Sans;
+    font-weight: 400;
+    font-size: var(--font-size-details);
+    line-height: 100%;
+    text-align: center;
+    font-variant: small-caps;
+    color: #6e634c;
+    margin-bottom: 3rem;
+}
+.clergy-cards {
+    margin-top: 2rem;
+}
+.clergy-card {
+    text-align: center;
+}
+.clergy-card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 2rem;
+    margin-bottom: 1rem;
+}
+.clergy-card .card-name {
+    font-family: Tenor Sans;
+    font-weight: 400;
+    font-size: clamp(0.75rem, 0.5481rem + 0.9074vw, 2rem);
+    line-height: 1.2;
+    color: #4a5b6f;
+    margin-bottom: 0.5rem;
+}
+.clergy-card .card-position {
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: clamp(0.75rem, 0.7096rem + 0.1815vw, 1rem);
+    line-height: 1.2;
+    color: #6e634c;
+}
+
+/* ---------- Activity ---------- */
+.activity {
+    margin-top: 120px;
+    margin-bottom: 120px;
+}
+.activity .title {
+    font-size: var(--font-size-title);
+    font-family: Tenor Sans;
+    font-weight: 400;
+    line-height: 64px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #4a5b6f;
+    margin-bottom: 1rem;
+}
+.activity-swiper-container {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    margin-top: 60px;
+    overflow: hidden;
+    padding: 0 60px;
+}
+.activity-swiper-container .swiper-wrapper {
+    align-items: center;
+}
+.activity-swiper-container .swiper-slide {
+    height: 500px;
+    transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s ease;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.85);
+}
+.activity-swiper-container .swiper-slide-active {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: scale(1) !important;
+    z-index: 2;
+}
+.activity-swiper-container .swiper-slide-prev,
+.activity-swiper-container .swiper-slide-next {
+    opacity: 0.5 !important;
+    visibility: visible !important;
+    transform: scale(0.9);
+}
+.activity-slide-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+.activity-slide-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.activity-slide-overlay {
+    position: absolute;
+    bottom: 0px;
+    left: 40px;
+    max-width: 500px;
+    padding: 20px;
+}
+.activity-slide-title {
+    font-family: "Tenor Sans", sans-serif;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 100%;
+    font-variant: small-caps;
+    color: white;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+.activity-slide-desc {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    font-variant: small-caps;
+    color: white;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+.activity-swiper-container .swiper-pagination {
+    bottom: -50px !important;
+}
+.activity-swiper-container .swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    background-color: #cbbd91;
+    opacity: 0.5;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.activity-swiper-container .swiper-pagination-bullet-active {
+    opacity: 1;
+    background-color: #4a5b6f;
+    transform: scale(1.3);
+}
+
+/* ---------- Donation ---------- */
+.donation .title {
+    font-size: var(--font-size-title);
+    font-family: Tenor Sans;
+    font-weight: 400;
+    line-height: 64px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #4a5b6f;
+    margin-bottom: 1rem;
+}
+
+/* ---------- Hero Section ---------- */
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    border-radius: 1.5rem;
+}
+.hero-image {
+    position: absolute;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    border-radius: 1.5rem;
+}
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+}
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(74, 91, 111, 0.5),
+        rgba(74, 91, 111, 0.7)
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.hero-logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+.hero-logo img {
+    width: 120px;
+    height: 120px;
+    filter: brightness(0) invert(1);
+}
+.hero-quote {
+    text-align: center;
+    color: white;
+}
+.hero-quote p {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 100%;
+    text-align: center;
+    text-transform: capitalize;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.hero-author {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    text-transform: uppercase;
+    font-style: Italic;
+    line-height: 100%;
+    text-align: center;
+    text-transform: lowercase;
+}
+.hero-btn {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 100%;
+    text-align: center;
+    font-variant: small-caps;
+    background: white;
+    color: var(--main-color);
+    padding: 15px 50px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+.hero-btn:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    color: var(--main-color);
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        height: 350px;
+    }
+    .hero-image {
+        height: 350px;
+    }
+    .hero-content {
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+    .hero-logo img {
+        width: 60px;
+        height: 60px;
+    }
+    .hero-quote p {
+        font-size: 16px;
+    }
+    .hero-author {
+        font-size: 14px;
+        margin-top: 1rem;
+    }
+    .hero-btn {
+        font-size: 18px;
+        padding: 12px 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-section {
+        height: 300px;
+    }
+    .hero-image {
+        height: 300px;
+    }
+    .hero-content {
+        gap: 1rem;
+        padding: 1rem;
+    }
+    .hero-logo img {
+        width: 50px;
+        height: 50px;
+    }
+    .hero-quote p {
+        font-size: 14px;
+    }
+    .hero-author {
+        font-size: 12px;
+    }
+    .hero-btn {
+        font-size: 16px;
+        padding: 10px 35px;
+    }
+}
+
+/* ---------- Фотогалерея ---------- */
+.photo-section .photo-filters {
+    flex-wrap: wrap;
+}
+.photo-section .photo-filters .btn-filter {
+    background: #efe9e0;
+    border: none;
+    padding: 12px 36px;
+    border-radius: 28px;
+    color: #4a5b6f;
+    font-weight: 600;
+}
+.photo-section .photo-filters .btn-filter.active {
+    background: #e2daca;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+}
+.gallery-wrap {
+    margin-top: 20px;
+}
+.gallery-instance {
+    position: relative;
+}
+.gallery-instance .swiper-button-prev,
+.gallery-instance .swiper-button-next {
+    color: #4a5b6f;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+.gallery-instance .swiper-button-prev {
+    left: -60px;
+}
+.gallery-instance .swiper-button-next {
+    right: -60px;
+}
+.gallery-swiper .swiper-slide img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.gallery-swiper .swiper-slide img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+.photo-section .title {
+    font-size: var(--font-size-title);
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 1200px) {
+    .gallery-swiper .swiper-slide img {
+        height: 320px;
+    }
+}

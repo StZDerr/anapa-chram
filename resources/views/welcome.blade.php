@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
+<head>
+    <title>Храм святого князя Владимира в Анапе</title>
+    @include('partials.head')
+
+    <!-- Стили главной страницы -->
+    @vite(['resources/css/welcome.css', 'resources/js/welcome.js'])
+</head>
+
+<body class="d-flex flex-column min-vh-100 font-sans antialiased">
+    @include('partials.navbar')
+    <div class="container">
+        <div class="background-container">
+            <div class="windows">
+                <div class="window"></div>
+                <div class="window"></div>
+                <div class="window"></div>
+                <div class="window"></div>
+            </div>
+        </div>
+
+        <div class="main-text-block">
+            <div class="display-1 display-xl-1 display-lg-2 display-md-3 display-sm-4 fs-0">ХРАМ СВЯТОГО</div>
+            <div class="display-1 display-xl-1 display-lg-2 display-md-3 display-sm-4 fs-0">РАВНОАПОСТОЛЬНОГО</div>
+            <div class="display-1 display-xl-1 display-lg-2 display-md-3 display-sm-4 fs-0">ВЕЛИКОГО КНЯЗЯ ВЛАДИМИРА
+            </div>
+            <p>Храм расположен в живописном месте, недалеко от моря, и часто посещается туристами. Парк "Долина Славы" и
+                набережная — идеально для прогулки после посещения.</p>
+        </div>
+    </div>
+    <div class="background-color-light-beige">
+        <div class="container">
+            <div class="calendar">
+                <div class="text-center title">ПРАВОСЛАВНЫЙ КАЛЕНДАРЬ</div>
+
+                <!-- Календарные блоки -->
+                <div class="d-flex justify-content-center align-items-center gap-3">
+                    <!-- Стрелка влево -->
+                    <button class="btn-calendar-nav">
+                        <i class="bi bi-chevron-left"></i>
+                    </button>
+
+                    <!-- Календарный блок 1 -->
+                    <div class="calendar-card">
+                        <div class="calendar-day">ВС</div>
+                        <div class="calendar-date">5 окт/22 окт</div>
+                        <div class="calendar-desc">Неделя 17-я по Пятидесятнице. Глас осмый.</div>
+                    </div>
+
+                    <!-- Календарный блок 2 -->
+                    <div class="calendar-card">
+                        <div class="calendar-day">ПН</div>
+                        <div class="calendar-date">6 окт/23 окт</div>
+                        <div class="calendar-desc">Зачатие честного славного Пророка и Крестителя Иоанна.</div>
+                    </div>
+
+                    <!-- Календарный блок 3 -->
+                    <div class="calendar-card">
+                        <div class="calendar-day">ВТ</div>
+                        <div class="calendar-date">7 окт/24 окт</div>
+                        <div class="calendar-desc">Мучеников Сергия и Вакха.</div>
+                    </div>
+
+                    <!-- Стрелка вправо -->
+                    <button class="btn-calendar-nav">
+                        <i class="bi bi-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="text-center quick-title">Быстрый доступ</div>
+        <div class="quick">
+            <div class="div2">
+                <div class="quick-card height-fix">
+                    <img src="{{ asset('images/ChramSvitogo.jpg') }}" alt="Храм святого князя Владимира">
+                    <div class="quick-card-arrow">
+                        <i class="bi bi-arrow-right"></i>
+                    </div>
+                    <div class="quick-card-content">
+                        <h3 class="quick-card-title">Храм святого<br>князя Владимира
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="div3">
+                <div class="quick-card">
+                    <img src="{{ asset('images/hram_kupel_knyagini_olgi.jpg') }}" alt="Храм святого князя Владимира">
+                    <div class="quick-card-arrow">
+                        <i class="bi bi-arrow-right"></i>
+                    </div>
+                    <div class="quick-card-content">
+                        <h3 class="quick-card-title">Храм-купель<br>княгини Ольги</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="div4">
+                <div class="quick-card height-fix">
+                    <img src="{{ asset('images/derzhavnaya_ikona_bozhej_materi.jpg') }}"
+                        alt="Храм святого князя Владимира">
+                    <div class="quick-card-arrow">
+                        <i class="bi bi-arrow-right"></i>
+                    </div>
+                    <div class="quick-card-content">
+                        <h3 class="quick-card-title">Державная икона<br>Божьей матери
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="div5">
+                <div class="quick-card">
+                    <img src="{{ asset('images/galery.jpg') }}" alt="Храм святого князя Владимира">
+                    <div class="quick-card-arrow">
+                        <i class="bi bi-arrow-right"></i>
+                    </div>
+                    <div class="quick-card-content">
+                        <h3 class="quick-card-title">Галерея</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="div6">
+                <div class="quick-card height-fix">
+                    <img src="{{ asset('images/Duhovenstvo.jpg') }}" alt="Храм святого князя Владимира">
+                    <div class="quick-card-arrow">
+                        <i class="bi bi-arrow-right"></i>
+                    </div>
+                    <div class="quick-card-content">
+                        <h3 class="quick-card-title">Духовенство</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="div7">
+                <div class="quick-card">
+                    <img src="{{ asset('images/Popechiteli.jpg') }}" alt="Храм святого князя Владимира">
+                    <div class="quick-card-arrow">
+                        <i class="bi bi-arrow-right"></i>
+                    </div>
+                    <div class="quick-card-content">
+                        <h3 class="quick-card-title">Попечители</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="background-color-light-beige mt-5 mb-5 pb-5 pt-5">
+        <div class="container">
+            <div class="timetable">
+                <div class="text-center title m-3">
+                    ЕЖЕДНЕВНОЕ РАСПИСАНИЕ
+                </div>
+
+                <!-- Дни недели -->
+                <ul class="nav justify-content-center mb-4" id="weekTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link day-circle active" data-short="Пн" data-full="Понедельник"
+                            id="monday-tab" data-bs-toggle="tab" data-bs-target="#monday" type="button"
+                            role="tab">
+                            Пн
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link day-circle" data-short="Вт" data-full="Вторник" id="tuesday-tab"
+                            data-bs-toggle="tab" data-bs-target="#tuesday" type="button" role="tab">
+                            Вт
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link day-circle" data-short="Ср" data-full="Среда" id="wednesday-tab"
+                            data-bs-toggle="tab" data-bs-target="#wednesday" type="button" role="tab">
+                            Ср
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link day-circle" data-short="Чт" data-full="Четверг" id="thursday-tab"
+                            data-bs-toggle="tab" data-bs-target="#thursday" type="button" role="tab">
+                            Чт
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link day-circle" data-short="Пт" data-full="Пятница" id="friday-tab"
+                            data-bs-toggle="tab" data-bs-target="#friday" type="button" role="tab">
+                            Пт
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link day-circle" data-short="Сб" data-full="Суббота" id="saturday-tab"
+                            data-bs-toggle="tab" data-bs-target="#saturday" type="button" role="tab">
+                            Сб
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link day-circle" data-short="Вс" data-full="Воскресенье" id="sunday-tab"
+                            data-bs-toggle="tab" data-bs-target="#sunday" type="button" role="tab">
+                            Вс
+                        </button>
+                    </li>
+                </ul>
+
+                <!-- Контент -->
+                <div class="tab-content" id="weekTabContent">
+                    <div class="tab-pane fade show active" id="monday" role="tabpanel">
+                        <div class="schedule-container">
+                            <!-- Утро -->
+                            <div class="schedule-half">
+                                <div class="schedule-header">
+                                    <div class="period">Утро</div>
+                                    <div class="time">08:00</div>
+                                </div>
+                                <div class="schedule-text">
+                                    Исповедь. Литургия.
+                                </div>
+                            </div>
+
+                            <!-- Вечер -->
+                            <div class="schedule-half">
+                                <div class="schedule-header">
+                                    <div class="period">Вечер</div>
+                                    <div class="time">18:00</div>
+                                </div>
+                                <div class="schedule-text">
+                                    Вечернее богослужение.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tuesday" role="tabpanel">
+                        <div class="schedule-container">
+                            <!-- Утро -->
+                            <div class="schedule-half">
+                                <div class="schedule-header">
+                                    <div class="period">Утро</div>
+                                    <div class="time">08:00</div>
+                                </div>
+                                <div class="schedule-text">
+                                    Исповедь. Литургия.
+                                </div>
+                            </div>
+
+                            <!-- Вечер -->
+                            <div class="schedule-half">
+                                <div class="schedule-header">
+                                    <div class="period">Вечер</div>
+                                    <div class="time">18:00</div>
+                                </div>
+                                <div class="schedule-text">
+                                    Вечернее богослужение.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="wednesday" role="tabpanel">
+                        <div class="schedule-container">
+                            <!-- Утро -->
+                            <div class="schedule-half">
+                                <div class="schedule-header">
+                                    <div class="period">Утро</div>
+                                    <div class="time">08:00</div>
+                                </div>
+                                <div class="schedule-text">
+                                    Исповедь. Литургия.
+                                </div>
+                            </div>
+
+                            <!-- Вечер -->
+                            <div class="schedule-half">
+                                <div class="schedule-header">
+                                    <div class="period">Вечер</div>
+                                    <div class="time">18:00</div>
+                                </div>
+                                <div class="schedule-text">
+                                    Вечернее богослужение.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Остальные дни аналогично -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="news">
+            <div class="text-center title m-3">
+                НОВОСТИ И СОБЫТИЯ
+            </div>
+            <!-- Обертка для свайпера с кнопками -->
+            <div class="swiper-wrapper-outer">
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+                <!-- Slider main container -->
+                <div class="swiper-container">
+                    <!-- Additional required wrapper -->
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="slide-inner">
+                                <img src="{{ asset('images/newsOne.jpg') }}" alt="Храм святого князя Владимира"
+                                    class="slide-img">
+                                <div class="slide-title">История храма</div>
+                                <div class="slide-desc">
+                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex sed, laborum fugit
+                                    repudiandae modi dolorum voluptate atque voluptatibus alias cupiditate odio delectus
+                                    obcaecati sit. Optio rerum repudiandae dolore id recusandae? Error nemo numquam
+                                    consequuntur nisi dolor quae earum dolore officiis?
+                                </div>
+                                <div class="slide-read">Читать</div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="slide-inner">
+                                <img src="{{ asset('images/newsOne.jpg') }}" alt="Храм святого князя Владимира"
+                                    class="slide-img">
+                                <div class="slide-title">История храма</div>
+                                <div class="slide-desc">
+                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex sed, laborum fugit
+                                    repudiandae modi dolorum voluptate atque voluptatibus alias cupiditate odio delectus
+                                    obcaecati sit. Optio rerum repudiandae dolore id recusandae? Error nemo numquam
+                                    consequuntur nisi dolor quae earum dolore officiis?
+                                </div>
+                                <div class="slide-read">Читать</div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="slide-inner">
+                                <img src="{{ asset('images/newsOne.jpg') }}" alt="Храм святого князя Владимира"
+                                    class="slide-img">
+                                <div class="slide-title">История храма</div>
+                                <div class="slide-desc">
+                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex sed, laborum fugit
+                                    repudiandae modi dolorum voluptate atque voluptatibus alias cupiditate odio delectus
+                                    obcaecati sit. Optio rerum repudiandae dolore id recusandae? Error nemo numquam
+                                    consequuntur nisi dolor quae earum dolore officiis?
+                                </div>
+                                <div class="slide-read">Читать</div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="slide-inner">
+                                <img src="{{ asset('images/newsOne.jpg') }}" alt="Храм святого князя Владимира"
+                                    class="slide-img">
+                                <div class="slide-title">История храма</div>
+                                <div class="slide-desc">
+                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex sed, laborum fugit
+                                    repudiandae modi dolorum voluptate atque voluptatibus alias cupiditate odio delectus
+                                    obcaecati sit. Optio rerum repudiandae dolore id recusandae? Error nemo numquam
+                                    consequuntur nisi dolor quae earum dolore officiis?
+                                </div>
+                                <div class="slide-read">Читать</div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="slide-inner">
+                                <img src="{{ asset('images/newsOne.jpg') }}" alt="Храм святого князя Владимира"
+                                    class="slide-img">
+                                <div class="slide-title">История храма</div>
+                                <div class="slide-desc">
+                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex sed, laborum fugit
+                                    repudiandae modi dolorum voluptate atque voluptatibus alias cupiditate odio delectus
+                                    obcaecati sit. Optio rerum repudiandae dolore id recusandae? Error nemo numquam
+                                    consequuntur nisi dolor quae earum dolore officiis?
+                                </div>
+                                <div class="slide-read">Читать</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- If we need navigation buttons -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="activity">
+            <div class="text-center title">ДЕЯТЕЛЬНОСТЬ ХРАМА</div>
+
+            <!-- Второй Swiper с pagination -->
+            <div class="activity-swiper-container">
+                <div class="swiper-wrapper">
+                    <!-- Slide 1 -->
+                    <div class="swiper-slide">
+                        <div class="activity-slide-inner">
+                            <img src="{{ asset('images/activity.jpg') }}" alt="Деятельность храма"
+                                class="activity-slide-img">
+                            <div class="activity-slide-overlay">
+                                <div class="activity-slide-title">Воскресная школа</div>
+                                <div class="activity-slide-desc">Обучение детей основам православной веры и культуры
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="swiper-slide">
+                        <div class="activity-slide-inner">
+                            <img src="{{ asset('images/activity.jpg') }}" alt="Деятельность храма"
+                                class="activity-slide-img">
+                            <div class="activity-slide-overlay">
+                                <div class="activity-slide-title">Благотворительность</div>
+                                <div class="activity-slide-desc">Помощь нуждающимся и социальная поддержка</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3 -->
+                    <div class="swiper-slide">
+                        <div class="activity-slide-inner">
+                            <img src="{{ asset('images/activity.jpg') }}" alt="Деятельность храма"
+                                class="activity-slide-img">
+                            <div class="activity-slide-overlay">
+                                <div class="activity-slide-title">Паломничество</div>
+                                <div class="activity-slide-desc">Организация поездок по святым местам</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 4 -->
+                    <div class="swiper-slide">
+                        <div class="activity-slide-inner">
+                            <img src="{{ asset('images/activity.jpg') }}" alt="Деятельность храма"
+                                class="activity-slide-img">
+                            <div class="activity-slide-overlay">
+                                <div class="activity-slide-title">Молодежное движение</div>
+                                <div class="activity-slide-desc">Встречи и мероприятия для молодежи</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 5 -->
+                    <div class="swiper-slide">
+                        <div class="activity-slide-inner">
+                            <img src="{{ asset('images/activity.jpg') }}" alt="Деятельность храма"
+                                class="activity-slide-img">
+                            <div class="activity-slide-overlay">
+                                <div class="activity-slide-title">Хор и клирос</div>
+                                <div class="activity-slide-desc">Церковное пение и богослужения</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pagination (точки) -->
+                <div class="swiper-pagination activity-pagination"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="gallery-section">
+            <div class="text-center title">ГАЛЕРЕЯ ХРАМА</div>
+
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <!-- Slide 1 -->
+                    <div class="swiper-slide active">
+                        <img src="{{ asset('images/ChramSvitogo.jpg') }}" alt="Храм святого князя Владимира" />
+                        <div class="slide-overlay">
+                            <!-- Заголовок с иконкой слева вверху -->
+                            <div class="slide-header">
+                                <img src="{{ asset('images/Logo2.svg') }}" alt="Логотип" class="slide-icon">
+                                <h3 class="slide-title">Крещенский парк</h3>
+                            </div>
+                            <!-- Описание внизу -->
+                            <div class="slide-footer">
+                                <p class="slide-description">Горожане с нетерпением ждали долгожданное открытие
+                                    Крещенского парка в Анапе и уже его посетили, а вот новые жители города не знают,
+                                    где именно он находится и как сюда можно добраться.</p>
+                                <div class="slide-actions">
+                                    <span class="slide-link">Узнать больше</span>
+                                    <svg class="slide-arrow" xmlns="http://www.w3.org/2000/svg" width="24"
+                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                        <polyline points="12 5 19 12 12 19"></polyline>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="swiper-slide">
+                        <img src="{{ asset('images/hram_kupel_knyagini_olgi.jpg') }}"
+                            alt="Храм-купель княгини Ольги" />
+                        <div class="slide-overlay">
+                            <div class="slide-header">
+                                <img src="{{ asset('images/Logo2.svg') }}" alt="Логотип" class="slide-icon">
+                                <h3 class="slide-title">Храм-купель княгини Ольги</h3>
+                            </div>
+                            <div class="slide-footer">
+                                <p class="slide-description">Уникальное место для проведения таинства крещения,
+                                    построенное в традициях русского зодчества.</p>
+                                <div class="slide-actions">
+                                    <span class="slide-link">Узнать больше</span>
+                                    <svg class="slide-arrow" xmlns="http://www.w3.org/2000/svg" width="24"
+                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                        <polyline points="12 5 19 12 12 19"></polyline>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3 -->
+                    <div class="swiper-slide">
+                        <img src="{{ asset('images/derzhavnaya_ikona_bozhej_materi.jpg') }}" alt="Державная икона" />
+                        <div class="slide-overlay">
+                            <div class="slide-header">
+                                <img src="{{ asset('images/Logo2.svg') }}" alt="Логотип" class="slide-icon">
+                                <h3 class="slide-title">Державная икона Божьей Матери</h3>
+                            </div>
+                            <div class="slide-footer">
+                                <p class="slide-description">Чудотворная икона, почитаемая верующими со всей России.
+                                    Перед ней совершаются молебны и богослужения.</p>
+                                <div class="slide-actions">
+                                    <span class="slide-link">Узнать больше</span>
+                                    <svg class="slide-arrow" xmlns="http://www.w3.org/2000/svg" width="24"
+                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                        <polyline points="12 5 19 12 12 19"></polyline>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 4 -->
+                    <div class="swiper-slide">
+                        <img src="{{ asset('images/galery.jpg') }}" alt="Галерея храма" />
+                        <div class="slide-overlay">
+                            <div class="slide-header">
+                                <img src="{{ asset('images/Logo2.svg') }}" alt="Логотип" class="slide-icon">
+                                <h3 class="slide-title">Галерея храма</h3>
+                            </div>
+                            <div class="slide-footer">
+                                <p class="slide-description">Внутреннее убранство храма с древними иконами, фресками и
+                                    уникальными произведениями церковного искусства.</p>
+                                <div class="slide-actions">
+                                    <span class="slide-link">Узнать больше</span>
+                                    <svg class="slide-arrow" xmlns="http://www.w3.org/2000/svg" width="24"
+                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                        <polyline points="12 5 19 12 12 19"></polyline>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mb-5">
+        <div class="photo-section">
+            <div class="text-center title">ФОТОГАЛЕРЕЯ</div>
+            <!-- Фильтры категорий -->
+            <div class="photo-filters d-flex justify-content-center gap-3 mb-4">
+                <button class="btn btn-filter active" data-target="#gallery-temple">Храм</button>
+                <button class="btn btn-filter" data-target="#gallery-festivals">Праздники</button>
+                <button class="btn btn-filter" data-target="#gallery-park">Крещенский парк</button>
+            </div>
+
+            <!-- Галереи: по одному Swiper на категорию -->
+            <div class="gallery-wrap">
+                <!-- Храм -->
+                <div id="gallery-temple" class="gallery-instance">
+                    <div class="swiper gallery-swiper gallery-temple-swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><a href="{{ asset('images/ChramSvitogo.jpg') }}"
+                                    data-pswp-width="1200" data-pswp-height="800">
+                                    <img src="{{ asset('images/ChramSvitogo.jpg') }}" alt="Храм">
+                                </a>
+                            </div>
+                            <div class="swiper-slide"><a href="{{ asset('images/galery.jpg') }}"
+                                    data-pswp-width="1200" data-pswp-height="800">
+                                    <img src="{{ asset('images/galery.jpg') }}" alt="Интерьер">
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="{{ asset('images/Duhovenstvo.jpg') }}" data-pswp-width="1200"
+                                    data-pswp-height="800">
+                                    <img src="{{ asset('images/Duhovenstvo.jpg') }}" alt="Духовенство">
+                                </a>
+                            </div>
+                            <div class="swiper-slide"><a href="{{ asset('images/Popechiteli.jpg') }}"
+                                    data-pswp-width="1200" data-pswp-height="800">
+                                    <img src="{{ asset('images/Popechiteli.jpg') }}" alt="Храм 4">
+                                </a>
+                            </div>
+                            <div class="swiper-slide"><a href="{{ asset('images/hram_kupel_knyagini_olgi.jpg') }}"
+                                    data-pswp-width="1200" data-pswp-height="800">
+                                    <img src="{{ asset('images/hram_kupel_knyagini_olgi.jpg') }}" alt="Купель">
+                                </a>
+                            </div>
+                            <div class="swiper-slide"><a
+                                    href="{{ asset('images/derzhavnaya_ikona_bozhej_materi.jpg') }}"
+                                    data-pswp-width="1200" data-pswp-height="800">
+                                    <img src="{{ asset('images/derzhavnaya_ikona_bozhej_materi.jpg') }}"
+                                        alt="Икона">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Кнопки навигации для Храм -->
+                    <div class="swiper-button-prev gallery-temple-prev"></div>
+                    <div class="swiper-button-next gallery-temple-next"></div>
+                </div>
+
+                <!-- Праздники -->
+                <div id="gallery-festivals" class="gallery-instance d-none">
+                    <div class="swiper gallery-swiper gallery-festivals-swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><a href="{{ asset('images/newsOne.jpg') }}"
+                                    data-pswp-width="1200" data-pswp-height="800">
+                                    <img src="{{ asset('images/newsOne.jpg') }}" alt="Праздник">
+                                </a>
+                            </div>
+                            <div class="swiper-slide"><a href="{{ asset('images/activity.jpg') }}"
+                                    data-pswp-width="1200" data-pswp-height="800">
+                                    <img src="{{ asset('images/activity.jpg') }}" alt="Праздник 2">
+                                </a>
+                            </div>
+                            <div class="swiper-slide"><a href="{{ asset('images/newsOne.jpg') }}"
+                                    data-pswp-width="1200" data-pswp-height="800">
+                                    <img src="{{ asset('images/newsOne.jpg') }}" alt="Праздник 3">
+                                </a>
+                            </div>
+                            <div class="swiper-slide"><a href="{{ asset('images/activity.jpg') }}"
+                                    data-pswp-width="1200" data-pswp-height="800">
+                                    <img src="{{ asset('images/activity.jpg') }}" alt="Праздник 4">
+                                </a>
+                            </div>
+                            <div class="swiper-slide"><a href="{{ asset('images/newsOne.jpg') }}"
+                                    data-pswp-width="1200" data-pswp-height="800">
+                                    <img src="{{ asset('images/newsOne.jpg') }}" alt="Праздник 5">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Кнопки навигации для Праздники -->
+                    <div class="swiper-button-prev gallery-festivals-prev"></div>
+                    <div class="swiper-button-next gallery-festivals-next"></div>
+                </div>
+
+                <!-- Крещенский парк -->
+                <div id="gallery-park" class="gallery-instance d-none">
+                    <div class="swiper gallery-swiper gallery-park-swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><a href="{{ asset('images/ChramSvitogo.jpg') }}"
+                                    data-pswp-width="1200" data-pswp-height="800"><img
+                                        src="{{ asset('images/ChramSvitogo.jpg') }}" alt="Парк"></a></div>
+                            <div class="swiper-slide"><a href="{{ asset('images/galery.jpg') }}"
+                                    data-pswp-width="1200" data-pswp-height="800"><img
+                                        src="{{ asset('images/galery.jpg') }}" alt="Парк 2"></a></div>
+                            <div class="swiper-slide"><a href="{{ asset('images/Duhovenstvo.jpg') }}"
+                                    data-pswp-width="1200" data-pswp-height="800"><img
+                                        src="{{ asset('images/Duhovenstvo.jpg') }}" alt="Парк 3"></a></div>
+                            <div class="swiper-slide"><a href="{{ asset('images/Popechiteli.jpg') }}"
+                                    data-pswp-width="1200" data-pswp-height="800"><img
+                                        src="{{ asset('images/Popechiteli.jpg') }}" alt="Парк 4"></a></div>
+                            <div class="swiper-slide"><a href="{{ asset('images/hram_kupel_knyagini_olgi.jpg') }}"
+                                    data-pswp-width="1200" data-pswp-height="800"><img
+                                        src="{{ asset('images/hram_kupel_knyagini_olgi.jpg') }}" alt="Парк 5"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Кнопки навигации для Парк -->
+                    <div class="swiper-button-prev gallery-park-prev"></div>
+                    <div class="swiper-button-next gallery-park-next"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="contact-section">
+            <div class="title text-center mb-5">КОНТАКТЫ</div>
+            <div class="row align-items-start">
+                <!-- Левая колонка: контактная информация -->
+                <div class="col-md-4">
+                    <div class="contact-info-left">
+                        <div class="contact-item mb-3">
+                            <i class="bi bi-telephone-fill contact-icon"></i>
+                            <div class="contact-text">
+                                <a href="tel:+79615830736" class="contact-link">+7 (961) 583-07-36</a>
+                            </div>
+                        </div>
+                        <div class="contact-item mb-3">
+                            <i class="bi bi-telephone-fill contact-icon"></i>
+                            <div class="contact-text">
+                                <a href="tel:+79384334293" class="contact-link">+7 (938) 433-42-93</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <a href="https://yandex.ru/maps/-/CLVlIQ8W">
+                        <div class="contact-item mb-3">
+                            <i class="bi bi-geo-alt-fill contact-icon"></i>
+                            <div class="contact-text">
+                                <span>г. Анапа, Краснодарский край, мкрн. 3А</span>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="contact-item mb-3">
+                        <i class="bi bi-clock-fill contact-icon"></i>
+                        <div class="contact-text">
+                            <span>Время работы: 8:00 — 19:00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Правая колонка: социальные сети -->
+                <div class="col-md-4">
+                    <div class="social-links d-flex justify-content-md-end justify-content-center gap-3">
+                        <!-- ВКонтакте -->
+                        <a href="#" class="social-icon" target="_blank" rel="noopener"
+                            aria-label="ВКонтакте">
+                            <svg width="50" height="50" viewBox="0 0 50 50" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M25 0C20.0555 0 15.222 1.46622 11.1108 4.21326C6.99953 6.9603 3.79521 10.8648 1.90302 15.4329C0.010832 20.0011 -0.484251 25.0277 0.480379 29.8773C1.44501 34.7268 3.82603 39.1814 7.32234 42.6777C10.8187 46.174 15.2732 48.555 20.1228 49.5196C24.9723 50.4843 29.9989 49.9892 34.5671 48.097C39.1352 46.2048 43.0397 43.0005 45.7868 38.8893C48.5338 34.778 50 29.9445 50 25C50 18.3696 47.3661 12.0107 42.6777 7.32233C37.9893 2.63392 31.6304 0 25 0ZM36.5296 32.8026C35.9441 32.8849 33.0987 32.8026 32.9507 32.8026C32.215 32.8101 31.506 32.5277 30.977 32.0164C30.375 31.4375 29.8322 30.8026 29.2566 30.1974C29.0826 30.0141 28.8946 29.8447 28.6941 29.6908C28.2237 29.3289 27.7599 29.4112 27.5395 29.9638C27.3675 30.5629 27.2486 31.1761 27.1842 31.7961C27.1796 31.9257 27.1494 32.0531 27.0954 32.1711C27.0415 32.289 26.9648 32.3952 26.8698 32.4835C26.7748 32.5718 26.6633 32.6404 26.5417 32.6856C26.4201 32.7308 26.2908 32.7516 26.1612 32.7467C25.773 32.7664 25.3849 32.773 25 32.7467C23.5998 32.7411 22.2209 32.4028 20.977 31.7599C19.6335 31.0091 18.4624 29.9849 17.5395 28.7533C16.0621 26.8038 14.7858 24.7098 13.7303 22.5033C13.6744 22.3947 12.5658 20.0362 12.5395 19.9243C12.4737 19.7709 12.4687 19.5982 12.5255 19.4412C12.5823 19.2843 12.6967 19.1548 12.8454 19.0789C13.0428 19.0033 16.6974 19.0789 16.7566 19.0789C17.0286 19.0751 17.2946 19.1587 17.5155 19.3174C17.7364 19.4761 17.9004 19.7015 17.9836 19.9605C18.6595 21.6877 19.5825 23.3077 20.7237 24.7697C20.8838 24.9643 21.071 25.1349 21.2796 25.2763C21.3334 25.3284 21.4 25.3652 21.4727 25.383C21.5454 25.4007 21.6216 25.3988 21.6933 25.3774C21.765 25.3559 21.8297 25.3157 21.8807 25.261C21.9317 25.2062 21.9672 25.1388 21.9836 25.0658C22.1284 24.5891 22.2135 24.0963 22.2369 23.5987C22.2566 22.6118 22.2369 21.9539 22.1809 20.9671C22.2008 20.6308 22.0873 20.3002 21.865 20.0471C21.6426 19.794 21.3295 19.6388 20.9934 19.6151C20.704 19.5658 20.6645 19.3289 20.8651 19.0921C21.25 18.602 21.7829 18.523 22.3619 18.4934C23.2369 18.4441 24.1151 18.4934 24.9934 18.4934H25.1842C25.5698 18.4925 25.9545 18.531 26.3322 18.6086C26.5531 18.6538 26.7535 18.7692 26.9034 18.9375C27.0534 19.1059 27.145 19.3182 27.1645 19.5428C27.2087 19.7913 27.2285 20.0436 27.2237 20.2961C27.2007 21.375 27.148 22.4507 27.1349 23.5263C27.1269 23.9525 27.1655 24.3783 27.25 24.7961C27.3783 25.3684 27.7697 25.5132 28.1711 25.0987C28.6712 24.5608 29.1298 23.9857 29.5428 23.3783C30.2848 22.2751 30.8964 21.0895 31.3651 19.8454C31.6184 19.2072 31.8125 19.0658 32.5 19.0658H36.3783C36.6095 19.0623 36.8399 19.0922 37.0625 19.1546C37.1409 19.1755 37.2142 19.2123 37.2778 19.2627C37.3414 19.3131 37.3939 19.3761 37.4322 19.4476C37.4704 19.5192 37.4935 19.5978 37.5001 19.6787C37.5067 19.7596 37.4966 19.841 37.4704 19.9178C37.2444 20.7433 36.8551 21.5151 36.3257 22.1875C35.5362 23.3059 34.7072 24.3947 33.898 25.4967C33.7949 25.6371 33.7015 25.7844 33.6184 25.9375C33.3158 26.4868 33.3388 26.7928 33.7763 27.2533C34.4803 27.9803 35.2336 28.6579 35.9112 29.4013C36.4102 29.9448 36.8615 30.5303 37.2599 31.1513C37.7599 31.9342 37.454 32.6711 36.5296 32.8026Z"
+                                    fill="#2785FF" />
+                            </svg>
+                        </a>
+
+                        <!-- Яндекс Дзен -->
+                        <a href="#" class="social-icon" target="_blank" rel="noopener"
+                            aria-label="Яндекс Дзен">
+                            <svg width="50" height="50" viewBox="0 0 50 50" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M23.9201 0.0121841C23.1745 0.0567513 22.5883 0.106459 22.0946 0.164738C18.627 0.572691 15.3034 1.69371 12.2986 3.46779C9.48063 5.13217 6.98834 7.35706 5.02057 9.96762C3.68015 11.7468 2.58828 13.6855 1.77408 15.7355C1.26328 17.0194 0.887899 18.245 0.591361 19.5871C0.253685 21.1212 0 23.113 0 24.2288V24.5288L0.0634213 24.5202C0.0994172 24.5168 0.356531 24.5082 0.634213 24.5031C7.78197 24.3643 11.7569 23.9306 14.664 22.9724C17.3672 22.0794 19.4515 20.6275 20.989 18.5638C22.6774 16.2978 23.6064 13.4147 24.0812 8.9563C24.2321 7.54904 24.3075 6.42802 24.3915 4.3454C24.4669 2.45819 24.4943 1.48459 24.4943 0.663538V0.000185013L24.2509 0.00361443C24.1155 0.00532722 23.9681 0.00875664 23.9201 0.0121841Z"
+                                    fill="black" />
+                                <path
+                                    d="M26.0559 0.0325203C25.9479 0.23307 26.0113 3.327 26.1827 6.28209C26.505 11.8117 27.338 15.2519 28.9818 17.8351C29.4789 18.6167 29.9366 19.1755 30.6754 19.9005C31.7055 20.9136 32.6123 21.5615 33.8619 22.1803C36.4433 23.4573 39.6863 24.0726 45.3463 24.3572C46.3044 24.4052 47.1615 24.4377 48.5345 24.4772C49.1858 24.496 49.7823 24.5132 49.8612 24.5166L50.0052 24.5234L49.9949 24.0675C49.9674 22.9259 49.7343 21.1004 49.4412 19.7377C48.4968 15.3462 46.4416 11.3832 43.3853 8.05618C43.0699 7.71507 42.2009 6.85117 41.8667 6.54606C39.2732 4.19776 36.3816 2.48024 33.0991 1.34209C31.9729 0.951273 30.5931 0.591314 29.4395 0.385624C28.867 0.284492 27.3637 0.099371 26.505 0.0273781C26.1005 -0.0086174 26.0765 -0.00690269 26.0559 0.0325203Z"
+                                    fill="black" />
+                                <path
+                                    d="M0 26.0405C0 26.1433 0.0685636 27.0003 0.102845 27.3483C0.728488 33.5105 3.38361 38.9338 7.85053 43.1745C8.93898 44.2081 9.90058 44.9829 11.0473 45.7473C14.0093 47.7237 17.4614 49.0984 20.8948 49.6658C21.9078 49.8337 23.5859 50 24.2544 50H24.5252L24.5183 49.892C24.5149 49.8337 24.5029 49.4926 24.4943 49.1344C24.3435 43.6356 24.1138 40.8382 23.603 38.2928C23.0631 35.5931 22.2523 33.6064 21.0062 31.9335C20.4217 31.1484 19.6486 30.3462 18.8653 29.7137C15.9342 27.3483 11.7672 26.3387 3.83099 26.0713C3.0168 26.0439 0.562221 25.9856 0.227974 25.9856H0V26.0405Z"
+                                    fill="black" />
+                                <path
+                                    d="M47.6089 26.0302C45.6086 26.0953 44.3967 26.1553 43.1694 26.2513C39.2681 26.5581 36.5993 27.1015 34.419 28.0288C34.0847 28.1728 33.4265 28.5019 33.0906 28.6939C31.2719 29.7377 29.7172 31.3113 28.6374 33.2019C27.153 35.8022 26.4073 39.4343 26.1142 45.4834C25.9959 47.9568 25.9719 49.6915 26.0559 49.9434C26.0714 49.9931 26.0816 50 26.1314 50C26.4125 50 28.2928 49.7892 29.0282 49.6743C29.8149 49.5526 30.7988 49.3349 31.7021 49.083C35.5074 48.0219 38.7933 46.2136 41.7484 43.5516C42.3244 43.0339 43.2071 42.1375 43.7625 41.5067C46.6113 38.2722 48.5996 34.3144 49.4687 30.1508C49.6264 29.3966 49.8252 28.0339 49.9315 26.9969C49.9761 26.5444 50.0086 26.0559 49.9932 26.0404C49.9812 26.0285 47.9346 26.0199 47.6089 26.0302Z"
+                                    fill="black" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Яндекс Карта -->
+    <div class="container mt-5 mb-5">
+        <div class="map-section">
+            <div class="title text-center mb-4">КАК НАС НАЙТИ</div>
+            <div class="map-container" style="position:relative;overflow:hidden;">
+                <iframe
+                    src="https://yandex.ru/map-widget/v1/?um=constructor%3A17b72ba8b2573a27deae651cf3dda2b9b30e2e9495077444e9acd7e960fd889c&amp;source=constructor"
+                    width="100%" height="500" frameborder="0" style="border:0; border-radius: 12px;"
+                    sandbox="allow-scripts allow-same-origin allow-popups allow-forms" loading="lazy"></iframe>
+            </div>
+        </div>
+    </div>
+
+    @include('partials.footer')
+
+    @include('partials.scripts')
+</body>
+
+</html>

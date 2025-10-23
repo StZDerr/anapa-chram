@@ -1,0 +1,938 @@
+/* Стили для страницы Крещенский парк */
+
+:root {
+    --main-color: #4a5b6f;
+    --font-title: "Tenor Sans", sans-serif;
+    --font-text: "Montserrat", sans-serif;
+    --font-size-title: clamp(1.5rem, 1rem + 2vw, 3.5rem);
+    --font-size-swiper-title: clamp(1rem, 0.8364rem + 0.7273vw, 2rem);
+}
+
+/* Заголовок */
+.gallery-section .title {
+    font-family: var(--font-title);
+    font-weight: 400;
+    font-size: var(--font-size-title);
+    color: var(--main-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 2rem;
+}
+
+/* Раскрывающаяся галерея */
+.mySwiper {
+    width: 100%;
+    max-width: 1200px;
+    height: 600px;
+    margin: 60px auto 0;
+    overflow: hidden;
+}
+
+.mySwiper .swiper-wrapper {
+    display: flex;
+    align-items: flex-start;
+    width: 100% !important;
+}
+
+.mySwiper .swiper-slide {
+    flex-basis: 180px;
+    flex-shrink: 0;
+    height: 550px;
+    margin-right: 10px;
+    overflow: hidden;
+    border-radius: 15px;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    transition: flex-basis 1.5s cubic-bezier(0.25, 0.8, 0.25, 1),
+        transform 1.2s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.mySwiper .swiper-slide:last-child {
+    margin-right: 0;
+}
+
+.mySwiper .swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 1.2s ease;
+}
+
+.mySwiper .swiper-slide.active {
+    flex-basis: 630px;
+    transform: scaleY(1.03);
+}
+
+.mySwiper .slide-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.6) 0%,
+        transparent 30%,
+        transparent 70%,
+        rgba(0, 0, 0, 0.8) 100%
+    );
+    opacity: 0;
+    transition: opacity 1.2s ease;
+}
+
+.mySwiper .swiper-slide.active .slide-overlay {
+    opacity: 1;
+}
+
+.mySwiper .swiper-slide.active img {
+    transform: scale(1.05);
+}
+
+.mySwiper .slide-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transform: translateY(-20px);
+    transition: transform 1.2s ease 0.2s;
+}
+
+.mySwiper .swiper-slide.active .slide-header {
+    transform: translateY(0);
+}
+
+.mySwiper .slide-icon {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px;
+    min-height: 40px;
+    max-width: 40px;
+    max-height: 40px;
+    flex-shrink: 0;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+    object-fit: contain;
+}
+
+.mySwiper .slide-title {
+    font-family: var(--font-title);
+    font-size: 24px;
+    font-weight: 400;
+    color: white;
+    margin: 0;
+    font-variant: small-caps;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+.mySwiper .slide-footer {
+    transform: translateY(20px);
+    transition: transform 1.2s ease 0.2s;
+}
+
+.mySwiper .swiper-slide.active .slide-footer {
+    transform: translateY(0);
+}
+
+.mySwiper .slide-description {
+    font-family: var(--font-text);
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 22px;
+    color: white;
+    margin: 0 0 15px 0;
+    text-align: center;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+.mySwiper .slide-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mySwiper .slide-link {
+    font-family: var(--font-text);
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+.mySwiper .slide-link:hover {
+    color: #cbbd91;
+}
+
+.mySwiper .slide-arrow {
+    width: 24px;
+    height: 24px;
+    color: white;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+    transition: transform 0.3s ease;
+}
+
+.mySwiper .slide-actions:hover .slide-arrow {
+    transform: translateX(5px);
+}
+
+/* Адаптивность */
+@media (min-width: 1200px) {
+    .mySwiper {
+        max-width: 95%;
+        padding: 0 15px;
+    }
+    .mySwiper .swiper-slide {
+        flex-basis: 130px;
+    }
+    .mySwiper .swiper-slide.active {
+        flex-basis: calc(100% - 420px);
+    }
+}
+
+@media (max-width: 1440px) {
+    .mySwiper {
+        max-width: 95%;
+        padding: 0 20px;
+    }
+    .mySwiper .swiper-slide {
+        flex-basis: 150px;
+    }
+    .mySwiper .swiper-slide.active {
+        flex-basis: calc(100% - 480px);
+    }
+}
+
+@media (max-width: 1024px) {
+    .mySwiper {
+        height: 80vh;
+    }
+    .mySwiper .swiper-wrapper {
+        flex-direction: column;
+    }
+    .mySwiper .swiper-slide {
+        margin-bottom: 10px;
+        margin-right: 0;
+        flex-basis: 150px;
+        height: auto;
+        min-height: 150px;
+    }
+    .mySwiper .swiper-slide.active {
+        flex-basis: 400px;
+        min-height: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .mySwiper {
+        height: 70vh;
+    }
+    .mySwiper .swiper-slide {
+        flex-basis: 100px;
+        min-height: 100px;
+    }
+    .mySwiper .swiper-slide.active {
+        flex-basis: 300px;
+        min-height: 300px;
+    }
+    .mySwiper .slide-overlay {
+        padding: 15px;
+    }
+    .mySwiper .slide-title {
+        font-size: 18px;
+    }
+    .mySwiper .slide-description {
+        font-size: 12px;
+        line-height: 16px;
+    }
+}
+
+@media (max-width: 576px) {
+    .mySwiper .swiper-slide {
+        flex-basis: 80px;
+    }
+    .mySwiper .swiper-slide.active {
+        flex-basis: 250px;
+    }
+    .mySwiper .slide-title {
+        font-size: 16px;
+    }
+    .mySwiper .slide-description {
+        font-size: 11px;
+    }
+}
+
+/* Стили для раздела достопримечательностей */
+.attractions {
+    padding: 60px 0;
+}
+
+.attractions .title {
+    font-family: var(--font-title);
+    font-weight: 400;
+    font-size: var(--font-size-title);
+    line-height: 64px;
+    text-transform: uppercase;
+    color: var(--main-color);
+}
+
+.attractionsSwiper {
+    width: 100%;
+    height: 500px;
+    padding: 20px 60px;
+}
+
+.attractionsSwiper .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    border-radius: 15px;
+    overflow: hidden;
+    padding: 0;
+}
+
+.attractionsSwiper .swiper-slide .row {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    align-items: flex-start;
+    padding: 20px;
+    margin: 0;
+}
+
+.attractionsSwiper .swiper-slide .col-12 {
+    padding: 10px;
+}
+
+.attractionsSwiper .swiper-slide .col-lg-6 {
+    padding: 10px;
+}
+
+/* Sticky изображение справа на больших экранах */
+.attractionsSwiper .swiper-slide .col-lg-6:last-child {
+    position: sticky;
+    top: 20px;
+    align-self: flex-start;
+}
+
+.attractionsSwiper .swiper-slide-title {
+    font-family: var(--font-title);
+    font-size: 24px;
+    color: var(--main-color);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.attractionsSwiper .swiper-slide-description {
+    font-family: var(--font-text);
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: justify;
+    margin-bottom: 20px;
+}
+
+/* Стилизация скроллбара для .row */
+.attractionsSwiper .swiper-slide .row::-webkit-scrollbar {
+    width: 6px;
+}
+
+.attractionsSwiper .swiper-slide .row::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.attractionsSwiper .swiper-slide .row::-webkit-scrollbar-thumb {
+    background: var(--main-color);
+    border-radius: 10px;
+}
+
+.attractionsSwiper .swiper-slide .row::-webkit-scrollbar-thumb:hover {
+    background: #3a4b5f;
+}
+
+.attractionsSwiper .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: contain;
+    border-radius: 15px;
+}
+
+.attractionsSwiper .swiper-button-next,
+.attractionsSwiper .swiper-button-prev {
+    color: var(--main-color);
+    width: 44px;
+    height: 44px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.attractionsSwiper .swiper-button-next:after,
+.attractionsSwiper .swiper-button-prev:after {
+    font-size: 20px;
+}
+
+.attractionsSwiper .swiper-slide .row {
+    height: 100%;
+    align-items: center;
+}
+
+.attractionsSwiper .swiper-slide-title {
+    font-family: var(--font-title);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 1.3;
+    color: var(--main-color);
+    margin-bottom: 1rem;
+}
+
+.attractionsSwiper .swiper-slide-description {
+    font-family: var(--font-text);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #333;
+    text-align: justify;
+}
+
+@media (max-width: 991px) {
+    .attractionsSwiper .swiper-slide .col-lg-12 {
+        margin-top: 20px;
+    }
+
+    /* Отключаем sticky на мобильных */
+    .attractionsSwiper .swiper-slide .col-lg-6:last-child {
+        position: relative;
+        top: auto;
+        align-self: auto;
+    }
+
+    .attractionsSwiper .swiper-slide img {
+        max-height: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .attractions {
+        padding: 40px 0;
+    }
+
+    .attractionsSwiper {
+        height: 500px;
+        padding: 20px 40px;
+    }
+
+    .attractionsSwiper .swiper-slide .row {
+        padding: 15px;
+    }
+
+    .attractionsSwiper .swiper-slide-title {
+        font-size: 20px;
+    }
+
+    .attractionsSwiper .swiper-slide-description {
+        font-size: 13px;
+    }
+
+    .attractionsSwiper .swiper-button-next,
+    .attractionsSwiper .swiper-button-prev {
+        width: 36px;
+        height: 36px;
+    }
+
+    .attractionsSwiper .swiper-button-next:after,
+    .attractionsSwiper .swiper-button-prev:after {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 576px) {
+    .attractionsSwiper {
+        height: 500px;
+        padding: 20px 20px;
+    }
+
+    .attractionsSwiper .swiper-slide .row {
+        padding: 10px;
+    }
+
+    .attractionsSwiper .swiper-slide-title {
+        font-size: 18px;
+        margin-bottom: 0.75rem;
+    }
+
+    .attractionsSwiper .swiper-slide-description {
+        font-size: 12px;
+        margin-bottom: 1rem;
+    }
+
+    .attractionsSwiper .swiper-slide img {
+        max-height: 250px;
+    }
+}
+
+/* Стили для раздела достопримечательностей внутри свайпера */
+.attractions .swiper-slide-title {
+    bottom: 20px;
+    left: 20px;
+    font-family: var(--font-title);
+    font-size: var(--font-size-swiper-title);
+    font-weight: 400;
+    color: #4a5b6f;
+}
+
+.attractions .swiper-slide-description {
+    font-family: var(--font-text);
+    font-weight: 500;
+    font-size: clamp(0.5rem, 0.4182rem + 0.3636vw, 1rem);
+    line-height: 24px;
+    font-variant: small-caps;
+}
+
+.attractions .swiper-slide img {
+    border-radius: 1rem;
+}
+
+/* Правила посещения */
+.rules {
+    padding: 80px 0;
+    background-color: #f8f5f0;
+}
+
+.rules-card {
+    border-radius: 30px;
+    padding: 40px;
+    height: 100%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.rules-card-allowed {
+    background: #efe9e0;
+}
+
+.rules-card-prohibited {
+    background: #f3e0db;
+}
+
+.rules-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.rules-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+}
+
+.rules-header-text {
+    flex: 1;
+}
+
+.rules-title {
+    font-family: var(--font-title);
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 100%;
+    color: var(--main-color);
+    margin-bottom: 8px;
+    font-variant: small-caps;
+}
+
+.rules-card-prohibited .rules-title {
+    color: #8b0000;
+}
+
+.rules-subtitle {
+    font-family: var(--font-text);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #666;
+    text-transform: lowercase;
+    margin-bottom: 0;
+}
+
+.rules-content {
+    margin-top: 20px;
+}
+
+.rules-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.rules-list li {
+    font-family: var(--font-text);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #333;
+    font-variant: small-caps;
+    margin-bottom: 16px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.rules-list li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--main-color);
+    font-size: 20px;
+}
+
+.rules-list li:last-child {
+    margin-bottom: 0;
+}
+
+/* Запрещенные действия */
+.rules-list-prohibited {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.rules-list-prohibited li {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.rules-list-prohibited li:last-child {
+    margin-bottom: 0;
+}
+
+.prohibited-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+}
+
+.rules-list-prohibited span {
+    font-family: var(--font-text);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #333;
+    font-variant: small-caps;
+    flex: 1;
+}
+
+/* Адаптив для правил */
+@media (max-width: 768px) {
+    .rules {
+        padding: 60px 0;
+    }
+
+    .rules-card {
+        padding: 30px 20px;
+        margin-bottom: 20px;
+    }
+
+    .rules-title {
+        font-size: 24px;
+    }
+
+    .rules-subtitle {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .rules-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .rules-list li,
+    .rules-list-prohibited span {
+        font-size: 14px;
+        line-height: 22px;
+    }
+
+    .prohibited-icon {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+@media (max-width: 576px) {
+    .rules {
+        padding: 40px 0;
+    }
+
+    .rules-card {
+        padding: 25px 15px;
+    }
+
+    .rules-title {
+        font-size: 20px;
+    }
+
+    .rules-subtitle {
+        font-size: 13px;
+    }
+
+    .rules-header {
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .rules-icon {
+        width: 45px;
+        height: 45px;
+    }
+
+    .rules-list li,
+    .rules-list-prohibited span {
+        font-size: 13px;
+        line-height: 20px;
+    }
+
+    .rules-list-prohibited li {
+        gap: 12px;
+    }
+
+    .prohibited-icon {
+        width: 32px;
+        height: 32px;
+    }
+
+    .prohibited-icon svg {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+/* Строительство храма */
+.construction {
+    padding: 80px 0;
+    background-color: #ffffff;
+}
+
+.construction .title {
+    font-family: var(--font-title);
+    font-weight: 400;
+    font-size: var(--font-size-title);
+    line-height: 64px;
+    text-transform: uppercase;
+    color: var(--main-color);
+    margin-bottom: 50px;
+}
+
+.swiper-container-wrapper {
+    display: flex;
+    gap: 10px;
+}
+
+.construction-gallery-top {
+    width: 80%;
+    height: 33.5rem;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.construction-gallery-top .swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+}
+
+.construction-gallery-top img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.construction-gallery-thumbs {
+    width: 20%;
+    height: 33.5rem;
+}
+
+.construction-gallery-thumbs .swiper-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.construction-gallery-thumbs .swiper-slide {
+    height: 25%;
+    opacity: 0.5;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.construction-gallery-thumbs .swiper-slide-thumb-active {
+    opacity: 1;
+    border: 2px solid var(--main-color);
+}
+
+.construction-gallery-thumbs img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.construction-gallery-top .swiper-button-next,
+.construction-gallery-top .swiper-button-prev {
+    color: #fff;
+    background: rgba(0, 0, 0, 0.5);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+}
+
+.construction-gallery-top .swiper-button-next:after,
+.construction-gallery-top .swiper-button-prev:after {
+    font-size: 20px;
+}
+
+.construction-info {
+    padding: 0 20px;
+}
+
+.construction-subtitle {
+    font-family: var(--font-title);
+    font-weight: 400;
+    font-size: var(--font-size-swiper-title);
+    color: var(--main-color);
+    margin-bottom: 25px;
+    font-variant: small-caps;
+}
+
+.construction-text {
+    font-family: var(--font-text);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+    color: #333;
+    text-align: justify;
+    margin-bottom: 20px;
+}
+
+.construction-text:last-child {
+    margin-bottom: 0;
+}
+
+/* Адаптив для строительства */
+@media (max-width: 991px) {
+    .construction {
+        padding: 60px 0;
+    }
+
+    .construction .title {
+        font-size: 36px;
+        line-height: 48px;
+        margin-bottom: 40px;
+    }
+
+    .swiper-container-wrapper {
+        flex-direction: column;
+    }
+
+    .construction-gallery-top {
+        width: 100%;
+        height: 400px;
+    }
+
+    .construction-gallery-thumbs {
+        width: 100%;
+        height: 100px;
+        margin-top: 10px;
+    }
+
+    .construction-gallery-thumbs .swiper-wrapper {
+        flex-direction: row;
+    }
+
+    .construction-gallery-thumbs .swiper-slide {
+        width: 25%;
+        height: 100%;
+    }
+
+    .construction-info {
+        margin-top: 30px;
+        padding: 0;
+    }
+
+    .construction-subtitle {
+        font-size: 24px;
+    }
+
+    .construction-text {
+        font-size: 15px;
+        line-height: 24px;
+    }
+}
+
+@media (max-width: 576px) {
+    .construction {
+        padding: 40px 0;
+    }
+
+    .construction .title {
+        font-size: 28px;
+        line-height: 36px;
+        margin-bottom: 30px;
+    }
+
+    .construction-gallery-top {
+        height: 300px;
+        border-radius: 15px;
+    }
+
+    .construction-gallery-thumbs {
+        height: 80px;
+    }
+
+    .construction-subtitle {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    .construction-text {
+        font-size: 14px;
+        line-height: 22px;
+        margin-bottom: 15px;
+    }
+
+    .construction-gallery-top .swiper-button-next,
+    .construction-gallery-top .swiper-button-prev {
+        width: 36px;
+        height: 36px;
+    }
+
+    .construction-gallery-top .swiper-button-next:after,
+    .construction-gallery-top .swiper-button-prev:after {
+        font-size: 16px;
+    }
+}
+
+.construction .concept {
+    font-family: var(--font-text);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    font-variant: small-caps;
+    background-color: #70829726;
+    padding: 1rem;
+    border-radius: 1rem;
+    color: #4a5b6f;
+    margin: 1rem 0;
+}

@@ -1,0 +1,561 @@
+/* Стили для страницы О храме */
+
+:root {
+    --shadow-2: 0 8px 25px rgba(0, 0, 0, 0.15);
+    --font-title: "Tenor Sans", sans-serif;
+    --main-color: #4a5b6f;
+}
+
+/* ---------- Hero секция ---------- */
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    border-radius: 1.5rem;
+}
+
+.hero-image {
+    position: absolute;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    border-radius: 1.5rem;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(74, 91, 111, 0.5),
+        rgba(74, 91, 111, 0.7)
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.hero-logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.hero-logo img {
+    width: 120px;
+    height: 120px;
+    filter: brightness(0) invert(1);
+}
+
+.hero-quote {
+    text-align: center;
+    color: white;
+}
+
+.hero-quote p {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 100%;
+    text-align: center;
+    text-transform: capitalize;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-author {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    text-transform: uppercase;
+    font-style: Italic;
+    line-height: 100%;
+    text-align: center;
+    text-transform: lowercase;
+}
+
+.hero-btn {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 100%;
+    text-align: center;
+    font-variant: small-caps;
+    background: white;
+    color: var(--main-color);
+    padding: 15px 50px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.hero-btn:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    color: var(--main-color);
+}
+
+/* Адаптивность hero секции */
+@media (max-width: 768px) {
+    .hero-section {
+        height: 350px;
+    }
+
+    .hero-image {
+        height: 350px;
+    }
+
+    .hero-content {
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+
+    .hero-logo img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .hero-quote p {
+        font-size: 16px;
+    }
+
+    .hero-author {
+        font-size: 14px;
+        margin-top: 1rem;
+    }
+
+    .hero-btn {
+        font-size: 18px;
+        padding: 12px 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-section {
+        height: 300px;
+    }
+
+    .hero-image {
+        height: 300px;
+    }
+
+    .hero-content {
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .hero-logo img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .hero-quote p {
+        font-size: 14px;
+    }
+
+    .hero-author {
+        font-size: 12px;
+    }
+
+    .hero-btn {
+        font-size: 16px;
+        padding: 10px 35px;
+    }
+}
+
+/* ---------- Быстрый доступ (quick) ---------- */
+.quick-title {
+    font-family: "Tenor Sans", sans-serif;
+    font-weight: 400;
+    color: #4a5b6f;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: clamp(2rem, 4vw, 4rem);
+}
+
+.quick-card {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--shadow-2);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    height: 250px;
+}
+
+.quick {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    gap: 1rem;
+}
+
+.div2 {
+    grid-area: 2 / 1 / 4 / 2;
+}
+.div3 {
+    grid-area: 2 / 2 / 3 / 3;
+}
+.div4 {
+    grid-area: 2 / 3 / 4 / 4;
+}
+.div5 {
+    grid-area: 4 / 1 / 5 / 2;
+}
+.div6 {
+    grid-area: 3 / 2 / 5 / 3;
+}
+.div7 {
+    grid-area: 4 / 3 / 5 / 4;
+}
+
+@media (max-width: 992px) {
+    .div2,
+    .div3,
+    .div4,
+    .div5,
+    .div6,
+    .div7 {
+        grid-area: unset;
+    }
+    .quick {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.height-fix {
+    height: 500px;
+}
+
+.quick-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+}
+.quick-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+.quick-card:hover img {
+    transform: scale(1.05);
+}
+.quick-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(74, 91, 111, 0.3),
+        rgba(74, 91, 111, 0.7)
+    );
+    z-index: 1;
+}
+.quick-card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem;
+    color: #fff;
+    z-index: 2;
+}
+.quick-card-title {
+    font-family: var(--font-title);
+    font-size: 2rem;
+    margin: 0;
+    line-height: 1.3;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+.quick-card-arrow {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.2rem;
+    z-index: 2;
+    transition: all 0.3s;
+}
+.quick-card:hover .quick-card-arrow {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateX(3px);
+}
+@media (max-width: 992px) {
+    .calendar-card {
+        width: 250px;
+        height: 180px;
+    }
+    .calendar-desc {
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        font-size: 0.85rem;
+    }
+    .quick-card {
+        height: 220px;
+    }
+}
+@media (max-width: 768px) {
+    .quick {
+        grid-template-columns: 1fr;
+    }
+    .quick-card {
+        height: 200px;
+    }
+    .quick .title {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    .quick-card-title {
+        font-size: 1.1rem;
+    }
+    .quick-card-content {
+        padding: 1rem;
+    }
+}
+.donation .title {
+    font-family: "Tenor Sans", sans-serif;
+    font-weight: 400;
+    font-size: clamp(2rem, 4vw, 4rem);
+    line-height: 64px;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--main-color);
+}
+
+/* ---------- Секция записок и треб ---------- */
+.zapiski-section {
+    background-color: #e2daca;
+    padding: 60px 0;
+}
+
+.zapiski-title {
+    font-family: "Tenor Sans", sans-serif;
+    font-weight: 400;
+    font-size: 48px;
+    color: #4a5b6f;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 3rem;
+}
+
+.zapiski-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    margin-bottom: 2rem;
+}
+
+.zapiski-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.zapiski-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.zapiski-card-image {
+    width: calc(100% - 30px);
+    height: 250px;
+    overflow: hidden;
+    background: #f5f5f5;
+    border-radius: 15px;
+    margin: 15px 15px 0 15px;
+}
+
+.zapiski-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.zapiski-card:hover .zapiski-card-image img {
+    transform: scale(1.05);
+}
+
+.zapiski-card-body {
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.zapiski-card-title {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.4;
+    color: #333;
+    margin: 0;
+    min-height: 45px;
+}
+
+.zapiski-card-price {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: #4a5b6f;
+    margin: 0;
+}
+
+.zapiski-btn {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    font-variant: small-caps;
+    background: #4a5b6f;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.zapiski-btn:hover {
+    background: #3a4a5a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(74, 91, 111, 0.3);
+}
+
+.zapiski-link {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #4a5b6f;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.zapiski-link:hover {
+    color: #3a4a5a;
+}
+
+/* Адаптивность записок */
+@media (max-width: 1400px) {
+    .zapiski-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .zapiski-card:nth-child(5) {
+        grid-column: 2 / 3;
+    }
+}
+
+@media (max-width: 1024px) {
+    .zapiski-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .zapiski-card:nth-child(5) {
+        grid-column: auto;
+    }
+
+    .zapiski-title {
+        font-size: 36px;
+    }
+}
+
+@media (max-width: 768px) {
+    .zapiski-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .zapiski-title {
+        font-size: 28px;
+        margin-bottom: 2rem;
+    }
+
+    .zapiski-card-image {
+        height: 200px;
+    }
+
+    .zapiski-card-title {
+        font-size: 14px;
+        min-height: auto;
+    }
+
+    .zapiski-card-price {
+        font-size: 18px;
+    }
+
+    .zapiski-btn {
+        font-size: 14px;
+        padding: 10px 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .zapiski-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .zapiski-section {
+        padding: 40px 0;
+    }
+
+    .zapiski-card-image {
+        height: 250px;
+    }
+}
+
+.notes {
+    padding: 4rem 0;
+    background-color: #e2daca;
+}
+
+.notes .title {
+    font-family: Tenor Sans;
+    font-weight: 400;
+    font-size: clamp(2rem, 4vw, 4rem);
+    line-height: 64px;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--main-color);
+}

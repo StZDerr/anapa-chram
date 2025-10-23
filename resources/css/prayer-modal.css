@@ -1,0 +1,62 @@
+@import url("https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Montserrat:wght@400;500&display=swap");
+
+.prayer-modal .donation-modal-title {
+    font-family: "Tenor Sans", serif;
+    font-size: 1.3rem;
+    color: #4a5b6f;
+    margin-bottom: 0.5rem;
+}
+.prayer-modal .donation-modal-svg {
+    margin-bottom: 0.5rem;
+}
+.prayer-modal .text-center {
+    font-size: 1.1rem;
+    color: #4a5b6f;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+}
+#prayer-names-list input[type="text"] {
+    border-radius: 8px;
+    border: 1.5px solid #566777;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    padding: 0.7rem 1rem;
+    font-family: "Montserrat", sans-serif;
+    background: #fff;
+    color: #c2c5ce;
+    transition: border-color 0.2s;
+}
+#prayer-names-list input[type="text"]:focus {
+    border-color: #4a5b6f;
+    outline: none;
+}
+#add-names-btn {
+    border-radius: 8px;
+    border: 1.5px solid #4a5b6f;
+    background: #fff;
+    color: #4a5b6f;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1rem;
+    padding: 0.5rem 1.2rem;
+    transition: background 0.2s, color 0.2s;
+}
+#add-names-btn:hover {
+    background: #4a5b6f;
+    color: #fff;
+}
+.btn-donation-submit {
+    margin-top: 1.5rem;
+}
+@media (max-width: 600px) {
+    .prayer-modal .donation-modal-title {
+        font-size: 1.1rem;
+    }
+    #prayer-names-list input[type="text"] {
+        font-size: 0.95rem;
+        padding: 0.5rem 0.7rem;
+    }
+    #add-names-btn {
+        font-size: 0.95rem;
+        padding: 0.4rem 0.8rem;
+    }
+}

@@ -1,0 +1,144 @@
+.footer {
+    background-color: #4a5b6f;
+    padding-top: 40px;
+    margin-top: 60px;
+    color: white;
+}
+
+.footer .navbar-brand {
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.footer svg {
+    filter: brightness(0) invert(1);
+}
+
+.footer .copyright {
+    font-family: Montserrat;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 120%;
+    font-variant: small-caps;
+    color: white;
+    margin-top: 15px;
+}
+
+/* Левая колонка */
+.footer-logo-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-nav-item {
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 200%;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: white;
+    margin: 0;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.footer-nav-item:hover {
+    opacity: 0.7;
+}
+
+.footer-nav-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Правая колонка - Деятельность */
+.footer-activity-section-title,
+.footer-services-section .title {
+    font-family: "Tenor Sans", sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 28px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.footer-activity-section ul,
+.footer-services-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+}
+
+.footer-activity-section li,
+.footer-services-section li {
+    font-family: Montserrat;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    line-height: 200%;
+    color: white;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.footer-activity-section li:hover,
+.footer-services-section li:hover {
+    opacity: 0.7;
+}
+
+/* Футер ссылки */
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 2rem;
+}
+
+.footer-links .footer-link {
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 140%;
+    color: white;
+    text-decoration: none;
+    transition: opacity 0.3s;
+}
+
+.footer-links .footer-link:hover {
+    opacity: 0.7;
+}
+
+/* Адаптив */
+@media (max-width: 768px) {
+    .footer {
+        padding: 30px 0;
+        margin-top: 40px;
+    }
+
+    .footer .copyright {
+        font-size: 12px;
+        margin-top: 10px;
+    }
+
+    .footer .row {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .footer-nav-item {
+        font-size: 14px;
+    }
+
+    .footer-activity-section-title,
+    .footer-services-section h3 {
+        font-size: 14px;
+    }
+
+    .footer-activity-section li,
+    .footer-services-section li {
+        font-size: 12px;
+    }
+}

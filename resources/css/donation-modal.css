@@ -1,0 +1,171 @@
+/* ---------- Donation Modal ---------- */
+.donation-modal {
+    border-radius: 20px;
+    border: none;
+    background: #f5f5f5;
+    position: relative;
+}
+.donation-modal-svg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+.btn-close-modal {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    color: #333;
+    cursor: pointer;
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+.btn-close-modal:hover {
+    color: #000;
+    transform: rotate(90deg);
+}
+.donation-modal-title {
+    font-family: Tenor Sans;
+    font-weight: 400;
+    font-size: clamp(1rem, 0.8364rem + 0.7273vw, 2rem);
+    line-height: 100%;
+    text-align: center;
+    font-variant: small-caps;
+    color: #6e634c;
+}
+.donation-modal-description {
+    font-family: Montserrat;
+    font-weight: 500;
+    font-size: clamp(0.625rem, 0.5227rem + 0.4545vw, 1.25rem);
+    line-height: 28px;
+    text-align: center;
+    color: #4a5b6f;
+}
+.donation-label {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+.donation-input {
+    width: 100%;
+    padding: 15px 20px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 18px;
+    border: 2px solid #d0d0d0;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+.donation-input:focus {
+    outline: none;
+    border-color: #4a5b6f;
+    box-shadow: 0 0 0 3px rgba(74, 91, 111, 0.1);
+}
+.donation-checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #d0d0d0;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.donation-checkbox:checked {
+    background-color: #4a5b6f;
+    border-color: #4a5b6f;
+}
+.donation-checkbox-label {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #333;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.donation-link {
+    color: #c4975a;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+.donation-link:hover {
+    color: #af8449;
+}
+.btn-donation-submit {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 100%;
+    text-align: center;
+    font-variant: small-caps;
+    background: #4a5b6f;
+    color: white;
+    padding: 15px 60px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(196, 151, 90, 0.3);
+}
+.btn-donation-submit:hover {
+    background: #4a5b6f;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(196, 151, 90, 0.4);
+}
+.btn-donation-submit:active {
+    transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+    .donation-modal-title {
+        font-size: 32px;
+        margin-bottom: 1.5rem;
+    }
+    .donation-modal-description {
+        font-size: 16px;
+    }
+    .modal-body {
+        padding: 2rem !important;
+    }
+    .btn-close-modal {
+        top: 15px;
+        right: 15px;
+        font-size: 20px;
+        width: 35px;
+        height: 35px;
+    }
+    .donation-input {
+        padding: 12px 15px;
+        font-size: 16px;
+    }
+    .btn-donation-submit {
+        font-size: 18px;
+        padding: 12px 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .donation-modal-title {
+        font-size: 24px;
+    }
+    .donation-modal-description {
+        font-size: 14px;
+    }
+    .donation-modal-description br {
+        display: none;
+    }
+    .modal-body {
+        padding: 1.5rem !important;
+    }
+    .btn-donation-submit {
+        width: 100%;
+        padding: 12px 20px;
+    }
+}

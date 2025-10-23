@@ -1,0 +1,19 @@
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import "./navbar.css";
+@import "./footer.css";
+
+.text-center {
+    text-align: center;
+}
+.left-justified {
+    text-align: justify;
+    /* выравнивание по ширине */
+    text-align-last: left;
+    /* последняя строка выравнивается по левому краю */
+    word-wrap: break-word;
+    /* перенос длинных слов */
+    overflow-wrap: break-word;
+}
+.pr-4 {
+    padding-right: 4rem !important;
+}
