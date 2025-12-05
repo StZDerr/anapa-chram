@@ -56,6 +56,26 @@
                                 @enderror
                             </div>
 
+                            <div class="mb-3">
+                                <label for="end" class="form-label">Дата и время окончания</label>
+                                <input type="datetime-local" class="form-control @error('end') is-invalid @enderror"
+                                    id="end" name="end"
+                                    value="{{ old('end', $event->end ? \Carbon\Carbon::parse($event->end)->format('Y-m-d\TH:i') : '') }}">
+                                @error('end')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="color" class="form-label">Цвет события</label>
+                                <input type="color"
+                                    class="form-control form-control-color @error('color') is-invalid @enderror"
+                                    id="color" name="color" value="{{ old('color', $event->color ?? '#378006') }}">
+                                @error('color')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
                             <div class="d-flex justify-content-between align-items-center">
                                 <button type="submit" class="btn btn-primary">Обновить событие</button>
                             </div>
