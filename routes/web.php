@@ -79,6 +79,9 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
     Route::get('api/events', [EventsCalendarController::class, 'apiIndex'])->name('events.apiIndex');
     Route::get('events/create', [EventsCalendarController::class, 'create'])->name('events.create');
     Route::post('events', [EventsCalendarController::class, 'store'])->name('events.store');
+    Route::get('events/{id}/edit', [EventsCalendarController::class, 'edit'])->name('events.edit');
+    Route::put('events/{id}', [EventsCalendarController::class, 'update'])->name('events.update');
+    Route::delete('events/{id}', [EventsCalendarController::class, 'destroy'])->name('events.destroy');
 });
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');

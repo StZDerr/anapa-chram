@@ -16,4 +16,9 @@ class Event extends Model
         'end',
         'color',
     ];
+
+    protected $casts = [
+        'start' => 'datetime',
+        'end' => 'datetime',
+    ];
 }

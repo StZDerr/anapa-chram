@@ -18,9 +18,13 @@ class EventsCalendarController extends Controller
             return [
                 'id' => $event->id,
                 'title' => $event->title,
-                'start' => $event->start,
-                'end' => $event->end,
+                'start' => $event->start ? $event->start->toIso8601String() : null,
+                'end' => $event->end ? $event->end->toIso8601String() : null,
+                'extendedProps' => [
+                    'description' => $event->description,
+                ],
                 'color' => $event->color,
+                'allDay' => false,
             ];
         });
 
@@ -47,5 +51,38 @@ class EventsCalendarController extends Controller
         Event::create($data);
 
         return redirect()->route('admin.events.index')->with('success', 'Событие добавлено');
+    }
+
+    // Показать форму редактирования события
+    public function edit($id)
+    {
+        $event = Event::findOrFail($id);
+        return view('admin.events.edit', compact('event'));
+    }
+
+    // Обновить событие
+    public function update(Request $request, $id)
+    {
+        $data = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'start' => 'required|date',
+            'end' => 'nullable|date|after_or_equal:start',
+            'color' => 'nullable|string|max:7',
+        ]);
+
+        $event = Event::findOrFail($id);
+        $event->update($data);
+
+        return redirect()->route('admin.events.index')->with('success', 'Событие обновлено');
+    }
+
+    // Удалить событие
+    public function destroy($id)
+    {
+        $event = Event::findOrFail($id);
+        $event->delete();
+
+        return redirect()->route('admin.events.index')->with('success', 'Событие удалено');
     }
 }

@@ -31,12 +31,9 @@ document.addEventListener("DOMContentLoaded", function () {
         fixedWeekCount: false,
         showNonCurrentDates: true,
         height: "auto",
-        // dayMaxEventRows: true,
-        dayMaxEvents: 2, // Показывать максимум 2 события, остальные скрыть под "+N"
-
-        moreLinkContent: function (args) {
-            return `+ещё ${args.num}`;
-        },
+        dayMaxEvents: 0, // Не показывать события в ячейках
+        displayEventTime: false, // Не показывать время события
+        displayEventEnd: false,
 
         // Загрузка событий из API
         events: function (fetchInfo, successCallback, failureCallback) {
@@ -45,6 +42,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then((response) => response.json())
                 .then((data) => {
                     successCallback(data);
+                    // После загрузки событий - окрасить ячейки
+                    setTimeout(() => {
+                        colorEventCells();
+                    }, 100);
                 })
                 .catch((error) => {
                     console.error("Ошибка загрузки событий:", error);
@@ -57,209 +58,297 @@ document.addEventListener("DOMContentLoaded", function () {
             return { html: arg.dayNumberText };
         },
 
-        // Кастомный рендер события
-        eventContent: function (arg) {
-            if (!arg.event.start) return { html: "" };
-
-            const time = arg.event.start.toLocaleTimeString("ru-RU", {
-                hour: "2-digit",
-                minute: "2-digit",
-            });
-
-            return {
-                html: `<div class="event-time-only">${time}</div>`,
-            };
-        },
-
-        // Клик по событию
-        eventClick: function (info) {
-            info.jsEvent.preventDefault();
-            console.log("Клик по событию:", info.event);
-            console.log(
-                "Bootstrap доступен:",
-                typeof bootstrap !== "undefined"
-            );
-            showEventModal(info.event);
-        },
-
-        // Клик по кнопке "+N событий" - показать все события
-        moreLinkClick: function (info) {
-            return "popover"; // показать всплывающее окно со всеми событиями
-        },
-
-        // Клик по дню - показать все события дня
+        // Клик по дню - показать popover с событиями
         dateClick: function (info) {
             const events = calendar.getEvents().filter((event) => {
+                if (!event.start) return false;
                 const eventDate = event.start.toDateString();
                 return eventDate === info.date.toDateString();
             });
 
             if (events.length > 0) {
-                showDayEventsModal(info.date, events);
+                showDayEventsPopover(info.dayEl, info.date, events);
             }
         },
     });
 
-    // Функция показа модального окна для события
-    function showEventModal(event) {
-        console.log("showEventModal вызвана для события:", event.title);
-
-        const modal =
-            document.getElementById("eventModal") || createEventModal();
-        console.log("Модальное окно:", modal);
-
-        document.getElementById("eventModalTitle").textContent = event.title;
-        document.getElementById("eventModalStart").textContent = event.start
-            ? event.start.toLocaleString("ru-RU", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                  hour: "2-digit",
-                  minute: "2-digit",
-              })
-            : "Не указано";
-
-        document.getElementById("eventModalEnd").textContent = event.end
-            ? event.end.toLocaleString("ru-RU", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                  hour: "2-digit",
-                  minute: "2-digit",
-              })
-            : "—";
-
-        document.getElementById("eventModalDescription").textContent =
-            event.extendedProps.description || "Описание отсутствует";
-
-        // Проверка доступности Bootstrap
-        if (typeof bootstrap === "undefined") {
-            console.error("Bootstrap не загружен!");
-            alert(
-                "Ошибка: Bootstrap не загружен. Проверьте подключение скриптов."
-            );
-            return;
+    // Функция показа кастомного popover с событиями дня
+    function showDayEventsPopover(dayEl, date, events) {
+        // Удалить существующий popover если есть
+        const existingPopover = document.querySelector(".custom-day-popover");
+        if (existingPopover) {
+            existingPopover.remove();
         }
 
-        try {
-            const bsModal = new bootstrap.Modal(modal);
-            console.log("Bootstrap Modal создан:", bsModal);
-            bsModal.show();
-        } catch (error) {
-            console.error("Ошибка при показе модального окна:", error);
-            alert("Ошибка при открытии модального окна: " + error.message);
-        }
-    }
+        // Создать popover
+        const popover = document.createElement("div");
+        popover.className = "custom-day-popover";
 
-    // Функция показа модального окна для всех событий дня
-    function showDayEventsModal(date, events) {
-        const modal =
-            document.getElementById("dayEventsModal") || createDayEventsModal();
+        // Получить координаты ячейки
+        const rect = dayEl.getBoundingClientRect();
+        const scrollTop =
+            window.pageYOffset || document.documentElement.scrollTop;
 
-        const dateStr = date.toLocaleDateString("ru-RU", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-        });
+        // Форматировать дату
+        const day = date.getDate().toString().padStart(2, "0");
+        const monthNames = [
+            "января",
+            "февраля",
+            "марта",
+            "апреля",
+            "мая",
+            "июня",
+            "июля",
+            "августа",
+            "сентября",
+            "октября",
+            "ноября",
+            "декабря",
+        ];
+        const monthYear = `${
+            monthNames[date.getMonth()]
+        } ${date.getFullYear()}`;
 
-        document.getElementById(
-            "dayEventsModalTitle"
-        ).textContent = `События на ${dateStr}`;
-
-        const eventsList = document.getElementById("dayEventsList");
-        eventsList.innerHTML = "";
-
+        // Сформировать HTML с событиями
+        let eventsHtml = "";
         events.forEach((event) => {
-            const eventItem = document.createElement("div");
-            eventItem.className = "list-group-item list-group-item-action";
-            eventItem.style.cursor = "pointer";
-            eventItem.innerHTML = `
-                <div class="d-flex w-100 justify-content-between">
-                    <h6 class="mb-1">${event.title}</h6>
-                    <small>${
-                        event.start
-                            ? event.start.toLocaleTimeString("ru-RU", {
-                                  hour: "2-digit",
-                                  minute: "2-digit",
-                              })
-                            : ""
-                    }</small>
-                </div>
-                ${
-                    event.extendedProps.description
-                        ? `<p class="mb-1 text-muted small">${event.extendedProps.description}</p>`
-                        : ""
+            const time = event.start
+                ? event.start.toLocaleTimeString("ru-RU", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                  })
+                : "";
+
+            // Определить период дня по времени начала
+            let period = "Утро";
+            if (event.start) {
+                const hours = event.start.getHours();
+                if (hours >= 5 && hours < 11) {
+                    period = "Утро";
+                } else if (hours >= 11 && hours < 17) {
+                    period = "День";
+                } else if (hours >= 17 && hours < 23) {
+                    period = "Вечер";
+                } else {
+                    period = "Ночь";
                 }
+            }
+            // Если есть в extendedProps - использовать его (для переопределения)
+            period = event.extendedProps.period || period;
+
+            const title = event.title || "";
+            const description = event.extendedProps.description || "";
+            const eventId = event.id || event.extendedProps.id || "";
+
+            // Проверяем, находимся ли мы в админке
+            const isAdmin = window.location.pathname.includes("/admin");
+            const clickableClass = isAdmin || !isAdmin ? "event-clickable" : ""; // Всегда кликабельно
+            const dataAttr = eventId ? `data-event-id="${eventId}"` : "";
+
+            eventsHtml += `
+                <div class="popover-event-item ${clickableClass}" ${dataAttr}>
+                    <div class="event-header">
+                        <span class="event-period">${period}</span>
+                        <span class="event-time">${time}</span>
+                    </div>
+                    <div class="event-description">${description || title}</div>
+                </div>
             `;
-            eventItem.addEventListener("click", () => {
-                bootstrap.Modal.getInstance(modal).hide();
-                showEventModal(event);
-            });
-            eventsList.appendChild(eventItem);
         });
 
-        const bsModal = new bootstrap.Modal(modal);
-        bsModal.show();
+        popover.innerHTML = `
+            <div class="popover-header-custom">
+                <div class="popover-date-left">${day}</div>
+                <div class="popover-date-right">${monthYear}</div>
+            </div>
+            <div class="popover-events">
+                ${eventsHtml}
+            </div>
+        `;
+
+        // Позиционировать popover под ячейкой
+        popover.style.position = "absolute";
+        popover.style.left = `${rect.left}px`;
+        popover.style.top = `${rect.bottom + scrollTop}px`;
+        popover.style.zIndex = "1000";
+
+        document.body.appendChild(popover);
+
+        // Добавить обработчики кликов для событий
+        const eventItems = popover.querySelectorAll(".event-clickable");
+        eventItems.forEach((item) => {
+            item.style.cursor = "pointer";
+            item.addEventListener("click", function (e) {
+                e.stopPropagation();
+                const eventId = this.getAttribute("data-event-id");
+                if (eventId) {
+                    if (window.location.pathname.includes("/admin")) {
+                        // В админке - переход на редактирование
+                        window.location.href = `/admin/events/${eventId}/edit`;
+                    } else {
+                        // На публичной странице - открыть модальное окно
+                        const event = calendar.getEventById(eventId);
+                        if (event) {
+                            showEventModal(event);
+                            popover.remove(); // Закрыть popover
+                        }
+                    }
+                }
+            });
+        });
+
+        // Закрыть popover при клике вне его
+        setTimeout(() => {
+            document.addEventListener("click", function closePopover(e) {
+                if (!popover.contains(e.target) && !dayEl.contains(e.target)) {
+                    popover.remove();
+                    document.removeEventListener("click", closePopover);
+                }
+            });
+        }, 0);
     }
 
-    // Создание модального окна для события
-    function createEventModal() {
-        const modalHtml = `
-            <div class="modal fade" id="eventModal" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="eventModalTitle"></h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="mb-3">
-                                <strong>Начало:</strong>
-                                <div id="eventModalStart"></div>
-                            </div>
-                            <div class="mb-3">
-                                <strong>Окончание:</strong>
-                                <div id="eventModalEnd"></div>
-                            </div>
-                            <div class="mb-3">
-                                <strong>Описание:</strong>
-                                <div id="eventModalDescription"></div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                        </div>
+    // Функция показа модального окна с деталями события
+    function showEventModal(event) {
+        // Удалить существующее модальное окно если есть
+        const existingModal = document.getElementById("eventDetailModal");
+        if (existingModal) {
+            existingModal.remove();
+        }
+
+        const time = event.start
+            ? event.start.toLocaleTimeString("ru-RU", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+              })
+            : "";
+
+        const date = event.start
+            ? event.start.toLocaleDateString("ru-RU", {
+                  day: "2-digit",
+                  month: "long",
+                  year: "numeric",
+              })
+            : "";
+
+        // Определить период дня по времени начала
+        let period = "Утро";
+        if (event.start) {
+            const hours = event.start.getHours();
+            if (hours >= 5 && hours < 11) {
+                period = "Утро";
+            } else if (hours >= 11 && hours < 17) {
+                period = "День";
+            } else if (hours >= 17 && hours < 23) {
+                period = "Вечер";
+            } else {
+                period = "Ночь";
+            }
+        }
+        // Если есть в extendedProps - использовать его (для переопределения)
+        period = event.extendedProps.period || period;
+
+        const title = event.title || "";
+        const description = event.extendedProps.description || "";
+        const endTime = event.end
+            ? event.end.toLocaleTimeString("ru-RU", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+              })
+            : "";
+
+        // Создать модальное окно
+        const modal = document.createElement("div");
+        modal.id = "eventDetailModal";
+        modal.className = "event-modal-overlay";
+        modal.innerHTML = `
+            <div class="event-modal-content">
+                <button class="event-modal-close">&times;</button>
+                <div class="event-modal-header">
+                    <div class="event-modal-date">${date}</div>
+                    <div class="event-modal-period-time">
+                        <span class="event-modal-period">${period}</span>
+                        <span class="event-modal-time">${time}${
+            endTime ? " - " + endTime : ""
+        }</span>
                     </div>
+                </div>
+                <div class="event-modal-body">
+                    <h3 class="event-modal-title">${title}</h3>
+                    <p class="event-modal-description">${
+                        description ||
+                        "Подробности уточняйте у служителей храма."
+                    }</p>
                 </div>
             </div>
         `;
-        document.body.insertAdjacentHTML("beforeend", modalHtml);
-        return document.getElementById("eventModal");
+
+        document.body.appendChild(modal);
+
+        // Показать модальное окно с анимацией
+        setTimeout(() => {
+            modal.classList.add("show");
+        }, 10);
+
+        // Закрыть модальное окно
+        const closeModal = () => {
+            modal.classList.remove("show");
+            setTimeout(() => {
+                modal.remove();
+            }, 300);
+        };
+
+        modal
+            .querySelector(".event-modal-close")
+            .addEventListener("click", closeModal);
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Закрыть по Escape
+        const handleEscape = (e) => {
+            if (e.key === "Escape") {
+                closeModal();
+                document.removeEventListener("keydown", handleEscape);
+            }
+        };
+        document.addEventListener("keydown", handleEscape);
     }
 
-    // Создание модального окна для списка событий дня
-    function createDayEventsModal() {
-        const modalHtml = `
-            <div class="modal fade" id="dayEventsModal" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="dayEventsModalTitle"></h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="list-group" id="dayEventsList"></div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-        document.body.insertAdjacentHTML("beforeend", modalHtml);
-        return document.getElementById("dayEventsModal");
+    // Функция окрашивания ячеек с событиями
+    function colorEventCells() {
+        const allCells = document.querySelectorAll(".fc-daygrid-day");
+        allCells.forEach((cell) => {
+            const dateStr = cell.getAttribute("data-date");
+            if (!dateStr) return;
+
+            const cellDate = new Date(dateStr + "T00:00:00");
+            const events = calendar.getEvents().filter((event) => {
+                if (!event.start) return false;
+                const eventDate = new Date(event.start);
+                return (
+                    eventDate.getFullYear() === cellDate.getFullYear() &&
+                    eventDate.getMonth() === cellDate.getMonth() &&
+                    eventDate.getDate() === cellDate.getDate()
+                );
+            });
+
+            const dayFrame = cell.querySelector(".fc-daygrid-day-frame");
+            if (dayFrame) {
+                if (events.length > 0) {
+                    dayFrame.classList.add("has-events");
+                    cell.style.cursor = "pointer";
+                } else {
+                    dayFrame.classList.remove("has-events");
+                    cell.style.cursor = "default";
+                }
+            }
+        });
     }
+
+    // Функции модальных окон удалены - используется кастомный popover
 
     calendar.render();
 
@@ -268,11 +357,13 @@ document.addEventListener("DOMContentLoaded", function () {
         const year = parseInt(yearSelect.value);
         const month = parseInt(monthSelect.value);
         calendar.gotoDate(new Date(year, month, 1));
+        setTimeout(() => colorEventCells(), 100);
     });
 
     yearSelect.addEventListener("change", function () {
         const year = parseInt(yearSelect.value);
         const month = parseInt(monthSelect.value);
         calendar.gotoDate(new Date(year, month, 1));
+        setTimeout(() => colorEventCells(), 100);
     });
 });

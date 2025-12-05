@@ -13,11 +13,13 @@ class CalendarController extends Controller
             return [
                 'id' => $event->id,
                 'title' => $event->title,
-                'start' => $event->start,
-                'end' => $event->end,
-                'description' => $event->description,
+                'start' => $event->start ? $event->start->toIso8601String() : null,
+                'end' => $event->end ? $event->end->toIso8601String() : null,
+                'extendedProps' => [
+                    'description' => $event->description,
+                ],
                 'color' => $event->color ?? '#4a5b6f', // цвет по умолчанию
-                'allDay' => empty($event->end), // если нет времени окончания, считаем весь день
+                'allDay' => false, // всегда показываем время
             ];
         });
 
