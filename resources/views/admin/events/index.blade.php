@@ -1,20 +1,11 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends('layouts.app')
 
-<head>
-    <title>Ежедневное расписание </title>
-    @include('partials.head')
-
-    <!-- Стили страницы Calendar -->
-    @vite(['resources/css/calendar.css', 'resources/js/calendar.js'])
-</head>
-
-<body class="d-flex flex-column min-vh-100">
-    @include('partials.navbar')
-
+@section('content')
+    @vite(['resources/css/calendar.css'])
     <main class="flex-fill">
         <div class="container calendar-container">
             <h1 class="calendar-title">ЕЖЕДНЕВНОЕ РАСПИСАНИЕ</h1>
+            <a href="{{ route('admin.events.create') }}" class="btn btn-success mb-3">Добавить мероприятие</a>
 
             <!-- Селекторы месяца и года -->
             <div class="calendar-controls">
@@ -40,12 +31,13 @@
             <div id="calendar"></div>
         </div>
     </main>
+@endsection
 
-    @include('partials.footer')
+@push('scripts')
+    @vite(['resources/js/calendar.js'])
 
-    @include('partials.scripts')
-
-    <script></script>
-</body>
-
-</html>
+    <script>
+        // Переопределяем URL для админки
+        window.CALENDAR_EVENTS_URL = '/admin/api/events';
+    </script>
+@endpush

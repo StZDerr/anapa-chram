@@ -35,36 +35,83 @@
             <div class="calendar">
                 <div class="text-center title">ПРАВОСЛАВНЫЙ КАЛЕНДАРЬ</div>
 
-                <!-- Календарные блоки -->
-                <div class="d-flex justify-content-center align-items-center gap-3">
+                <!-- Календарные блоки (Swiper) -->
+                <div class="calendar-swiper-wrapper">
                     <!-- Стрелка влево -->
-                    <button class="btn-calendar-nav">
+                    <button class="btn-calendar-nav calendar-prev" aria-label="Prev">
                         <i class="bi bi-chevron-left"></i>
                     </button>
 
-                    <!-- Календарный блок 1 -->
-                    <div class="calendar-card">
-                        <div class="calendar-day">ВС</div>
-                        <div class="calendar-date">5 окт/22 окт</div>
-                        <div class="calendar-desc">Неделя 17-я по Пятидесятнице. Глас осмый.</div>
-                    </div>
+                    <div class="swiper calendar-swiper">
+                        <div class="swiper-wrapper">
+                            <!-- Календарный блок 1 -->
+                            <div class="swiper-slide">
+                                <div class="calendar-card">
+                                    <div class="calendar-day">ВС</div>
+                                    <div class="calendar-date">5 окт/22 окт</div>
+                                    <div class="calendar-desc">Неделя 17-я по Пятидесятнице. Глас осмий.</div>
+                                </div>
+                            </div>
 
-                    <!-- Календарный блок 2 -->
-                    <div class="calendar-card">
-                        <div class="calendar-day">ПН</div>
-                        <div class="calendar-date">6 окт/23 окт</div>
-                        <div class="calendar-desc">Зачатие честного славного Пророка и Крестителя Иоанна.</div>
-                    </div>
+                            <!-- Календарный блок 2 -->
+                            <div class="swiper-slide">
+                                <div class="calendar-card">
+                                    <div class="calendar-day">ПН</div>
+                                    <div class="calendar-date">6 окт/23 окт</div>
+                                    <div class="calendar-desc">Зачатие честного славного Пророка и Крестителя Иоанна.
+                                    </div>
+                                </div>
+                            </div>
 
-                    <!-- Календарный блок 3 -->
-                    <div class="calendar-card">
-                        <div class="calendar-day">ВТ</div>
-                        <div class="calendar-date">7 окт/24 окт</div>
-                        <div class="calendar-desc">Мучеников Сергия и Вакха.</div>
+                            <!-- Календарный блок 3 -->
+                            <div class="swiper-slide">
+                                <div class="calendar-card">
+                                    <div class="calendar-day">ВТ</div>
+                                    <div class="calendar-date">7 окт/24 окт</div>
+                                    <div class="calendar-desc">Мучеников Сергия и Вакха.</div>
+                                </div>
+                            </div>
+
+                            <!-- ДЕНЬ 4 -->
+                            <div class="swiper-slide">
+                                <div class="calendar-card">
+                                    <div class="calendar-day">СР</div>
+                                    <div class="calendar-date">8 окт / 25 сен</div>
+                                    <div class="calendar-desc">Прп. Сергия, игумена Радонежского.</div>
+                                </div>
+                            </div>
+
+                            <!-- ДЕНЬ 5 -->
+                            <div class="swiper-slide">
+                                <div class="calendar-card">
+                                    <div class="calendar-day">ЧТ</div>
+                                    <div class="calendar-date">9 окт / 26 сен</div>
+                                    <div class="calendar-desc">Апостола и евангелиста Иоанна Богослова.</div>
+                                </div>
+                            </div>
+
+                            <!-- ДЕНЬ 6 -->
+                            <div class="swiper-slide">
+                                <div class="calendar-card">
+                                    <div class="calendar-day">ПТ</div>
+                                    <div class="calendar-date">10 окт / 27 сен</div>
+                                    <div class="calendar-desc">Мч. Каллистрата и дружины его.</div>
+                                </div>
+                            </div>
+
+                            <!-- ДЕНЬ 7 -->
+                            <div class="swiper-slide">
+                                <div class="calendar-card">
+                                    <div class="calendar-day">СБ</div>
+                                    <div class="calendar-date">11 окт / 28 сен</div>
+                                    <div class="calendar-desc">Прп. Харитона Исповедника.</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Стрелка вправо -->
-                    <button class="btn-calendar-nav">
+                    <button class="btn-calendar-nav calendar-next" aria-label="Next">
                         <i class="bi bi-chevron-right"></i>
                     </button>
                 </div>
@@ -75,73 +122,86 @@
         <div class="text-center quick-title">Быстрый доступ</div>
         <div class="quick">
             <div class="div2">
-                <div class="quick-card height-fix">
-                    <img src="{{ asset('images/ChramSvitogo.jpg') }}" alt="Храм святого князя Владимира">
-                    <div class="quick-card-arrow">
-                        <i class="bi bi-arrow-right"></i>
+                <a href="">
+                    <div class="quick-card height-fix">
+                        <img src="{{ asset('images/ChramSvitogo.jpg') }}" alt="Храм святого князя Владимира">
+                        <div class="quick-card-arrow">
+                            <i class="bi bi-arrow-right"></i>
+                        </div>
+                        <div class="quick-card-content">
+                            <h3 class="quick-card-title">Храм святого<br>князя Владимира
+                            </h3>
+                        </div>
                     </div>
-                    <div class="quick-card-content">
-                        <h3 class="quick-card-title">Храм святого<br>князя Владимира
-                        </h3>
-                    </div>
-                </div>
+                </a>
             </div>
             <div class="div3">
-                <div class="quick-card">
-                    <img src="{{ asset('images/hram_kupel_knyagini_olgi.jpg') }}" alt="Храм святого князя Владимира">
-                    <div class="quick-card-arrow">
-                        <i class="bi bi-arrow-right"></i>
+                <a href="">
+                    <div class="quick-card">
+                        <img src="{{ asset('images/hram_kupel_knyagini_olgi.jpg') }}"
+                            alt="Храм святого князя Владимира">
+                        <div class="quick-card-arrow">
+                            <i class="bi bi-arrow-right"></i>
+                        </div>
+                        <div class="quick-card-content">
+                            <h3 class="quick-card-title">Храм-купель<br>княгини Ольги</h3>
+                        </div>
                     </div>
-                    <div class="quick-card-content">
-                        <h3 class="quick-card-title">Храм-купель<br>княгини Ольги</h3>
-                    </div>
-                </div>
+                </a>
             </div>
             <div class="div4">
-                <div class="quick-card height-fix">
-                    <img src="{{ asset('images/derzhavnaya_ikona_bozhej_materi.jpg') }}"
-                        alt="Храм святого князя Владимира">
-                    <div class="quick-card-arrow">
-                        <i class="bi bi-arrow-right"></i>
+                <a href="">
+                    <div class="quick-card height-fix">
+                        <img src="{{ asset('images/derzhavnaya_ikona_bozhej_materi.jpg') }}"
+                            alt="Храм святого князя Владимира">
+                        <div class="quick-card-arrow">
+                            <i class="bi bi-arrow-right"></i>
+                        </div>
+                        <div class="quick-card-content">
+                            <h3 class="quick-card-title">Державная икона<br>Божьей матери
+                            </h3>
+                        </div>
                     </div>
-                    <div class="quick-card-content">
-                        <h3 class="quick-card-title">Державная икона<br>Божьей матери
-                        </h3>
-                    </div>
-                </div>
+                </a>
             </div>
             <div class="div5">
-                <div class="quick-card">
-                    <img src="{{ asset('images/galery.jpg') }}" alt="Храм святого князя Владимира">
-                    <div class="quick-card-arrow">
-                        <i class="bi bi-arrow-right"></i>
+                <a href="">
+                    <div class="quick-card">
+                        <img src="{{ asset('images/galery.jpg') }}" alt="Храм святого князя Владимира">
+                        <div class="quick-card-arrow">
+                            <i class="bi bi-arrow-right"></i>
+                        </div>
+                        <div class="quick-card-content">
+                            <h3 class="quick-card-title">Галерея</h3>
+                        </div>
                     </div>
-                    <div class="quick-card-content">
-                        <h3 class="quick-card-title">Галерея</h3>
-                    </div>
-                </div>
+                </a>
             </div>
             <div class="div6">
-                <div class="quick-card height-fix">
-                    <img src="{{ asset('images/Duhovenstvo.jpg') }}" alt="Храм святого князя Владимира">
-                    <div class="quick-card-arrow">
-                        <i class="bi bi-arrow-right"></i>
+                <a href="">
+                    <div class="quick-card height-fix">
+                        <img src="{{ asset('images/Duhovenstvo.jpg') }}" alt="Храм святого князя Владимира">
+                        <div class="quick-card-arrow">
+                            <i class="bi bi-arrow-right"></i>
+                        </div>
+                        <div class="quick-card-content">
+                            <h3 class="quick-card-title">Духовенство</h3>
+                        </div>
                     </div>
-                    <div class="quick-card-content">
-                        <h3 class="quick-card-title">Духовенство</h3>
-                    </div>
-                </div>
+                </a>
             </div>
             <div class="div7">
-                <div class="quick-card">
-                    <img src="{{ asset('images/Popechiteli.jpg') }}" alt="Храм святого князя Владимира">
-                    <div class="quick-card-arrow">
-                        <i class="bi bi-arrow-right"></i>
+                <a href="">
+                    <div class="quick-card">
+                        <img src="{{ asset('images/Popechiteli.jpg') }}" alt="Храм святого князя Владимира">
+                        <div class="quick-card-arrow">
+                            <i class="bi bi-arrow-right"></i>
+                        </div>
+                        <div class="quick-card-content">
+                            <h3 class="quick-card-title">Попечители</h3>
+                        </div>
                     </div>
-                    <div class="quick-card-content">
-                        <h3 class="quick-card-title">Попечители</h3>
-                    </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>
@@ -560,6 +620,7 @@
 
     <div class="container mb-5">
         <div class="photo-section">
+
             <div class="text-center title">ФОТОГАЛЕРЕЯ</div>
             <!-- Фильтры категорий -->
             <div class="photo-filters d-flex justify-content-center gap-3 mb-4">
@@ -572,6 +633,19 @@
             <div class="gallery-wrap">
                 <!-- Храм -->
                 <div id="gallery-temple" class="gallery-instance">
+                    <!-- Кнопки навигации для Храм -->
+                    <div class="swiper-button-prev gallery-temple-prev">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <line x1="19" y1="12" x2="5" y2="12"></line>
+                            <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                    </div>
+                    <div class="swiper-button-next gallery-temple-next">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </div>
                     <div class="swiper gallery-swiper gallery-temple-swiper">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide"><a href="{{ asset('images/ChramSvitogo.jpg') }}"
@@ -609,13 +683,23 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Кнопки навигации для Храм -->
-                    <div class="swiper-button-prev gallery-temple-prev"></div>
-                    <div class="swiper-button-next gallery-temple-next"></div>
                 </div>
 
                 <!-- Праздники -->
                 <div id="gallery-festivals" class="gallery-instance d-none">
+                    <!-- Кнопки навигации для Праздники -->
+                    <div class="swiper-button-prev gallery-festivals-prev">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <line x1="19" y1="12" x2="5" y2="12"></line>
+                            <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                    </div>
+                    <div class="swiper-button-next gallery-festivals-next">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </div>
                     <div class="swiper gallery-swiper gallery-festivals-swiper">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide"><a href="{{ asset('images/newsOne.jpg') }}"
@@ -645,13 +729,23 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Кнопки навигации для Праздники -->
-                    <div class="swiper-button-prev gallery-festivals-prev"></div>
-                    <div class="swiper-button-next gallery-festivals-next"></div>
                 </div>
 
                 <!-- Крещенский парк -->
                 <div id="gallery-park" class="gallery-instance d-none">
+                    <!-- Кнопки навигации для Парк -->
+                    <div class="swiper-button-prev gallery-park-prev">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <line x1="19" y1="12" x2="5" y2="12"></line>
+                            <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                    </div>
+                    <div class="swiper-button-next gallery-park-next">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </div>
                     <div class="swiper gallery-swiper gallery-park-swiper">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide"><a href="{{ asset('images/ChramSvitogo.jpg') }}"
@@ -672,9 +766,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Кнопки навигации для Парк -->
-                    <div class="swiper-button-prev gallery-park-prev"></div>
-                    <div class="swiper-button-next gallery-park-next"></div>
+
                 </div>
             </div>
         </div>

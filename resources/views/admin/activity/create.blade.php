@@ -6,8 +6,9 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">Добавить новость</h5>
-                        <a href="{{ route('admin.news.index') }}" class="btn btn-outline-secondary btn-sm">Назад к списку</a>
+                        <h5 class="mb-0">Добавить активность</h5>
+                        <a href="{{ route('admin.activity.index') }}" class="btn btn-outline-secondary btn-sm">Назад к
+                            списку</a>
                     </div>
                     <div class="card-body">
 
@@ -22,7 +23,7 @@
                             </div>
                         @endif
 
-                        <form action="{{ route('admin.news.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.activity.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div class="mb-3">

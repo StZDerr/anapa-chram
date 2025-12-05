@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\News;
-use App\Models\NewsImage;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Carbon\Carbon;
+
 class NewsController extends Controller
 {
     /**
@@ -14,7 +14,8 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = News::orderBy("created_at","desc")->paginate(10);
+        $news = News::orderBy('created_at', 'desc')->paginate(10);
+
         return view('admin.news.index', compact('news')); // view resources/views/news/index.blade.php
     }
 
@@ -37,15 +38,20 @@ class NewsController extends Controller
             'content' => 'required|string',
             'status' => 'required|in:draft,pending,published',
             'published_at' => 'nullable|date',
-            'img_preview' => 'image|max:2048',
+            'img_preview' => 'required|image|max:2048',
             'images.*' => 'image|max:2048', // каждая картинка до 2MB
         ]);
+
+        if ($request->hasFile('img_preview')) {
+            // Сохраняем файл в storage/app/public/news
+            $imgPreviewPath = $request->file('img_preview')->store('news', 'public');
+        }
 
         // Создаем новость
         $news = News::create([
             'title' => $data['title'],
             'content' => $data['content'],
-            'img_preview' => $data['img_preview'],
+            'img_preview' => $imgPreviewPath,
             'status' => $data['status'],
             'published_at' => $data['published_at'] ?? Carbon::today(),
         ]);
@@ -80,6 +86,7 @@ class NewsController extends Controller
     public function edit(string $id)
     {
         $newsItem = News::with('images')->findOrFail($id);
+
         return view('admin.news.edit', compact('newsItem'));
     }
 
@@ -96,6 +103,7 @@ class NewsController extends Controller
             'content' => 'required|string',
             'status' => 'required|in:draft,pending,published',
             'published_at' => 'nullable|date',
+            'img_preview' => 'nullable|image|max:2048',
             'images.*' => 'image|max:2048',
             'remove_images' => 'array',
             'remove_images.*' => 'integer',
@@ -109,8 +117,18 @@ class NewsController extends Controller
             'published_at' => $data['published_at'] ?? $news->published_at,
         ]);
 
+        if ($request->hasFile('img_preview')) {
+            // Удаляем старое превью с диска
+            if ($news->img_preview && \Storage::disk('public')->exists($news->img_preview)) {
+                \Storage::disk('public')->delete($news->img_preview);
+            }
+
+            // Сохраняем новое превью
+            $news->img_preview = $request->file('img_preview')->store('news', 'public');
+            $news->save();
+        }
         // Удаляем отмеченные изображения
-        if (!empty($data['remove_images'])) {
+        if (! empty($data['remove_images'])) {
             $imagesToDelete = $news->images()->whereIn('id', $data['remove_images'])->get();
             foreach ($imagesToDelete as $img) {
                 \Storage::disk('public')->delete($img->path);
@@ -126,7 +144,7 @@ class NewsController extends Controller
             }
         }
 
-        return redirect()->route('admin.news.edit', $news->id)
+        return redirect()->route('admin.news.index', $news->id)
             ->with('success', 'Новость успешно обновлена!');
     }
 
@@ -136,6 +154,7 @@ class NewsController extends Controller
     public function destroy(News $news)
     {
         $news->delete(); // помечаем удалённой
+
         return redirect()->route('admin.news.index')->with('success', 'Новость удалена');
     }
 }

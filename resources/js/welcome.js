@@ -111,6 +111,36 @@ document.addEventListener("DOMContentLoaded", () => {
         simulateTouch: false,
     });
 
+    // Календарь: свайпер для карточек (сохраняем стили .calendar-card)
+    try {
+        const calendarSwiper = new Swiper(".calendar-swiper", {
+            modules: [Navigation],
+            spaceBetween: 16,
+            slidesPerView: 3,
+            loop: true,
+            centeredSlides: false,
+            navigation: {
+                nextEl: ".calendar-next",
+                prevEl: ".calendar-prev",
+            },
+            breakpoints: {
+                320: { slidesPerView: 1, spaceBetween: 8 },
+                576: { slidesPerView: 2, spaceBetween: 10 },
+                768: { slidesPerView: 3, spaceBetween: 12 },
+                992: { slidesPerView: 3, spaceBetween: 14 },
+                1200: { slidesPerView: 3, spaceBetween: 16 },
+            },
+        });
+        // ensure prev/next buttons retain original .btn-calendar-nav visuals
+        document
+            .querySelectorAll(".calendar-prev, .calendar-next")
+            .forEach((btn) => {
+                btn.classList.add("btn-calendar-nav");
+            });
+    } catch (e) {
+        console.error("Calendar swiper init failed", e);
+    }
+
     // Обработка кликов для активации слайдов в галерее
     const mySwiperEl = document.querySelector(".mySwiper");
     if (mySwiperEl) {

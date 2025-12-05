@@ -2,53 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Event;
 
 class CalendarController extends Controller
 {
     public function index()
     {
-        // Примерные данные о мероприятиях (статические)
-        $events = [
-            [
-                'title' => 'Утренняя молитва',
-                'start' => '2025-10-22T06:00:00',
-                'end' => '2025-10-22T07:00:00',
-                'description' => 'Ежедневная утренняя молитва',
-            ],
-            [
-                'title' => 'Божественная литургия',
-                'start' => '2025-10-22T09:00:00',
-                'end' => '2025-10-22T11:00:00',
-                'description' => 'Главная служба дня',
-            ],
-            [
-                'title' => 'Молебен',
-                'start' => '2025-10-22T12:00:00',
-                'end' => '2025-10-22T13:00:00',
-                'description' => 'Молебен о здравии',
-            ],
-            [
-                'title' => 'Вечерняя служба',
-                'start' => '2025-10-22T18:00:00',
-                'end' => '2025-10-22T19:00:00',
-                'description' => 'Вечерняя служба',
-            ],
-            [
-                'title' => 'Всенощное бдение',
-                'start' => '2025-10-22T20:00:00',
-                'end' => '2025-10-22T22:00:00',
-                'description' => 'По праздникам',
-            ],
-            [
-                'title' => 'Праздник: День памяти святого Иоанна Кронштадтского',
-                'start' => '2025-10-22',
-                'allDay' => true,
-                'description' => 'Празднование в честь праведного Иоанна Кронштадтского',
-            ],
-            // Добавьте больше событий по необходимости
-        ];
+        // Получаем все события из БД
+        $events = Event::all()->map(function ($event) {
+            return [
+                'id' => $event->id,
+                'title' => $event->title,
+                'start' => $event->start,
+                'end' => $event->end,
+                'description' => $event->description,
+                'color' => $event->color ?? '#4a5b6f', // цвет по умолчанию
+                'allDay' => empty($event->end), // если нет времени окончания, считаем весь день
+            ];
+        });
 
         return response()->json($events);
     }
 }
+

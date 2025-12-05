@@ -6,46 +6,47 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">Редактировать новость</h5>
-                        <a href="{{ route('admin.news.index') }}" class="btn btn-outline-secondary btn-sm">Назад к списку</a>
+                        <h5 class="mb-0">Редактировать активность</h5>
+                        <a href="{{ route('admin.activity.index') }}" class="btn btn-outline-secondary btn-sm">Назад к
+                            списку</a>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('admin.news.update', $newsItem->id) }}"
-                            enctype="multipart/form-data" id="news-edit-form">
+                        <form method="POST" action="{{ route('admin.activity.update', $activity->id) }}"
+                            enctype="multipart/form-data" id="activity-edit-form">
                             @csrf
                             @method('PUT')
                             <div class="mb-3">
                                 <label for="title" class="form-label">Заголовок</label>
                                 <input type="text" class="form-control" id="title" name="title"
-                                    value="{{ old('title', $newsItem->title) }}" required>
+                                    value="{{ old('title', $activity->title) }}" required>
                             </div>
                             <div class="mb-3">
-                                <label for="content" class="form-label">Текст новости</label>
-                                <textarea class="form-control" id="content" name="content" rows="6" required>{{ old('content', $newsItem->content) }}</textarea>
+                                <label for="content" class="form-label">Текст активности</label>
+                                <textarea class="form-control" id="content" name="content" rows="6" required>{{ old('content', $activity->content) }}</textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="status" class="form-label">Статус</label>
                                 <select class="form-select" id="status" name="status">
-                                    <option value="published" @if (old('status', $newsItem->status) === 'published') selected @endif>
+                                    <option value="published" @if (old('status', $activity->status) === 'published') selected @endif>
                                         Опубликовано</option>
-                                    <option value="draft" @if (old('status', $newsItem->status) === 'draft') selected @endif>
+                                    <option value="draft" @if (old('status', $activity->status) === 'draft') selected @endif>
                                         Черновик</option>
-                                    <option value="pending" @if (old('status', $newsItem->status) === 'pending') selected @endif>
+                                    <option value="pending" @if (old('status', $activity->status) === 'pending') selected @endif>
                                         На модерации</option>
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="published_at" class="form-label">Дата публикации</label>
                                 <input type="date" class="form-control" id="published_at" name="published_at"
-                                    value="{{ old('published_at', $newsItem->published_at ? \Illuminate\Support\Carbon::parse($newsItem->published_at)->format('Y-m-d') : '') }}">
+                                    value="{{ old('published_at', $activity->published_at ? \Illuminate\Support\Carbon::parse($activity->published_at)->format('Y-m-d') : '') }}">
                             </div>
                             <div class="mb-3">
                                 <label for="img_preview" class="form-label">Превью новости</label>
                                 <input type="file" class="form-control" id="img_preview" name="img_preview">
 
-                                @if ($newsItem->img_preview)
+                                @if ($activity->img_preview)
                                     <div class="mt-2" style="max-width: 300px;">
-                                        <img src="{{ asset('storage/' . $newsItem->img_preview) }}" alt="Превью новости"
+                                        <img src="{{ asset('storage/' . $activity->img_preview) }}" alt="Превью активности"
                                             class="img-thumbnail w-100" style="object-fit: cover; height: 180px;">
                                     </div>
                                 @endif
@@ -53,10 +54,10 @@
                             <div class="mb-3">
                                 <label for="images" class="form-label">Изображения</label>
                                 <input type="file" class="form-control" id="images" name="images[]" multiple>
-                                @if ($newsItem->images && count($newsItem->images))
+                                @if ($activity->images && count($activity->images))
                                     <div class="mt-2 d-flex flex-wrap gap-3" id="news-images-list"
                                         style="--img-thumb-width: 23%;">
-                                        @foreach ($newsItem->images as $image)
+                                        @foreach ($activity->images as $image)
                                             <div class="position-relative news-image-thumb"
                                                 data-image-id="{{ $image->id }}"
                                                 style="width: var(--img-thumb-width); min-width: 180px; max-width: 260px;">

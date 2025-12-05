@@ -4,11 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
-class News extends Model
+class Activity extends Model
 {
     use SoftDeletes;
-
     protected $fillable = ['title', 'content', 'img_preview', 'status', 'published_at'];
 
     protected $dates = ['published_at', 'deleted_at'];
@@ -16,7 +14,7 @@ class News extends Model
     // Связь с изображениями
     public function images()
     {
-        return $this->hasMany(NewsImage::class);
+        return $this->hasMany(ActivityImage::class);
     }
 
     public function getStatusNameAttribute()

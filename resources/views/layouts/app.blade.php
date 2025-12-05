@@ -50,6 +50,12 @@
                             Деятельность
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.events.index') }}" class="nav-link text-white">
+                            <i class="bi bi-calendar"></i>
+                            Календарь событий
+                        </a>
+                    </li>
                 </ul>
                 <hr>
 
@@ -84,7 +90,8 @@
         </main>
 
     </div>
+
+    @stack('scripts')
 </body>
-@stack('scripts')
 
 </html>

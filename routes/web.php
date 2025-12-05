@@ -1,12 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CalendarController;
-use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ActivityController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EventsCalendarController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -74,6 +75,10 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
         'activity' => ActivityController::class,
         'users' => UserController::class,
     ]);
+    Route::get('events', [EventsCalendarController::class, 'index'])->name('events.index');
+    Route::get('api/events', [EventsCalendarController::class, 'apiIndex'])->name('events.apiIndex');
+    Route::get('events/create', [EventsCalendarController::class, 'create'])->name('events.create');
+    Route::post('events', [EventsCalendarController::class, 'store'])->name('events.store');
 });
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');

@@ -254,6 +254,28 @@ body {
     flex-direction: column;
     justify-content: space-between;
 }
+/* Swiper slide wrapper for calendar: allow Swiper to control slide width */
+.calendar-swiper .swiper-slide {
+    /* Do NOT override width; let Swiper set inline width based on slidesPerView */
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.calendar-swiper-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.calendar-prev,
+.calendar-next {
+    background: transparent;
+    border: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
 .calendar-day,
 .calendar-date {
     font-family: var(--font-title);
@@ -287,7 +309,7 @@ body {
     border: 2px solid var(--main-color);
     color: var(--main-color);
     border-radius: 50%;
-    width: 50px;
+    width: 100px;
     height: 50px;
     display: flex;
     align-items: center;
@@ -310,6 +332,9 @@ body {
         line-clamp: 3;
         font-size: 0.85rem;
     }
+    .btn-calendar-nav {
+        width: 70px;
+    }
 }
 @media (max-width: 768px) {
     .d-flex.justify-content-center {
@@ -322,9 +347,7 @@ body {
         max-width: 300px;
     }
     .btn-calendar-nav {
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
+        width: 120px;
     }
     .calendar-desc {
         -webkit-line-clamp: 2;
@@ -599,60 +622,15 @@ body {
 .swiper-container .swiper-slide {
     width: 100% !important;
 }
-.gallery-park-next,
-.gallery-park-prev {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 55px !important;
-    height: 55px !important;
-    background: linear-gradient(
-        135deg,
-        var(--main-color) 0%,
-        #8b6914 100%
-    ) !important;
-    border: 2px solid rgba(255, 255, 255, 0.3) !important;
-    border-radius: 50% !important;
-    color: white !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 10;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
-    transition: all 0.3s ease !important;
-}
-.gallery-park-next:after,
-.gallery-park-prev:after {
-    font-size: 14px !important;
-    font-weight: bold !important;
-    color: white !important;
-}
-.gallery-park-next:hover,
-.gallery-park-prev:hover {
-    background: linear-gradient(
-        135deg,
-        #8b6914 0%,
-        var(--main-color) 100%
-    ) !important;
-    transform: translateY(-50%) scale(1.1) !important;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4) !important;
-    border-color: rgba(255, 255, 255, 0.5) !important;
-}
-.gallery-park-next:active,
-.gallery-park-prev:active {
-    transform: translateY(-50%) scale(0.95) !important;
-}
 .gallery-park-next:hover:after,
+.gallery-festivals-next:hover:after,
+.gallery-temple-next:hover:after,
+.gallery-festivals-prev:hover:after,
+.gallery-temple-prev:hover:after,
 .gallery-park-prev:hover:after {
     color: white !important;
 }
-.gallery-park-prev {
-    left: -50px;
-}
-.gallery-park-next {
-    right: -50px;
-}
+
 .slide-inner {
     background-color: var(--beige-light);
     border-radius: 1rem;
@@ -723,21 +701,8 @@ body {
     .swiper-container .swiper-slide {
         width: calc((100% - 60px) / 3) !important;
     }
-    .gallery-park-prev {
-        left: -50px;
-    }
-    .gallery-park-next {
-        right: -50px;
-    }
 }
-@media (max-width: 1200px) {
-    .gallery-park-prev {
-        left: 10px;
-    }
-    .gallery-park-next {
-        right: 10px;
-    }
-}
+
 @media (max-width: 768px) {
     .gallery-park-next,
     .gallery-park-prev {
@@ -1078,7 +1043,7 @@ body {
 }
 @media (max-width: 1024px) {
     .mySwiper {
-        height: 80vh;
+        height: 100vh;
     }
     .mySwiper .swiper-wrapper {
         flex-direction: column;
@@ -1150,54 +1115,68 @@ body {
     background: #e2daca;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
 }
+
+.gallery-wrap .swiper-button-prev::after,
+.gallery-wrap .swiper-button-next::after {
+    display: none;
+}
+
+.gallery-wrap .swiper-button-prev,
+.gallery-wrap .swiper-button-next {
+    color: white !important;
+}
+
+.gallery-festivals-prev,
+.gallery-festivals-next,
+.gallery-temple-prev,
+.gallery-temple-next,
+.gallery-park-prev,
+.gallery-park-next {
+    position: absolute !important;
+    width: 50px !important;
+    height: 50px !important;
+    background: white !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 10;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+.gallery-park-prev,
+.gallery-festivals-prev,
+.gallery-temple-prev {
+    left: -50px !important;
+}
+.gallery-park-next,
+.gallery-festivals-next,
+.gallery-temple-next {
+    right: -50px !important;
+}
+.gallery-festivals-prev svg,
+.gallery-festivals-next svg,
+.gallery-temple-prev svg,
+.gallery-temple-next svg,
+.gallery-park-prev svg,
+.gallery-park-next svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: #000000;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
 .gallery-wrap {
     margin-top: 20px;
 }
 .gallery-instance {
     position: relative;
 }
-.gallery-instance .gallery-park-prev,
-.gallery-instance .gallery-park-next {
-    color: white !important;
-    width: 50px !important;
-    height: 50px !important;
-    background: linear-gradient(
-        135deg,
-        var(--main-color) 0%,
-        #8b6914 100%
-    ) !important;
-    border: 2px solid rgba(255, 255, 255, 0.3) !important;
-    border-radius: 50% !important;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
-    transition: all 0.3s ease !important;
-}
-.gallery-instance .gallery-park-prev:after,
-.gallery-instance .gallery-park-next:after {
-    font-size: 14px !important;
-    font-weight: bold !important;
-    color: white !important;
-}
-.gallery-instance .gallery-park-prev:hover,
-.gallery-instance .gallery-park-next:hover {
-    background: linear-gradient(
-        135deg,
-        #8b6914 0%,
-        var(--main-color) 100%
-    ) !important;
-    transform: scale(1.1) !important;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4) !important;
-    border-color: rgba(255, 255, 255, 0.5) !important;
-}
-.gallery-instance .gallery-park-prev:active,
-.gallery-instance .gallery-park-next:active {
-    transform: scale(0.95) !important;
-}
-.gallery-instance .gallery-park-prev {
-    left: -60px;
-}
-.gallery-instance .gallery-park-next {
-    right: -60px;
-}
+
 .gallery-swiper .swiper-slide img {
     width: 100%;
     height: 280px;
@@ -1215,9 +1194,61 @@ body {
     margin-bottom: 2rem;
 }
 
-@media (min-width: 1200px) {
-    .gallery-swiper .swiper-slide img {
-        height: 320px;
+/* ===== Позиционирование кнопок: на малых экранах внутрь слайдера ===== */
+/* Ставим эти правила ПОСЛЕ всех остальных, чтобы точно перекрыть базовые !important */
+@media (max-width: 1200px) {
+    /* общий набор селекторов + более специфичные с .gallery-instance */
+    .gallery-park-prev,
+    .gallery-festivals-prev,
+    .gallery-temple-prev,
+    .gallery-instance .gallery-park-prev,
+    .gallery-instance .gallery-festivals-prev,
+    .gallery-instance .gallery-temple-prev {
+        left: 10px !important;
+        right: auto !important;
+        background: none !important;
+        color: #ffffff00 !important;
+    }
+
+    .gallery-park-next,
+    .gallery-festivals-next,
+    .gallery-temple-next,
+    .gallery-instance .gallery-park-next,
+    .gallery-instance .gallery-festivals-next,
+    .gallery-instance .gallery-temple-next {
+        right: 10px !important;
+        left: auto !important;
+        background: none !important;
+        color: #ffffff00 !important;
+    }
+}
+
+/* Ещё более компактно для мобильных */
+@media (max-width: 768px) {
+    .gallery-park-prev,
+    .gallery-festivals-prev,
+    .gallery-temple-prev,
+    .gallery-instance .gallery-park-prev,
+    .gallery-instance .gallery-festivals-prev,
+    .gallery-instance .gallery-temple-prev,
+    .gallery-park-next,
+    .gallery-festivals-next,
+    .gallery-temple-next,
+    .gallery-instance .gallery-park-next,
+    .gallery-instance .gallery-festivals-next,
+    .gallery-instance .gallery-temple-next {
+        width: 44px !important;
+        height: 44px !important;
+        background: none !important;
+        color: #ffffff00 !important;
+    }
+    .gallery-park-prev,
+    .gallery-instance .gallery-park-prev {
+        left: 8px !important;
+    }
+    .gallery-park-next,
+    .gallery-instance .gallery-park-next {
+        right: 8px !important;
     }
 }
 
