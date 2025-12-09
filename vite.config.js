@@ -34,6 +34,7 @@ export default defineConfig({
                 "resources/js/calendar.js",
                 "resources/js/prayer-modal.js",
                 "resources/js/park.js",
+                "resources/js/calendar-swiper.js",
             ],
             refresh: true,
         }),
