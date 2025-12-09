@@ -15,6 +15,7 @@ export default defineConfig({
                 "resources/css/news-read.css",
                 "resources/css/gallery.css",
                 "resources/css/activity.css",
+                "resources/css/calendar-swiper.css",
                 "resources/css/about.css",
                 "resources/css/footer.css",
                 "resources/css/navbar.css",
