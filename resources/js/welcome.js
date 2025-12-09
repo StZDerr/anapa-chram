@@ -1,6 +1,18 @@
+document.addEventListener("DOMContentLoaded", () => {
+    try {
+        const activeBtn = document.querySelector(".nav-link.day-circle.active");
+        if (activeBtn && window.bootstrap) {
+            const tab = window.bootstrap.Tab.getOrCreateInstance(activeBtn);
+            tab.show();
+        }
+    } catch (e) {
+        // безопасно логируем, но не ломаем страницу
+        console.error("Welcome tab activation failed", e);
+    }
+});
 // Импортируем Swiper
 import Swiper from "swiper";
-import { Navigation, Pagination, FreeMode } from "swiper/modules";
+import { Navigation, Pagination, FreeMode, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -110,36 +122,6 @@ document.addEventListener("DOMContentLoaded", () => {
         allowTouchMove: false,
         simulateTouch: false,
     });
-
-    // Календарь: свайпер для карточек (сохраняем стили .calendar-card)
-    try {
-        const calendarSwiper = new Swiper(".calendar-swiper", {
-            modules: [Navigation],
-            spaceBetween: 16,
-            slidesPerView: 3,
-            loop: true,
-            centeredSlides: false,
-            navigation: {
-                nextEl: ".calendar-next",
-                prevEl: ".calendar-prev",
-            },
-            breakpoints: {
-                320: { slidesPerView: 1, spaceBetween: 8 },
-                576: { slidesPerView: 2, spaceBetween: 10 },
-                768: { slidesPerView: 3, spaceBetween: 12 },
-                992: { slidesPerView: 3, spaceBetween: 14 },
-                1200: { slidesPerView: 3, spaceBetween: 16 },
-            },
-        });
-        // ensure prev/next buttons retain original .btn-calendar-nav visuals
-        document
-            .querySelectorAll(".calendar-prev, .calendar-next")
-            .forEach((btn) => {
-                btn.classList.add("btn-calendar-nav");
-            });
-    } catch (e) {
-        console.error("Calendar swiper init failed", e);
-    }
 
     // Обработка кликов для активации слайдов в галерее
     const mySwiperEl = document.querySelector(".mySwiper");
@@ -255,4 +237,57 @@ document.addEventListener("DOMContentLoaded", () => {
         padding: { top: 50, bottom: 50, left: 50, right: 50 },
     });
     lightbox.init();
+    (function animateWindows() {
+        const windows = document.querySelectorAll(
+            ".background-container .window"
+        );
+        if (!windows || windows.length === 0) return;
+
+        // задаём начальное состояние (на случай, если CSS не успел подгрузиться)
+        windows.forEach((w) => {
+            w.classList.remove("window--enter");
+            w.style.willChange = "transform, opacity";
+        });
+
+        // небольшой таймаут чтобы дать браузеру отрисовать начальное состояние
+        // затем включаем класс с задержками
+        setTimeout(() => {
+            windows.forEach((w, i) => {
+                // задержка по индексу (stagger)
+                const delay = i * 120; // ms — можно увеличить/уменьшить
+                setTimeout(() => {
+                    w.classList.add("window--enter");
+                }, delay);
+            });
+        }, 100); // даём 100ms после DOM ready
+    })();
+
+    // Плавная анимация для основного текстового блока
+    (function animateMainText() {
+        const el = document.querySelector(".main-text-block");
+        if (!el) return;
+
+        const trigger = () => {
+            if (!el.classList.contains("animate")) {
+                el.classList.add("animate");
+            }
+        };
+
+        if ("IntersectionObserver" in window) {
+            const io = new IntersectionObserver(
+                (entries, observer) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            trigger();
+                            observer.disconnect();
+                        }
+                    });
+                },
+                { threshold: 0.15 }
+            );
+            io.observe(el);
+        } else {
+            setTimeout(trigger, 350);
+        }
+    })();
 });

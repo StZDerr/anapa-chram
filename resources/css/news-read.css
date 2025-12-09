@@ -480,3 +480,109 @@
     font-variant: small-caps;
     color: #25282f;
 }
+
+/* Стили для контента из CKEditor */
+.news-content-display {
+    font-family: var(--font-text);
+    font-size: 18px;
+    line-height: 1.8;
+    color: #444;
+}
+
+.news-content-display p {
+    margin-bottom: 25px;
+    text-align: justify;
+}
+
+.news-content-display h1,
+.news-content-display h2,
+.news-content-display h3,
+.news-content-display h4 {
+    font-family: var(--font-title);
+    color: var(--main-color);
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.news-content-display img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.news-content-display figure.image {
+    margin: 1.5rem 0;
+}
+
+.news-content-display figure.image img {
+    border-radius: 8px;
+}
+
+/* Выравнивание изображений из CKEditor */
+.news-content-display .image-style-align-left,
+.news-content-display .image-style-side {
+    float: left;
+    margin: 0 1.5em 1em 0;
+    max-width: 50%;
+}
+
+.news-content-display .image-style-align-right {
+    float: right;
+    margin: 0 0 1em 1.5em;
+    max-width: 50%;
+}
+
+.news-content-display .image-style-align-center {
+    display: block;
+    margin: 1.5em auto;
+    text-align: center;
+}
+
+.news-content-display .image-inline {
+    display: inline-block;
+    max-width: 100%;
+}
+
+/* Очистка float для корректного отображения */
+.news-content-display::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.news-content-display p::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Стили для ссылок */
+.news-content-display a {
+    color: var(--main-color);
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.news-content-display a:hover {
+    color: #8b6914;
+}
+
+/* Стили для списков */
+.news-content-display ul,
+.news-content-display ol {
+    margin: 1em 0;
+    padding-left: 2em;
+}
+
+.news-content-display li {
+    margin-bottom: 0.5em;
+}
+
+/* Стили для цитат */
+.news-content-display blockquote {
+    border-left: 4px solid var(--main-color);
+    padding-left: 1.5em;
+    margin: 1.5em 0;
+    font-style: italic;
+    color: #666;
+}

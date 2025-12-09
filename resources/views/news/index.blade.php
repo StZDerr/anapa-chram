@@ -18,88 +18,23 @@
                 <h1 class="title text-center mb-5">НОВОСТИ И СОБЫТИЯ</h1>
                 <div class="news-grid">
                     <!-- Карточка 1 -->
-                    <div class="news-card">
-                        <div class="news-card-image">
-                            <img src="{{ asset('images/newsOne.jpg') }}" alt="История Храма">
+                    @forelse ($news as $newsItem)
+                        <div class="news-card">
+                            <div class="news-card-image">
+                                <img src="{{ $newsItem->img_preview ? asset('storage/' . $newsItem->img_preview) : asset('images/newsOne.jpg') }}"
+                                    alt="{{ $newsItem->title }}" class="slide-img">
+                            </div>
+                            <div class="news-card-body">
+                                <h3 class="news-card-title">{{ $newsItem->title }}</h3>
+                                <div class="slide-desc">
+                                    {{ Str::limit(strip_tags($newsItem->content), 70) }}
+                                </div>
+                                <a href="{{ route('news.read', $newsItem->slug) }}" class="news-btn">Читать</a>
+                            </div>
                         </div>
-                        <div class="news-card-body">
-                            <h3 class="news-card-title">История Храма</h3>
-                            <p class="news-card-description">
-                                Сегодня Церковь празднует память отцов Первого Вселенского собора
-                            </p>
-                            <a href="{{ route('test') }}" class="news-btn">Читать</a>
-                        </div>
-                    </div>
-
-                    <!-- Карточка 2 -->
-                    <div class="news-card">
-                        <div class="news-card-image">
-                            <img src="{{ asset('images/newsOne.jpg') }}" alt="Крещенский парк">
-                        </div>
-                        <div class="news-card-body">
-                            <h3 class="news-card-title">Крещенский парк</h3>
-                            <p class="news-card-description">
-                                Сегодня Церковь празднует память отцов Первого Вселенского собора
-                            </p>
-                            <a href="#" class="news-btn">Читать</a>
-                        </div>
-                    </div>
-
-                    <!-- Карточка 3 -->
-                    <div class="news-card">
-                        <div class="news-card-image">
-                            <img src="{{ asset('images/newsOne.jpg') }}" alt="Вербное воскресенье">
-                        </div>
-                        <div class="news-card-body">
-                            <h3 class="news-card-title">Вербное воскресенье</h3>
-                            <p class="news-card-description">
-                                Сегодня Церковь празднует память отцов Первого Вселенского собора
-                            </p>
-                            <a href="#" class="news-btn">Читать</a>
-                        </div>
-                    </div>
-
-                    <!-- Карточка 4 -->
-                    <div class="news-card">
-                        <div class="news-card-image">
-                            <img src="{{ asset('images/newsOne.jpg') }}" alt="История Храма">
-                        </div>
-                        <div class="news-card-body">
-                            <h3 class="news-card-title">История Храма</h3>
-                            <p class="news-card-description">
-                                Сегодня Церковь празднует память отцов Первого Вселенского собора
-                            </p>
-                            <a href="#" class="news-btn">Читать</a>
-                        </div>
-                    </div>
-
-                    <!-- Карточка 5 -->
-                    <div class="news-card">
-                        <div class="news-card-image">
-                            <img src="{{ asset('images/newsOne.jpg') }}" alt="Крещенский парк">
-                        </div>
-                        <div class="news-card-body">
-                            <h3 class="news-card-title">Крещенский парк</h3>
-                            <p class="news-card-description">
-                                Сегодня Церковь празднует память отцов Первого Вселенского собора
-                            </p>
-                            <a href="#" class="news-btn">Читать</a>
-                        </div>
-                    </div>
-
-                    <!-- Карточка 6 -->
-                    <div class="news-card">
-                        <div class="news-card-image">
-                            <img src="{{ asset('images/newsOne.jpg') }}" alt="Вербное воскресенье">
-                        </div>
-                        <div class="news-card-body">
-                            <h3 class="news-card-title">Вербное воскресенье</h3>
-                            <p class="news-card-description">
-                                Сегодня Церковь празднует память отцов Первого Вселенского собора
-                            </p>
-                            <a href="#" class="news-btn">Читать</a>
-                        </div>
-                    </div>
+                    @empty
+                        <div class="null">Новостей пока нет</div>
+                    @endforelse
                 </div>
             </div>
         </div>

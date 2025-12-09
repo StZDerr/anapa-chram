@@ -2,6 +2,30 @@
 @import "./navbar.css";
 @import "./footer.css";
 
+/* ---------- Переменные ---------- */
+:root {
+    --main-color: #4a5b6f;
+    --beige-light: #efe9e0;
+    --beige-alt: #e2daca;
+    --dark: #222222;
+    --muted: #666666;
+    --accent-border: #cbbd91;
+    --shadow-1: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --shadow-2: 0 8px 25px rgba(0, 0, 0, 0.15);
+    --font-title: "Tenor Sans", sans-serif;
+    --font-ui: "Montserrat", sans-serif;
+    --break-lg: 1400px;
+    --break-md: 1199px;
+    --break-sm: 992px;
+    --break-xs: 768px;
+    --font-size-title: clamp(2rem, 4vw, 4rem);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .text-center {
     text-align: center;
 }

@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\News;
-use Carbon\Carbon;
+use DOMDocument;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class NewsController extends Controller
 {
@@ -32,40 +33,50 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        // Валидация
-        $data = $request->validate([
+        $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'status' => 'required|in:draft,pending,published',
+            'status' => 'nullable|in:published,draft',
             'published_at' => 'nullable|date',
-            'img_preview' => 'required|image|max:2048',
-            'images.*' => 'image|max:2048', // каждая картинка до 2MB
+            'img_preview' => 'required|image|max:5120',
+            'images.*' => 'nullable|image|max:5120',
         ]);
 
-        if ($request->hasFile('img_preview')) {
-            // Сохраняем файл в storage/app/public/news
-            $imgPreviewPath = $request->file('img_preview')->store('news', 'public');
+        // Сохранить превью
+        $previewPath = null;
+        if ($request->hasFile('img_preview') && $request->file('img_preview')->isValid()) {
+            $file = $request->file('img_preview');
+            $filename = date('Ymd_His').'_preview_'.Str::random(8).'.'.$file->getClientOriginalExtension();
+
+            // Сохраняем файл на диск 'public'
+            $file->storeAs('news/previews', $filename, 'public');
+            $previewPath = 'news/previews/'.$filename;
         }
 
-        // Создаем новость
+        // Сохраняем запись новости
         $news = News::create([
-            'title' => $data['title'],
-            'content' => $data['content'],
-            'img_preview' => $imgPreviewPath,
-            'status' => $data['status'],
-            'published_at' => $data['published_at'] ?? Carbon::today(),
+            'title' => $request->input('title'),
+            'content' => $request->input('content'),
+            'status' => $request->input('status') ?? 'draft',
+            'published_at' => $request->input('published_at') ?: null,
+            'img_preview' => $previewPath,
         ]);
 
-        // Сохраняем изображения, если они есть
+        // Сохранить дополнительные изображения (если были)
         if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $path = $image->store('news_images', 'public'); // сохраняем в storage/app/public/news_images
-                $news->images()->create(['path' => $path]);
+            foreach ($request->file('images') as $img) {
+                if (! $img->isValid()) {
+                    continue;
+                }
+                $filename = date('Ymd_His').'_gallery_'.Str::random(8).'.'.$img->getClientOriginalExtension();
+                $img->storeAs('news/images', $filename, 'public');
+                $news->images()->create([
+                    'path' => 'news/images/'.$filename,
+                ]);
             }
         }
 
-        return redirect()->route('admin.news.index')
-            ->with('success', 'Новость успешно создана!');
+        return redirect()->route('admin.news.index')->with('success', 'Новость сохранена');
     }
 
     /**
@@ -103,48 +114,76 @@ class NewsController extends Controller
             'content' => 'required|string',
             'status' => 'required|in:draft,pending,published',
             'published_at' => 'nullable|date',
-            'img_preview' => 'nullable|image|max:2048',
-            'images.*' => 'image|max:2048',
-            'remove_images' => 'array',
+            'img_preview' => 'nullable|image|max:5120',
+            'images.*' => 'nullable|image|max:5120',
+            'remove_images' => 'nullable|array',
             'remove_images.*' => 'integer',
         ]);
 
-        // Обновляем новость
-        $news->update([
-            'title' => $data['title'],
-            'content' => $data['content'],
-            'status' => $data['status'],
-            'published_at' => $data['published_at'] ?? $news->published_at,
-        ]);
+        // Получаем старое содержимое для сравнения
+        $oldContent = $news->content;
+        $newContent = $data['content'];
 
-        if ($request->hasFile('img_preview')) {
+        // Находим изображения в старом контенте, которых нет в новом
+        $oldImages = $this->extractImagesFromHtml($oldContent);
+        $newImages = $this->extractImagesFromHtml($newContent);
+        $removedImages = array_diff($oldImages, $newImages);
+
+        // Удаляем файлы, которые были удалены из редактора
+        foreach ($removedImages as $imageUrl) {
+            $this->deleteImageByUrl($imageUrl);
+        }
+
+        // Подготовим путь превью (оставим прежний по умолчанию)
+        $previewPath = $news->img_preview;
+
+        // Обновляем превью если загружено новое
+        if ($request->hasFile('img_preview') && $request->file('img_preview')->isValid()) {
             // Удаляем старое превью с диска
-            if ($news->img_preview && \Storage::disk('public')->exists($news->img_preview)) {
-                \Storage::disk('public')->delete($news->img_preview);
+            if ($previewPath && Storage::disk('public')->exists($previewPath)) {
+                Storage::disk('public')->delete($previewPath);
             }
 
-            // Сохраняем новое превью
-            $news->img_preview = $request->file('img_preview')->store('news', 'public');
-            $news->save();
+            // Сохраняем новое превью (аналогично store)
+            $file = $request->file('img_preview');
+            $filename = date('Ymd_His').'_preview_'.Str::random(8).'.'.$file->getClientOriginalExtension();
+            $file->storeAs('news/previews', $filename, 'public');
+            $previewPath = 'news/previews/'.$filename;
         }
-        // Удаляем отмеченные изображения
+
+        // Обновляем новость (включаем img_preview чтобы сохранить путь)
+        $news->update([
+            'title' => $data['title'],
+            'content' => $newContent,
+            'status' => $data['status'],
+            'published_at' => $data['published_at'] ?? $news->published_at,
+            'img_preview' => $previewPath,
+        ]);
+
+        // Удаляем отмеченные изображения галереи
         if (! empty($data['remove_images'])) {
             $imagesToDelete = $news->images()->whereIn('id', $data['remove_images'])->get();
             foreach ($imagesToDelete as $img) {
-                \Storage::disk('public')->delete($img->path);
+                if (Storage::disk('public')->exists($img->path)) {
+                    Storage::disk('public')->delete($img->path);
+                }
                 $img->delete();
             }
         }
 
-        // Добавляем новые изображения
+        // Добавляем новые изображения в галерею
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-                $path = $image->store('news_images', 'public');
-                $news->images()->create(['path' => $path]);
+                if (! $image->isValid()) {
+                    continue;
+                }
+                $filename = date('Ymd_His').'_gallery_'.Str::random(8).'.'.$image->getClientOriginalExtension();
+                $image->storeAs('public/news/images', $filename);
+                $news->images()->create(['path' => 'news/images/'.$filename]);
             }
         }
 
-        return redirect()->route('admin.news.index', $news->id)
+        return redirect()->route('admin.news.index')
             ->with('success', 'Новость успешно обновлена!');
     }
 
@@ -153,8 +192,109 @@ class NewsController extends Controller
      */
     public function destroy(News $news)
     {
-        $news->delete(); // помечаем удалённой
+        // Удаляем превью
+        if ($news->img_preview && Storage::disk('public')->exists($news->img_preview)) {
+            Storage::disk('public')->delete($news->img_preview);
+        }
+
+        // Удаляем изображения из галереи
+        foreach ($news->images as $image) {
+            if (Storage::disk('public')->exists($image->path)) {
+                Storage::disk('public')->delete($image->path);
+            }
+            $image->delete();
+        }
+
+        // Удаляем изображения из контента (текстовый редактор)
+        $contentImages = $this->extractImagesFromHtml($news->content);
+        foreach ($contentImages as $imageUrl) {
+            $this->deleteImageByUrl($imageUrl);
+        }
+
+        // Помечаем новость как удалённую (soft delete)
+        $news->delete();
 
         return redirect()->route('admin.news.index')->with('success', 'Новость удалена');
+    }
+
+    /**
+     * Upload image from CKEditor
+     */
+    public function uploadImage(Request $request)
+    {
+        $request->validate([
+            'upload' => 'required|image|max:5120', // макс 5MB
+        ]);
+
+        $file = $request->file('upload');
+
+        // формируем уникальное имя
+        $filename = date('Ymd_His').'_editor_'.Str::random(8).'.'.$file->getClientOriginalExtension();
+
+        // путь в storage/app/public/news/editor (используем диск 'public')
+        $file->storeAs('news/editor', $filename, 'public');
+
+        // получаем публичный URL
+        $url = Storage::url('news/editor/'.$filename);
+
+        return response()->json(['url' => $url], 200);
+    }
+
+    /**
+     * Извлекает URLs изображений из HTML контента
+     */
+    private function extractImagesFromHtml($html)
+    {
+        $images = [];
+
+        if (empty($html)) {
+            return $images;
+        }
+
+        // Подавляем предупреждения от DOMDocument
+        libxml_use_internal_errors(true);
+
+        $dom = new DOMDocument;
+        $dom->loadHTML('<?xml encoding="UTF-8">'.$html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+
+        libxml_clear_errors();
+
+        $imgTags = $dom->getElementsByTagName('img');
+
+        foreach ($imgTags as $img) {
+            if ($img instanceof \DOMElement) {
+                $src = $img->getAttribute('src');
+                if ($src) {
+                    $images[] = $src;
+                }
+            }
+        }
+
+        return $images;
+    }
+
+    /**
+     * Удаляет файл изображения по URL
+     */
+    private function deleteImageByUrl($url)
+    {
+        // Преобразуем URL в путь файла
+        // Например: /storage/news/editor/20251208_123456_editor_abc123.jpg -> news/editor/20251208_123456_editor_abc123.jpg
+
+        if (Str::startsWith($url, '/storage/')) {
+            $path = Str::after($url, '/storage/');
+        } elseif (Str::startsWith($url, 'storage/')) {
+            $path = Str::after($url, 'storage/');
+        } elseif (Str::contains($url, '/storage/')) {
+            $path = Str::after($url, '/storage/');
+        } else {
+            // Если не содержит /storage/, возможно это относительный путь
+            $path = $url;
+        }
+
+        // Удаляем файл если существует
+        if (Storage::disk('public')->exists($path)) {
+            Storage::disk('public')->delete($path);
+        }
     }
 }

@@ -9,3 +9,19 @@
 
 // Bootstrap Icons
 @import "../../node_modules/bootstrap-icons/font/bootstrap-icons.css";
+
+
+
+/* задаёт минимальную высоту области редактирования CKEditor */
+.ck-editor__editable[role="textbox"] {
+    min-height: 400px;
+    /* подставьте нужную высоту */
+    max-height: 1200px;
+    overflow: auto;
+}
+
+/* опционально: увеличить ширину контейнера редактора, если нужно */
+.ck-editor {
+    width: 100%;
+}
+

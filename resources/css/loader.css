@@ -1,0 +1,55 @@
+/* Loader styles — shows full-screen overlay until images for .window are loaded */
+#page-loader {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    z-index: 99999;
+    transition: opacity 300ms ease, visibility 300ms ease;
+}
+#page-loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* Spinner */
+.loader-spinner {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 6px solid rgba(0, 0, 0, 0.08);
+    border-top-color: var(--main-color, #4a5b6f);
+    animation: loader-spin 1s linear infinite;
+}
+@keyframes loader-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Hide the main block until page-loaded class is added on body */
+body:not(.page-loaded) .background-container,
+body:not(.page-loaded) .main-text-block {
+    visibility: hidden;
+    opacity: 0;
+}
+
+/* When loaded, make them visible (small fade-in handled by existing transitions) */
+body.page-loaded .background-container,
+body.page-loaded .main-text-block {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Reduced-motion fallback */
+@media (prefers-reduced-motion: reduce) {
+    .loader-spinner {
+        animation: none;
+    }
+}

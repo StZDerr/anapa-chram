@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <title>Новость храма - Храм святого князя Владимира в Анапе</title>
+    <title>{{ $news->title }} - Храм святого князя Владимира в Анапе</title>
     @include('partials.head')
 
     <!-- Стили страницы News Read -->
@@ -16,11 +16,15 @@
         <!-- Hero секция с фоном -->
         <div class="news-hero">
             <div class="news-hero-overlay"></div>
-            <img src="{{ asset('images/ChramSvitogo.jpg') }}" alt="Освящение храма" class="news-hero-image">
+            @if ($news->img_preview && Storage::disk('public')->exists($news->img_preview))
+                <img src="{{ Storage::url($news->img_preview) }}" alt="{{ $news->title }}" class="news-hero-image">
+            @else
+                <img src="{{ asset('images/ChramSvitogo.jpg') }}" alt="{{ $news->title }}" class="news-hero-image">
+            @endif
             <div class="container">
                 <div class="news-hero-content">
                     <div class="news-category">Новости храма</div>
-                    <h1 class="news-hero-title">Освящение храма святого князя Владимира</h1>
+                    <h1 class="news-hero-title">{{ $news->title }}</h1>
                     <div class="news-meta">
                         <span class="news-date">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
@@ -30,7 +34,7 @@
                                 <line x1="8" y1="2" x2="8" y2="6"></line>
                                 <line x1="3" y1="10" x2="21" y2="10"></line>
                             </svg>
-                            1 октября 2023
+                            {{ $news->published_at ? $news->published_at->format('d.m.Y') : $news->created_at->format('d.m.Y') }}
                         </span>
                         <span class="news-author">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
@@ -52,12 +56,11 @@
                     <!-- Основной текст на всю ширину -->
                     <div class="col-lg-10 col-xl-9">
                         <article class="news-article">
-                            <div class="news-lead">
-                                1 октября 2023 года состоялось знаменательное событие — освящение храма святого
-                                равноапостольного великого князя Владимира Патриархом Московским и всея Руси Кириллом.
+                            <div class="news-content-display">
+                                {!! $news->content !!}
                             </div>
                         </article>
-                        <div class="more">
+                        <div class="more d-none">
                             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae vel
                             pariatur, necessitatibus a nostrum at repellendus libero aliquam, obcaecati culpa non iusto.
                             Possimus labore dicta natus suscipit. Sint ab, natus eum asperiores molestiae tempore
@@ -114,189 +117,80 @@
                         </div>
 
                         <!-- Фотогалерея -->
-                        <div class="news-gallery-section">
-                            <h2 class="section-title">Фотогалерея события</h2>
-                            <div class="swiper newsGallerySwiper">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <a href="{{ asset('images/ChramSvitogo.jpg') }}" data-pswp-width="1200"
-                                            data-pswp-height="800">
-                                            <img src="{{ asset('images/ChramSvitogo.jpg') }}"
-                                                alt="Освящение храма - фото 1">
-                                            <div class="gallery-overlay">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2">
-                                                    <circle cx="11" cy="11" r="8"></circle>
-                                                    <line x1="21" y1="21" x2="16.65" y2="16.65">
-                                                    </line>
-                                                    <line x1="11" y1="8" x2="11" y2="14">
-                                                    </line>
-                                                    <line x1="8" y1="11" x2="14" y2="11">
-                                                    </line>
-                                                </svg>
-                                            </div>
-                                        </a>
+                        @if ($news->gallery && count(json_decode($news->gallery, true)) > 0)
+                            <div class="news-gallery-section">
+                                <h2 class="section-title">Фотогалерея события</h2>
+                                <div class="swiper newsGallerySwiper">
+                                    <div class="swiper-wrapper">
+                                        @foreach (json_decode($news->gallery, true) as $image)
+                                            @if (Storage::disk('public')->exists($image))
+                                                <div class="swiper-slide">
+                                                    <a href="{{ Storage::url($image) }}" data-pswp-width="1200"
+                                                        data-pswp-height="800">
+                                                        <img src="{{ Storage::url($image) }}"
+                                                            alt="Фото {{ $loop->iteration }}">
+                                                        <div class="gallery-overlay">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="40"
+                                                                height="40" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2">
+                                                                <circle cx="11" cy="11" r="8"></circle>
+                                                                <line x1="21" y1="21" x2="16.65"
+                                                                    y2="16.65"></line>
+                                                                <line x1="11" y1="8" x2="11"
+                                                                    y2="14"></line>
+                                                                <line x1="8" y1="11" x2="14"
+                                                                    y2="11"></line>
+                                                            </svg>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            @endif
+                                        @endforeach
                                     </div>
-                                    <div class="swiper-slide">
-                                        <a href="{{ asset('images/derzhavnaya_ikona_bozhej_materi.jpg') }}"
-                                            data-pswp-width="1200" data-pswp-height="800">
-                                            <img src="{{ asset('images/derzhavnaya_ikona_bozhej_materi.jpg') }}"
-                                                alt="Освящение храма - фото 2">
-                                            <div class="gallery-overlay">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2">
-                                                    <circle cx="11" cy="11" r="8"></circle>
-                                                    <line x1="21" y1="21" x2="16.65"
-                                                        y2="16.65"></line>
-                                                    <line x1="11" y1="8" x2="11"
-                                                        y2="14"></line>
-                                                    <line x1="8" y1="11" x2="14"
-                                                        y2="11"></line>
-                                                </svg>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <a href="{{ asset('images/galery.jpg') }}" data-pswp-width="1200"
-                                            data-pswp-height="800">
-                                            <img src="{{ asset('images/galery.jpg') }}"
-                                                alt="Освящение храма - фото 3">
-                                            <div class="gallery-overlay">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2">
-                                                    <circle cx="11" cy="11" r="8"></circle>
-                                                    <line x1="21" y1="21" x2="16.65"
-                                                        y2="16.65"></line>
-                                                    <line x1="11" y1="8" x2="11"
-                                                        y2="14"></line>
-                                                    <line x1="8" y1="11" x2="14"
-                                                        y2="11"></line>
-                                                </svg>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <a href="{{ asset('images/hram_kupel_knyagini_olgi.jpg') }}"
-                                            data-pswp-width="1200" data-pswp-height="800">
-                                            <img src="{{ asset('images/hram_kupel_knyagini_olgi.jpg') }}"
-                                                alt="Освящение храма - фото 4">
-                                            <div class="gallery-overlay">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2">
-                                                    <circle cx="11" cy="11" r="8"></circle>
-                                                    <line x1="21" y1="21" x2="16.65"
-                                                        y2="16.65"></line>
-                                                    <line x1="11" y1="8" x2="11"
-                                                        y2="14"></line>
-                                                    <line x1="8" y1="11" x2="14"
-                                                        y2="11"></line>
-                                                </svg>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <a href="{{ asset('images/ChramSvitogo.jpg') }}" data-pswp-width="1200"
-                                            data-pswp-height="800">
-                                            <img src="{{ asset('images/ChramSvitogo.jpg') }}"
-                                                alt="Освящение храма - фото 5">
-                                            <div class="gallery-overlay">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2">
-                                                    <circle cx="11" cy="11" r="8"></circle>
-                                                    <line x1="21" y1="21" x2="16.65"
-                                                        y2="16.65"></line>
-                                                    <line x1="11" y1="8" x2="11"
-                                                        y2="14"></line>
-                                                    <line x1="8" y1="11" x2="14"
-                                                        y2="11"></line>
-                                                </svg>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <a href="{{ asset('images/galery.jpg') }}" data-pswp-width="1200"
-                                            data-pswp-height="800">
-                                            <img src="{{ asset('images/galery.jpg') }}"
-                                                alt="Освящение храма - фото 6">
-                                            <div class="gallery-overlay">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2">
-                                                    <circle cx="11" cy="11" r="8"></circle>
-                                                    <line x1="21" y1="21" x2="16.65"
-                                                        y2="16.65"></line>
-                                                    <line x1="11" y1="8" x2="11"
-                                                        y2="14"></line>
-                                                    <line x1="8" y1="11" x2="14"
-                                                        y2="11"></line>
-                                                </svg>
-                                            </div>
-                                        </a>
-                                    </div>
+                                    <div class="swiper-button-next"></div>
+                                    <div class="swiper-button-prev"></div>
+                                    <div class="swiper-pagination"></div>
                                 </div>
-                                <div class="swiper-button-next"></div>
-                                <div class="swiper-button-prev"></div>
-                                <div class="swiper-pagination"></div>
                             </div>
-                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Другие новости внизу страницы -->
-        <div class="other-news-section">
-            <div class="container">
-                <h2 class="section-title text-center">Другие новости</h2>
-                <div class="row g-4">
-                    <div class="col-md-6 col-lg-4">
-                        <a href="#" class="other-news-card">
-                            <div class="other-news-image">
-                                <img src="{{ asset('images/galery.jpg') }}" alt="Престольный праздник храма">
+        @if ($otherNews->count() > 0)
+            <div class="other-news-section">
+                <div class="container">
+                    <h2 class="section-title text-center">Другие новости</h2>
+                    <div class="row g-4">
+                        @foreach ($otherNews->take(3) as $otherNewsItem)
+                            <div class="col-md-6 col-lg-4">
+                                <a href="{{ route('news.read', $otherNewsItem->slug) }}" class="other-news-card">
+                                    <div class="other-news-image">
+                                        @if ($otherNewsItem->img_preview && Storage::disk('public')->exists($otherNewsItem->img_preview))
+                                            <img src="{{ Storage::url($otherNewsItem->img_preview) }}"
+                                                alt="{{ $otherNewsItem->title }}">
+                                        @else
+                                            <img src="{{ asset('images/ChramSvitogo.jpg') }}"
+                                                alt="{{ $otherNewsItem->title }}">
+                                        @endif
+                                    </div>
+                                    <div class="other-news-content">
+                                        <div class="other-news-date">
+                                            {{ $otherNewsItem->published_at ? $otherNewsItem->published_at->format('d.m.Y') : $otherNewsItem->created_at->format('d.m.Y') }}
+                                        </div>
+                                        <h3 class="other-news-title">{{ $otherNewsItem->title }}</h3>
+                                        <p class="other-news-excerpt">
+                                            {{ Str::limit(strip_tags($otherNewsItem->content), 120) }}</p>
+                                    </div>
+                                </a>
                             </div>
-                            <div class="other-news-content">
-                                <div class="other-news-date">15 сентября 2023</div>
-                                <h3 class="other-news-title">Престольный праздник храма</h3>
-                                <p class="other-news-excerpt">В день памяти святого равноапостольного князя Владимира
-                                    состоялись торжественные богослужения...</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <a href="#" class="other-news-card">
-                            <div class="other-news-image">
-                                <img src="{{ asset('images/hram_kupel_knyagini_olgi.jpg') }}"
-                                    alt="Крещение в храме-купели">
-                            </div>
-                            <div class="other-news-content">
-                                <div class="other-news-date">10 августа 2023</div>
-                                <h3 class="other-news-title">Крещение в храме-купели княгини Ольги</h3>
-                                <p class="other-news-excerpt">Таинство крещения в уникальном храме-купели стало
-                                    особенным событием для многих семей...</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <a href="#" class="other-news-card">
-                            <div class="other-news-image">
-                                <img src="{{ asset('images/ChramSvitogo.jpg') }}" alt="Открытие Крещенского парка">
-                            </div>
-                            <div class="other-news-content">
-                                <div class="other-news-date">1 июля 2023</div>
-                                <h3 class="other-news-title">Открытие Крещенского парка</h3>
-                                <p class="other-news-excerpt">Торжественное открытие духовно-исторического комплекса
-                                    собрало тысячи жителей и гостей города...</p>
-                            </div>
-                        </a>
+                        @endforeach
                     </div>
                 </div>
             </div>
-        </div>
+        @endif
     </main>
 
     @include('partials.footer')

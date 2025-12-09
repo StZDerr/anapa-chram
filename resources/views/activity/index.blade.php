@@ -13,94 +13,28 @@
     @include('partials.navbar')
 
     <main class="flex-fill">
-        <div class="activity-page">
-            <div class="container py-5">
-                <h1 class="title text-center mb-5">ДЕЯТЕЛЬНОСТЬ ХРАМА</h1>
-                <div class="activity-grid">
+        <div class="container py-5">
+            <h1 class="title text-center mb-5">ДЕЯТЕЛЬНОСТЬ ХРАМА</h1>
+            <div class="activity-grid">
+                @forelse ($activities as $activity)
                     <!-- Карточка 1 -->
                     <div class="activity-card">
-                        <div class="activity-card-image">
-                            <img src="{{ asset('images/activity.jpg') }}" alt="Приходской хор">
-                        </div>
-                        <div class="activity-card-overlay">
-                            <h3 class="activity-card-title">Приходской хор</h3>
-                            <p class="activity-card-description">
-                                Профессиональный или любительский коллектив, исполняющий церковное песнопение и
-                                создающий музыкальное сопровождение к богослужениям.
-                            </p>
-                        </div>
+                        <a href="{{ route('activity.read', $activity->slug) }}">
+                            <div class="activity-card-image">
+                                <img src="{{ $activity->img_preview ? asset('storage/' . $activity->img_preview) : asset('images/newsOne.jpg') }}"
+                                    alt="{{ $activity->title }}" class="activity-slide-img">
+                            </div>
+                            <div class="activity-card-overlay">
+                                <h3 class="activity-card-title">{{ $activity->title }}</h3>
+                                <p class="activity-card-description">
+                                    {{ Str::limit(strip_tags($activity->content), 132) }}
+                                </p>
+                            </div>
+                        </a>
                     </div>
-
-                    <!-- Карточка 2 -->
-                    <div class="activity-card">
-                        <div class="activity-card-image">
-                            <img src="{{ asset('images/activity.jpg') }}" alt="Приходской хор">
-                        </div>
-                        <div class="activity-card-overlay">
-                            <h3 class="activity-card-title">Приходской хор</h3>
-                            <p class="activity-card-description">
-                                Профессиональный или любительский коллектив, исполняющий церковное песнопение и
-                                создающий музыкальное сопровождение к богослужениям.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Карточка 3 -->
-                    <div class="activity-card">
-                        <div class="activity-card-image">
-                            <img src="{{ asset('images/activity.jpg') }}" alt="Приходской хор">
-                        </div>
-                        <div class="activity-card-overlay">
-                            <h3 class="activity-card-title">Приходской хор</h3>
-                            <p class="activity-card-description">
-                                Профессиональный или любительский коллектив, исполняющий церковное песнопение и
-                                создающий музыкальное сопровождение к богослужениям.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Карточка 4 -->
-                    <div class="activity-card">
-                        <div class="activity-card-image">
-                            <img src="{{ asset('images/activity.jpg') }}" alt="Приходской хор">
-                        </div>
-                        <div class="activity-card-overlay">
-                            <h3 class="activity-card-title">Приходской хор</h3>
-                            <p class="activity-card-description">
-                                Профессиональный или любительский коллектив, исполняющий церковное песнопение и
-                                создающий музыкальное сопровождение к богослужениям.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Карточка 5 -->
-                    <div class="activity-card">
-                        <div class="activity-card-image">
-                            <img src="{{ asset('images/activity.jpg') }}" alt="Приходской хор">
-                        </div>
-                        <div class="activity-card-overlay">
-                            <h3 class="activity-card-title">Приходской хор</h3>
-                            <p class="activity-card-description">
-                                Профессиональный или любительский коллектив, исполняющий церковное песнопение и
-                                создающий музыкальное сопровождение к богослужениям.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Карточка 6 -->
-                    <div class="activity-card">
-                        <div class="activity-card-image">
-                            <img src="{{ asset('images/activity.jpg') }}" alt="Приходской хор">
-                        </div>
-                        <div class="activity-card-overlay">
-                            <h3 class="activity-card-title">Приходской хор</h3>
-                            <p class="activity-card-description">
-                                Профессиональный или любительский коллектив, исполняющий церковное песнопение и
-                                создающий музыкальное сопровождение к богослужениям.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                @empty
+                    <p class="no-activities-message">Деятельность храма пока не добавлена.</p>
+                @endforelse
             </div>
         </div>
     </main>

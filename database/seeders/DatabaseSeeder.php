@@ -15,5 +15,9 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
         $this->call(UsersTableSeeder::class);
+        $this->call(NewsSeeder::class);
+        $this->call(ActivitiesTableSeeder::class);
+        // Seed Orthodox calendar entries for the next month
+        $this->call(\Database\Seeders\OrthodoxCalendarSeeder::class);
     }
 }

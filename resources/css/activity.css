@@ -16,7 +16,7 @@
 }
 
 /* Заголовок */
-.activity-page .title {
+.title {
     font-family: var(--font-title);
     font-weight: 400;
     font-size: var(--font-size-title);

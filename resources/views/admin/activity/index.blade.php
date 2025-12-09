@@ -31,31 +31,31 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($activity as $activityItem)
+                                    @foreach ($activities as $activity)
                                         <tr>
-                                            <th scope="row">{{ $activityItem->id }}</th>
-                                            <td>{{ $activityItem->title }}</td>
-                                            <td>{{ $activityItem->published_at }}</td>
+                                            <th scope="row">{{ $activity->id }}</th>
+                                            <td>{{ $activity->title }}</td>
+                                            <td>{{ $activity->published_at }}</td>
                                             <td>
-                                                @if ($activityItem->deleted_at)
+                                                @if ($activity->deleted_at)
                                                     <span class="badge bg-danger">Удалена</span>
                                                 @else
                                                     <span
-                                                        class="badge bg-{{ $statusColors[$activityItem->status] ?? 'secondary' }}">
-                                                        {{ $activityItem->status_name }}
+                                                        class="badge bg-{{ $statusColors[$activity->status] ?? 'secondary' }}">
+                                                        {{ $activity->status_name }}
                                                     </span>
                                                 @endif
                                             </td>
                                             <td>
-                                                <img src="{{ asset('storage/' . $activityItem->img_preview) }}"
-                                                    alt="Превью" class="img-thumbnail" style="max-width: 100px;">
+                                                <img src="{{ asset('storage/' . $activity->img_preview) }}" alt="Превью"
+                                                    class="img-thumbnail" style="max-width: 100px;">
                                             </td>
                                             <td>
-                                                <a href="{{ route('admin.activity.show', $activityItem->id) }}"
+                                                <a href="{{ route('admin.activity.show', $activity->id) }}"
                                                     class="btn btn-sm btn-outline-primary">Подробнее</a>
-                                                <a href="{{ route('admin.activity.edit', $activityItem->id) }}"
+                                                <a href="{{ route('admin.activity.edit', $activity->id) }}"
                                                     class="btn btn-sm btn-outline-secondary">Редактировать</a>
-                                                <form action="{{ route('admin.activity.destroy', $activityItem->id) }}"
+                                                <form action="{{ route('admin.activity.destroy', $activity->id) }}"
                                                     method="POST" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')

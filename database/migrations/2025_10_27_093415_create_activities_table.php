@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('activities', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('content');
+            $table->string('slug')->unique(); // ← slug
+            $table->longText('content');
             $table->text('img_preview');
             $table->enum('status', ['draft', 'pending', 'published'])->default('draft');
             $table->date('published_at')->default(now());

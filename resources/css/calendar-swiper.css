@@ -1,0 +1,146 @@
+.calendar .title {
+    font-family: var(--font-title);
+    font-weight: 400;
+    color: var(--main-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.background-color-light-beige {
+    background-color: var(--beige-alt);
+}
+/* ---------- Календарь ---------- */
+.calendar {
+    padding: 1rem 0;
+}
+.calendar .title {
+    font-size: var(--font-size-title);
+    margin-bottom: 1rem;
+}
+.calendar-card {
+    background: #faf7f2;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-1);
+    width: 33vw;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Swiper slide wrapper for calendar: allow Swiper to control slide width */
+.calendar-swiper .swiper-slide {
+    /* Do NOT override width; let Swiper set inline width based on slidesPerView */
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.calendar-swiper-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.calendar-prev,
+.calendar-next {
+    background: transparent;
+    border: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.calendar-day,
+.calendar-date {
+    font-family: var(--font-title);
+    color: var(--main-color);
+    text-transform: uppercase;
+    flex-shrink: 0;
+}
+.calendar-day {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+.calendar-date {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+.calendar-desc {
+    font-family: var(--font-ui);
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.4;
+    flex-grow: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.btn-calendar-nav {
+    background: #fff;
+    border: 2px solid var(--main-color);
+    color: var(--main-color);
+    border-radius: 50%;
+    width: 100px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+.btn-calendar-nav:hover {
+    background: var(--main-color);
+    color: #fff;
+}
+
+@media (max-width: 992px) {
+    .calendar-card {
+        width: 250px;
+        height: 180px;
+    }
+    .calendar-desc {
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        font-size: 0.85rem;
+    }
+    /* .btn-calendar-nav {
+        width: 120px;
+    } */
+}
+@media (max-width: 768px) {
+    .d-flex.justify-content-center {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem !important;
+    }
+    .calendar-card {
+        width: 100%;
+        max-width: 300px;
+    }
+    .btn-calendar-nav {
+        /* width: 150px; */
+        height: 30px;
+    }
+    .calendar-desc {
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        font-size: 0.8rem;
+    }
+}
+@media (max-width: 576px) {
+    .calendar-card {
+        height: 140px;
+        padding: 1rem;
+    }
+    .calendar-day {
+        font-size: 1.3rem;
+        margin-bottom: 0.3rem;
+    }
+    .calendar-date {
+        font-size: 1rem;
+        margin-bottom: 0.8rem;
+    }
+}

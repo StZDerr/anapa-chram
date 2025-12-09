@@ -4,25 +4,6 @@
    но убрать дубли, склеить медиазапросы и вынести переменные.
 */
 
-/* ---------- Переменные ---------- */
-:root {
-    --main-color: #4a5b6f;
-    --beige-light: #efe9e0;
-    --beige-alt: #e2daca;
-    --dark: #222222;
-    --muted: #666666;
-    --accent-border: #cbbd91;
-    --shadow-1: 0 4px 12px rgba(0, 0, 0, 0.1);
-    --shadow-2: 0 8px 25px rgba(0, 0, 0, 0.15);
-    --font-title: "Tenor Sans", sans-serif;
-    --font-ui: "Montserrat", sans-serif;
-    --break-lg: 1400px;
-    --break-md: 1199px;
-    --break-sm: 992px;
-    --break-xs: 768px;
-    --font-size-title: clamp(2rem, 4vw, 4rem);
-}
-
 /* ---------- Общие правила ---------- */
 * {
     box-sizing: border-box;
@@ -51,16 +32,12 @@ body {
 .fs-0 {
     font-size: 4rem;
 }
-.background-color-light-beige {
-    background-color: var(--beige-alt);
-}
 
 /* ---------- Окошки (windows) ---------- */
 .background-container {
     position: relative;
     width: 100%;
     height: 400px;
-    background-color: #f5f5f5;
 }
 .windows {
     display: flex;
@@ -72,10 +49,44 @@ body {
     height: 373px;
     border-radius: 15px;
     overflow: hidden;
-    background-image: url("https://xn----7sbaab6ecrl3c.xn--p1ai/wp-content/uploads/2024/08/photo_2025-10-03_16-51-13.jpg");
+    /* background-image: url("/images/image-background.webp"); */
     background-size: 1248px auto;
     background-repeat: no-repeat;
+    transform: translateY(-40px);
+    opacity: 0;
+    transition: transform 650ms cubic-bezier(0.2, 0.9, 0.2, 1),
+        opacity 400ms ease;
+    will-change: transform, opacity;
 }
+
+/* конечное состояние — место на странице */
+.window.window--enter {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* небольшая задержка при наведении/фокусе — опционально */
+.window:focus,
+.window:hover {
+    transform: translateY(-2px);
+}
+
+/* Если нужно, можно задать явное keyframes (альтернатива transition) */
+@keyframes windowSlideDown {
+    0% {
+        transform: translateY(-40px);
+        opacity: 0;
+    }
+    60% {
+        transform: translateY(6px);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
 .window:nth-child(1) {
     background-position: 0 0;
 }
@@ -235,145 +246,68 @@ body {
     }
 }
 
-/* ---------- Календарь ---------- */
-.calendar {
-    padding: 3rem 0;
+/* ---------- Анимация для основного текстового блока (main-text-block) ---------- */
+.main-text-block {
+    overflow: visible;
+    --mtb-line-delay: 0.12s;
+    --mtb-line-duration: 700ms;
+    --mtb-ease: cubic-bezier(0.16, 0.84, 0.26, 1);
 }
-.calendar .title {
-    font-size: var(--font-size-title);
-    margin-bottom: 2rem;
+
+.main-text-block > .display-1,
+.main-text-block > p {
+    opacity: 0;
+    transform: translateY(20px) translateZ(0) scale(0.998);
+    transition: transform var(--mtb-line-duration) var(--mtb-ease),
+        opacity var(--mtb-line-duration) var(--mtb-ease);
+    will-change: transform, opacity;
 }
-.calendar-card {
-    background: #fff;
-    border-radius: 15px;
-    padding: 1.5rem;
-    box-shadow: var(--shadow-1);
-    width: 280px;
-    height: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+
+.main-text-block > .display-1 {
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
 }
-/* Swiper slide wrapper for calendar: allow Swiper to control slide width */
-.calendar-swiper .swiper-slide {
-    /* Do NOT override width; let Swiper set inline width based on slidesPerView */
-    display: flex;
-    justify-content: center;
-    flex-shrink: 0;
+
+.main-text-block.animate > .display-1:nth-of-type(1) {
+    transition-delay: calc(var(--mtb-line-delay) * 1);
+    opacity: 1;
+    transform: translateY(0) scale(1);
 }
-.calendar-swiper-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+.main-text-block.animate > .display-1:nth-of-type(2) {
+    transition-delay: calc(var(--mtb-line-delay) * 2);
+    opacity: 1;
+    transform: translateY(0) scale(1);
 }
-.calendar-prev,
-.calendar-next {
-    background: transparent;
-    border: none;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+.main-text-block.animate > .display-1:nth-of-type(3) {
+    transition-delay: calc(var(--mtb-line-delay) * 3);
+    opacity: 1;
+    transform: translateY(0) scale(1);
 }
-.calendar-day,
-.calendar-date {
-    font-family: var(--font-title);
-    color: var(--main-color);
-    text-transform: uppercase;
-    flex-shrink: 0;
-}
-.calendar-day {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-}
-.calendar-date {
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
-}
-.calendar-desc {
-    font-family: var(--font-ui);
-    font-size: 0.9rem;
-    color: var(--muted);
+
+.main-text-block.animate > p {
+    transition-delay: calc(var(--mtb-line-delay) * 4);
+    transition-duration: calc(var(--mtb-line-duration) * 0.9);
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    color: #444;
     line-height: 1.4;
-    flex-grow: 1;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-.btn-calendar-nav {
-    background: #fff;
-    border: 2px solid var(--main-color);
-    color: var(--main-color);
-    border-radius: 50%;
-    width: 100px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    cursor: pointer;
-}
-.btn-calendar-nav:hover {
-    background: var(--main-color);
-    color: #fff;
 }
 
-@media (max-width: 992px) {
-    .calendar-card {
-        width: 250px;
-        height: 180px;
-    }
-    .calendar-desc {
-        -webkit-line-clamp: 3;
-        line-clamp: 3;
-        font-size: 0.85rem;
-    }
-    .btn-calendar-nav {
-        width: 70px;
-    }
-}
-@media (max-width: 768px) {
-    .d-flex.justify-content-center {
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem !important;
-    }
-    .calendar-card {
-        width: 100%;
-        max-width: 300px;
-    }
-    .btn-calendar-nav {
-        width: 120px;
-    }
-    .calendar-desc {
-        -webkit-line-clamp: 2;
-        line-clamp: 2;
-        font-size: 0.8rem;
-    }
-}
-@media (max-width: 576px) {
-    .calendar-card {
-        height: 140px;
-        padding: 1rem;
-    }
-    .calendar-day {
-        font-size: 1.3rem;
-        margin-bottom: 0.3rem;
-    }
-    .calendar-date {
-        font-size: 1rem;
-        margin-bottom: 0.8rem;
-    }
+.main-text-block.animate > .display-1 {
+    transform-origin: center;
 }
 
+@media (prefers-reduced-motion: reduce) {
+    .main-text-block > .display-1,
+    .main-text-block > p {
+        transition: none;
+        transform: none;
+        opacity: 1;
+    }
+}
 /* ---------- Быстрый доступ (quick) ---------- */
 .quick-title {
     font-size: var(--font-size-title);
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 .quick-card {
     position: relative;
@@ -500,7 +434,7 @@ body {
     }
     .quick .title {
         font-size: 1.5rem;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
     }
     .quick-card-title {
         font-size: 1.1rem;
@@ -510,9 +444,6 @@ body {
     }
 }
 @media (max-width: 576px) {
-    .quick {
-        padding: 2rem 0;
-    }
     .quick-card {
         height: 180px;
     }
@@ -571,6 +502,15 @@ body {
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
     color: #6e634c;
 }
+
+@media (max-width: 600px) {
+    .schedule-container {
+        flex-direction: column;
+    }
+    .schedule-half {
+        width: 100%;
+    }
+}
 .schedule-header {
     display: flex;
     justify-content: space-between;
@@ -627,7 +567,19 @@ body {
 .gallery-temple-next:hover:after,
 .gallery-festivals-prev:hover:after,
 .gallery-temple-prev:hover:after,
-.gallery-park-prev:hover:after {
+.gallery-park-prev:hover:after,
+.news-button-next:hover:after,
+.news-button-prev:hover:after {
+    color: white !important;
+}
+
+.news .swiper-button-prev::after,
+.news .swiper-button-next::after {
+    display: none;
+}
+
+.news .swiper-button-prev,
+.news .swiper-button-next {
     color: white !important;
 }
 
@@ -688,7 +640,7 @@ body {
     font-variant: small-caps;
     padding: 1rem 0;
     margin-top: auto;
-    border-radius: 0 0 1rem 1rem;
+    border-radius: 1rem;
     cursor: pointer;
 }
 
@@ -723,15 +675,15 @@ body {
 }
 
 /* ---------- ДЕЯТЕЛЬНОСТЬ ХРАМА ---------- */
-.activity {
+/* .activity {
     margin-top: 120px;
     margin-bottom: 120px;
-}
+} */
 .activity-swiper-container {
     position: relative;
     width: 100%;
     height: 600px;
-    margin-top: 60px;
+    /* margin-top: 60px; */
     overflow: hidden;
     padding: 0 60px;
 }
@@ -755,7 +707,7 @@ body {
 .activity-swiper-container .swiper-slide-next {
     opacity: 0.5 !important;
     visibility: visible !important;
-    transform: scale(0.9);
+    transform: scale(0.8) !important;
 }
 .activity-slide-inner {
     position: relative;
@@ -773,7 +725,6 @@ body {
 .activity-slide-overlay {
     position: absolute;
     bottom: 0px;
-    left: 40px;
     max-width: 500px;
     padding: 20px;
 }
@@ -792,6 +743,7 @@ body {
     font-weight: 500;
     font-size: 16px;
     line-height: 24px;
+    text-align: justify;
     font-variant: small-caps;
     color: white;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
@@ -813,7 +765,7 @@ body {
 }
 .activity .title {
     font-size: var(--font-size-title);
-    margin-bottom: 2rem;
+    /* margin-bottom: 2rem; */
 }
 
 @media (max-width: 1199px) {
@@ -831,7 +783,6 @@ body {
     }
     .activity-slide-overlay {
         bottom: 0px;
-        left: 30px;
         max-width: 350px;
     }
     .activity-slide-title {
@@ -852,7 +803,6 @@ body {
     }
     .activity-slide-overlay {
         top: 20px;
-        left: 20px;
         max-width: 250px;
     }
     .activity-slide-title {
@@ -1088,6 +1038,9 @@ body {
     }
 }
 @media (max-width: 576px) {
+    .mySwiper {
+        height: 70vh;
+    }
     .mySwiper .swiper-slide {
         flex-basis: 80px;
     }
@@ -1131,7 +1084,9 @@ body {
 .gallery-temple-prev,
 .gallery-temple-next,
 .gallery-park-prev,
-.gallery-park-next {
+.gallery-park-next,
+.news-button-next,
+.news-button-prev {
     position: absolute !important;
     width: 50px !important;
     height: 50px !important;
@@ -1147,12 +1102,14 @@ body {
 
 .gallery-park-prev,
 .gallery-festivals-prev,
-.gallery-temple-prev {
+.gallery-temple-prev,
+.news-button-prev {
     left: -50px !important;
 }
 .gallery-park-next,
 .gallery-festivals-next,
-.gallery-temple-next {
+.gallery-temple-next,
+.news-button-next {
     right: -50px !important;
 }
 .gallery-festivals-prev svg,
@@ -1160,7 +1117,9 @@ body {
 .gallery-temple-prev svg,
 .gallery-temple-next svg,
 .gallery-park-prev svg,
-.gallery-park-next svg {
+.gallery-park-next svg,
+.news-button-next svg,
+.news-button-prev svg {
     width: 24px;
     height: 24px;
     fill: none;
@@ -1203,7 +1162,9 @@ body {
     .gallery-temple-prev,
     .gallery-instance .gallery-park-prev,
     .gallery-instance .gallery-festivals-prev,
-    .gallery-instance .gallery-temple-prev {
+    .gallery-instance .gallery-temple-prev,
+    .news-button-prev,
+    .news-button-next {
         left: 10px !important;
         right: auto !important;
         background: none !important;
@@ -1226,6 +1187,8 @@ body {
 /* Ещё более компактно для мобильных */
 @media (max-width: 768px) {
     .gallery-park-prev,
+    .news-button-prev,
+    .news-button-next,
     .gallery-festivals-prev,
     .gallery-temple-prev,
     .gallery-instance .gallery-park-prev,
@@ -1243,18 +1206,20 @@ body {
         color: #ffffff00 !important;
     }
     .gallery-park-prev,
-    .gallery-instance .gallery-park-prev {
+    .gallery-instance .gallery-park-prev,
+    .news-button-prev {
         left: 8px !important;
     }
     .gallery-park-next,
-    .gallery-instance .gallery-park-next {
+    .gallery-instance .gallery-park-next,
+    .news-button-next {
         right: 8px !important;
     }
 }
 
 /* ---------- Секция контактов ---------- */
 .contact-section {
-    padding: 60px 0;
+    /* padding: 60px 0; */
 }
 .contact-section .title {
     font-size: var(--font-size-title);

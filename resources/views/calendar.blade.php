@@ -6,13 +6,16 @@
     @include('partials.head')
 
     <!-- Стили страницы Calendar -->
-    @vite(['resources/css/calendar.css', 'resources/js/calendar.js'])
+    @vite(['resources/css/calendar.css', 'resources/css/calendar-swiper.css', 'resources/js/calendar-swiper.js', 'resources/js/calendar.js'])
 </head>
 
 <body class="d-flex flex-column min-vh-100">
     @include('partials.navbar')
 
+
+
     <main class="flex-fill">
+
         <div class="container calendar-container">
             <h1 class="calendar-title">ЕЖЕДНЕВНОЕ РАСПИСАНИЕ</h1>
 
@@ -38,7 +41,11 @@
             </div>
 
             <div id="calendar"></div>
+
+            <!-- Дублированный блок календарных карточек (перенесён из welcome) -->
+
         </div>
+        @include('partials.calendar-partials')
     </main>
 
     @include('partials.footer')

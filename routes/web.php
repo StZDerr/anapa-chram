@@ -3,15 +3,20 @@
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CalendarController;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\EventsCalendarController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\OrthodoxCalendarController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\EventsCalendarController;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+Route::get('/', [PageController::class, 'welcome'])->name('welcome');
+Route::get('/calendar', [PageController::class, 'calendar'])->name('calendar');
+Route::get('/news', [PageController::class, 'news'])->name('news.index');
+Route::get('/news/{slug}', [PageController::class, 'newsRead'])->name('news.read');
+
+Route::get('/activity', [PageController::class, 'activity'])->name('activity.index');
+Route::get('/activity/{slug}', [PageController::class, 'activityRead'])->name('activity.read');
 
 Route::get('/about', function () {
     return view('about');
@@ -25,6 +30,10 @@ Route::get('/gallery', function () {
     return view('gallery/index');
 })->name('gallery');
 
+Route::get('/gallery/desc', function () {
+    return view('gallery/index');
+})->name('gallery.desc');
+
 Route::get('/zapiski', function () {
     return view('zapiskiAndTreby/zapiski');
 })->name('zapiski');
@@ -36,14 +45,6 @@ Route::get('/treby', function () {
 Route::get('/park', function () {
     return view('park');
 })->name('park');
-
-Route::get('/test', function () {
-    return view('news/read');
-})->name('test');
-
-Route::get('/calendar', function () {
-    return view('calendar');
-})->name('calendar');
 
 Route::get('/api/calendar/events', [CalendarController::class, 'index'])->name('calendar.events');
 
@@ -59,21 +60,16 @@ Route::get('/privacy-policy', function () {
     return view('privacy-policy/index');
 })->name('privacy-policy');
 
-// Route::get('/news', function () {
-//     return view('news/index');
-// })->name('news.index');
-
-Route::get('news', [Controller::class, 'news'])->name('news.index');
-
-Route::get('/activity', function () {
-    return view('activity/index');
-})->name('activity.index');
+// Route::get('/activity', function () {
+//     return view('activity/index');
+// })->name('activity.index');
 
 Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
     Route::softDeletableResources([
         'news' => NewsController::class,
         'activity' => ActivityController::class,
         'users' => UserController::class,
+        'orthodox_calendar' => OrthodoxCalendarController::class,
     ]);
     Route::get('events', [EventsCalendarController::class, 'index'])->name('events.index');
     Route::get('api/events', [EventsCalendarController::class, 'apiIndex'])->name('events.apiIndex');
@@ -82,6 +78,10 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
     Route::get('events/{id}/edit', [EventsCalendarController::class, 'edit'])->name('events.edit');
     Route::put('events/{id}', [EventsCalendarController::class, 'update'])->name('events.update');
     Route::delete('events/{id}', [EventsCalendarController::class, 'destroy'])->name('events.destroy');
+    Route::post('admin/news/upload-image', [NewsController::class, 'uploadImage'])
+        ->name('news.upload-image');
+    Route::post('admin/activity/upload-image', [ActivityController::class, 'uploadImage'])
+        ->name('activity.upload-image');
 });
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');

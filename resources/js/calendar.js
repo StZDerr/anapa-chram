@@ -151,7 +151,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         <span class="event-period">${period}</span>
                         <span class="event-time">${time}</span>
                     </div>
-                    <div class="event-description">${description || title}</div>
+                    <div class="event-description">${title || description}</div>
                 </div>
             `;
         });

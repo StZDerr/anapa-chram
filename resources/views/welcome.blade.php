@@ -5,8 +5,8 @@
     <title>Храм святого князя Владимира в Анапе</title>
     @include('partials.head')
 
-    <!-- Стили главной страницы -->
-    @vite(['resources/css/welcome.css', 'resources/js/welcome.js'])
+    <!-- Стили и скрипты главной страницы (loader + welcome) -->
+    @vite(['resources/css/calendar-swiper.css', 'resources/js/calendar-swiper.js', 'resources/css/loader.css', 'resources/css/welcome.css', 'resources/js/loader.js', 'resources/js/welcome.js'])
 </head>
 
 <body class="d-flex flex-column min-vh-100 font-sans antialiased">
@@ -14,10 +14,10 @@
     <div class="container">
         <div class="background-container">
             <div class="windows">
-                <div class="window"></div>
-                <div class="window"></div>
-                <div class="window"></div>
-                <div class="window"></div>
+                <div class="window" style="background-image: url('{{ asset('images/image-background.webp') }}')"></div>
+                <div class="window" style="background-image: url('{{ asset('images/image-background.webp') }}')"></div>
+                <div class="window" style="background-image: url('{{ asset('images/image-background.webp') }}')"></div>
+                <div class="window" style="background-image: url('{{ asset('images/image-background.webp') }}')"></div>
             </div>
         </div>
 
@@ -30,99 +30,12 @@
                 набережная — идеально для прогулки после посещения.</p>
         </div>
     </div>
-    <div class="background-color-light-beige">
-        <div class="container">
-            <div class="calendar">
-                <div class="text-center title">ПРАВОСЛАВНЫЙ КАЛЕНДАРЬ</div>
-
-                <!-- Календарные блоки (Swiper) -->
-                <div class="calendar-swiper-wrapper">
-                    <!-- Стрелка влево -->
-                    <button class="btn-calendar-nav calendar-prev" aria-label="Prev">
-                        <i class="bi bi-chevron-left"></i>
-                    </button>
-
-                    <div class="swiper calendar-swiper">
-                        <div class="swiper-wrapper">
-                            <!-- Календарный блок 1 -->
-                            <div class="swiper-slide">
-                                <div class="calendar-card">
-                                    <div class="calendar-day">ВС</div>
-                                    <div class="calendar-date">5 окт/22 окт</div>
-                                    <div class="calendar-desc">Неделя 17-я по Пятидесятнице. Глас осмий.</div>
-                                </div>
-                            </div>
-
-                            <!-- Календарный блок 2 -->
-                            <div class="swiper-slide">
-                                <div class="calendar-card">
-                                    <div class="calendar-day">ПН</div>
-                                    <div class="calendar-date">6 окт/23 окт</div>
-                                    <div class="calendar-desc">Зачатие честного славного Пророка и Крестителя Иоанна.
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Календарный блок 3 -->
-                            <div class="swiper-slide">
-                                <div class="calendar-card">
-                                    <div class="calendar-day">ВТ</div>
-                                    <div class="calendar-date">7 окт/24 окт</div>
-                                    <div class="calendar-desc">Мучеников Сергия и Вакха.</div>
-                                </div>
-                            </div>
-
-                            <!-- ДЕНЬ 4 -->
-                            <div class="swiper-slide">
-                                <div class="calendar-card">
-                                    <div class="calendar-day">СР</div>
-                                    <div class="calendar-date">8 окт / 25 сен</div>
-                                    <div class="calendar-desc">Прп. Сергия, игумена Радонежского.</div>
-                                </div>
-                            </div>
-
-                            <!-- ДЕНЬ 5 -->
-                            <div class="swiper-slide">
-                                <div class="calendar-card">
-                                    <div class="calendar-day">ЧТ</div>
-                                    <div class="calendar-date">9 окт / 26 сен</div>
-                                    <div class="calendar-desc">Апостола и евангелиста Иоанна Богослова.</div>
-                                </div>
-                            </div>
-
-                            <!-- ДЕНЬ 6 -->
-                            <div class="swiper-slide">
-                                <div class="calendar-card">
-                                    <div class="calendar-day">ПТ</div>
-                                    <div class="calendar-date">10 окт / 27 сен</div>
-                                    <div class="calendar-desc">Мч. Каллистрата и дружины его.</div>
-                                </div>
-                            </div>
-
-                            <!-- ДЕНЬ 7 -->
-                            <div class="swiper-slide">
-                                <div class="calendar-card">
-                                    <div class="calendar-day">СБ</div>
-                                    <div class="calendar-date">11 окт / 28 сен</div>
-                                    <div class="calendar-desc">Прп. Харитона Исповедника.</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Стрелка вправо -->
-                    <button class="btn-calendar-nav calendar-next" aria-label="Next">
-                        <i class="bi bi-chevron-right"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('partials.calendar-partials')
     <div class="container">
         <div class="text-center quick-title">Быстрый доступ</div>
         <div class="quick">
             <div class="div2">
-                <a href="">
+                <a href="{{ route('temple') }}">
                     <div class="quick-card height-fix">
                         <img src="{{ asset('images/ChramSvitogo.jpg') }}" alt="Храм святого князя Владимира">
                         <div class="quick-card-arrow">
@@ -138,8 +51,7 @@
             <div class="div3">
                 <a href="">
                     <div class="quick-card">
-                        <img src="{{ asset('images/hram_kupel_knyagini_olgi.jpg') }}"
-                            alt="Храм святого князя Владимира">
+                        <img src="{{ asset('images/hram_kupel_knyagini_olgi.jpg') }}" alt="Храм-купель княгини Ольги">
                         <div class="quick-card-arrow">
                             <i class="bi bi-arrow-right"></i>
                         </div>
@@ -153,7 +65,7 @@
                 <a href="">
                     <div class="quick-card height-fix">
                         <img src="{{ asset('images/derzhavnaya_ikona_bozhej_materi.jpg') }}"
-                            alt="Храм святого князя Владимира">
+                            alt="Державная икона Божьей матери">
                         <div class="quick-card-arrow">
                             <i class="bi bi-arrow-right"></i>
                         </div>
@@ -165,9 +77,9 @@
                 </a>
             </div>
             <div class="div5">
-                <a href="">
+                <a href="{{ route('gallery') }}">
                     <div class="quick-card">
-                        <img src="{{ asset('images/galery.jpg') }}" alt="Храм святого князя Владимира">
+                        <img src="{{ asset('images/galery.jpg') }}" alt="Галерея">
                         <div class="quick-card-arrow">
                             <i class="bi bi-arrow-right"></i>
                         </div>
@@ -180,7 +92,7 @@
             <div class="div6">
                 <a href="">
                     <div class="quick-card height-fix">
-                        <img src="{{ asset('images/Duhovenstvo.jpg') }}" alt="Храм святого князя Владимира">
+                        <img src="{{ asset('images/Duhovenstvo.jpg') }}" alt="Духовенство">
                         <div class="quick-card-arrow">
                             <i class="bi bi-arrow-right"></i>
                         </div>
@@ -193,7 +105,7 @@
             <div class="div7">
                 <a href="">
                     <div class="quick-card">
-                        <img src="{{ asset('images/Popechiteli.jpg') }}" alt="Храм святого князя Владимира">
+                        <img src="{{ asset('images/Popechiteli.jpg') }}" alt="Попечители">
                         <div class="quick-card-arrow">
                             <i class="bi bi-arrow-right"></i>
                         </div>
@@ -205,138 +117,106 @@
             </div>
         </div>
     </div>
-    <div class="background-color-light-beige mt-5 mb-5 pb-5 pt-5">
+    <div class="background-color-light-beige mt-5 mb-5">
         <div class="container">
-            <div class="timetable">
-                <div class="text-center title m-3">
+            <div class="timetable mb-3 mt-3">
+                <div class="text-center title">
                     ЕЖЕДНЕВНОЕ РАСПИСАНИЕ
                 </div>
 
-                <!-- Дни недели -->
+                @php
+                    use Carbon\Carbon;
+                    use Illuminate\Support\Str;
+
+                    $today = $today ?? Carbon::today();
+                    $startOfWeek = $startOfWeek ?? $today->copy()->startOfWeek(Carbon::MONDAY);
+                    $dayNamesFull = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'];
+                    $dayNamesShort = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+                    // индекс активного дня (0..6) — по ISO (1=Mon..7=Sun)
+                    $activeIndex = $today->dayOfWeekIso - 1;
+                    $weekEvents = $weekEvents ?? collect();
+                @endphp
+
                 <ul class="nav justify-content-center mb-4" id="weekTab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link day-circle active" data-short="Пн" data-full="Понедельник"
-                            id="monday-tab" data-bs-toggle="tab" data-bs-target="#monday" type="button"
-                            role="tab">
-                            Пн
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link day-circle" data-short="Вт" data-full="Вторник" id="tuesday-tab"
-                            data-bs-toggle="tab" data-bs-target="#tuesday" type="button" role="tab">
-                            Вт
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link day-circle" data-short="Ср" data-full="Среда" id="wednesday-tab"
-                            data-bs-toggle="tab" data-bs-target="#wednesday" type="button" role="tab">
-                            Ср
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link day-circle" data-short="Чт" data-full="Четверг" id="thursday-tab"
-                            data-bs-toggle="tab" data-bs-target="#thursday" type="button" role="tab">
-                            Чт
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link day-circle" data-short="Пт" data-full="Пятница" id="friday-tab"
-                            data-bs-toggle="tab" data-bs-target="#friday" type="button" role="tab">
-                            Пт
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link day-circle" data-short="Сб" data-full="Суббота" id="saturday-tab"
-                            data-bs-toggle="tab" data-bs-target="#saturday" type="button" role="tab">
-                            Сб
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link day-circle" data-short="Вс" data-full="Воскресенье" id="sunday-tab"
-                            data-bs-toggle="tab" data-bs-target="#sunday" type="button" role="tab">
-                            Вс
-                        </button>
-                    </li>
+                    @for ($i = 0; $i < 7; $i++)
+                        @php
+                            $short = $dayNamesShort[$i];
+                            $full = $dayNamesFull[$i];
+                            $btnId = Str::slug($short) . '-tab-btn';
+                            $paneId = Str::slug($short) . '-tab';
+                        @endphp
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link day-circle @if ($i === $activeIndex) active @endif"
+                                data-short="{{ $short }}" data-full="{{ $full }}"
+                                id="{{ $btnId }}" data-bs-toggle="tab" data-bs-target="#{{ $paneId }}"
+                                type="button" role="tab" aria-controls="{{ $paneId }}"
+                                aria-selected="{{ $i === $activeIndex ? 'true' : 'false' }}">
+                                {{ $short }}
+                            </button>
+                        </li>
+                    @endfor
                 </ul>
 
-                <!-- Контент -->
                 <div class="tab-content" id="weekTabContent">
-                    <div class="tab-pane fade show active" id="monday" role="tabpanel">
-                        <div class="schedule-container">
-                            <!-- Утро -->
-                            <div class="schedule-half">
-                                <div class="schedule-header">
-                                    <div class="period">Утро</div>
-                                    <div class="time">08:00</div>
-                                </div>
-                                <div class="schedule-text">
-                                    Исповедь. Литургия.
-                                </div>
-                            </div>
+                    @for ($i = 0; $i < 7; $i++)
+                        @php
+                            $dt = $startOfWeek->copy()->addDays($i);
+                            $eventsOfDay = $weekEvents->filter(function ($ev) use ($dt) {
+                                if (isset($ev->start) && $ev->start instanceof \Carbon\Carbon) {
+                                    return $ev->start->isSameDay($dt);
+                                }
+                                return Str::startsWith((string) $ev->start, $dt->toDateString());
+                            });
+                            $paneId = Str::slug($dayNamesShort[$i]) . '-tab';
+                        @endphp
 
-                            <!-- Вечер -->
-                            <div class="schedule-half">
-                                <div class="schedule-header">
-                                    <div class="period">Вечер</div>
-                                    <div class="time">18:00</div>
-                                </div>
-                                <div class="schedule-text">
-                                    Вечернее богослужение.
-                                </div>
+                        <div class="tab-pane fade @if ($i === $activeIndex) show active @endif"
+                            id="{{ $paneId }}" role="tabpanel" aria-labelledby="{{ $btnId }}">
+                            <div class="schedule-container">
+                                @if ($eventsOfDay->isEmpty())
+                                    <div class="schedule-half">
+                                        <div class="schedule-text text-muted">Событий нет</div>
+                                    </div>
+                                @else
+                                    @foreach ($eventsOfDay as $ev)
+                                        <div class="schedule-half">
+                                            <div class="schedule-header">
+                                                @php
+                                                    $start =
+                                                        $ev->start instanceof \Carbon\Carbon
+                                                            ? $ev->start
+                                                            : \Carbon\Carbon::parse($ev->start);
+
+                                                    $hour = $start->format('H');
+
+                                                    if ($hour >= 5 && $hour < 11) {
+                                                        $period = 'Утро';
+                                                    } elseif ($hour >= 11 && $hour < 17) {
+                                                        $period = 'День';
+                                                    } elseif ($hour >= 17 && $hour < 23) {
+                                                        $period = 'Вечер';
+                                                    } else {
+                                                        $period = 'Ночь';
+                                                    }
+                                                @endphp
+
+                                                <div class="period">
+                                                    {{ $period }}
+                                                </div>
+
+                                                <div class="time">
+                                                    {{ $start->format('H:i') }}
+                                                </div>
+                                            </div>
+                                            <div class="schedule-text">
+                                                {{ Str::limit(strip_tags($ev->title), 140) }}
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
-                    </div>
-                    <div class="tab-pane fade" id="tuesday" role="tabpanel">
-                        <div class="schedule-container">
-                            <!-- Утро -->
-                            <div class="schedule-half">
-                                <div class="schedule-header">
-                                    <div class="period">Утро</div>
-                                    <div class="time">08:00</div>
-                                </div>
-                                <div class="schedule-text">
-                                    Исповедь. Литургия.
-                                </div>
-                            </div>
-
-                            <!-- Вечер -->
-                            <div class="schedule-half">
-                                <div class="schedule-header">
-                                    <div class="period">Вечер</div>
-                                    <div class="time">18:00</div>
-                                </div>
-                                <div class="schedule-text">
-                                    Вечернее богослужение.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="wednesday" role="tabpanel">
-                        <div class="schedule-container">
-                            <!-- Утро -->
-                            <div class="schedule-half">
-                                <div class="schedule-header">
-                                    <div class="period">Утро</div>
-                                    <div class="time">08:00</div>
-                                </div>
-                                <div class="schedule-text">
-                                    Исповедь. Литургия.
-                                </div>
-                            </div>
-
-                            <!-- Вечер -->
-                            <div class="schedule-half">
-                                <div class="schedule-header">
-                                    <div class="period">Вечер</div>
-                                    <div class="time">18:00</div>
-                                </div>
-                                <div class="schedule-text">
-                                    Вечернее богослужение.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Остальные дни аналогично -->
+                    @endfor
                 </div>
 
             </div>
@@ -349,157 +229,69 @@
             </div>
             <!-- Обертка для свайпера с кнопками -->
             <div class="swiper-wrapper-outer">
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev news-button-prev">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                </div>
+                <div class="swiper-button-next news-button-next">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </div>
                 <!-- Slider main container -->
                 <div class="swiper-container">
                     <!-- Additional required wrapper -->
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <div class="slide-inner">
-                                <img src="{{ asset('images/newsOne.jpg') }}" alt="Храм святого князя Владимира"
-                                    class="slide-img">
-                                <div class="slide-title">История храма</div>
-                                <div class="slide-desc">
-                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex sed, laborum fugit
-                                    repudiandae modi dolorum voluptate atque voluptatibus alias cupiditate odio delectus
-                                    obcaecati sit. Optio rerum repudiandae dolore id recusandae? Error nemo numquam
-                                    consequuntur nisi dolor quae earum dolore officiis?
+                        @forelse ($news as $newsItem)
+                            <div class="swiper-slide">
+                                <div class="slide-inner">
+                                    <img src="{{ $newsItem->img_preview ? asset('storage/' . $newsItem->img_preview) : asset('images/newsOne.jpg') }}"
+                                        alt="{{ $newsItem->title }}" class="slide-img">
+                                    <div class="slide-title">{{ $newsItem->title }}</div>
+                                    <div class="slide-desc">
+                                        {{ Str::limit(strip_tags($newsItem->content), 200) }}
+                                    </div>
+                                    <div class="slide-read">
+                                        <a href="{{ route('news.read', $newsItem->slug) }}">
+                                            Читать
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="slide-read">Читать</div>
                             </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="slide-inner">
-                                <img src="{{ asset('images/newsOne.jpg') }}" alt="Храм святого князя Владимира"
-                                    class="slide-img">
-                                <div class="slide-title">История храма</div>
-                                <div class="slide-desc">
-                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex sed, laborum fugit
-                                    repudiandae modi dolorum voluptate atque voluptatibus alias cupiditate odio delectus
-                                    obcaecati sit. Optio rerum repudiandae dolore id recusandae? Error nemo numquam
-                                    consequuntur nisi dolor quae earum dolore officiis?
-                                </div>
-                                <div class="slide-read">Читать</div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="slide-inner">
-                                <img src="{{ asset('images/newsOne.jpg') }}" alt="Храм святого князя Владимира"
-                                    class="slide-img">
-                                <div class="slide-title">История храма</div>
-                                <div class="slide-desc">
-                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex sed, laborum fugit
-                                    repudiandae modi dolorum voluptate atque voluptatibus alias cupiditate odio delectus
-                                    obcaecati sit. Optio rerum repudiandae dolore id recusandae? Error nemo numquam
-                                    consequuntur nisi dolor quae earum dolore officiis?
-                                </div>
-                                <div class="slide-read">Читать</div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="slide-inner">
-                                <img src="{{ asset('images/newsOne.jpg') }}" alt="Храм святого князя Владимира"
-                                    class="slide-img">
-                                <div class="slide-title">История храма</div>
-                                <div class="slide-desc">
-                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex sed, laborum fugit
-                                    repudiandae modi dolorum voluptate atque voluptatibus alias cupiditate odio delectus
-                                    obcaecati sit. Optio rerum repudiandae dolore id recusandae? Error nemo numquam
-                                    consequuntur nisi dolor quae earum dolore officiis?
-                                </div>
-                                <div class="slide-read">Читать</div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="slide-inner">
-                                <img src="{{ asset('images/newsOne.jpg') }}" alt="Храм святого князя Владимира"
-                                    class="slide-img">
-                                <div class="slide-title">История храма</div>
-                                <div class="slide-desc">
-                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex sed, laborum fugit
-                                    repudiandae modi dolorum voluptate atque voluptatibus alias cupiditate odio delectus
-                                    obcaecati sit. Optio rerum repudiandae dolore id recusandae? Error nemo numquam
-                                    consequuntur nisi dolor quae earum dolore officiis?
-                                </div>
-                                <div class="slide-read">Читать</div>
-                            </div>
-                        </div>
+                        @empty
+                            <div class="null">Новостей пока нет</div>
+                        @endforelse
                     </div>
-
-                    <!-- If we need navigation buttons -->
-
                 </div>
             </div>
         </div>
     </div>
     <div class="container">
-        <div class="activity">
+        <div class="activity mt-3">
             <div class="text-center title">ДЕЯТЕЛЬНОСТЬ ХРАМА</div>
-
-            <!-- Второй Swiper с pagination -->
             <div class="activity-swiper-container">
                 <div class="swiper-wrapper">
-                    <!-- Slide 1 -->
-                    <div class="swiper-slide">
-                        <div class="activity-slide-inner">
-                            <img src="{{ asset('images/activity.jpg') }}" alt="Деятельность храма"
-                                class="activity-slide-img">
-                            <div class="activity-slide-overlay">
-                                <div class="activity-slide-title">Воскресная школа</div>
-                                <div class="activity-slide-desc">Обучение детей основам православной веры и культуры
+                    @forelse ($activitys as $activity)
+                        <div class="swiper-slide">
+                            <a href="{{ route('activity.read', $activity->slug) }}">
+                                <div class="activity-slide-inner">
+                                    <img src="{{ $activity->img_preview ? asset('storage/' . $activity->img_preview) : asset('images/newsOne.jpg') }}"
+                                        alt="{{ $activity->title }}" class="activity-slide-img">
+                                    <div class="activity-slide-overlay">
+                                        <div class="activity-slide-title">{{ $activity->title }}</div>
+                                        <div class="activity-slide-desc">
+                                            {{ Str::limit(strip_tags($activity->content), 132) }}</div>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
-                    </div>
+                    @empty
+                        <div class="null">Новостей про деятельность пока нет</div>
+                    @endforelse
 
-                    <!-- Slide 2 -->
-                    <div class="swiper-slide">
-                        <div class="activity-slide-inner">
-                            <img src="{{ asset('images/activity.jpg') }}" alt="Деятельность храма"
-                                class="activity-slide-img">
-                            <div class="activity-slide-overlay">
-                                <div class="activity-slide-title">Благотворительность</div>
-                                <div class="activity-slide-desc">Помощь нуждающимся и социальная поддержка</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Slide 3 -->
-                    <div class="swiper-slide">
-                        <div class="activity-slide-inner">
-                            <img src="{{ asset('images/activity.jpg') }}" alt="Деятельность храма"
-                                class="activity-slide-img">
-                            <div class="activity-slide-overlay">
-                                <div class="activity-slide-title">Паломничество</div>
-                                <div class="activity-slide-desc">Организация поездок по святым местам</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Slide 4 -->
-                    <div class="swiper-slide">
-                        <div class="activity-slide-inner">
-                            <img src="{{ asset('images/activity.jpg') }}" alt="Деятельность храма"
-                                class="activity-slide-img">
-                            <div class="activity-slide-overlay">
-                                <div class="activity-slide-title">Молодежное движение</div>
-                                <div class="activity-slide-desc">Встречи и мероприятия для молодежи</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Slide 5 -->
-                    <div class="swiper-slide">
-                        <div class="activity-slide-inner">
-                            <img src="{{ asset('images/activity.jpg') }}" alt="Деятельность храма"
-                                class="activity-slide-img">
-                            <div class="activity-slide-overlay">
-                                <div class="activity-slide-title">Хор и клирос</div>
-                                <div class="activity-slide-desc">Церковное пение и богослужения</div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- Pagination (точки) -->
@@ -510,11 +302,12 @@
 
     <div class="container">
         <div class="gallery-section">
-            <div class="text-center title">ГАЛЕРЕЯ ХРАМА</div>
+            <div class="text-center title">КРЕЩЕНСКИЙ ПАРК</div>
 
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
                     <!-- Slide 1 -->
+
                     <div class="swiper-slide active">
                         <img src="{{ asset('images/ChramSvitogo.jpg') }}" alt="Храм святого князя Владимира" />
                         <div class="slide-overlay">
@@ -528,89 +321,55 @@
                                 <p class="slide-description">Горожане с нетерпением ждали долгожданное открытие
                                     Крещенского парка в Анапе и уже его посетили, а вот новые жители города не знают,
                                     где именно он находится и как сюда можно добраться.</p>
-                                <div class="slide-actions">
-                                    <span class="slide-link">Узнать больше</span>
-                                    <svg class="slide-arrow" xmlns="http://www.w3.org/2000/svg" width="24"
-                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2">
-                                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                                        <polyline points="12 5 19 12 12 19"></polyline>
-                                    </svg>
-                                </div>
+                                <a href="{{ route('temple') }}">
+                                    <div class="slide-actions">
+                                        <span class="slide-link">Узнать больше</span>
+                                        <svg class="slide-arrow" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2">
+                                            <line x1="5" y1="12" x2="19" y2="12">
+                                            </line>
+                                            <polyline points="12 5 19 12 12 19"></polyline>
+                                        </svg>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     </div>
 
                     <!-- Slide 2 -->
                     <div class="swiper-slide">
-                        <img src="{{ asset('images/hram_kupel_knyagini_olgi.jpg') }}"
-                            alt="Храм-купель княгини Ольги" />
+                        <img src="{{ asset('images/hram_kupel_knyagini_olgi.jpg') }}" alt="Крещенский парк" />
                         <div class="slide-overlay">
                             <div class="slide-header">
                                 <img src="{{ asset('images/Logo2.svg') }}" alt="Логотип" class="slide-icon">
-                                <h3 class="slide-title">Храм-купель княгини Ольги</h3>
+                                <h3 class="slide-title">Крещенский парк</h3>
                             </div>
-                            <div class="slide-footer">
-                                <p class="slide-description">Уникальное место для проведения таинства крещения,
-                                    построенное в традициях русского зодчества.</p>
-                                <div class="slide-actions">
-                                    <span class="slide-link">Узнать больше</span>
-                                    <svg class="slide-arrow" xmlns="http://www.w3.org/2000/svg" width="24"
-                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2">
-                                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                                        <polyline points="12 5 19 12 12 19"></polyline>
-                                    </svg>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
 
                     <!-- Slide 3 -->
                     <div class="swiper-slide">
-                        <img src="{{ asset('images/derzhavnaya_ikona_bozhej_materi.jpg') }}" alt="Державная икона" />
+                        <img src="{{ asset('images/derzhavnaya_ikona_bozhej_materi.jpg') }}" alt="Крещенский парк" />
                         <div class="slide-overlay">
                             <div class="slide-header">
                                 <img src="{{ asset('images/Logo2.svg') }}" alt="Логотип" class="slide-icon">
-                                <h3 class="slide-title">Державная икона Божьей Матери</h3>
+                                <h3 class="slide-title">Крещенский парк</h3>
                             </div>
-                            <div class="slide-footer">
-                                <p class="slide-description">Чудотворная икона, почитаемая верующими со всей России.
-                                    Перед ней совершаются молебны и богослужения.</p>
-                                <div class="slide-actions">
-                                    <span class="slide-link">Узнать больше</span>
-                                    <svg class="slide-arrow" xmlns="http://www.w3.org/2000/svg" width="24"
-                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2">
-                                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                                        <polyline points="12 5 19 12 12 19"></polyline>
-                                    </svg>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
 
                     <!-- Slide 4 -->
                     <div class="swiper-slide">
-                        <img src="{{ asset('images/galery.jpg') }}" alt="Галерея храма" />
+                        <img src="{{ asset('images/galery.jpg') }}" alt="Крещенский парк" />
                         <div class="slide-overlay">
                             <div class="slide-header">
                                 <img src="{{ asset('images/Logo2.svg') }}" alt="Логотип" class="slide-icon">
-                                <h3 class="slide-title">Галерея храма</h3>
+                                <h3 class="slide-title">Крещенский парк</h3>
                             </div>
-                            <div class="slide-footer">
-                                <p class="slide-description">Внутреннее убранство храма с древними иконами, фресками и
-                                    уникальными произведениями церковного искусства.</p>
-                                <div class="slide-actions">
-                                    <span class="slide-link">Узнать больше</span>
-                                    <svg class="slide-arrow" xmlns="http://www.w3.org/2000/svg" width="24"
-                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2">
-                                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                                        <polyline points="12 5 19 12 12 19"></polyline>
-                                    </svg>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -773,7 +532,7 @@
     </div>
 
     <div class="container">
-        <div class="contact-section">
+        <div class="contact-section mt-3">
             <div class="title text-center mb-5">КОНТАКТЫ</div>
             <div class="row align-items-start">
                 <!-- Левая колонка: контактная информация -->

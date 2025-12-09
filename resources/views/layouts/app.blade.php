@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Анапа-Храм') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -16,6 +16,8 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+    @stack('styles')
 </head>
 
 <body>
@@ -54,6 +56,12 @@
                         <a href="{{ route('admin.events.index') }}" class="nav-link text-white">
                             <i class="bi bi-calendar"></i>
                             Календарь событий
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.orthodox_calendar.index') }}" class="nav-link text-white">
+                            <i class="bi bi-calendar"></i>
+                            Православный Календарь
                         </a>
                     </li>
                 </ul>
