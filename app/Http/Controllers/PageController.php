@@ -140,7 +140,9 @@ class PageController extends Controller
             ->orderBy('published_at', 'desc')
             ->get();
 
-        return view('temple', compact('templePage', 'activitys'));
+        $categories = $this->loadCategoriesWithLimit(5);
+
+        return view('temple', compact('templePage', 'activitys', 'categories'));
     }
 
     public function gallery()
