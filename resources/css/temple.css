@@ -25,7 +25,7 @@
 }
 .gallery-top {
     width: 80%;
-    height: 25rem;
+    height: 35rem;
     position: relative;
     padding: 0.5rem;
     border-radius: 3rem;
@@ -64,13 +64,68 @@
     object-fit: cover;
     border-radius: 1rem;
 }
-.swiper-button-next,
-.swiper-button-prev {
-    color: #fff;
+/* Custom navigation arrows for temple galleries */
+.swiper-container-wrapper .swiper-button-prev::after,
+.swiper-container-wrapper .swiper-button-next::after {
+    display: none;
+}
+
+.gallery-top-prev,
+.gallery-top-next,
+.gallery-top-2-prev,
+.gallery-top-2-next {
+    position: absolute !important;
+    width: 50px !important;
+    height: 50px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 10;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    svg {
+        color: #ffffff00 !important;
+    }
+}
+
+.gallery-top-prev:hover,
+.gallery-top-next:hover,
+.gallery-top-2-prev:hover,
+.gallery-top-2-next:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    transform: scale(1.05);
+}
+
+.gallery-top-prev,
+.gallery-top-2-prev {
+    left: 10px !important;
+}
+
+.gallery-top-next,
+.gallery-top-2-next {
+    right: 10px !important;
+}
+
+.gallery-top-prev svg,
+.gallery-top-next svg,
+.gallery-top-2-prev svg,
+.gallery-top-2-next svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: #000000;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 .gallery-top-2 {
     width: 80%;
-    height: 25rem;
+    height: 35rem;
     position: relative;
     padding: 0.5rem;
     border-radius: 3rem;
@@ -108,6 +163,118 @@
     height: 100%;
     object-fit: cover;
     border-radius: 1rem;
+}
+
+/* Скрыть полосу прокрутки у миниатюр, но сохранить возможность прокрутки */
+.sticky-swiper .gallery-thumbs,
+.sticky-swiper .gallery-thumbs-2 {
+    -ms-overflow-style: none; /* IE 10+ */
+    scrollbar-width: none; /* Firefox */
+    -webkit-overflow-scrolling: touch;
+}
+
+/* WebKit (Chrome, Safari, Edge Chromium) */
+.sticky-swiper .gallery-thumbs::-webkit-scrollbar,
+.sticky-swiper .gallery-thumbs-2::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+/* Резерв: предотвращаем сдвиг контента при появлении/скрытии скролла */
+@supports (scrollbar-gutter: stable) {
+    .sticky-swiper .gallery-thumbs,
+    .sticky-swiper .gallery-thumbs-2 {
+        scrollbar-gutter: stable;
+    }
+}
+
+/* На мобильных можно оставить поведение по умолчанию (опционально) */
+@media (max-width: 991.98px) {
+    .sticky-swiper .gallery-thumbs,
+    .sticky-swiper .gallery-thumbs-2 {
+        -ms-overflow-style: auto;
+        scrollbar-width: auto;
+    }
+    .sticky-swiper .gallery-thumbs::-webkit-scrollbar,
+    .sticky-swiper .gallery-thumbs-2::-webkit-scrollbar {
+        width: initial;
+        height: initial;
+    }
+}
+
+/* ---------- Sticky / Follow-on-scroll behaviour for temple swipers ---------- */
+@media (min-width: 992px) {
+    .swiper-container-wrapper.sticky-swiper {
+        position: sticky;
+        top: 100px; /* leave space for navbar/header */
+        align-self: start;
+        max-height: calc(100vh - 120px);
+        z-index: 5;
+    }
+
+    /* Make main image adapt to available viewport height */
+    .swiper-container-wrapper.sticky-swiper .gallery-top,
+    .swiper-container-wrapper.sticky-swiper .gallery-top-2 {
+        height: calc(min(35rem, 100vh - 160px));
+    }
+
+    /* Allow thumbnails to scroll internally when there are many items */
+    .swiper-container-wrapper.sticky-swiper .gallery-thumbs,
+    .swiper-container-wrapper.sticky-swiper .gallery-thumbs-2 {
+        padding: 0 1rem;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Ensure vertical thumb layout keeps spacing when scrolling */
+    .swiper-container-wrapper.sticky-swiper .gallery-thumbs .swiper-wrapper,
+    .swiper-container-wrapper.sticky-swiper .gallery-thumbs-2 .swiper-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+/* ---------- Mobile responsive layout for galleries ---------- */
+@media (max-width: 1200px) {
+    /* Stack layout: main image full width, thumbs below */
+    .swiper-container-wrapper {
+        flex-direction: column;
+    }
+
+    .gallery-top,
+    .gallery-top-2 {
+        width: 100% !important;
+        height: 500px !important;
+        margin-bottom: 1rem;
+    }
+
+    .gallery-thumbs,
+    .gallery-thumbs-2 {
+        width: 100% !important;
+        height: auto !important;
+        padding: 0 !important;
+    }
+
+    /* Horizontal thumbnail layout on mobile */
+    .gallery-thumbs .swiper-wrapper,
+    .gallery-thumbs-2 .swiper-wrapper {
+        flex-direction: row !important;
+    }
+
+    .gallery-thumbs .swiper-slide,
+    .gallery-thumbs-2 .swiper-slide {
+        width: 80px !important;
+        height: 80px !important;
+        margin-right: 10px;
+    }
+
+    /* Remove vertical navigation buttons on mobile */
+    .gallery-thumbs .swiper-button-next,
+    .gallery-thumbs .swiper-button-prev,
+    .gallery-thumbs-2 .swiper-button-next,
+    .gallery-thumbs-2 .swiper-button-prev {
+        display: none;
+    }
 }
 
 /* ---------- Temple Content ---------- */
@@ -181,107 +348,6 @@
     line-height: 1.2;
     color: #6e634c;
 }
-
-/* ---------- Activity ---------- */
-.activity {
-    margin-top: 120px;
-    margin-bottom: 120px;
-}
-.activity .title {
-    font-size: var(--font-size-title);
-    font-family: Tenor Sans;
-    font-weight: 400;
-    line-height: 64px;
-    text-align: center;
-    text-transform: uppercase;
-    color: #4a5b6f;
-    margin-bottom: 1rem;
-}
-.activity-swiper-container {
-    position: relative;
-    width: 100%;
-    height: 600px;
-    margin-top: 60px;
-    overflow: hidden;
-    padding: 0 60px;
-}
-.activity-swiper-container .swiper-wrapper {
-    align-items: center;
-}
-.activity-swiper-container .swiper-slide {
-    height: 500px;
-    transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s ease;
-    opacity: 0;
-    visibility: hidden;
-    transform: scale(0.85);
-}
-.activity-swiper-container .swiper-slide-active {
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: scale(1) !important;
-    z-index: 2;
-}
-.activity-swiper-container .swiper-slide-prev,
-.activity-swiper-container .swiper-slide-next {
-    opacity: 0.5 !important;
-    visibility: visible !important;
-    transform: scale(0.9);
-}
-.activity-slide-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
-.activity-slide-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.activity-slide-overlay {
-    position: absolute;
-    bottom: 0px;
-    left: 40px;
-    max-width: 500px;
-    padding: 20px;
-}
-.activity-slide-title {
-    font-family: "Tenor Sans", sans-serif;
-    font-weight: 400;
-    font-size: 28px;
-    line-height: 100%;
-    font-variant: small-caps;
-    color: white;
-    margin-bottom: 15px;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-}
-.activity-slide-desc {
-    font-family: "Montserrat", sans-serif;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
-    font-variant: small-caps;
-    color: white;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-}
-.activity-swiper-container .swiper-pagination {
-    bottom: -50px !important;
-}
-.activity-swiper-container .swiper-pagination-bullet {
-    width: 12px;
-    height: 12px;
-    background-color: #cbbd91;
-    opacity: 0.5;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-.activity-swiper-container .swiper-pagination-bullet-active {
-    opacity: 1;
-    background-color: #4a5b6f;
-    transform: scale(1.3);
-}
-
 /* ---------- Donation ---------- */
 .donation .title {
     font-size: var(--font-size-title);
@@ -449,65 +515,5 @@
     .hero-btn {
         font-size: 16px;
         padding: 10px 35px;
-    }
-}
-
-/* ---------- Фотогалерея ---------- */
-.photo-section .photo-filters {
-    flex-wrap: wrap;
-}
-.photo-section .photo-filters .btn-filter {
-    background: #efe9e0;
-    border: none;
-    padding: 12px 36px;
-    border-radius: 28px;
-    color: #4a5b6f;
-    font-weight: 600;
-}
-.photo-section .photo-filters .btn-filter.active {
-    background: #e2daca;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
-}
-.gallery-wrap {
-    margin-top: 20px;
-}
-.gallery-instance {
-    position: relative;
-}
-.gallery-instance .swiper-button-prev,
-.gallery-instance .swiper-button-next {
-    color: #4a5b6f;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    transition: all 0.3s ease;
-}
-.gallery-instance .swiper-button-prev {
-    left: -60px;
-}
-.gallery-instance .swiper-button-next {
-    right: -60px;
-}
-.gallery-swiper .swiper-slide img {
-    width: 100%;
-    height: 280px;
-    object-fit: cover;
-    border-radius: 14px;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.gallery-swiper .swiper-slide img:hover {
-    transform: scale(1.02);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
-.photo-section .title {
-    font-size: var(--font-size-title);
-    margin-bottom: 2rem;
-}
-
-@media (min-width: 1200px) {
-    .gallery-swiper .swiper-slide img {
-        height: 320px;
     }
 }

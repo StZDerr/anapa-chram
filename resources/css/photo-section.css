@@ -1,0 +1,277 @@
+.photo-section .title {
+    font-family: var(--font-title);
+    font-weight: 400;
+    color: var(--main-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ---------- Фотогалерея ---------- */
+.photo-section .photo-filters .btn-filter {
+    background: #efe9e0;
+    border: none;
+    padding: 12px 36px;
+    border-radius: 28px;
+    color: #4a5b6f;
+    font-weight: 600;
+}
+.photo-section .photo-filters .btn-filter.active {
+    background: #e2daca;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+.gallery-wrap .swiper-button-prev::after,
+.gallery-wrap .swiper-button-next::after {
+    display: none;
+}
+
+.gallery-wrap .swiper-button-prev,
+.gallery-wrap .swiper-button-next {
+    color: white !important;
+}
+
+.gallery-festivals-prev,
+.gallery-festivals-next,
+.gallery-temple-prev,
+.gallery-temple-next,
+.gallery-park-prev,
+.gallery-park-next,
+.news-button-next,
+.news-button-prev {
+    position: absolute !important;
+    width: 50px !important;
+    height: 50px !important;
+    background: white !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 10;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+.gallery-park-prev,
+.gallery-festivals-prev,
+.gallery-temple-prev,
+.news-button-prev {
+    left: -50px !important;
+}
+.gallery-park-next,
+.gallery-festivals-next,
+.gallery-temple-next,
+.news-button-next {
+    right: -50px !important;
+}
+.gallery-festivals-prev svg,
+.gallery-festivals-next svg,
+.gallery-temple-prev svg,
+.gallery-temple-next svg,
+.gallery-park-prev svg,
+.gallery-park-next svg,
+.news-button-next svg,
+.news-button-prev svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: #000000;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.gallery-wrap {
+    margin-top: 20px;
+}
+.gallery-instance {
+    position: relative;
+}
+
+.gallery-swiper .swiper-slide img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.gallery-swiper .swiper-slide img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+.photo-section .title {
+    font-size: var(--font-size-title);
+    margin-bottom: 2rem;
+}
+@media (min-width: 1200px) {
+    .mySwiper {
+        max-width: 95%;
+        padding: 0 15px;
+    }
+    .mySwiper .swiper-slide {
+        flex-basis: 130px;
+    }
+    .mySwiper .swiper-slide.active {
+        flex-basis: calc(100% - 420px);
+    }
+}
+@media (max-width: 1440px) {
+    .mySwiper {
+        max-width: 95%;
+        padding: 0 20px;
+    }
+    .mySwiper .swiper-slide {
+        flex-basis: 150px;
+    }
+    .mySwiper .swiper-slide.active {
+        flex-basis: calc(100% - 480px);
+    }
+}
+@media (max-width: 1024px) {
+    .mySwiper {
+        height: 100vh;
+    }
+    .mySwiper .swiper-wrapper {
+        flex-direction: column;
+    }
+    .mySwiper .swiper-slide {
+        margin-bottom: 10px;
+        margin-right: 0;
+        flex-basis: 150px;
+        height: auto;
+        min-height: 150px;
+    }
+    .mySwiper .swiper-slide.active {
+        flex-basis: 400px;
+        min-height: 400px;
+    }
+}
+@media (max-width: 768px) {
+    .mySwiper {
+        height: 70vh;
+    }
+    .mySwiper .swiper-slide {
+        flex-basis: 100px;
+        min-height: 100px;
+    }
+    .mySwiper .swiper-slide.active {
+        flex-basis: 300px;
+        min-height: 300px;
+    }
+    .mySwiper .details {
+        padding: 15px;
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+    }
+    .mySwiper .details h3 {
+        font-size: 18px;
+        margin-bottom: 8px;
+    }
+    .mySwiper .details p {
+        font-size: 12px;
+        line-height: 16px;
+    }
+}
+@media (max-width: 576px) {
+    .mySwiper {
+        height: 70vh;
+    }
+    .mySwiper .swiper-slide {
+        flex-basis: 80px;
+    }
+    .mySwiper .swiper-slide.active {
+        flex-basis: 250px;
+    }
+    .mySwiper .details h3 {
+        font-size: 16px;
+    }
+    .mySwiper .details p {
+        font-size: 11px;
+    }
+}
+/* ===== Позиционирование кнопок: на малых экранах внутрь слайдера ===== */
+/* Ставим эти правила ПОСЛЕ всех остальных, чтобы точно перекрыть базовые !important */
+@media (max-width: 1200px) {
+    /* общий набор селекторов + более специфичные с .gallery-instance */
+    .gallery-park-prev,
+    .gallery-festivals-prev,
+    .gallery-temple-prev,
+    .gallery-instance .gallery-park-prev,
+    .gallery-instance .gallery-festivals-prev,
+    .gallery-instance .gallery-temple-prev {
+        left: 10px !important;
+        right: auto !important;
+        background: none !important;
+        color: #ffffff00 !important;
+    }
+
+    .gallery-park-next,
+    .gallery-festivals-next,
+    .gallery-temple-next,
+    .gallery-instance .gallery-park-next,
+    .gallery-instance .gallery-festivals-next,
+    .gallery-instance .gallery-temple-next {
+        right: 10px !important;
+        left: auto !important;
+        background: none !important;
+        color: #ffffff00 !important;
+    }
+    .gallery-wrap .swiper-button-prev,
+    .gallery-wrap .swiper-button-next {
+        color: #ffffff00 !important;
+    }
+}
+
+/* Ещё более компактно для мобильных */
+@media (max-width: 768px) {
+    .gallery-park-prev,
+    .news-button-prev,
+    .news-button-next,
+    .gallery-festivals-prev,
+    .gallery-temple-prev,
+    .gallery-instance .gallery-park-prev,
+    .gallery-instance .gallery-festivals-prev,
+    .gallery-instance .gallery-temple-prev,
+    .gallery-park-next,
+    .gallery-festivals-next,
+    .gallery-temple-next,
+    .gallery-instance .gallery-park-next,
+    .gallery-instance .gallery-festivals-next,
+    .gallery-instance .gallery-temple-next {
+        width: 44px !important;
+        height: 44px !important;
+        background: none !important;
+        color: #ffffff00 !important;
+    }
+    .gallery-park-prev,
+    .gallery-instance .gallery-park-prev,
+    .news-button-prev {
+        left: 8px !important;
+    }
+    .gallery-park-next,
+    .gallery-instance .gallery-park-next,
+    .news-button-next {
+        right: 8px !important;
+    }
+}
+@media (max-width: 768px) {
+    .d-flex.justify-content-center {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem !important;
+    }
+    .calendar-card {
+        width: 100%;
+        max-width: 300px;
+    }
+    .btn-calendar-nav {
+        /* width: 150px; */
+        height: 30px;
+    }
+    .calendar-desc {
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        font-size: 0.8rem;
+    }
+}

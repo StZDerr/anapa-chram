@@ -2,11 +2,11 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <title>{{ $news->title }} - Храм святого князя Владимира в Анапе</title>
+    <title>{{ $newsItem->title }} - Храм святого князя Владимира в Анапе</title>
     @include('partials.head')
 
     <!-- Стили страницы News Read -->
-    @vite(['resources/css/news-read.css', 'resources/js/news-read.js'])
+    @vite(['resources/css/news-read.css', 'resources/js/news-read.js', 'resources/js/news-swiper.js', 'resources/css/news-swiper.css'])
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -16,15 +16,15 @@
         <!-- Hero секция с фоном -->
         <div class="news-hero">
             <div class="news-hero-overlay"></div>
-            @if ($news->img_preview && Storage::disk('public')->exists($news->img_preview))
-                <img src="{{ Storage::url($news->img_preview) }}" alt="{{ $news->title }}" class="news-hero-image">
+            @if ($newsItem->img_preview && Storage::disk('public')->exists($newsItem->img_preview))
+                <img src="{{ Storage::url($newsItem->img_preview) }}" alt="{{ $newsItem->title }}" class="news-hero-image">
             @else
-                <img src="{{ asset('images/ChramSvitogo.jpg') }}" alt="{{ $news->title }}" class="news-hero-image">
+                <img src="{{ asset('images/ChramSvitogo.jpg') }}" alt="{{ $newsItem->title }}" class="news-hero-image">
             @endif
             <div class="container">
                 <div class="news-hero-content">
                     <div class="news-category">Новости храма</div>
-                    <h1 class="news-hero-title">{{ $news->title }}</h1>
+                    <h1 class="news-hero-title">{{ $newsItem->title }}</h1>
                     <div class="news-meta">
                         <span class="news-date">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
@@ -34,7 +34,7 @@
                                 <line x1="8" y1="2" x2="8" y2="6"></line>
                                 <line x1="3" y1="10" x2="21" y2="10"></line>
                             </svg>
-                            {{ $news->published_at ? $news->published_at->format('d.m.Y') : $news->created_at->format('d.m.Y') }}
+                            {{ $newsItem->published_at ? $newsItem->published_at->format('d.m.Y') : $newsItem->created_at->format('d.m.Y') }}
                         </span>
                         <span class="news-author">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
@@ -57,7 +57,7 @@
                     <div class="col-lg-10 col-xl-9">
                         <article class="news-article">
                             <div class="news-content-display">
-                                {!! $news->content !!}
+                                {!! $newsItem->content !!}
                             </div>
                         </article>
                         <div class="more d-none">
@@ -117,12 +117,12 @@
                         </div>
 
                         <!-- Фотогалерея -->
-                        @if ($news->gallery && count(json_decode($news->gallery, true)) > 0)
+                        @if ($newsItem->gallery && count(json_decode($newsItem->gallery, true)) > 0)
                             <div class="news-gallery-section">
                                 <h2 class="section-title">Фотогалерея события</h2>
                                 <div class="swiper newsGallerySwiper">
                                     <div class="swiper-wrapper">
-                                        @foreach (json_decode($news->gallery, true) as $image)
+                                        @foreach (json_decode($newsItem->gallery, true) as $image)
                                             @if (Storage::disk('public')->exists($image))
                                                 <div class="swiper-slide">
                                                     <a href="{{ Storage::url($image) }}" data-pswp-width="1200"
@@ -159,38 +159,7 @@
         </div>
 
         <!-- Другие новости внизу страницы -->
-        @if ($otherNews->count() > 0)
-            <div class="other-news-section">
-                <div class="container">
-                    <h2 class="section-title text-center">Другие новости</h2>
-                    <div class="row g-4">
-                        @foreach ($otherNews->take(3) as $otherNewsItem)
-                            <div class="col-md-6 col-lg-4">
-                                <a href="{{ route('news.read', $otherNewsItem->slug) }}" class="other-news-card">
-                                    <div class="other-news-image">
-                                        @if ($otherNewsItem->img_preview && Storage::disk('public')->exists($otherNewsItem->img_preview))
-                                            <img src="{{ Storage::url($otherNewsItem->img_preview) }}"
-                                                alt="{{ $otherNewsItem->title }}">
-                                        @else
-                                            <img src="{{ asset('images/ChramSvitogo.jpg') }}"
-                                                alt="{{ $otherNewsItem->title }}">
-                                        @endif
-                                    </div>
-                                    <div class="other-news-content">
-                                        <div class="other-news-date">
-                                            {{ $otherNewsItem->published_at ? $otherNewsItem->published_at->format('d.m.Y') : $otherNewsItem->created_at->format('d.m.Y') }}
-                                        </div>
-                                        <h3 class="other-news-title">{{ $otherNewsItem->title }}</h3>
-                                        <p class="other-news-excerpt">
-                                            {{ Str::limit(strip_tags($otherNewsItem->content), 120) }}</p>
-                                    </div>
-                                </a>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-        @endif
+        @include('partials.news-partials')
     </main>
 
     @include('partials.footer')

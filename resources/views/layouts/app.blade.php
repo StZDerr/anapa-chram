@@ -64,6 +64,20 @@
                             Православный Календарь
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('admin.temple.edit') }}" class="nav-link text-white">
+                            <i class="bi bi-calendar"></i>
+                            TemplePages
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('admin.gallery.index') }}" class="nav-link text-white">
+                            <i class="bi bi-calendar"></i>
+                            Галерея
+                        </a>
+                    </li>
                 </ul>
                 <hr>
 

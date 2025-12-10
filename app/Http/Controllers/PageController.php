@@ -6,6 +6,7 @@ use App\Models\Activity;
 use App\Models\Event;
 use App\Models\News;
 use App\Models\OrthodoxCalendar;
+use App\Models\TemplePage;
 use Carbon\Carbon;
 
 class PageController extends Controller
@@ -68,17 +69,17 @@ class PageController extends Controller
 
     public function newsRead($slug)
     {
-        $news = News::where('slug', $slug)
+        $newsItem = News::where('slug', $slug)
             ->where('status', 'published')
             ->firstOrFail();
 
-        $otherNews = News::where('status', 'published')
-            ->where('id', '!=', $news->id)
+        $news = News::where('status', 'published')
+            ->where('id', '!=', $newsItem->id)
             ->orderBy('published_at', 'desc')
             ->take(6)
             ->get();
 
-        return view('news.read', compact('news', 'otherNews'));
+        return view('news.read', compact('newsItem', 'news'));
     }
 
     public function activity()
@@ -102,5 +103,15 @@ class PageController extends Controller
             ->get();
 
         return view('activity.read', compact('activity', 'otherActivity'));
+    }
+
+    public function temple()
+    {
+        $templePage = TemplePage::getByKey('temple_main');
+        $activitys = Activity::where('status', 'published')
+            ->orderBy('published_at', 'desc')
+            ->get();
+
+        return view('temple', compact('templePage', 'activitys'));
     }
 }

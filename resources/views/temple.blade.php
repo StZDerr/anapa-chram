@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <!-- Стили страницы Temple -->
-    @vite(['resources/css/temple.css', 'resources/css/donation-modal.css', 'resources/js/temple.js'])
+    @vite(['resources/css/activity-swiper.css', 'resources/js/activity-swiper.js', 'resources/js/photo-section.js', 'resources/css/temple.css', 'resources/css/donation-modal.css', 'resources/js/temple.js', 'resources/css/photo-section.css'])
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -21,50 +21,56 @@
     <main class="flex-fill">
         <div class="container py-5">
             <h1 class="text-center temple-title mb-5">
-                Храм святого равноапостольного
-                великого князя Владимира
+                {{ $templePage->title ?? 'Храм святого равноапостольного великого князя Владимира' }}
             </h1>
 
             <!-- Основной контент -->
             <div class="temple-content">
                 <div class="row">
-                    <div class="col-sm-12 col-lg-6">
-                        <div class="swiper-container-wrapper">
+                    <div class="col-sm-12 col-lg-6 d-flex align-items-center">
+                        <div class="swiper-container-wrapper w-100 sticky-swiper">
                             <!-- Большое изображение -->
                             <div class="swiper gallery-top">
                                 <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <img src="{{ asset('images/ChramSvitogo.jpg') }}"
-                                            alt="Храм святого князя Владимира">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{ asset('images/derzhavnaya_ikona_bozhej_materi.jpg') }}"
-                                            alt="Храм святого князя Владимира">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{ asset('images/galery.jpg') }}" alt="Храм святого князя Владимира">
-                                    </div>
+                                    @php
+                                        $gallery1 = $templePage->gallery_1_images ?? [
+                                            'images/ChramSvitogo.jpg',
+                                            'images/derzhavnaya_ikona_bozhej_materi.jpg',
+                                            'images/galery.jpg',
+                                        ];
+                                    @endphp
+                                    @foreach ($gallery1 as $image)
+                                        <div class="swiper-slide">
+                                            <img src="{{ asset(str_starts_with($image, 'http') ? $image : 'storage/' . $image) }}"
+                                                alt="Храм святого князя Владимира">
+                                        </div>
+                                    @endforeach
                                 </div>
 
                                 <!-- Стрелки -->
-                                <div class="swiper-button-next"></div>
-                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-button-prev gallery-top-prev">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                                        <polyline points="12 19 5 12 12 5"></polyline>
+                                    </svg>
+                                </div>
+                                <div class="swiper-button-next gallery-top-next">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                        <polyline points="12 5 19 12 12 19"></polyline>
+                                    </svg>
+                                </div>
                             </div>
 
                             <!-- Превью (миниатюры) -->
                             <div class="swiper gallery-thumbs">
                                 <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <img src="{{ asset('images/ChramSvitogo.jpg') }}"
-                                            alt="Храм святого князя Владимира">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{ asset('images/derzhavnaya_ikona_bozhej_materi.jpg') }}"
-                                            alt="Храм святого князя Владимира">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{ asset('images/galery.jpg') }}" alt="Храм святого князя Владимира">
-                                    </div>
+                                    @foreach ($gallery1 as $image)
+                                        <div class="swiper-slide">
+                                            <img src="{{ asset(str_starts_with($image, 'http') ? $image : 'storage/' . $image) }}"
+                                                alt="Храм святого князя Владимира">
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -72,72 +78,69 @@
                     <div class="col-sm-12 col-lg-6">
                         <div class="title">О храме</div>
                         <div class="details fs-5">
-                            Горожане с нетерпением ждали долгожданное открытие Крещенского парка в
-                            Анапе и уже его посетили, а вот новые жители города не знают, где именно он находится и как
-                            сюда можно добраться.
-                            Проходя храм мы попадаем на огромную площадь с фонтанами, вымощенную крупной плиткой. Место
-                            поистине огромно. На мой взгляд больше площади у "Родины". Фонтан работал только при
-                            освящений храма, уже сегодня его доводят до ума мастера. По всей площади большое количество
-                            диодных фонарей и точечных спотов. Вечером тут светло.
-                            Проходя храм мы попадаем на огромную площадь с фонтанами, вымощенную крупной плиткой. Место
-                            поистине огромно. На мой взгляд больше площади у "Родины". Фонтан работал только при
-                            освящений храма, уже сегодня его доводят до ума мастера. По всей площади большое количество
-                            диодных фонарей и точечных спотов. Вечером тут светло. Анапе и уже его посетили, а вот новые
-                            жители города не знают, где именно он находится и как сюда можно добраться
+                            {!! $templePage->about_text ??
+                                'Горожане с нетерпением ждали долгожданное открытие Крещенского парка в Анапе и уже его посетили, а вот новые жители города не знают, где именно он находится и как сюда можно добраться.' !!}
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row mt-4">
                     <div class="col-sm-12 col-lg-6">
-                        <div class="title">Открытие храма</div>
+                        <div class="title">{{ $templePage->opening_title ?? 'Открытие храма' }}</div>
                         <div class="details fs-5">
-                            1 октября 2023 года состоялось открытие Храма Святого равноапостольного Великого князя
-                            Владимира
+                            {!! $templePage->opening_text ??
+                                '1 октября 2023 года состоялось открытие Храма Святого равноапостольного Великого князя Владимира' !!}
                         </div>
                         <div class="more-details fs-5">
-                            Патриарх Московский и всея Руси Кирилл освятил храм в честь святого равноапостольного князя
-                            Владимира в городе-курорте Анапа. В ходе мероприятия патриарх подарил храму образ Святой
-                            Матроны Московской.
+                            {!! $templePage->opening_details ??
+                                'Патриарх Московский и всея Руси Кирилл освятил храм в честь святого равноапостольного князя Владимира в городе-курорте Анапа.' !!}
                         </div>
                     </div>
-                    <div class="col-sm-12 col-lg-6">
-                        <div class="swiper-container-wrapper">
+                    <div class="col-sm-12 col-lg-6 d-flex align-items-center">
+                        <div class="swiper-container-wrapper w-100 sticky-swiper">
                             <!-- Большое изображение (второй свайпер) -->
                             <div class="swiper gallery-top-2">
                                 <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <img src="{{ asset('images/ChramSvitogo.jpg') }}"
-                                            alt="Храм святого князя Владимира">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{ asset('images/derzhavnaya_ikona_bozhej_materi.jpg') }}"
-                                            alt="Храм святого князя Владимира">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{ asset('images/galery.jpg') }}" alt="Храм святого князя Владимира">
-                                    </div>
+                                    @php
+                                        $gallery2 = $templePage->gallery_2_images ?? [
+                                            'images/ChramSvitogo.jpg',
+                                            'images/derzhavnaya_ikona_bozhej_materi.jpg',
+                                            'images/galery.jpg',
+                                        ];
+                                    @endphp
+                                    @foreach ($gallery2 as $image)
+                                        <div class="swiper-slide">
+                                            <img src="{{ asset(str_starts_with($image, 'http') ? $image : 'storage/' . $image) }}"
+                                                alt="Храм святого князя Владимира">
+                                        </div>
+                                    @endforeach
                                 </div>
 
                                 <!-- Стрелки -->
-                                <div class="swiper-button-next"></div>
-                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-button-prev gallery-top-2-prev">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                                        <polyline points="12 19 5 12 12 5"></polyline>
+                                    </svg>
+                                </div>
+                                <div class="swiper-button-next gallery-top-2-next">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                        <polyline points="12 5 19 12 12 19"></polyline>
+                                    </svg>
+                                </div>
                             </div>
 
                             <!-- Превью (миниатюры второго свайпера) -->
                             <div class="swiper gallery-thumbs-2">
                                 <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <img src="{{ asset('images/ChramSvitogo.jpg') }}"
-                                            alt="Храм святого князя Владимира">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{ asset('images/derzhavnaya_ikona_bozhej_materi.jpg') }}"
-                                            alt="Храм святого князя Владимира">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{ asset('images/galery.jpg') }}" alt="Храм святого князя Владимира">
-                                    </div>
+                                    @foreach ($gallery2 as $image)
+                                        <div class="swiper-slide">
+                                            <img src="{{ asset(str_starts_with($image, 'http') ? $image : 'storage/' . $image) }}"
+                                                alt="Храм святого князя Владимира">
+                                        </div>
+                                    @endforeach
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -220,81 +223,7 @@
                 </div>
             </div>
         </div>
-        <div class="container">
-            <div class="activity">
-                <div class="text-center title">ДЕЯТЕЛЬНОСТЬ ХРАМА</div>
-
-                <!-- Второй Swiper с pagination -->
-                <div class="activity-swiper-container">
-                    <div class="swiper-wrapper">
-                        <!-- Slide 1 -->
-                        <div class="swiper-slide">
-                            <div class="activity-slide-inner">
-                                <img src="{{ asset('images/activity.jpg') }}" alt="Деятельность храма"
-                                    class="activity-slide-img">
-                                <div class="activity-slide-overlay">
-                                    <div class="activity-slide-title">Воскресная школа</div>
-                                    <div class="activity-slide-desc">Обучение детей основам православной веры и
-                                        культуры
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Slide 2 -->
-                        <div class="swiper-slide">
-                            <div class="activity-slide-inner">
-                                <img src="{{ asset('images/activity.jpg') }}" alt="Деятельность храма"
-                                    class="activity-slide-img">
-                                <div class="activity-slide-overlay">
-                                    <div class="activity-slide-title">Благотворительность</div>
-                                    <div class="activity-slide-desc">Помощь нуждающимся и социальная поддержка</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Slide 3 -->
-                        <div class="swiper-slide">
-                            <div class="activity-slide-inner">
-                                <img src="{{ asset('images/activity.jpg') }}" alt="Деятельность храма"
-                                    class="activity-slide-img">
-                                <div class="activity-slide-overlay">
-                                    <div class="activity-slide-title">Паломничество</div>
-                                    <div class="activity-slide-desc">Организация поездок по святым местам</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Slide 4 -->
-                        <div class="swiper-slide">
-                            <div class="activity-slide-inner">
-                                <img src="{{ asset('images/activity.jpg') }}" alt="Деятельность храма"
-                                    class="activity-slide-img">
-                                <div class="activity-slide-overlay">
-                                    <div class="activity-slide-title">Молодежное движение</div>
-                                    <div class="activity-slide-desc">Встречи и мероприятия для молодежи</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Slide 5 -->
-                        <div class="swiper-slide">
-                            <div class="activity-slide-inner">
-                                <img src="{{ asset('images/activity.jpg') }}" alt="Деятельность храма"
-                                    class="activity-slide-img">
-                                <div class="activity-slide-overlay">
-                                    <div class="activity-slide-title">Хор и клирос</div>
-                                    <div class="activity-slide-desc">Церковное пение и богослужения</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pagination (точки) -->
-                    <div class="swiper-pagination activity-pagination"></div>
-                </div>
-            </div>
-        </div>
+        @include('partials.activity-partials')
         <div class="donation">
             <div class="container py-5">
                 <div class="text-center title m-4">ПОЖЕРТВОВАНИЕ</div>
@@ -326,130 +255,7 @@
             </div>
         </div>
 
-        <div class="container mb-5">
-            <div class="photo-section">
-                <div class="text-center title">ФОТОГАЛЕРЕЯ</div>
-                <!-- Фильтры категорий -->
-                <div class="photo-filters d-flex justify-content-center gap-3 mb-4">
-                    <button class="btn btn-filter active" data-target="#gallery-temple">Храм</button>
-                    <button class="btn btn-filter" data-target="#gallery-festivals">Праздники</button>
-                    <button class="btn btn-filter" data-target="#gallery-park">Крещенский парк</button>
-                </div>
-
-                <!-- Галереи: по одному Swiper на категорию -->
-                <div class="gallery-wrap">
-                    <!-- Храм -->
-                    <div id="gallery-temple" class="gallery-instance">
-                        <div class="swiper gallery-swiper gallery-temple-swiper">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide"><a href="{{ asset('images/ChramSvitogo.jpg') }}"
-                                        data-pswp-width="1200" data-pswp-height="800">
-                                        <img src="{{ asset('images/ChramSvitogo.jpg') }}" alt="Храм">
-                                    </a>
-                                </div>
-                                <div class="swiper-slide"><a href="{{ asset('images/galery.jpg') }}"
-                                        data-pswp-width="1200" data-pswp-height="800">
-                                        <img src="{{ asset('images/galery.jpg') }}" alt="Интерьер">
-                                    </a>
-                                </div>
-                                <div class="swiper-slide">
-                                    <a href="{{ asset('images/Duhovenstvo.jpg') }}" data-pswp-width="1200"
-                                        data-pswp-height="800">
-                                        <img src="{{ asset('images/Duhovenstvo.jpg') }}" alt="Духовенство">
-                                    </a>
-                                </div>
-                                <div class="swiper-slide"><a href="{{ asset('images/Popechiteli.jpg') }}"
-                                        data-pswp-width="1200" data-pswp-height="800">
-                                        <img src="{{ asset('images/Popechiteli.jpg') }}" alt="Храм 4">
-                                    </a>
-                                </div>
-                                <div class="swiper-slide"><a
-                                        href="{{ asset('images/hram_kupel_knyagini_olgi.jpg') }}"
-                                        data-pswp-width="1200" data-pswp-height="800">
-                                        <img src="{{ asset('images/hram_kupel_knyagini_olgi.jpg') }}" alt="Купель">
-                                    </a>
-                                </div>
-                                <div class="swiper-slide"><a
-                                        href="{{ asset('images/derzhavnaya_ikona_bozhej_materi.jpg') }}"
-                                        data-pswp-width="1200" data-pswp-height="800">
-                                        <img src="{{ asset('images/derzhavnaya_ikona_bozhej_materi.jpg') }}"
-                                            alt="Икона">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Кнопки навигации для Храм -->
-                        <div class="swiper-button-prev gallery-temple-prev"></div>
-                        <div class="swiper-button-next gallery-temple-next"></div>
-                    </div>
-
-                    <!-- Праздники -->
-                    <div id="gallery-festivals" class="gallery-instance d-none">
-                        <div class="swiper gallery-swiper gallery-festivals-swiper">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide"><a href="{{ asset('images/newsOne.jpg') }}"
-                                        data-pswp-width="1200" data-pswp-height="800">
-                                        <img src="{{ asset('images/newsOne.jpg') }}" alt="Праздник">
-                                    </a>
-                                </div>
-                                <div class="swiper-slide"><a href="{{ asset('images/activity.jpg') }}"
-                                        data-pswp-width="1200" data-pswp-height="800">
-                                        <img src="{{ asset('images/activity.jpg') }}" alt="Праздник 2">
-                                    </a>
-                                </div>
-                                <div class="swiper-slide"><a href="{{ asset('images/newsOne.jpg') }}"
-                                        data-pswp-width="1200" data-pswp-height="800">
-                                        <img src="{{ asset('images/newsOne.jpg') }}" alt="Праздник 3">
-                                    </a>
-                                </div>
-                                <div class="swiper-slide"><a href="{{ asset('images/activity.jpg') }}"
-                                        data-pswp-width="1200" data-pswp-height="800">
-                                        <img src="{{ asset('images/activity.jpg') }}" alt="Праздник 4">
-                                    </a>
-                                </div>
-                                <div class="swiper-slide"><a href="{{ asset('images/newsOne.jpg') }}"
-                                        data-pswp-width="1200" data-pswp-height="800">
-                                        <img src="{{ asset('images/newsOne.jpg') }}" alt="Праздник 5">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Кнопки навигации для Праздники -->
-                        <div class="swiper-button-prev gallery-festivals-prev"></div>
-                        <div class="swiper-button-next gallery-festivals-next"></div>
-                    </div>
-
-                    <!-- Крещенский парк -->
-                    <div id="gallery-park" class="gallery-instance d-none">
-                        <div class="swiper gallery-swiper gallery-park-swiper">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide"><a href="{{ asset('images/ChramSvitogo.jpg') }}"
-                                        data-pswp-width="1200" data-pswp-height="800"><img
-                                            src="{{ asset('images/ChramSvitogo.jpg') }}" alt="Парк"></a></div>
-                                <div class="swiper-slide"><a href="{{ asset('images/galery.jpg') }}"
-                                        data-pswp-width="1200" data-pswp-height="800"><img
-                                            src="{{ asset('images/galery.jpg') }}" alt="Парк 2"></a></div>
-                                <div class="swiper-slide"><a href="{{ asset('images/Duhovenstvo.jpg') }}"
-                                        data-pswp-width="1200" data-pswp-height="800"><img
-                                            src="{{ asset('images/Duhovenstvo.jpg') }}" alt="Парк 3"></a></div>
-                                <div class="swiper-slide"><a href="{{ asset('images/Popechiteli.jpg') }}"
-                                        data-pswp-width="1200" data-pswp-height="800"><img
-                                            src="{{ asset('images/Popechiteli.jpg') }}" alt="Парк 4"></a></div>
-                                <div class="swiper-slide"><a
-                                        href="{{ asset('images/hram_kupel_knyagini_olgi.jpg') }}"
-                                        data-pswp-width="1200" data-pswp-height="800"><img
-                                            src="{{ asset('images/hram_kupel_knyagini_olgi.jpg') }}"
-                                            alt="Парк 5"></a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Кнопки навигации для Парк -->
-                        <div class="swiper-button-prev gallery-park-prev"></div>
-                        <div class="swiper-button-next gallery-park-next"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @include('partials.photo-section')
     </main>
 
     @include('partials.donation-modal')

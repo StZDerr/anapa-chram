@@ -25,6 +25,8 @@ export default defineConfig({
                 "resources/css/donation-modal.css",
                 "resources/css/prayer-modal.css",
                 "resources/css/park.css",
+                "resources/css/activity-swiper.css",
+
                 "resources/js/app.js",
                 "resources/js/welcome.js",
                 "resources/js/zapiski.js",
@@ -37,6 +39,7 @@ export default defineConfig({
                 "resources/js/park.js",
                 "resources/js/calendar-swiper.js",
                 "resources/js/loader.js",
+                "resources/js/activity-swiper.js",
             ],
             refresh: true,
         }),
