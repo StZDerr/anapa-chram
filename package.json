@@ -18,6 +18,7 @@
         "vite": "^7.0.4"
     },
     "dependencies": {
+        "@fontsource/triodion": "^5.2.7",
         "@fullcalendar/core": "^6.1.19",
         "@fullcalendar/daygrid": "^6.1.19",
         "@fullcalendar/interaction": "^6.1.19",

@@ -17,7 +17,7 @@ class GalleryCategoryController extends Controller
      */
     public function index()
     {
-        $categories = PhotoCategory::all();
+        $categories = PhotoCategory::withCount('photos')->orderBy('name')->get();
 
         return view('admin.gallery.category.index', compact('categories'));
     }
@@ -25,14 +25,25 @@ class GalleryCategoryController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create() {}
+    public function create()
+    {
+        return view('admin.gallery.category.create');
+    }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        PhotoCategory::create([
+            'name' => $data['name'],
+        ]);
+
+        return redirect()->route('admin.gallery.categories.index')->with('success', 'Категория создана.');
     }
 
     /**
@@ -48,22 +59,32 @@ class GalleryCategoryController extends Controller
      */
     public function edit(PhotoCategory $photoCategory)
     {
-        //
+        return view('admin.gallery.category.edit', compact('photoCategory'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, PhotoCategory $photoCategory)
+    public function update(Request $request, PhotoCategory $gallery_category)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $gallery_category->update([
+            'name' => $data['name'],
+        ]);
+
+        return redirect()->route('admin.gallery.categories.index')->with('success', 'Категория обновлена.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PhotoCategory $photoCategory)
+    public function destroy(PhotoCategory $gallery_category)
     {
-        //
+        $gallery_category->delete();
+
+        return redirect()->route('admin.gallery.categories.index')->with('success', 'Категория удалена.');
     }
 }

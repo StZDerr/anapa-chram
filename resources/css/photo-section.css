@@ -30,12 +30,9 @@
     color: white !important;
 }
 
-.gallery-festivals-prev,
-.gallery-festivals-next,
-.gallery-temple-prev,
-.gallery-temple-next,
-.gallery-park-prev,
-.gallery-park-next,
+/* Универсальные стили для всех стрелок навигации галерей */
+.gallery-instance .swiper-button-prev,
+.gallery-instance .swiper-button-next,
 .news-button-next,
 .news-button-prev {
     position: absolute !important;
@@ -51,24 +48,18 @@
     outline: none;
 }
 
-.gallery-park-prev,
-.gallery-festivals-prev,
-.gallery-temple-prev,
+.gallery-instance .swiper-button-prev,
 .news-button-prev {
     left: -50px !important;
 }
-.gallery-park-next,
-.gallery-festivals-next,
-.gallery-temple-next,
+
+.gallery-instance .swiper-button-next,
 .news-button-next {
     right: -50px !important;
 }
-.gallery-festivals-prev svg,
-.gallery-festivals-next svg,
-.gallery-temple-prev svg,
-.gallery-temple-next svg,
-.gallery-park-prev svg,
-.gallery-park-next svg,
+
+.gallery-instance .swiper-button-prev svg,
+.gallery-instance .swiper-button-next svg,
 .news-button-next svg,
 .news-button-prev svg {
     width: 24px;
@@ -193,30 +184,20 @@
 /* ===== Позиционирование кнопок: на малых экранах внутрь слайдера ===== */
 /* Ставим эти правила ПОСЛЕ всех остальных, чтобы точно перекрыть базовые !important */
 @media (max-width: 1200px) {
-    /* общий набор селекторов + более специфичные с .gallery-instance */
-    .gallery-park-prev,
-    .gallery-festivals-prev,
-    .gallery-temple-prev,
-    .gallery-instance .gallery-park-prev,
-    .gallery-instance .gallery-festivals-prev,
-    .gallery-instance .gallery-temple-prev {
+    .gallery-instance .swiper-button-prev {
         left: 10px !important;
         right: auto !important;
         background: none !important;
         color: #ffffff00 !important;
     }
 
-    .gallery-park-next,
-    .gallery-festivals-next,
-    .gallery-temple-next,
-    .gallery-instance .gallery-park-next,
-    .gallery-instance .gallery-festivals-next,
-    .gallery-instance .gallery-temple-next {
+    .gallery-instance .swiper-button-next {
         right: 10px !important;
         left: auto !important;
         background: none !important;
         color: #ffffff00 !important;
     }
+
     .gallery-wrap .swiper-button-prev,
     .gallery-wrap .swiper-button-next {
         color: #ffffff00 !important;
@@ -225,32 +206,22 @@
 
 /* Ещё более компактно для мобильных */
 @media (max-width: 768px) {
-    .gallery-park-prev,
+    .gallery-instance .swiper-button-prev,
+    .gallery-instance .swiper-button-next,
     .news-button-prev,
-    .news-button-next,
-    .gallery-festivals-prev,
-    .gallery-temple-prev,
-    .gallery-instance .gallery-park-prev,
-    .gallery-instance .gallery-festivals-prev,
-    .gallery-instance .gallery-temple-prev,
-    .gallery-park-next,
-    .gallery-festivals-next,
-    .gallery-temple-next,
-    .gallery-instance .gallery-park-next,
-    .gallery-instance .gallery-festivals-next,
-    .gallery-instance .gallery-temple-next {
+    .news-button-next {
         width: 44px !important;
         height: 44px !important;
         background: none !important;
         color: #ffffff00 !important;
     }
-    .gallery-park-prev,
-    .gallery-instance .gallery-park-prev,
+
+    .gallery-instance .swiper-button-prev,
     .news-button-prev {
         left: 8px !important;
     }
-    .gallery-park-next,
-    .gallery-instance .gallery-park-next,
+
+    .gallery-instance .swiper-button-next,
     .news-button-next {
         right: 8px !important;
     }

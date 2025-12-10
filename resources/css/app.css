@@ -1,4 +1,5 @@
 @import "bootstrap/dist/css/bootstrap.min.css";
+@import "@fontsource/triodion";
 @import "./navbar.css";
 @import "./footer.css";
 
@@ -12,7 +13,8 @@
     --accent-border: #cbbd91;
     --shadow-1: 0 4px 12px rgba(0, 0, 0, 0.1);
     --shadow-2: 0 8px 25px rgba(0, 0, 0, 0.15);
-    --font-title: "Tenor Sans", sans-serif;
+    /* --font-title: "Tenor Sans", sans-serif; */
+    --font-title: "Triodion", serif;
     --font-ui: "Montserrat", sans-serif;
     --break-lg: 1400px;
     --break-md: 1199px;

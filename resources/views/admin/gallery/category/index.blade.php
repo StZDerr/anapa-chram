@@ -23,19 +23,11 @@
                             <form action="{{ route('admin.gallery.categories.store') }}" method="POST">
                                 @csrf
                                 <div class="row g-2 align-items-end">
-                                    <div class="col-md-5">
+                                    <div class="col-md-12">
                                         <label class="form-label">Название</label>
                                         <input name="name" value="{{ old('name') }}"
                                             class="form-control @error('name') is-invalid @enderror" required>
                                         @error('name')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="col-md-5">
-                                        <label class="form-label">Slug (опционально)</label>
-                                        <input name="slug" value="{{ old('slug') }}"
-                                            class="form-control @error('slug') is-invalid @enderror">
-                                        @error('slug')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -52,7 +44,6 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Название</th>
-                                        <th>Slug</th>
                                         <th>Фото</th>
                                         <th>Создано</th>
                                         <th>Действия</th>
@@ -63,7 +54,6 @@
                                         <tr>
                                             <td>{{ $category->id }}</td>
                                             <td>{{ $category->name }}</td>
-                                            <td>{{ $category->slug }}</td>
                                             <td>
                                                 <span class="badge bg-secondary">
                                                     {{ $category->photos_count ?? $category->photos()->count() }}
@@ -74,7 +64,6 @@
                                                 <button type="button" class="btn btn-sm btn-outline-secondary"
                                                     data-bs-toggle="modal" data-bs-target="#editCategoryModal"
                                                     data-id="{{ $category->id }}" data-name="{{ $category->name }}"
-                                                    data-slug="{{ $category->slug }}"
                                                     data-update-url="{{ route('admin.gallery.categories.update', $category->id) }}">
                                                     Редактировать
                                                 </button>
@@ -125,10 +114,6 @@
                             <label class="form-label">Название</label>
                             <input type="text" name="name" id="editCategoryName" class="form-control" required>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">Slug</label>
-                            <input type="text" name="slug" id="editCategorySlug" class="form-control">
-                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отменить</button>
@@ -150,18 +135,15 @@
                 const button = event.relatedTarget;
                 const id = button.getAttribute('data-id');
                 const name = button.getAttribute('data-name') || '';
-                const slug = button.getAttribute('data-slug') || '';
                 const updateUrl = button.getAttribute('data-update-url');
 
                 const form = document.getElementById('editCategoryForm');
                 const inputName = document.getElementById('editCategoryName');
-                const inputSlug = document.getElementById('editCategorySlug');
 
                 if (form && updateUrl) {
                     form.setAttribute('action', updateUrl);
                 }
                 if (inputName) inputName.value = name;
-                if (inputSlug) inputSlug.value = slug;
             });
         });
     </script>

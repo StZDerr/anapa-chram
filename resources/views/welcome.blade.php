@@ -306,18 +306,7 @@
 
     @include('partials.contacts-partials')
 
-    <!-- Яндекс Карта -->
-    <div class="container mt-5 mb-5">
-        <div class="map-section">
-            <div class="title text-center mb-4">КАК НАС НАЙТИ</div>
-            <div class="map-container" style="position:relative;overflow:hidden;">
-                <iframe
-                    src="https://yandex.ru/map-widget/v1/?um=constructor%3A17b72ba8b2573a27deae651cf3dda2b9b30e2e9495077444e9acd7e960fd889c&amp;source=constructor"
-                    width="100%" height="500" frameborder="0" style="border:0; border-radius: 12px;"
-                    sandbox="allow-scripts allow-same-origin allow-popups allow-forms" loading="lazy"></iframe>
-            </div>
-        </div>
-    </div>
+
 
     @include('partials.footer')
 

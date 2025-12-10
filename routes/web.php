@@ -26,13 +26,11 @@ Route::get('/activity/{slug}', [PageController::class, 'activityRead'])->name('a
 
 Route::get('/temple', [PageController::class, 'temple'])->name('temple');
 
+Route::get('/gallery', [PageController::class, 'gallery'])->name('gallery');
+
 Route::get('/about', function () {
     return view('about');
 })->name('about');
-
-Route::get('/gallery', function () {
-    return view('gallery/index');
-})->name('gallery');
 
 Route::get('/gallery/desc', function () {
     return view('gallery/index');

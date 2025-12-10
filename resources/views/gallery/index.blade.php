@@ -22,138 +22,65 @@
 
                 <!-- Фильтры категорий -->
                 <div class="photo-filters d-flex justify-content-center gap-3 mb-5">
-                    <button class="btn btn-filter active" data-target="#gallery-temple">Храм</button>
-                    <button class="btn btn-filter" data-target="#gallery-festivals">Праздники</button>
-                    <button class="btn btn-filter" data-target="#gallery-park">Крещенский парк</button>
+                    <button class="btn btn-filter active" data-target="#gallery-all">Все
+                        <span class="badge bg-secondary ms-1">{{ $allPhotos->count() }}</span>
+                    </button>
+
+                    @foreach ($categories as $i => $category)
+                        <button class="btn btn-filter" data-target="#gallery-{{ $category->id }}">
+                            {{ $category->name }}
+                            <span class="badge bg-secondary ms-1">{{ $category->photos->count() }}</span>
+                        </button>
+                    @endforeach
                 </div>
 
                 <!-- Галереи: сетка изображений -->
                 <div class="gallery-wrap">
-                    <!-- Храм -->
-                    <div id="gallery-temple" class="gallery-instance">
+                    {{-- Панель "Все" (открыта по умолчанию) --}}
+                    <div id="gallery-all" class="gallery-instance">
                         <div class="gallery-grid">
-                            <a href="{{ asset('images/ChramSvitogo.jpg') }}" class="gallery-item" data-pswp-width="1200"
-                                data-pswp-height="800">
-                                <img src="{{ asset('images/ChramSvitogo.jpg') }}" alt="Храм">
-                            </a>
-                            <a href="{{ asset('images/galery.jpg') }}" class="gallery-item" data-pswp-width="1200"
-                                data-pswp-height="800">
-                                <img src="{{ asset('images/galery.jpg') }}" alt="Интерьер">
-                            </a>
-                            <a href="{{ asset('images/Duhovenstvo.jpg') }}" class="gallery-item" data-pswp-width="1200"
-                                data-pswp-height="800">
-                                <img src="{{ asset('images/Duhovenstvo.jpg') }}" alt="Духовенство">
-                            </a>
-                            <a href="{{ asset('images/Popechiteli.jpg') }}" class="gallery-item" data-pswp-width="1200"
-                                data-pswp-height="800">
-                                <img src="{{ asset('images/Popechiteli.jpg') }}" alt="Попечители">
-                            </a>
-                            <a href="{{ asset('images/hram_kupel_knyagini_olgi.jpg') }}" class="gallery-item"
-                                data-pswp-width="1200" data-pswp-height="800">
-                                <img src="{{ asset('images/hram_kupel_knyagini_olgi.jpg') }}" alt="Купель">
-                            </a>
-                            <a href="{{ asset('images/derzhavnaya_ikona_bozhej_materi.jpg') }}" class="gallery-item"
-                                data-pswp-width="1200" data-pswp-height="800">
-                                <img src="{{ asset('images/derzhavnaya_ikona_bozhej_materi.jpg') }}" alt="Икона">
-                            </a>
-                            <a href="{{ asset('images/ChramSvitogo.jpg') }}" class="gallery-item"
-                                data-pswp-width="1200" data-pswp-height="800">
-                                <img src="{{ asset('images/ChramSvitogo.jpg') }}" alt="Храм">
-                            </a>
-                            <a href="{{ asset('images/galery.jpg') }}" class="gallery-item" data-pswp-width="1200"
-                                data-pswp-height="800">
-                                <img src="{{ asset('images/galery.jpg') }}" alt="Интерьер">
-                            </a>
-                            <a href="{{ asset('images/Duhovenstvo.jpg') }}" class="gallery-item" data-pswp-width="1200"
-                                data-pswp-height="800">
-                                <img src="{{ asset('images/Duhovenstvo.jpg') }}" alt="Духовенство">
-                            </a>
+                            @foreach ($allPhotos as $photo)
+                                @php
+                                    $storagePath = storage_path('app/public/' . $photo->file_path);
+                                    $imgSize = @getimagesize($storagePath);
+                                    $imgW = $imgSize[0] ?? 1200;
+                                    $imgH = $imgSize[1] ?? 800;
+                                @endphp
+
+                                <a href="{{ asset('storage/' . $photo->file_path) }}" class="gallery-item"
+                                    data-pswp-width="{{ $imgW }}" data-pswp-height="{{ $imgH }}"
+                                    data-cropped="true" target="_blank" rel="noopener">
+                                    <img src="{{ asset('storage/' . $photo->file_path) }}"
+                                        alt="{{ $photo->title ?? '' }}">
+                                </a>
+                            @endforeach
                         </div>
                     </div>
 
-                    <!-- Праздники -->
-                    <div id="gallery-festivals" class="gallery-instance d-none">
-                        <div class="gallery-grid">
-                            <a href="{{ asset('images/newsOne.jpg') }}" class="gallery-item" data-pswp-width="1200"
-                                data-pswp-height="800">
-                                <img src="{{ asset('images/newsOne.jpg') }}" alt="Праздник">
-                            </a>
-                            <a href="{{ asset('images/activity.jpg') }}" class="gallery-item" data-pswp-width="1200"
-                                data-pswp-height="800">
-                                <img src="{{ asset('images/activity.jpg') }}" alt="Праздник 2">
-                            </a>
-                            <a href="{{ asset('images/newsOne.jpg') }}" class="gallery-item" data-pswp-width="1200"
-                                data-pswp-height="800">
-                                <img src="{{ asset('images/newsOne.jpg') }}" alt="Праздник 3">
-                            </a>
-                            <a href="{{ asset('images/activity.jpg') }}" class="gallery-item" data-pswp-width="1200"
-                                data-pswp-height="800">
-                                <img src="{{ asset('images/activity.jpg') }}" alt="Праздник 4">
-                            </a>
-                            <a href="{{ asset('images/newsOne.jpg') }}" class="gallery-item" data-pswp-width="1200"
-                                data-pswp-height="800">
-                                <img src="{{ asset('images/newsOne.jpg') }}" alt="Праздник 5">
-                            </a>
-                            <a href="{{ asset('images/activity.jpg') }}" class="gallery-item" data-pswp-width="1200"
-                                data-pswp-height="800">
-                                <img src="{{ asset('images/activity.jpg') }}" alt="Праздник 6">
-                            </a>
-                            <a href="{{ asset('images/newsOne.jpg') }}" class="gallery-item" data-pswp-width="1200"
-                                data-pswp-height="800">
-                                <img src="{{ asset('images/newsOne.jpg') }}" alt="Праздник 7">
-                            </a>
-                            <a href="{{ asset('images/activity.jpg') }}" class="gallery-item" data-pswp-width="1200"
-                                data-pswp-height="800">
-                                <img src="{{ asset('images/activity.jpg') }}" alt="Праздник 8">
-                            </a>
-                            <a href="{{ asset('images/newsOne.jpg') }}" class="gallery-item" data-pswp-width="1200"
-                                data-pswp-height="800">
-                                <img src="{{ asset('images/newsOne.jpg') }}" alt="Праздник 9">
-                            </a>
-                        </div>
-                    </div>
+                    {{-- По категориям: каждая категория своя панель (по умолчанию скрыта) --}}
+                    @foreach ($categories as $category)
+                        <div id="gallery-{{ $category->id }}" class="gallery-instance d-none">
+                            <div class="gallery-grid">
+                                @forelse ($category->photos as $photo)
+                                    @php
+                                        $storagePath = storage_path('app/public/' . $photo->file_path);
+                                        $imgSize = @getimagesize($storagePath);
+                                        $imgW = $imgSize[0] ?? 1200;
+                                        $imgH = $imgSize[1] ?? 800;
+                                    @endphp
 
-                    <!-- Крещенский парк -->
-                    <div id="gallery-park" class="gallery-instance d-none">
-                        <div class="gallery-grid">
-                            <a href="{{ asset('images/ChramSvitogo.jpg') }}" class="gallery-item"
-                                data-pswp-width="1200" data-pswp-height="800">
-                                <img src="{{ asset('images/ChramSvitogo.jpg') }}" alt="Парк">
-                            </a>
-                            <a href="{{ asset('images/galery.jpg') }}" class="gallery-item" data-pswp-width="1200"
-                                data-pswp-height="800">
-                                <img src="{{ asset('images/galery.jpg') }}" alt="Парк 2">
-                            </a>
-                            <a href="{{ asset('images/Duhovenstvo.jpg') }}" class="gallery-item"
-                                data-pswp-width="1200" data-pswp-height="800">
-                                <img src="{{ asset('images/Duhovenstvo.jpg') }}" alt="Парк 3">
-                            </a>
-                            <a href="{{ asset('images/Popechiteli.jpg') }}" class="gallery-item"
-                                data-pswp-width="1200" data-pswp-height="800">
-                                <img src="{{ asset('images/Popechiteli.jpg') }}" alt="Парк 4">
-                            </a>
-                            <a href="{{ asset('images/hram_kupel_knyagini_olgi.jpg') }}" class="gallery-item"
-                                data-pswp-width="1200" data-pswp-height="800">
-                                <img src="{{ asset('images/hram_kupel_knyagini_olgi.jpg') }}" alt="Парк 5">
-                            </a>
-                            <a href="{{ asset('images/ChramSvitogo.jpg') }}" class="gallery-item"
-                                data-pswp-width="1200" data-pswp-height="800">
-                                <img src="{{ asset('images/ChramSvitogo.jpg') }}" alt="Парк 6">
-                            </a>
-                            <a href="{{ asset('images/galery.jpg') }}" class="gallery-item" data-pswp-width="1200"
-                                data-pswp-height="800">
-                                <img src="{{ asset('images/galery.jpg') }}" alt="Парк 7">
-                            </a>
-                            <a href="{{ asset('images/Duhovenstvo.jpg') }}" class="gallery-item"
-                                data-pswp-width="1200" data-pswp-height="800">
-                                <img src="{{ asset('images/Duhovenstvo.jpg') }}" alt="Парк 8">
-                            </a>
-                            <a href="{{ asset('images/Popechiteli.jpg') }}" class="gallery-item"
-                                data-pswp-width="1200" data-pswp-height="800">
-                                <img src="{{ asset('images/Popechiteli.jpg') }}" alt="Парк 9">
-                            </a>
+                                    <a href="{{ asset('storage/' . $photo->file_path) }}" class="gallery-item"
+                                        data-pswp-width="{{ $imgW }}" data-pswp-height="{{ $imgH }}"
+                                        data-cropped="true" target="_blank" rel="noopener">
+                                        <img src="{{ asset('storage/' . $photo->file_path) }}"
+                                            alt="{{ $photo->title ?? '' }}">
+                                    </a>
+                                @empty
+                                    <div class="text-center text-muted py-4">В этой категории пока нет фотографий.</div>
+                                @endforelse
+                            </div>
                         </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>

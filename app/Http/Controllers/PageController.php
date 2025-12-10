@@ -6,6 +6,8 @@ use App\Models\Activity;
 use App\Models\Event;
 use App\Models\News;
 use App\Models\OrthodoxCalendar;
+use App\Models\Photo;
+use App\Models\PhotoCategory;
 use App\Models\TemplePage;
 use Carbon\Carbon;
 
@@ -41,7 +43,33 @@ class PageController extends Controller
             ->orderBy('published_at', 'desc')
             ->get();
 
-        return view('welcome', compact('orthodoxCalendars', 'weekEvents', 'today', 'start', 'end', 'startOfWeek', 'endOfWeek', 'news', 'activitys'));
+        $categories = $this->loadCategoriesWithLimit(5);
+
+        return view('welcome', compact('orthodoxCalendars', 'weekEvents', 'today', 'start', 'end', 'startOfWeek', 'endOfWeek', 'news', 'activitys', 'categories'));
+    }
+
+    /**
+     * Загружает все категории и в каждой категории максимум $limit фото (по убыванию created_at).
+     * Реализовано простым запросом фотографий для каждой категории (N+1 запросов для photos,
+     * но обычно число категорий невелико — это простое и надёжное решение).
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|PhotoCategory[]
+     */
+    private function loadCategoriesWithLimit(int $limit = 5)
+    {
+        $categories = PhotoCategory::orderBy('name')->get();
+
+        foreach ($categories as $category) {
+            $category->setRelation(
+                'photos',
+                $category->photos()
+                    ->orderBy('created_at', 'desc')
+                    ->take($limit)
+                    ->get()
+            );
+        }
+
+        return $categories;
     }
 
     // Страница календаря
@@ -113,5 +141,16 @@ class PageController extends Controller
             ->get();
 
         return view('temple', compact('templePage', 'activitys'));
+    }
+
+    public function gallery()
+    {
+        // Подгружаем категории с их фотографиями (последние сверху)
+        $categories = $this->loadCategoriesWithLimit(5);
+
+        // Все фото (для вкладки "Все")
+        $allPhotos = Photo::with('category')->orderBy('created_at', 'desc')->get();
+
+        return view('gallery.index', compact('categories', 'allPhotos'));
     }
 }
