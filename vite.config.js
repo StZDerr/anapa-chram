@@ -26,6 +26,9 @@ export default defineConfig({
                 "resources/css/prayer-modal.css",
                 "resources/css/park.css",
                 "resources/css/activity-swiper.css",
+                "resources/css/photo-section.css",
+                "resources/css/news-swiper.css",
+                "resources/css/park-swiper.css",
 
                 "resources/js/app.js",
                 "resources/js/welcome.js",
@@ -40,6 +43,8 @@ export default defineConfig({
                 "resources/js/calendar-swiper.js",
                 "resources/js/loader.js",
                 "resources/js/activity-swiper.js",
+                "resources/js/photo-section.js",
+                "resources/js/news-swiper.js",
             ],
             refresh: true,
         }),
