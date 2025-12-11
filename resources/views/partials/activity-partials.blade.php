@@ -1,5 +1,5 @@
-<div class="container">
-    <div class="activity mt-3">
+<div class="container pb-3 pt-3">
+    <div class="activity">
         <div class="text-center title">ДЕЯТЕЛЬНОСТЬ ХРАМА</div>
         <div class="activity-swiper-container">
             <div class="swiper">

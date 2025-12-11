@@ -186,4 +186,11 @@ class PageController extends Controller
 
         return view('gallery.index', compact('categories', 'allPhotos'));
     }
+
+    public function clergy()
+    {
+        $clergy = Clergy::orderBy('order')->get();
+
+        return view('clergy', compact('clergy'));
+    }
 }

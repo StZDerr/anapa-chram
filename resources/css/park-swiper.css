@@ -7,14 +7,14 @@
 }
 .gallery-section .title {
     font-size: var(--font-size-title);
-    margin-bottom: 2rem;
+    /* margin-bottom: 2rem; */
 }
 /* ---------- ТРЕТИЙ SWIPER: РАСКРЫВАЮЩАЯСЯ ГАЛЕРЕЯ ---------- */
 .mySwiper {
     width: 100%;
     max-width: 1200px;
     height: 600px;
-    margin: 60px auto 0;
+    /* margin: 60px auto 0; */
     overflow: hidden;
 }
 .mySwiper .swiper-wrapper {
@@ -163,10 +163,10 @@
     }
 }
 @media (max-width: 1440px) {
-    .mySwiper {
+    /* .mySwiper {
         max-width: 95%;
         padding: 0 20px;
-    }
+    } */
     .mySwiper .swiper-slide {
         flex-basis: 150px;
     }
@@ -175,9 +175,9 @@
     }
 }
 @media (max-width: 1024px) {
-    .mySwiper {
+    /* .mySwiper {
         height: 100vh;
-    }
+    } */
     .mySwiper .swiper-wrapper {
         flex-direction: column;
     }
@@ -194,9 +194,9 @@
     }
 }
 @media (max-width: 768px) {
-    .mySwiper {
+    /* .mySwiper {
         height: 70vh;
-    }
+    } */
     .mySwiper .swiper-slide {
         flex-basis: 100px;
         min-height: 100px;
@@ -221,9 +221,9 @@
     }
 }
 @media (max-width: 576px) {
-    .mySwiper {
-        height: 70vh;
-    }
+    /* .mySwiper {
+        height: 100vh;
+    } */
     .mySwiper .swiper-slide {
         flex-basis: 80px;
     }

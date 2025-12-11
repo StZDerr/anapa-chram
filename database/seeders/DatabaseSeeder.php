@@ -18,9 +18,10 @@ class DatabaseSeeder extends Seeder
         $this->call(NewsSeeder::class);
         $this->call(ActivitiesTableSeeder::class);
         // Seed Orthodox calendar entries for the next month
-        $this->call(\Database\Seeders\OrthodoxCalendarSeeder::class);
+        $this->call(OrthodoxCalendarSeeder::class);
         $this->call(TemplePageSeeder::class);
         $this->call(DerzhavnayaIkonaSeeder::class);
         $this->call(TemplePageKupelOlgiSeeder::class);
+        $this->call(EventsTableSeeder::class);
     }
 }

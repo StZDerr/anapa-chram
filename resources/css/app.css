@@ -21,6 +21,15 @@
     --break-sm: 992px;
     --break-xs: 768px;
     --font-size-title: clamp(2rem, 4vw, 4rem);
+    --calendar-main: #5a6b7e;
+    --calendar-beige: #f5f5f5;
+    --calendar-dark: #333333;
+    --calendar-muted: #999999;
+    --calendar-accent: #d4c5a9;
+    --background-color: #faf7f2;
+    --calendar-border: #e0e0e0;
+    --calendar-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --calendar-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 a {
@@ -42,4 +51,8 @@ a {
 }
 .pr-4 {
     padding-right: 4rem !important;
+}
+
+.title {
+    margin-bottom: 1rem;
 }

@@ -6,7 +6,7 @@
     @include('partials.head')
 
     <!-- Стили страницы Calendar -->
-    @vite(['resources/css/calendar.css', 'resources/css/calendar-swiper.css', 'resources/js/calendar-swiper.js', 'resources/js/calendar.js'])
+    @vite(['resources/css/app.css', 'resources/css/calendar.css', 'resources/css/calendar-swiper.css', 'resources/js/calendar-swiper.js', 'resources/js/calendar.js'])
 </head>
 
 <body class="d-flex flex-column min-vh-100">

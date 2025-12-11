@@ -8,7 +8,6 @@
 /* ---------- Быстрый доступ (quick) ---------- */
 .quick-title {
     font-size: var(--font-size-title);
-    margin-bottom: 1rem;
 }
 .quick-card {
     position: relative;

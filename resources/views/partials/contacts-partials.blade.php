@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container pb-3 pt-3">
     <div class="contact-section mt-3">
         <div class="title text-center mb-5">КОНТАКТЫ</div>
         <div class="row align-items-start">
@@ -72,11 +72,7 @@
             </div>
         </div>
     </div>
-</div>
-<!-- Яндекс Карта -->
-<div class="container mt-5 mb-5">
     <div class="map-section">
-        <div class="title text-center mb-4">КАК НАС НАЙТИ</div>
         <div class="map-container" style="position:relative;overflow:hidden;">
             <iframe
                 src="https://yandex.ru/map-widget/v1/?um=constructor%3A17b72ba8b2573a27deae651cf3dda2b9b30e2e9495077444e9acd7e960fd889c&amp;source=constructor"

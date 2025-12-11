@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container pb-3 pt-3">
     <div class="news">
-        <div class="text-center title m-3">
+        <div class="text-center title">
             НОВОСТИ И СОБЫТИЯ
         </div>
         <!-- Обертка для свайпера с кнопками -->

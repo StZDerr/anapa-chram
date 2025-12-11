@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @vite(['resources/css/calendar.css'])
+    @vite(['resources/css/app.css', 'resources/css/calendar.css'])
     <main class="flex-fill">
         <div class="container calendar-container">
             <h1 class="calendar-title">ЕЖЕДНЕВНОЕ РАСПИСАНИЕ</h1>

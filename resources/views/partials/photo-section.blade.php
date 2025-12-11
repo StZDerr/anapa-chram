@@ -1,4 +1,4 @@
-<div class="container mb-5">
+<div class="container pb-3 pt-3">
     <div class="photo-section">
 
         <div class="text-center title">ФОТОГАЛЕРЕЯ</div>

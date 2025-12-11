@@ -1,4 +1,4 @@
-<div class="background-color-light-beige">
+<div class="background-color-light-beige pb-3 pt-3">
     <div class="container">
         <div class="calendar">
             <div class="text-center title">ПРАВОСЛАВНЫЙ КАЛЕНДАРЬ</div>

@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const calendar = new Calendar(calendarEl, {
         plugins: [dayGridPlugin, interactionPlugin],
         locale: ruLocale,
+        // timeZone: "Europe/Moscow",
         initialView: "dayGridMonth",
         headerToolbar: false, // Отключить стандартный тулбар
         dayHeaderFormat: { weekday: "short" },

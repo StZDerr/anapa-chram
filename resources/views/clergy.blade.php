@@ -6,15 +6,14 @@
     @include('partials.head')
 
     <!-- Стили страницы Zapiski -->
-    @vite(['resources/css/contact.css', 'resources/js/contact.js'])
+    @vite(['resources/css/app.css', 'resources/css/clergy.css'])
 </head>
 
 <body class="d-flex flex-column min-vh-100">
     @include('partials.navbar')
 
     <main class="flex-fill">
-        @include('partials.contacts-partials')
-
+        @include('partials.clergy')
     </main>
 
     @include('partials.footer')

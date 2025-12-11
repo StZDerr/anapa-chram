@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container pb-3 pt-3">
     @if (request()->routeIs('welcome'))
         <div class="text-center quick-title">Быстрый доступ</div>
     @else
@@ -62,7 +62,7 @@
             </a>
         </div>
         <div class="div6">
-            <a href="">
+            <a href="{{ route('clergy') }}">
                 <div class="quick-card height-fix">
                     <img src="{{ asset('images/Duhovenstvo.jpg') }}" alt="Духовенство">
                     <div class="quick-card-arrow">

@@ -33,6 +33,8 @@ Route::get('/temple/derzhavnaya-ikona', [PageController::class, 'derzhavnayaIkon
 
 Route::get('/gallery', [PageController::class, 'gallery'])->name('gallery');
 
+Route::get('/clergy', [PageController::class, 'clergy'])->name('clergy');
+
 Route::get('/about', function () {
     return view('about');
 })->name('about');

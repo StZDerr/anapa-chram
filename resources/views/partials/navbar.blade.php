@@ -324,8 +324,7 @@
                         <div class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdownHram" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">Храм</a>
-                            <ul class="dropdown-menu dropdown-menu-start w-100" data-bs-display="static"
-                                aria-labelledby="dropdownHram">
+                            <ul class="dropdown-menu" aria-labelledby="dropdownHram">
                                 <li>
                                     <a class="dropdown-item" href="{{ route('about') }}">
                                         О Храме
@@ -349,6 +348,11 @@
                                 <li>
                                     <a class="dropdown-item" href="{{ route('gallery') }}">
                                         Фотогалерея
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('clergy') }}">
+                                        Духовенство
                                     </a>
                                 </li>
                             </ul>

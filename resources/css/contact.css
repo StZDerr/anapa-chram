@@ -1,4 +1,13 @@
 /* ---------- Секция контактов ---------- */
+.contact-section .title,
+.map-section .title {
+    font-family: var(--font-title);
+    font-weight: 400;
+    color: var(--main-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
 .contact-section {
     padding: 60px 0;
 }

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container pb-3 pt-3">
     <div class="gallery-section">
         <div class="text-center title">КРЕЩЕНСКИЙ ПАРК</div>
 

@@ -6,7 +6,7 @@
     @include('partials.head')
 
     <!-- Стили и скрипты главной страницы (loader + welcome) -->
-    @vite(['resources/js/photo-section.js', 'resources/css/calendar-swiper.css', 'resources/js/calendar-swiper.js', 'resources/css/activity-swiper.css', 'resources/js/activity-swiper.js', 'resources/css/loader.css', 'resources/css/welcome.css', 'resources/js/loader.js', 'resources/js/welcome.js', 'resources/css/photo-section.css', 'resources/css/news-swiper.css', 'resources/js/news-swiper.js', 'resources/css/park-swiper.css', 'resources/css/quick.css'])
+    @vite(['resources/js/photo-section.js', 'resources/css/calendar-swiper.css', 'resources/js/calendar-swiper.js', 'resources/css/activity-swiper.css', 'resources/js/activity-swiper.js', 'resources/css/loader.css', 'resources/css/welcome.css', 'resources/js/loader.js', 'resources/js/welcome.js', 'resources/css/photo-section.css', 'resources/css/news-swiper.css', 'resources/js/news-swiper.js', 'resources/css/park-swiper.css', 'resources/css/quick.css', 'resources/css/contact.css'])
 </head>
 
 <body class="d-flex flex-column min-vh-100 font-sans antialiased">
@@ -32,7 +32,7 @@
     </div>
     @include('partials.calendar-partials')
     @include('partials.quick-partials')
-    <div class="background-color-light-beige mt-5 mb-5">
+    <div class="background-color-light-beige pb-3 pt-3">
         <div class="container">
             <div class="timetable mb-3 mt-3">
                 <div class="text-center title">
