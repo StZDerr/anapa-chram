@@ -6,88 +6,14 @@
     @include('partials.head')
 
     <!-- Стили страницы About -->
-    @vite(['resources/css/about.css', 'resources/css/donation-modal.css'])
+    @vite(['resources/css/about.css', 'resources/css/donation-modal.css', 'resources/css/quick.css'])
 </head>
 
 <body class="d-flex flex-column min-vh-100">
     @include('partials.navbar')
 
     <main class="flex-fill">
-        <div class="container py-5">
-            <h1 class="text-center quick-title m-4">О ХРАМЕ</h1>
-            <div class="quick">
-                <div class="div2">
-                    <div class="quick-card height-fix">
-                        <img src="{{ asset('images/ChramSvitogo.jpg') }}" alt="Храм святого князя Владимира">
-                        <div class="quick-card-arrow">
-                            <i class="bi bi-arrow-right"></i>
-                        </div>
-                        <div class="quick-card-content">
-                            <h3 class="quick-card-title">Храм святого<br>князя Владимира
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="div3">
-                    <div class="quick-card">
-                        <img src="{{ asset('images/hram_kupel_knyagini_olgi.jpg') }}"
-                            alt="Храм святого князя Владимира">
-                        <div class="quick-card-arrow">
-                            <i class="bi bi-arrow-right"></i>
-                        </div>
-                        <div class="quick-card-content">
-                            <h3 class="quick-card-title">Храм-купель<br>княгини Ольги</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="div4">
-                    <div class="quick-card height-fix">
-                        <img src="{{ asset('images/derzhavnaya_ikona_bozhej_materi.jpg') }}"
-                            alt="Храм святого князя Владимира">
-                        <div class="quick-card-arrow">
-                            <i class="bi bi-arrow-right"></i>
-                        </div>
-                        <div class="quick-card-content">
-                            <h3 class="quick-card-title">Державная икона<br>Божьей матери
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="div5">
-                    <div class="quick-card">
-                        <img src="{{ asset('images/galery.jpg') }}" alt="Храм святого князя Владимира">
-                        <div class="quick-card-arrow">
-                            <i class="bi bi-arrow-right"></i>
-                        </div>
-                        <div class="quick-card-content">
-                            <h3 class="quick-card-title">Галерея</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="div6">
-                    <div class="quick-card height-fix">
-                        <img src="{{ asset('images/Duhovenstvo.jpg') }}" alt="Храм святого князя Владимира">
-                        <div class="quick-card-arrow">
-                            <i class="bi bi-arrow-right"></i>
-                        </div>
-                        <div class="quick-card-content">
-                            <h3 class="quick-card-title">Духовенство</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="div7">
-                    <div class="quick-card">
-                        <img src="{{ asset('images/Popechiteli.jpg') }}" alt="Храм святого князя Владимира">
-                        <div class="quick-card-arrow">
-                            <i class="bi bi-arrow-right"></i>
-                        </div>
-                        <div class="quick-card-content">
-                            <h3 class="quick-card-title">Попечители</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @include('partials.quick-partials')
 
         <div class="donation">
             <div class="container py-5">
@@ -210,8 +136,7 @@
     @include('partials.donation-modal')
 
     <!-- Модальное окно для записок -->
-    <div class="modal fade" id="zapiskiModal" tabindex="-1" aria-labelledby="zapiskiModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="zapiskiModal" tabindex="-1" aria-labelledby="zapiskiModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content donation-modal">
                 <!-- Кнопка закрытия -->

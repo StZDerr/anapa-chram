@@ -68,7 +68,7 @@
                     <li class="nav-item">
                         <a href="{{ route('admin.temple.edit') }}" class="nav-link text-white">
                             <i class="bi bi-calendar"></i>
-                            TemplePages
+                            Храм святого равноапостольного великого князя Владимира
                         </a>
                     </li>
 

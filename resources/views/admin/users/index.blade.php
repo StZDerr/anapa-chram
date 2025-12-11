@@ -4,9 +4,13 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
+
                 <div class="card mb-4">
-                    <div class="card-header d-flex justify-content-center align-items-center">
-                        <h5 class="mb-0 text-center">Пользователи</h5>
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Пользователи</h5>
+                        <a href="{{ route('admin.users.create') }}" class="btn btn-primary btn-sm">
+                            Создать пользователя
+                        </a>
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">

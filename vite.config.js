@@ -29,6 +29,7 @@ export default defineConfig({
                 "resources/css/photo-section.css",
                 "resources/css/news-swiper.css",
                 "resources/css/park-swiper.css",
+                "resources/css/quick.css",
 
                 "resources/js/app.js",
                 "resources/js/welcome.js",

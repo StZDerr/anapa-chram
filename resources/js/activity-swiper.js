@@ -9,6 +9,7 @@ import "swiper/css/free-mode";
 // Второй Swiper - Деятельность храма
 const activitySwiper = new Swiper(".activity-swiper-container .swiper", {
     modules: [Pagination],
+    initialSlide: 1,
     passiveListeners: true,
     slideToClickedSlide: true,
     lazy: true,

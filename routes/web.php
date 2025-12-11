@@ -97,6 +97,10 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
     // Temple page management
     Route::get('temple-page/edit', [TemplePageController::class, 'edit'])->name('temple.edit');
     Route::post('temple-page/update', [TemplePageController::class, 'update'])->name('temple.update');
+
+    // Temple page management
+    Route::get('temple-page/edit', [TemplePageController::class, 'edit'])->name('temple.edit');
+    Route::post('temple-page/update', [TemplePageController::class, 'update'])->name('temple.update');
 });
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
