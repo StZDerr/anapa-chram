@@ -378,6 +378,16 @@
                         </a>
                     </li>
                     <li>
+                        <a href="{{ route('temple.kupelOlgi') }}" class = "text-decoration-none text-reset">
+                            Купель святой равноапостольной княгини Ольги
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('temple.derzhavnayaIkona') }}" class = "text-decoration-none text-reset">
+                            Державная икона Божией Матери
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ route('gallery') }}" class = "text-decoration-none text-reset">
                             Фотогалерея
                         </a>

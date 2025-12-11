@@ -1,9 +1,9 @@
 /* Import Montserrat font */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap");
 
 /* Force text color override - Bootstrap dark theme removed */
 * {
-    --bs-navbar-color: #6E634C !important;
+    --bs-navbar-color: #6e634c !important;
     --bs-navbar-hover-color: #5a5041 !important;
 }
 
@@ -70,14 +70,14 @@
 /* More specific selectors to override Bootstrap */
 .navbar-hero-header .navbar-nav .nav-link,
 .navbar-hero-header .navbar-nav .dropdown-toggle {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-weight: 600;
     font-style: normal;
     font-size: 20px;
     line-height: 100%;
     letter-spacing: 0%;
     text-transform: uppercase;
-    color: #6E634C !important;
+    color: #6e634c !important;
     text-decoration: none;
     padding: 0.5rem 0;
     transition: color 0.3s ease;
@@ -91,14 +91,14 @@
 }
 
 .navbar-nav .nav-link {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-weight: 600;
     font-style: normal;
     font-size: 20px;
     line-height: 100%;
     letter-spacing: 0%;
     text-transform: uppercase;
-    color: #6E634C !important;
+    color: #6e634c !important;
     text-decoration: none;
     padding: 0.5rem 0;
     transition: color 0.3s ease;
@@ -120,10 +120,10 @@
 }
 
 .dropdown-item {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-weight: 600;
     font-size: 16px;
-    color: #6E634C !important;
+    color: #6e634c !important;
     padding: 0.5rem 1rem;
     text-transform: uppercase;
     transition: background-color 0.3s ease;
@@ -132,12 +132,12 @@
 .dropdown-item:hover,
 .dropdown-item:focus {
     background-color: #f8f9fa;
-    color: #6E634C !important;
+    color: #6e634c !important;
 }
 
 /* Navbar toggler for mobile */
 .navbar-toggler {
-    border: 1px solid #6E634C;
+    border: 1px solid #6e634c;
     padding: 0.25rem 0.5rem;
 }
 
@@ -159,13 +159,13 @@
         justify-content: flex-start;
         padding-left: 0;
     }
-    
+
     .navbar-nav .nav-link {
         font-size: 18px;
         width: 100%;
         text-align: center;
     }
-    
+
     .navbar {
         padding-left: 1rem;
         padding-right: 1rem;
@@ -183,7 +183,7 @@
 .navbar-hero-header .navbar .navbar-nav .dropdown-toggle,
 .navbar-dark .navbar-nav .nav-link,
 body .navbar-hero-header .navbar-nav .nav-link {
-    color: #6E634C !important;
+    color: #6e634c !important;
 }
 
 .navbar-hero-header .navbar .navbar-nav .nav-link:hover,
@@ -196,11 +196,43 @@ body .navbar-hero-header .navbar-nav .nav-link:hover {
 /* Force dropdown colors */
 .navbar-hero-header .dropdown-menu .dropdown-item,
 body .dropdown-menu .dropdown-item {
-    color: #6E634C !important;
+    color: #6e634c !important;
 }
 
 .navbar-hero-header .dropdown-menu .dropdown-item:hover,
 body .dropdown-menu .dropdown-item:hover {
-    color: #6E634C !important;
+    color: #6e634c !important;
     background-color: #f8f9fa !important;
+}
+
+@media (max-width: 1199.98px) {
+    /* Убираем фиксированную ширину 100% для выпадающего меню Храм */
+    .dropdown-menu.dropdown-menu-start.w-100 {
+        width: auto !important;
+        max-width: calc(100vw - 2rem);
+        left: 0 !important;
+        right: auto !important;
+    }
+
+    /* Ограничиваем пункты меню и переносим текст */
+    .dropdown-menu .dropdown-item {
+        white-space: normal !important;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        line-height: 1.4;
+        padding: 0.75rem 1rem;
+        text-align: center;
+    }
+}
+
+@media (max-width: 767.98px) {
+    /* На совсем маленьких экранах еще больше ограничиваем */
+    .dropdown-menu.dropdown-menu-start.w-100 {
+        max-width: calc(100vw - 1rem);
+    }
+
+    .dropdown-menu .dropdown-item {
+        font-size: 14px;
+        padding: 0.65rem 0.75rem;
+    }
 }
