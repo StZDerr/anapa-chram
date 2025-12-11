@@ -157,7 +157,9 @@ class PageController extends Controller
 
         $categories = $this->loadCategoriesWithLimit(5);
 
-        return view('temple', compact('templePage', 'activitys', 'categories'));
+        $clergy = Clergy::orderBy('order')->get();
+
+        return view('temple', compact('templePage', 'activitys', 'categories', 'clergy'));
     }
 
     public function derzhavnayaIkona()
@@ -169,7 +171,9 @@ class PageController extends Controller
 
         $categories = $this->loadCategoriesWithLimit(5);
 
-        return view('temple', compact('templePage', 'activitys', 'categories'));
+        $clergy = Clergy::orderBy('order')->get();
+
+        return view('temple', compact('templePage', 'activitys', 'categories', 'clergy'));
     }
 
     public function gallery()
