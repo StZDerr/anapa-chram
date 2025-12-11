@@ -1,12 +1,12 @@
 /* Стили для страницы Записки и требы */
 
-:root {
+/* :root {
     --main-color: #4a5b6f;
     --beige-color: #e2daca;
     --font-title: "Tenor Sans", sans-serif;
     --font-text: "Montserrat", sans-serif;
     --font-size-title: clamp(1.5rem, 1rem + 2vw, 3.5rem);
-}
+} */
 
 /* Страница записок */
 .notes-page {

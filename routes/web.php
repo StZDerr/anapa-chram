@@ -3,6 +3,7 @@
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\ClergyController;
 use App\Http\Controllers\EventsCalendarController;
 use App\Http\Controllers\GalleryCategoryController;
 use App\Http\Controllers\GalleryController;
@@ -24,7 +25,11 @@ Route::get('/news/{slug}', [PageController::class, 'newsRead'])->name('news.read
 Route::get('/activity', [PageController::class, 'activity'])->name('activity.index');
 Route::get('/activity/{slug}', [PageController::class, 'activityRead'])->name('activity.read');
 
-Route::get('/temple', [PageController::class, 'temple'])->name('temple');
+Route::get('/temple/chram', [PageController::class, 'temple'])->name('temple');
+
+Route::get('/temple/kupel-olgi', [PageController::class, 'kupelOlgi'])->name('temple.kupelOlgi');
+
+Route::get('/temple/derzhavnaya-ikona', [PageController::class, 'derzhavnayaIkona'])->name('temple.derzhavnayaIkona');
 
 Route::get('/gallery', [PageController::class, 'gallery'])->name('gallery');
 
@@ -80,6 +85,7 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
         'users' => UserController::class,
         'orthodox_calendar' => OrthodoxCalendarController::class,
         'gallery' => GalleryController::class,
+        'clergy' => ClergyController::class,
     ]);
 
     Route::get('events', [EventsCalendarController::class, 'index'])->name('events.index');
@@ -101,6 +107,15 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
     // Temple page management
     Route::get('temple-page/edit', [TemplePageController::class, 'edit'])->name('temple.edit');
     Route::post('temple-page/update', [TemplePageController::class, 'update'])->name('temple.update');
+
+    // Temple page management
+    Route::get('temple-page/kupel-olgi/edit', [TemplePageController::class, 'kupelOlgiEdit'])->name('temple.kupelOlgi.edit');
+    Route::post('temple-page/kupel-olgi/update', [TemplePageController::class, 'kupelOlgiUpdate'])->name('temple.kupelOlgi.update');
+
+    // Temple page management
+    Route::get('temple-page/derzhavnaya-ikona/edit', [TemplePageController::class, 'derzhavnayaIkonaEdit'])
+        ->name('temple.derzhavnayaIkona.edit');
+    Route::post('temple-page/derzhavnaya-ikona/update', [TemplePageController::class, 'derzhavnayaIkonaUpdate'])->name('temple.derzhavnayaIkona.update');
 });
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');

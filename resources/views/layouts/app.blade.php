@@ -36,46 +36,68 @@
                 <ul class="nav nav-pills flex-column mb-auto">
                     <li class="nav-item">
                         <a href="{{ route('admin.users.index') }}" class="nav-link text-white">
-                            <i class="bi bi-person-circle"></i>
+                            <i class="bi bi-people"></i>
                             Пользователи
                         </a>
                     </li>
+
                     <li class="nav-item">
                         <a href="{{ route('admin.news.index') }}" class="nav-link text-white">
                             <i class="bi bi-newspaper"></i>
                             Новости
                         </a>
                     </li>
+
                     <li class="nav-item">
                         <a href="{{ route('admin.activity.index') }}" class="nav-link text-white">
                             <i class="bi bi-building"></i>
                             Деятельность
                         </a>
                     </li>
+
                     <li class="nav-item">
                         <a href="{{ route('admin.events.index') }}" class="nav-link text-white">
-                            <i class="bi bi-calendar"></i>
+                            <i class="bi bi-calendar-event"></i>
                             Календарь событий
                         </a>
                     </li>
+
                     <li class="nav-item">
                         <a href="{{ route('admin.orthodox_calendar.index') }}" class="nav-link text-white">
-                            <i class="bi bi-calendar"></i>
+                            <i class="bi bi-journal-bookmark"></i>
                             Православный Календарь
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a href="{{ route('admin.temple.edit') }}" class="nav-link text-white">
-                            <i class="bi bi-calendar"></i>
+                            <i class="bi bi-bank"></i>
                             Храм святого равноапостольного великого князя Владимира
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.temple.kupelOlgi.edit') }}" class="nav-link text-white">
+                            <i class="bi bi-water"></i>
+                            Храм-купель святой княгини Ольги
                         </a>
                     </li>
 
                     <li class="nav-item">
+                        <a href="{{ route('admin.temple.derzhavnayaIkona.edit') }}" class="nav-link text-white">
+                            <i class="bi bi-award"></i>
+                            Державная икона Божией Матери
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ route('admin.gallery.index') }}" class="nav-link text-white">
-                            <i class="bi bi-calendar"></i>
+                            <i class="bi bi-images"></i>
                             Галерея
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.clergy.index') }}" class="nav-link text-white">
+                            <i class="bi bi-people"></i>
+                            Служители храма
                         </a>
                     </li>
                 </ul>

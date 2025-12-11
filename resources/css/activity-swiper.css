@@ -3,6 +3,14 @@
     margin-top: 120px;
     margin-bottom: 120px;
 } */
+
+.activity .title {
+    font-family: var(--font-title);
+    font-weight: 400;
+    color: var(--main-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
 .activity-swiper-container {
     position: relative;
     width: 100%;

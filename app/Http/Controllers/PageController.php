@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
+use App\Models\Clergy;
 use App\Models\Event;
 use App\Models\News;
 use App\Models\OrthodoxCalendar;
@@ -136,6 +137,32 @@ class PageController extends Controller
     public function temple()
     {
         $templePage = TemplePage::getByKey('temple_main');
+        $activitys = Activity::where('status', 'published')
+            ->orderBy('published_at', 'desc')
+            ->get();
+
+        $categories = $this->loadCategoriesWithLimit(5);
+
+        $clergy = Clergy::orderBy('order')->get();
+
+        return view('temple', compact('templePage', 'activitys', 'categories', 'clergy'));
+    }
+
+    public function kupelOlgi()
+    {
+        $templePage = TemplePage::getByKey('kupel-olgi');
+        $activitys = Activity::where('status', 'published')
+            ->orderBy('published_at', 'desc')
+            ->get();
+
+        $categories = $this->loadCategoriesWithLimit(5);
+
+        return view('temple', compact('templePage', 'activitys', 'categories'));
+    }
+
+    public function derzhavnayaIkona()
+    {
+        $templePage = TemplePage::getByKey('derzhavnaya-ikona');
         $activitys = Activity::where('status', 'published')
             ->orderBy('published_at', 'desc')
             ->get();

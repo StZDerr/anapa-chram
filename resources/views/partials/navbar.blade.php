@@ -336,6 +336,16 @@
                                     </a>
                                 </li>
                                 <li>
+                                    <a class="dropdown-item" href="{{ route('temple.kupelOlgi') }}">
+                                        Купель святой равноапостольной княгини Ольги
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('temple.derzhavnayaIkona') }}">
+                                        Державная икона Божией Матери
+                                    </a>
+                                </li>
+                                <li>
                                     <a class="dropdown-item" href="{{ route('gallery') }}">
                                         Фотогалерея
                                     </a>

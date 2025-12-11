@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <!-- Стили страницы Temple -->
-    @vite(['resources/css/activity-swiper.css', 'resources/js/activity-swiper.js', 'resources/js/photo-section.js', 'resources/css/temple.css', 'resources/css/donation-modal.css', 'resources/js/temple.js', 'resources/css/photo-section.css'])
+    @vite(['resources/css/app.css', 'resources/css/activity-swiper.css', 'resources/js/activity-swiper.js', 'resources/js/photo-section.js', 'resources/css/temple.css', 'resources/css/donation-modal.css', 'resources/js/temple.js', 'resources/css/photo-section.css', 'resources/css/clergy.css', 'resources/css/donation.css'])
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -76,7 +76,7 @@
                         </div>
                     </div>
                     <div class="col-sm-12 col-lg-6">
-                        <div class="title">О храме</div>
+                        {{-- <div class="title">О храме</div> --}}
                         <div class="details fs-5">
                             {!! $templePage->about_text ??
                                 'Горожане с нетерпением ждали долгожданное открытие Крещенского парка в Анапе и уже его посетили, а вот новые жители города не знают, где именно он находится и как сюда можно добраться.' !!}
@@ -147,113 +147,9 @@
                 </div>
             </div>
         </div>
-        <div class="clergy">
-            <div class="container">
-                <div class="title text-center">ДУХОВЕНСТВО ХРАМА</div>
-                <div class="details">Священнослужители, постоянно служащие в нашем храме</div>
-                <div class="clergy-cards">
-                    <div class="row g-4">
-                        <div class="col-12 col-md-6 col-lg-3">
-                            <div class="clergy-card">
-                                <img src="{{ asset('images/personal/frame-30.webp') }}" alt="Духовенство">
-                                <div class="card-name">Имя Фамилия</div>
-                                <div class="card-position">должность</div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-3">
-                            <div class="clergy-card">
-                                <img src="{{ asset('images/personal/frame-28.webp') }}" alt="Духовенство">
-                                <div class="card-name">Имя Фамилия</div>
-                                <div class="card-position">должность</div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-3">
-                            <div class="clergy-card">
-                                <img src="{{ asset('images/personal/izobrazhenie-whatsapp-2025-01-20-v-17.46.27_6aa9051f.webp') }}"
-                                    alt="Духовенство">
-                                <div class="card-name">Имя Фамилия</div>
-                                <div class="card-position">должность</div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-3">
-                            <div class="clergy-card">
-                                <img src="{{ asset('images/personal/izobrazhenie-whatsapp-2025-01-24-v-15.29.38_dfe7e4f6.webp') }}"
-                                    alt="Духовенство">
-                                <div class="card-name">Имя Фамилия</div>
-                                <div class="card-position">должность</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="title text-center mt-5">ПЕРСОНАЛ ХРАМА</div>
-                <div class="details">Работающих на приходе</div>
-                <div class="clergy-cards">
-                    <div class="row g-4">
-                        <div class="col-12 col-md-6 col-lg-3">
-                            <div class="clergy-card">
-                                <img src="{{ asset('images/personal/frame-30.webp') }}" alt="Духовенство">
-                                <div class="card-name">Имя Фамилия</div>
-                                <div class="card-position">должность</div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-3">
-                            <div class="clergy-card">
-                                <img src="{{ asset('images/personal/frame-28.webp') }}" alt="Духовенство">
-                                <div class="card-name">Имя Фамилия</div>
-                                <div class="card-position">должность</div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-3">
-                            <div class="clergy-card">
-                                <img src="{{ asset('images/personal/izobrazhenie-whatsapp-2025-01-20-v-17.46.27_6aa9051f.webp') }}"
-                                    alt="Духовенство">
-                                <div class="card-name">Имя Фамилия</div>
-                                <div class="card-position">должность</div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-3">
-                            <div class="clergy-card">
-                                <img src="{{ asset('images/personal/izobrazhenie-whatsapp-2025-01-24-v-15.29.38_dfe7e4f6.webp') }}"
-                                    alt="Духовенство">
-                                <div class="card-name">Имя Фамилия</div>
-                                <div class="card-position">должность</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @include('partials.clergy')
         @include('partials.activity-partials')
-        <div class="donation">
-            <div class="container py-5">
-                <div class="text-center title m-4">ПОЖЕРТВОВАНИЕ</div>
-                <!-- Hero секция с фотографией храма -->
-                <section class="hero-section">
-                    <div class="hero-image">
-                        <img src="{{ asset('images/donation/donatio-back.webp') }}"
-                            alt="Храм святого князя Владимира">
-                    </div>
-                    <div class="hero-overlay">
-                        <div class="hero-content">
-                            <div class="hero-logo">
-                                <img src="{{ asset('images/logo.svg') }}" alt="Логотип храма">
-                            </div>
-                            <div class="hero-quote">
-                                <p>"ЕСЛИ НА ВАШУ ДОЛЮ ВЫПАЛА ЧЕСТЬ СТРОИТЬ ДОМ БОЖИЙ, ПРИМИТЕ ЭТО КАК ВЕЛИКИЙ ДАР
-                                    ТВОРЦА,
-                                    ИБО
-                                    ДЕСНИЦА ГОСПОДНЯ КАСАЕТСЯ ТОГО, КТО СТРОИТ ХРАМЫ, И МНОГИЕ ГРЕХИ ПРОСТИТ ТОМУ
-                                    ГОСПОДЬ."
-                                </p>
-                                <p class="hero-author">СВЯТОЙ ПРАВЕДНЫЙ ИОАНН КРОНШТАДСКИЙ</p>
-                            </div>
-                            <button class="hero-btn" data-bs-toggle="modal"
-                                data-bs-target="#donationModal">Пожертвовать</button>
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </div>
+        @include('partials.donation')
 
         @include('partials.photo-section')
     </main>

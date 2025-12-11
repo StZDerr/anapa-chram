@@ -9,8 +9,7 @@ body {
 .title,
 .calendar .title,
 .contact-section .title,
-.timetable .title,
-.activity-title {
+.timetable .title {
     font-family: var(--font-title);
     font-weight: 400;
     color: var(--main-color);

@@ -1,0 +1,52 @@
+/* ---------- Clergy ---------- */
+.clergy {
+    padding: 3rem 0;
+}
+.clergy .title {
+    font-size: var(--font-size-title);
+    font-family: var(--font-title);
+    font-weight: 400;
+    line-height: 64px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #4a5b6f;
+    margin-bottom: 1rem;
+}
+.clergy .details {
+    font-family: var(--font-ui);
+    font-weight: 400;
+    font-size: var(--font-size-details);
+    line-height: 100%;
+    text-align: center;
+    font-variant: small-caps;
+    color: #6e634c;
+    margin-bottom: 3rem;
+}
+.clergy-cards {
+    margin-top: 2rem;
+}
+.clergy-card {
+    text-align: center;
+}
+.clergy-card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 2rem;
+    margin-bottom: 1rem;
+}
+.clergy-card .card-name {
+    font-family: var(--font-title);
+    font-weight: 400;
+    font-size: clamp(0.75rem, 0.5481rem + 0.9074vw, 2rem);
+    line-height: 1.2;
+    color: #4a5b6f;
+    margin-bottom: 0.5rem;
+}
+.clergy-card .card-position {
+    font-family: var(--font-ui);
+    font-weight: 400;
+    font-size: clamp(0.75rem, 0.7096rem + 0.1815vw, 1rem);
+    line-height: 1.2;
+    color: #6e634c;
+}

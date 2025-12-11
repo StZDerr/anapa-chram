@@ -21,7 +21,7 @@
             </a>
         </div>
         <div class="div3">
-            <a href="">
+            <a href="{{ route('temple.kupelOlgi') }}">
                 <div class="quick-card">
                     <img src="{{ asset('images/hram_kupel_knyagini_olgi.jpg') }}" alt="Храм-купель княгини Ольги">
                     <div class="quick-card-arrow">
@@ -34,7 +34,7 @@
             </a>
         </div>
         <div class="div4">
-            <a href="">
+            <a href="{{ route('temple.derzhavnayaIkona') }}">
                 <div class="quick-card height-fix">
                     <img src="{{ asset('images/derzhavnaya_ikona_bozhej_materi.jpg') }}"
                         alt="Державная икона Божьей матери">
