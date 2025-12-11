@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <title>Храм святого князя Владимира - Храм святого князя Владимира в Анапе</title>
+    @include('partials.seo')
     @include('partials.head')
 
     <!-- PhotoSwipe v5 CSS -->

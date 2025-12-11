@@ -100,6 +100,12 @@
                             Служители храма
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.seo-settings.index') }}" class="nav-link text-white">
+                            <i class="bi bi-tag"></i>
+                            SEO
+                        </a>
+                    </li>
                 </ul>
                 <hr>
 

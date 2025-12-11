@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <title>Ежедневное расписание </title>
+    @include('partials.seo')
     @include('partials.head')
 
     <!-- Стили страницы Calendar -->

@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <title>{{ $newsItem->title }} - Храм святого князя Владимира в Анапе</title>
+    @include('partials.seo')
     @include('partials.head')
 
     <!-- Стили страницы News Read -->

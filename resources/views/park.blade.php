@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <title>Крещенский парк - Храм святого князя Владимира в Анапе</title>
+    @include('partials.seo')
     @include('partials.head')
 
     <!-- Swiper CSS -->

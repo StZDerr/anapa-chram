@@ -10,6 +10,8 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\OrthodoxCalendarController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\SeoPageController;
+use App\Http\Controllers\SeoSettingController;
 use App\Http\Controllers\TemplePageController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
@@ -88,6 +90,8 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
         'orthodox_calendar' => OrthodoxCalendarController::class,
         'gallery' => GalleryController::class,
         'clergy' => ClergyController::class,
+        'seo-settings' => SeoSettingController::class,
+        'seo-pages' => SeoPageController::class,
     ]);
 
     Route::get('events', [EventsCalendarController::class, 'index'])->name('events.index');
