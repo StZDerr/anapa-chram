@@ -10,6 +10,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\OrthodoxCalendarController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\ParkController;
 use App\Http\Controllers\SeoPageController;
 use App\Http\Controllers\SeoSettingController;
 use App\Http\Controllers\TemplePageController;
@@ -83,6 +84,9 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
         'destroy' => 'gallery.categories.destroy',
     ]);
 
+    // Маршрут для обновления порядка слайдов парка
+    Route::post('park/update-order', [ParkController::class, 'updateOrder'])->name('park.update-order');
+
     Route::softDeletableResources([
         'news' => NewsController::class,
         'activity' => ActivityController::class,
@@ -92,6 +96,7 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
         'clergy' => ClergyController::class,
         'seo-settings' => SeoSettingController::class,
         'seo-pages' => SeoPageController::class,
+        'park' => ParkController::class,
     ]);
 
     Route::get('events', [EventsCalendarController::class, 'index'])->name('events.index');

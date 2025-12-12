@@ -44,6 +44,7 @@ class AppServiceProvider extends ServiceProvider
                     'description' => $page->og_description ?? ($page->description ?? null),
                     'image' => $page->og_image ?? null,
                 ],
+                'h1' => $page->h1 ?? null,
                 'structured_data' => $page->structured_data ?? null,
             ];
 

@@ -106,6 +106,12 @@
                             SEO
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.park.index') }}" class="nav-link text-white">
+                            <i class="bi bi-tag"></i>
+                            Парк
+                        </a>
+                    </li>
                 </ul>
                 <hr>
 

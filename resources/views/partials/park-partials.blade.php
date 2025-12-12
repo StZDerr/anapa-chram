@@ -1,76 +1,66 @@
+@php
+    // Если слайды не переданы напрямую, загружаем из БД
+    $slides = $parkSlides ?? \App\Models\Park::active()->ordered()->limit(4)->get();
+@endphp
+
 <div class="container pb-3 pt-3">
     <div class="gallery-section">
         <div class="text-center title">КРЕЩЕНСКИЙ ПАРК</div>
 
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper">
-                <!-- Slide 1 -->
-
-                <div class="swiper-slide active">
-                    <img src="{{ asset('images/ChramSvitogo.jpg') }}" alt="Храм святого князя Владимира" />
-                    <div class="slide-overlay">
-                        <!-- Заголовок с иконкой слева вверху -->
-                        <div class="slide-header">
-                            <img src="{{ asset('images/Logo2.svg') }}" alt="Логотип" class="slide-icon">
-                            <h3 class="slide-title">Крещенский парк</h3>
-                        </div>
-                        <!-- Описание внизу -->
-                        <div class="slide-footer">
-                            <p class="slide-description">Горожане с нетерпением ждали долгожданное открытие
-                                Крещенского парка в Анапе и уже его посетили, а вот новые жители города не знают,
-                                где именно он находится и как сюда можно добраться.</p>
-                            <a href="{{ route('temple') }}">
-                                <div class="slide-actions">
-                                    <span class="slide-link">Узнать больше</span>
-                                    <svg class="slide-arrow" xmlns="http://www.w3.org/2000/svg" width="24"
-                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2">
-                                        <line x1="5" y1="12" x2="19" y2="12">
-                                        </line>
-                                        <polyline points="12 5 19 12 12 19"></polyline>
-                                    </svg>
+        @if ($slides->isNotEmpty())
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    @foreach ($slides as $index => $slide)
+                        <div class="swiper-slide {{ $index === 0 ? 'active' : '' }}">
+                            @if ($slide->image)
+                                <img src="{{ $slide->image_url }}" alt="{{ $slide->title ?? 'Крещенский парк' }}" />
+                            @else
+                                <img src="{{ asset('images/ChramSvitogo.jpg') }}"
+                                    alt="{{ $slide->title ?? 'Крещенский парк' }}" />
+                            @endif
+                            <div class="slide-overlay">
+                                <!-- Заголовок с иконкой слева вверху -->
+                                <div class="slide-header">
+                                    @if ($slide->logo)
+                                        <img src="{{ $slide->logo_url }}" alt="Логотип" class="slide-icon">
+                                    @else
+                                        <img src="{{ asset('images/Logo2.svg') }}" alt="Логотип" class="slide-icon">
+                                    @endif
+                                    <h3 class="slide-title">{{ $slide->title ?? 'Крещенский парк' }}</h3>
                                 </div>
-                            </a>
+                                <!-- Описание и ссылка внизу -->
+                                @if ($slide->description || $slide->link)
+                                    <div class="slide-footer">
+                                        @if ($slide->description)
+                                            <p class="slide-description">{{ $slide->description }}</p>
+                                        @endif
+                                        @if ($slide->link)
+                                            <a href="{{ $slide->link }}">
+                                                <div class="slide-actions">
+                                                    <span
+                                                        class="slide-link">{{ $slide->link_text ?? 'Узнать больше' }}</span>
+                                                    <svg class="slide-arrow" xmlns="http://www.w3.org/2000/svg"
+                                                        width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                        stroke="currentColor" stroke-width="2">
+                                                        <line x1="5" y1="12" x2="19"
+                                                            y2="12">
+                                                        </line>
+                                                        <polyline points="12 5 19 12 12 19"></polyline>
+                                                    </svg>
+                                                </div>
+                                            </a>
+                                        @endif
+                                    </div>
+                                @endif
+                            </div>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Slide 2 -->
-                <div class="swiper-slide">
-                    <img src="{{ asset('images/hram_kupel_knyagini_olgi.jpg') }}" alt="Крещенский парк" />
-                    <div class="slide-overlay">
-                        <div class="slide-header">
-                            <img src="{{ asset('images/Logo2.svg') }}" alt="Логотип" class="slide-icon">
-                            <h3 class="slide-title">Крещенский парк</h3>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- Slide 3 -->
-                <div class="swiper-slide">
-                    <img src="{{ asset('images/derzhavnaya_ikona_bozhej_materi.jpg') }}" alt="Крещенский парк" />
-                    <div class="slide-overlay">
-                        <div class="slide-header">
-                            <img src="{{ asset('images/Logo2.svg') }}" alt="Логотип" class="slide-icon">
-                            <h3 class="slide-title">Крещенский парк</h3>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- Slide 4 -->
-                <div class="swiper-slide">
-                    <img src="{{ asset('images/galery.jpg') }}" alt="Крещенский парк" />
-                    <div class="slide-overlay">
-                        <div class="slide-header">
-                            <img src="{{ asset('images/Logo2.svg') }}" alt="Логотип" class="slide-icon">
-                            <h3 class="slide-title">Крещенский парк</h3>
-                        </div>
-
-                    </div>
+                    @endforeach
                 </div>
             </div>
-        </div>
+        @else
+            <div class="text-center text-muted py-5">
+                Слайды не найдены
+            </div>
+        @endif
     </div>
 </div>
