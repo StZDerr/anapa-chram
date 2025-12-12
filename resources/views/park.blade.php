@@ -167,62 +167,64 @@
                 </div>
             </div>
         </div>
+        @if (!empty($construction))
+            <!-- Строительство храма -->
+            <div class="construction">
+                <div class="container">
+                    <h2 class="text-center title mb-5">СТРОИТЕЛЬСТВО ХРАМА</h2>
+                    <div class="row">
+                        <div class="col-12 col-lg-6 d-flex">
+                            @if ($construction && $construction->images->isNotEmpty())
+                                <div class="swiper-container-wrapper"
+                                    style="width:100%; align-self:flex-start; position:sticky; top:100px; z-index:2;">
+                                    <!-- Большое изображение -->
+                                    <div class="swiper construction-gallery-top">
+                                        <div class="swiper-wrapper">
+                                            @foreach ($construction->images as $image)
+                                                <div class="swiper-slide">
+                                                    <img src="{{ $image->image_url }}"
+                                                        alt="{{ $construction->title }} - изображение {{ $image->order }}">
+                                                </div>
+                                            @endforeach
+                                        </div>
 
-        <!-- Строительство храма -->
-        <div class="construction">
-            <div class="container">
-                <h2 class="text-center title mb-5">СТРОИТЕЛЬСТВО ХРАМА</h2>
-                <div class="row">
-                    <div class="col-12 col-lg-6 d-flex">
-                        @if ($construction && $construction->images->isNotEmpty())
-                            <div class="swiper-container-wrapper"
-                                style="width:100%; align-self:flex-start; position:sticky; top:100px; z-index:2;">
-                                <!-- Большое изображение -->
-                                <div class="swiper construction-gallery-top">
-                                    <div class="swiper-wrapper">
-                                        @foreach ($construction->images as $image)
-                                            <div class="swiper-slide">
-                                                <img src="{{ $image->image_url }}"
-                                                    alt="{{ $construction->title }} - изображение {{ $image->order }}">
-                                            </div>
-                                        @endforeach
+                                        <!-- Стрелки -->
+                                        <div class="swiper-button-next"></div>
+                                        <div class="swiper-button-prev"></div>
                                     </div>
 
-                                    <!-- Стрелки -->
-                                    <div class="swiper-button-next"></div>
-                                    <div class="swiper-button-prev"></div>
-                                </div>
-
-                                <!-- Превью (миниатюры) -->
-                                <div class="swiper construction-gallery-thumbs mt-3">
-                                    <div class="swiper-wrapper">
-                                        @foreach ($construction->images as $image)
-                                            <div class="swiper-slide">
-                                                <img src="{{ $image->image_url }}"
-                                                    alt="{{ $construction->title }} - превью {{ $image->order }}">
-                                            </div>
-                                        @endforeach
+                                    <!-- Превью (миниатюры) -->
+                                    <div class="swiper construction-gallery-thumbs mt-3">
+                                        <div class="swiper-wrapper">
+                                            @foreach ($construction->images as $image)
+                                                <div class="swiper-slide">
+                                                    <img src="{{ $image->image_url }}"
+                                                        alt="{{ $construction->title }} - превью {{ $image->order }}">
+                                                </div>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        @else
-                            <div class="alert alert-info w-100">
-                                <i class="fas fa-info-circle"></i> Изображения строительства храма пока не загружены.
-                            </div>
-                        @endif
-                    </div>
+                            @else
+                                <div class="alert alert-info w-100">
+                                    <i class="fas fa-info-circle"></i> Изображения строительства храма пока не
+                                    загружены.
+                                </div>
+                            @endif
+                        </div>
 
-                    <div class="col-12 col-lg-6">
-                        <div class="construction-info">
-                            <h3 class="construction-subtitle">{{ $construction->title }}</h3>
-                            <p class="construction-text">
-                                {{ $construction->description }}
-                            </p>
+                        <div class="col-12 col-lg-6">
+                            <div class="construction-info">
+                                <h3 class="construction-subtitle">{{ $construction->title }}</h3>
+                                <p class="construction-text">
+                                    {{ $construction->description }}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        @endif
     </main>
 
     @include('partials.footer')
