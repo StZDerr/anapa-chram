@@ -48,23 +48,79 @@ class SeoPageController extends Controller
 
         // Обработка файла: сохраняем относительный путь в БД (без абсолютного URL)
         if ($request->hasFile('og_image_file')) {
-            $path = $request->file('og_image_file')->store('seo', 'public'); // возвращает "seo/....jpg"
+            $path = $request->file('og_image_file')->store('seo', 'public');
             $data['og_image'] = $path;
         } else {
             $data['og_image'] = null;
         }
 
-        // Попытка распарсить JSON-LD в массив (если валидный JSON)
+        // Автоматическая генерация JSON-LD если не заполнено или невалидно
         if (! empty($data['structured_data'])) {
             $decoded = json_decode($data['structured_data'], true);
-            $data['structured_data'] = $decoded !== null ? $decoded : null;
+            $data['structured_data'] = $decoded !== null ? $decoded : $this->generateStructuredData($data);
         } else {
-            $data['structured_data'] = null;
+            $data['structured_data'] = $this->generateStructuredData($data);
         }
 
         SeoPage::create($data);
 
         return redirect()->route('admin.seo-settings.index')->with('success', 'SEO-страница создана');
+    }
+
+    /**
+     * Генерирует базовую JSON-LD структуру на основе данных страницы.
+     */
+    private function generateStructuredData(array $data): array
+    {
+        $baseUrl = url('/');
+        $isHomePage = empty($data['slug']);
+
+        if ($isHomePage) {
+            // Для главной страницы — Organization
+            $schema = [
+                '@context' => 'https://schema.org',
+                '@type' => 'Organization',
+                'name' => $data['title'] ?? config('app.name'),
+                'url' => $baseUrl,
+            ];
+
+            if (! empty($data['description'])) {
+                $schema['description'] = $data['description'];
+            }
+
+            if (! empty($data['og_image'])) {
+                $imageUrl = \Illuminate\Support\Str::startsWith($data['og_image'], ['http://', 'https://', '/'])
+                    ? $data['og_image']
+                    : asset('storage/'.ltrim($data['og_image'], '/'));
+                $schema['logo'] = $imageUrl;
+                $schema['image'] = $imageUrl;
+            }
+
+            return $schema;
+        }
+
+        // Для остальных страниц — WebPage
+        $pageUrl = $baseUrl.'/'.$data['slug'];
+
+        $schema = [
+            '@context' => 'https://schema.org',
+            '@type' => 'WebPage',
+            'name' => $data['title'] ?? $data['h1'] ?? 'Страница',
+            'url' => $pageUrl,
+        ];
+
+        if (! empty($data['description'])) {
+            $schema['description'] = $data['description'];
+        }
+
+        if (! empty($data['og_image'])) {
+            $imageUrl = \Illuminate\Support\Str::startsWith($data['og_image'], ['http://', 'https://', '/'])
+                ? $data['og_image']
+                : asset('storage/'.ltrim($data['og_image'], '/'));
+            $schema['image'] = $imageUrl;
+        }
+
+        return $schema;
     }
 
     /**
