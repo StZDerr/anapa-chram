@@ -10,6 +10,7 @@ use App\Models\News;
 use App\Models\OrthodoxCalendar;
 use App\Models\Photo;
 use App\Models\PhotoCategory;
+use App\Models\TempleConstruction;
 use App\Models\TemplePage;
 use Carbon\Carbon;
 
@@ -198,7 +199,8 @@ class PageController extends Controller
     public function park()
     {
         $attractions = Attraction::orderBy('order')->get();
+        $construction = TempleConstruction::with('images')->first();
 
-        return view('park', compact('attractions'));
+        return view('park', compact('attractions', 'construction'));
     }
 }

@@ -14,6 +14,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\ParkController;
 use App\Http\Controllers\SeoPageController;
 use App\Http\Controllers\SeoSettingController;
+use App\Http\Controllers\TempleConstructionController;
 use App\Http\Controllers\TemplePageController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
@@ -89,6 +90,12 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
     // Маршрут для обновления порядка слайдов достопримечательностей
     Route::post('attractions/update-order', [AttractionController::class, 'updateOrder'])->name('attractions.update-order');
 
+    // Маршрут для обновления порядка слайдов Строительства храма
+    Route::post('temple-construction/update-order', [TempleConstructionController::class, 'updateOrder'])
+        ->name('temple-construction.update-order');
+    Route::delete('temple-construction/images/{image}', [TempleConstructionController::class, 'deleteImage'])
+        ->name('temple-construction.delete-image');
+
     Route::softDeletableResources([
         'news' => NewsController::class,
         'activity' => ActivityController::class,
@@ -100,6 +107,7 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
         'seo-pages' => SeoPageController::class,
         'park' => ParkController::class,
         'attractions' => AttractionController::class,
+        'temple-construction' => TempleConstructionController::class,
     ]);
 
     Route::get('events', [EventsCalendarController::class, 'index'])->name('events.index');

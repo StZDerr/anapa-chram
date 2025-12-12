@@ -184,80 +184,51 @@
             <div class="container">
                 <h2 class="text-center title mb-5">СТРОИТЕЛЬСТВО ХРАМА</h2>
                 <div class="row">
-                    <div class="col-12 col-lg-6">
-                        <div class="swiper-container-wrapper">
-                            <!-- Большое изображение -->
-                            <div class="swiper construction-gallery-top">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <img src="{{ asset('images/ChramSvitogo.jpg') }}"
-                                            alt="Строительство храма - этап 1">
+                    <div class="col-12 col-lg-6 d-flex">
+                        @if ($construction && $construction->images->isNotEmpty())
+                            <div class="swiper-container-wrapper"
+                                style="width:100%; align-self:flex-start; position:sticky; top:100px; z-index:2;">
+                                <!-- Большое изображение -->
+                                <div class="swiper construction-gallery-top">
+                                    <div class="swiper-wrapper">
+                                        @foreach ($construction->images as $image)
+                                            <div class="swiper-slide">
+                                                <img src="{{ $image->image_url }}"
+                                                    alt="{{ $construction->title }} - изображение {{ $image->order }}">
+                                            </div>
+                                        @endforeach
                                     </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{ asset('images/derzhavnaya_ikona_bozhej_materi.jpg') }}"
-                                            alt="Строительство храма - этап 2">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{ asset('images/galery.jpg') }}"
-                                            alt="Строительство храма - этап 3">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{ asset('images/hram_kupel_knyagini_olgi.jpg') }}"
-                                            alt="Строительство храма - этап 4">
-                                    </div>
+
+                                    <!-- Стрелки -->
+                                    <div class="swiper-button-next"></div>
+                                    <div class="swiper-button-prev"></div>
                                 </div>
 
-                                <!-- Стрелки -->
-                                <div class="swiper-button-next"></div>
-                                <div class="swiper-button-prev"></div>
-                            </div>
-
-                            <!-- Превью (миниатюры) -->
-                            <div class="swiper construction-gallery-thumbs">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <img src="{{ asset('images/ChramSvitogo.jpg') }}"
-                                            alt="Строительство храма - этап 1">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{ asset('images/derzhavnaya_ikona_bozhej_materi.jpg') }}"
-                                            alt="Строительство храма - этап 2">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{ asset('images/galery.jpg') }}"
-                                            alt="Строительство храма - этап 3">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{ asset('images/hram_kupel_knyagini_olgi.jpg') }}"
-                                            alt="Строительство храма - этап 4">
+                                <!-- Превью (миниатюры) -->
+                                <div class="swiper construction-gallery-thumbs mt-3">
+                                    <div class="swiper-wrapper">
+                                        @foreach ($construction->images as $image)
+                                            <div class="swiper-slide">
+                                                <img src="{{ $image->image_url }}"
+                                                    alt="{{ $construction->title }} - превью {{ $image->order }}">
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @else
+                            <div class="alert alert-info w-100">
+                                <i class="fas fa-info-circle"></i> Изображения строительства храма пока не загружены.
+                            </div>
+                        @endif
                     </div>
+
                     <div class="col-12 col-lg-6">
                         <div class="construction-info">
-                            <h3 class="construction-subtitle">Этапы строительства</h3>
+                            <h3 class="construction-subtitle">{{ $construction->title }}</h3>
                             <p class="construction-text">
-                                Блок работ по созданию инженерной инфраструктуры завершен: проложены сети водоснабжения,
-                                водоотведения и канализирования, зарезервированы мощности энергоснабжения.
+                                {{ $construction->description }}
                             </p>
-                            <p class="construction-text">
-                                Завершены монолитные работы по созданию Тропы истории: построено 12 арочных сводов,
-                                соединенных между собой по кругу, затем там установят гранитные плиты, на них будут
-                                изображения и информация об обращении Руси в христианство. Готовы основание и стены
-                                крестильной купели имени княгини Ольги, которая станет центральным местом для совершения
-                                таинства крещения. Завершается обновление благоустройства территории малого храма иконы
-                                Божией Матери «Державная».
-                                Для детской и тренажерной площадок приобретено оборудование, на баскетбольной площадке
-                                завершена укладка покрытия, так же завершен монтаж коммуникаций и основания фонтана — в
-                                парке установят 33-метровую конструкцию со светомузыкальным сопровождением и высажено
-                                358 деревьев и 200 кустарников.
-                            </p>
-                        </div>
-                        <div class="concept">
-                            Концепция озеленения парка заключается в создании именных семейных аллей. Высадить деревья
-                            смогут как анапчане, так и гости города.
                         </div>
                     </div>
                 </div>

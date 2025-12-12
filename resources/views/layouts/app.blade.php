@@ -124,6 +124,12 @@
                             Достопримечательности
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.temple-construction.index') }}" class="nav-link text-white">
+                            <i class="bi bi-map"></i>
+                            Строительство храма
+                        </a>
+                    </li>
 
                 </ul>
                 <hr>
