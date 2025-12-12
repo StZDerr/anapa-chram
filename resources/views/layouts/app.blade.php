@@ -130,6 +130,12 @@
                             Строительство храма
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.park-rules.index') }}" class="nav-link text-white">
+                            <i class="bi bi-map"></i>
+                            Правила храма
+                        </a>
+                    </li>
 
                 </ul>
                 <hr>

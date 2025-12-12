@@ -12,6 +12,7 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\OrthodoxCalendarController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ParkController;
+use App\Http\Controllers\ParkRuleController;
 use App\Http\Controllers\SeoPageController;
 use App\Http\Controllers\SeoSettingController;
 use App\Http\Controllers\TempleConstructionController;
@@ -96,6 +97,14 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
     Route::delete('temple-construction/images/{image}', [TempleConstructionController::class, 'deleteImage'])
         ->name('temple-construction.delete-image');
 
+    // В секцию admin
+    Route::post('park-rules/{parkRule}/add-item', [ParkRuleController::class, 'addItem'])
+        ->name('park-rules.add-item');
+    Route::put('park-rules/{parkRule}/update-item/{itemId}', [ParkRuleController::class, 'updateItem'])
+        ->name('park-rules.update-item');
+    Route::delete('park-rules/{parkRule}/delete-item/{itemId}', [ParkRuleController::class, 'deleteItem'])
+        ->name('park-rules.delete-item');
+
     Route::softDeletableResources([
         'news' => NewsController::class,
         'activity' => ActivityController::class,
@@ -108,6 +117,7 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
         'park' => ParkController::class,
         'attractions' => AttractionController::class,
         'temple-construction' => TempleConstructionController::class,
+        'park-rules' => ParkRuleController::class,
     ]);
 
     Route::get('events', [EventsCalendarController::class, 'index'])->name('events.index');

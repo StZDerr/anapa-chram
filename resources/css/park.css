@@ -325,6 +325,7 @@
     margin-top: 20px;
 }
 
+/* Правила посещения */
 .rules-list {
     list-style: none;
     padding: 0;
@@ -332,30 +333,73 @@
 }
 
 .rules-list li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 16px;
+
     font-family: var(--font-text);
     font-weight: 500;
     font-size: 16px;
     line-height: 24px;
     color: #333;
     font-variant: small-caps;
-    margin-bottom: 16px;
-    padding-left: 20px;
-    position: relative;
 }
 
-.rules-list li:before {
-    content: "•";
-    position: absolute;
-    left: 0;
-    color: var(--main-color);
-    font-size: 20px;
+/* Маркер слева: либо SVG, либо точка */
+.rules-list .marker {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+.rules-list .marker img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.rules-list .marker .dot {
+    display: block;
+    box-sizing: border-box;
+    width: 10px;
+    height: 10px;
+    min-width: 10px;
+    min-height: 10px;
+    aspect-ratio: 1 / 1;
+    flex: 0 0 10px;
+    border-radius: 50%;
+    background: var(--main-color);
+}
+
+/* Надёжный круг-маркер для запрещённых пунктов (красный) */
+.rules-list-prohibited .prohibited-icon .dot,
+.prohibited-icon .dot {
+    display: block;
+    box-sizing: border-box;
+    width: 10px;
+    height: 10px;
+    min-width: 10px;
+    min-height: 10px;
+    aspect-ratio: 1 / 1;
+    flex: 0 0 10px;
+    border-radius: 50%;
+    background: #8b0000;
+}
+/* Текст пункта */
+.rules-list .text {
+    flex: 1;
+}
+
+/* Сохраняем отступ у последнего */
 .rules-list li:last-child {
     margin-bottom: 0;
 }
 
-/* Запрещенные действия */
+/* Запрещенные действия (без изменений логики, чуть унифицировал) */
 .rules-list-prohibited {
     list-style: none;
     padding: 0;
@@ -377,6 +421,27 @@
     flex-shrink: 0;
     width: 40px;
     height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.prohibited-icon .dot {
+    width: 10px;
+    height: 10px;
+    background: var(--main-color);
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.rules-list-prohibited span {
+    font-family: var(--font-text);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #333;
+    font-variant: small-caps;
+    flex: 1;
 }
 
 .rules-list-prohibited span {

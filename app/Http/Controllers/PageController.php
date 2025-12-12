@@ -8,6 +8,7 @@ use App\Models\Clergy;
 use App\Models\Event;
 use App\Models\News;
 use App\Models\OrthodoxCalendar;
+use App\Models\ParkRule;
 use App\Models\Photo;
 use App\Models\PhotoCategory;
 use App\Models\TempleConstruction;
@@ -200,7 +201,8 @@ class PageController extends Controller
     {
         $attractions = Attraction::orderBy('order')->get();
         $construction = TempleConstruction::with('images')->first();
+        $parkRule = ParkRule::first();
 
-        return view('park', compact('attractions', 'construction'));
+        return view('park', compact('attractions', 'construction', 'parkRule'));
     }
 }
