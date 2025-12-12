@@ -50,7 +50,7 @@
 
                     <li class="nav-item">
                         <a href="{{ route('admin.activity.index') }}" class="nav-link text-white">
-                            <i class="bi bi-building"></i>
+                            <i class="bi bi-briefcase"></i>
                             Деятельность
                         </a>
                     </li>
@@ -71,13 +71,14 @@
 
                     <li class="nav-item">
                         <a href="{{ route('admin.temple.edit') }}" class="nav-link text-white">
-                            <i class="bi bi-bank"></i>
+                            <i class="bi bi-bank2"></i>
                             Храм святого равноапостольного великого князя Владимира
                         </a>
                     </li>
+
                     <li class="nav-item">
                         <a href="{{ route('admin.temple.kupelOlgi.edit') }}" class="nav-link text-white">
-                            <i class="bi bi-water"></i>
+                            <i class="bi bi-droplet"></i>
                             Храм-купель святой княгини Ольги
                         </a>
                     </li>
@@ -88,30 +89,42 @@
                             Державная икона Божией Матери
                         </a>
                     </li>
+
                     <li class="nav-item">
                         <a href="{{ route('admin.gallery.index') }}" class="nav-link text-white">
                             <i class="bi bi-images"></i>
                             Галерея
                         </a>
                     </li>
+
                     <li class="nav-item">
                         <a href="{{ route('admin.clergy.index') }}" class="nav-link text-white">
-                            <i class="bi bi-people"></i>
+                            <i class="bi bi-person-badge"></i>
                             Служители храма
                         </a>
                     </li>
+
                     <li class="nav-item">
                         <a href="{{ route('admin.seo-settings.index') }}" class="nav-link text-white">
-                            <i class="bi bi-tag"></i>
+                            <i class="bi bi-gear"></i>
                             SEO
                         </a>
                     </li>
+
                     <li class="nav-item">
                         <a href="{{ route('admin.park.index') }}" class="nav-link text-white">
-                            <i class="bi bi-tag"></i>
+                            <i class="bi bi-tree"></i>
                             Парк
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('admin.attractions.index') }}" class="nav-link text-white">
+                            <i class="bi bi-map"></i>
+                            Достопримечательности
+                        </a>
+                    </li>
+
                 </ul>
                 <hr>
 
@@ -142,6 +155,16 @@
 
         <!-- Main content -->
         <main class="flex-grow-1 ms-280" style="margin-left: 280px; padding: 20px;">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             @yield('content')
         </main>
 

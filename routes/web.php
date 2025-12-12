@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\AttractionController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ClergyController;
@@ -38,6 +39,8 @@ Route::get('/gallery', [PageController::class, 'gallery'])->name('gallery');
 
 Route::get('/clergy', [PageController::class, 'clergy'])->name('clergy');
 
+Route::get('/park', [PageController::class, 'park'])->name('park');
+
 Route::get('/about', function () {
     return view('about');
 })->name('about');
@@ -53,10 +56,6 @@ Route::get('/zapiski', function () {
 Route::get('/treby', function () {
     return view('zapiskiAndTreby/treby');
 })->name('treby');
-
-Route::get('/park', function () {
-    return view('park');
-})->name('park');
 
 Route::get('/api/calendar/events', [CalendarController::class, 'index'])->name('calendar.events');
 
@@ -87,6 +86,9 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
     // Маршрут для обновления порядка слайдов парка
     Route::post('park/update-order', [ParkController::class, 'updateOrder'])->name('park.update-order');
 
+    // Маршрут для обновления порядка слайдов достопримечательностей
+    Route::post('attractions/update-order', [AttractionController::class, 'updateOrder'])->name('attractions.update-order');
+
     Route::softDeletableResources([
         'news' => NewsController::class,
         'activity' => ActivityController::class,
@@ -97,6 +99,7 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
         'seo-settings' => SeoSettingController::class,
         'seo-pages' => SeoPageController::class,
         'park' => ParkController::class,
+        'attractions' => AttractionController::class,
     ]);
 
     Route::get('events', [EventsCalendarController::class, 'index'])->name('events.index');

@@ -5,7 +5,7 @@
     --font-title: "Tenor Sans", sans-serif;
     --font-text: "Montserrat", sans-serif;
     --font-size-title: clamp(1.5rem, 1rem + 2vw, 3.5rem);
-    --font-size-swiper-title: clamp(1rem, 0.8364rem + 0.7273vw, 2rem);
+    --font-size-subtitle: clamp(1rem, 0.8364rem + 0.7273vw, 2rem);
 } */
 
 /* Заголовок */
@@ -48,6 +48,10 @@
     border-radius: 15px;
     overflow: hidden;
     padding: 0;
+}
+
+.swiper-slide:nth-child(odd) > .row > .order {
+    order: -1;
 }
 
 .attractionsSwiper .swiper-slide .row {
@@ -238,7 +242,7 @@
     bottom: 20px;
     left: 20px;
     font-family: var(--font-title);
-    font-size: var(--font-size-swiper-title);
+    font-size: var(--font-size-subtitle);
     font-weight: 400;
     color: #4a5b6f;
 }
@@ -563,7 +567,7 @@
 .construction-subtitle {
     font-family: var(--font-title);
     font-weight: 400;
-    font-size: var(--font-size-swiper-title);
+    font-size: var(--font-size-subtitle);
     color: var(--main-color);
     margin-bottom: 25px;
     font-variant: small-caps;

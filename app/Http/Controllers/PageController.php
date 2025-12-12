@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
+use App\Models\Attraction;
 use App\Models\Clergy;
 use App\Models\Event;
 use App\Models\News;
@@ -192,5 +193,12 @@ class PageController extends Controller
         $clergy = Clergy::orderBy('order')->get();
 
         return view('clergy', compact('clergy'));
+    }
+
+    public function park()
+    {
+        $attractions = Attraction::orderBy('order')->get();
+
+        return view('park', compact('attractions'));
     }
 }
