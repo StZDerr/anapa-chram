@@ -120,18 +120,46 @@
                             </div>
                             <div class="rules-content">
                                 <ul class="rules-list-prohibited">
-                                    @foreach ($parkRule->prohibited_items as $item)
-                                        <li>
-                                            <div class="prohibited-icon">
-                                                @if (!empty($item['svg']))
-                                                    <img src="{{ asset('storage/' . $item['svg']) }}" alt="">
-                                                @else
-                                                    <span class="dot"></span>
-                                                @endif
-                                            </div>
-                                            <span>{!! nl2br(e($item['title'])) !!}</span>
-                                        </li>
-                                    @endforeach
+                                    @if (!empty($parkRule) && $parkRule->prohibited_items->isNotEmpty())
+                                        @foreach ($parkRule->prohibited_items as $item)
+                                            <li>
+                                                <div class="prohibited-icon">
+                                                    @if (!empty($item['svg']))
+                                                        <img src="{{ asset('storage/' . $item['svg']) }}"
+                                                            alt="">
+                                                    @else
+                                                        <span class="dot"></span>
+                                                    @endif
+                                                </div>
+                                                <span>{!! nl2br(e($item['title'])) !!}</span>
+                                            </li>
+                                        @endforeach
+                                    @else
+                                        <ul class="rules-list">
+                                            <li>
+                                                <span class="marker"><span class="dot"></span></span>
+                                                <span class="text">Соблюдайте общепринятые нормы поведения, не
+                                                    наносите
+                                                    повреждений имуществу парка.</span>
+                                            </li>
+                                            <li>
+                                                <span class="marker"><span class="dot"></span></span>
+                                                <span class="text">Соблюдайте правила пользования детскими и
+                                                    спортивными
+                                                    площадками.</span>
+                                            </li>
+                                            <li>
+                                                <span class="marker"><span class="dot"></span></span>
+                                                <span class="text">Соблюдайте правила пожарной безопасности.</span>
+                                            </li>
+                                            <li>
+                                                <span class="marker"><span class="dot"></span></span>
+                                                <span class="text">В случае обнаружения вещей без присмотра...
+                                                    сообщите
+                                                    сотрудникам парка.</span>
+                                            </li>
+                                        </ul>
+                                    @endif
                                 </ul>
                             </div>
                         </div>

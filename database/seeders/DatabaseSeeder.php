@@ -23,5 +23,6 @@ class DatabaseSeeder extends Seeder
         $this->call(DerzhavnayaIkonaSeeder::class);
         $this->call(TemplePageKupelOlgiSeeder::class);
         $this->call(EventsTableSeeder::class);
+        $this->call(ParkRulesSeeder::class);
     }
 }

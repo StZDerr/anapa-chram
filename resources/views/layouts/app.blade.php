@@ -42,73 +42,39 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('admin.news.index') }}" class="nav-link text-white">
-                            <i class="bi bi-newspaper"></i>
-                            Новости
+                        <a href="#contentSubmenu" data-bs-toggle="collapse" class="nav-link text-white">
+                            <i class="bi bi-file-earmark-text"></i>
+                            Контент
                         </a>
+                        <ul class="collapse list-unstyled ps-3" id="contentSubmenu">
+                            <li><a href="{{ route('admin.news.index') }}" class="nav-link text-white"><i
+                                        class="bi bi-newspaper"></i> Новости</a></li>
+                            <li><a href="{{ route('admin.activity.index') }}" class="nav-link text-white"><i
+                                        class="bi bi-briefcase"></i> Деятельность</a></li>
+                            <li><a href="{{ route('admin.events.index') }}" class="nav-link text-white"><i
+                                        class="bi bi-calendar-event"></i> Календарь событий</a></li>
+                            <li><a href="{{ route('admin.orthodox_calendar.index') }}" class="nav-link text-white"><i
+                                        class="bi bi-journal-bookmark"></i> Православный Календарь</a></li>
+                            <li><a href="{{ route('admin.gallery.index') }}" class="nav-link text-white"><i
+                                        class="bi bi-images"></i> Галерея</a></li>
+                        </ul>
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('admin.activity.index') }}" class="nav-link text-white">
-                            <i class="bi bi-briefcase"></i>
-                            Деятельность
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="{{ route('admin.events.index') }}" class="nav-link text-white">
-                            <i class="bi bi-calendar-event"></i>
-                            Календарь событий
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="{{ route('admin.orthodox_calendar.index') }}" class="nav-link text-white">
-                            <i class="bi bi-journal-bookmark"></i>
-                            Православный Календарь
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="{{ route('admin.temple.edit') }}" class="nav-link text-white">
+                        <a href="#templeSubmenu" data-bs-toggle="collapse" class="nav-link text-white">
                             <i class="bi bi-bank2"></i>
-                            Храм святого равноапостольного великого князя Владимира
+                            Храмы и иконы
                         </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="{{ route('admin.temple.kupelOlgi.edit') }}" class="nav-link text-white">
-                            <i class="bi bi-droplet"></i>
-                            Храм-купель святой княгини Ольги
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="{{ route('admin.temple.derzhavnayaIkona.edit') }}" class="nav-link text-white">
-                            <i class="bi bi-award"></i>
-                            Державная икона Божией Матери
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="{{ route('admin.gallery.index') }}" class="nav-link text-white">
-                            <i class="bi bi-images"></i>
-                            Галерея
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="{{ route('admin.clergy.index') }}" class="nav-link text-white">
-                            <i class="bi bi-person-badge"></i>
-                            Служители храма
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="{{ route('admin.seo-settings.index') }}" class="nav-link text-white">
-                            <i class="bi bi-gear"></i>
-                            SEO
-                        </a>
+                        <ul class="collapse list-unstyled ps-3" id="templeSubmenu">
+                            <li><a href="{{ route('admin.temple.edit') }}" class="nav-link text-white"><i
+                                        class="bi bi-bank2"></i> Храм святого князя Владимира</a></li>
+                            <li><a href="{{ route('admin.temple.kupelOlgi.edit') }}" class="nav-link text-white"><i
+                                        class="bi bi-droplet"></i> Храм-купель святой княгини Ольги</a></li>
+                            <li><a href="{{ route('admin.temple.derzhavnayaIkona.edit') }}" class="nav-link text-white"><i
+                                        class="bi bi-award"></i> Державная икона Божией Матери</a></li>
+                            <li><a href="{{ route('admin.clergy.index') }}" class="nav-link text-white"><i
+                                        class="bi bi-person-badge"></i> Служители храма</a></li>
+                        </ul>
                     </li>
 
                     <li class="nav-item">
@@ -119,23 +85,27 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('admin.attractions.index') }}" class="nav-link text-white">
+                        <a href="#parkSubmenu" data-bs-toggle="collapse" class="nav-link text-white">
                             <i class="bi bi-map"></i>
-                            Достопримечательности
+                            Парк и достопримечательности
                         </a>
+                        <ul class="collapse list-unstyled ps-3" id="parkSubmenu">
+                            <li><a href="{{ route('admin.attractions.index') }}" class="nav-link text-white"><i
+                                        class="bi bi-geo-alt"></i> Достопримечательности</a></li>
+                            <li><a href="{{ route('admin.temple-construction.index') }}" class="nav-link text-white"><i
+                                        class="bi bi-building"></i> Строительство храма</a></li>
+                            <li><a href="{{ route('admin.park-rules.index') }}" class="nav-link text-white"><i
+                                        class="bi bi-shield-check"></i> Правила храма</a></li>
+                        </ul>
                     </li>
+
                     <li class="nav-item">
-                        <a href="{{ route('admin.temple-construction.index') }}" class="nav-link text-white">
-                            <i class="bi bi-map"></i>
-                            Строительство храма
+                        <a href="{{ route('admin.seo-settings.index') }}" class="nav-link text-white">
+                            <i class="bi bi-gear"></i>
+                            SEO
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ route('admin.park-rules.index') }}" class="nav-link text-white">
-                            <i class="bi bi-map"></i>
-                            Правила храма
-                        </a>
-                    </li>
+
 
                 </ul>
                 <hr>

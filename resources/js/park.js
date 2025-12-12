@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const attractionsSwiper = new Swiper(".attractionsSwiper", {
         slidesPerView: 1,
         spaceBetween: 30,
-        loop: true,
+        loop: false,
         navigation: {
             nextEl: ".swiper-button-next",
             prevEl: ".swiper-button-prev",
