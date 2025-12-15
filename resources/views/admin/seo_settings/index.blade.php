@@ -35,8 +35,37 @@
                         <button class="btn btn-primary">Создать</button>
                     </form>
                 @endif
+                <form action="{{ route('admin.seo-settings.favicon.update') }}" method="POST"
+                    enctype="multipart/form-data">
+                    @csrf
+                    @method('POST')
+
+                    <div class="mb-3">
+                        <label for="favicon" class="form-label">Файл фавикона (ico / png / svg)</label>
+                        <input type="file" name="favicon" id="favicon" class="form-control"
+                            accept=".ico,image/png,image/svg+xml">
+                        @error('favicon')
+                            <div class="text-danger mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    @if (!empty($site_settings->favicon))
+                        <div class="mb-3">
+                            <label class="form-label">Текущий фавикон</label>
+                            <div>
+                                <img src="{{ asset('storage/' . $site_settings->favicon) }}" alt="favicon"
+                                    style="width:32px;height:32px;object-fit:contain;">
+                                <span class="ms-2">{{ $site_settings->favicon }}</span>
+                            </div>
+                        </div>
+                    @endif
+
+                    <button class="btn btn-primary">Загрузить</button>
+                    <a href="{{ route('admin.seo-settings.index') }}" class="btn btn-outline-secondary">Назад</a>
+                </form>
             </div>
         </div>
+
 
         <h2 class="mb-3">SEO для страниц</h2>
 
@@ -57,7 +86,8 @@
                     <tbody>
                         @foreach ($pages as $page)
                             <tr>
-                                <td style="min-width:200px; word-break:break-all;">{{ $page->slug ?? ($page->path ?? '—') }}
+                                <td style="min-width:200px; word-break:break-all;">
+                                    {{ $page->slug ?? ($page->path ?? '—') }}
                                 </td>
                                 <td>{{ $page->title ?: '—' }}</td>
                                 <td>{{ \Illuminate\Support\Str::limit($page->description ?: '', 140) }}</td>

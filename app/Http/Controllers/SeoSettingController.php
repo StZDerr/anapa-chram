@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\SeoPage;
 use App\Models\SeoSetting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SeoSettingController extends Controller
 {
@@ -15,8 +16,9 @@ class SeoSettingController extends Controller
     {
         $setting = SeoSetting::first();
         $pages = SeoPage::orderBy('slug')->get();
+        $site_settings = DB::table('site_settings')->first();
 
-        return view('admin.seo_settings.index', compact('setting', 'pages'));
+        return view('admin.seo_settings.index', compact('setting', 'pages', 'site_settings'));
     }
 
     /**

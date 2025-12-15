@@ -31,14 +31,18 @@
     <meta property="og:image" content="{{ $ogImage }}">
 @endif
 
-@if (!empty($meta['h1']))
-    <h1 class="visually-hidden">{{ $meta['h1'] }}</h1>
-    {{-- <meta name="headline" content="{{ $meta['h1'] }}">
-    <meta property="og:headline" content="{{ $meta['h1'] }}"> --}}
+@if (!empty($site_settings->favicon))
+    <link type="image/png" rel="icon" href="{{ asset('storage/' . ltrim($site_settings->favicon, '/')) }}" />
 @endif
 
 @if (!empty($meta['structured_data']))
     <script type="application/ld+json">
         {!! json_encode($meta['structured_data'], JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT) !!}
     </script>
+@endif
+
+@if (!empty($meta['h1']))
+    <h1 class="visually-hidden">{{ $meta['h1'] }}</h1>
+    {{-- <meta name="headline" content="{{ $meta['h1'] }}">
+    <meta property="og:headline" content="{{ $meta['h1'] }}"> --}}
 @endif

@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\SeoPage;
 use App\Models\SeoSetting;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -51,6 +52,10 @@ class AppServiceProvider extends ServiceProvider
             ];
 
             $view->with('seo_meta', $meta);
+        });
+        View::composer('*', function ($view) {
+            $site_settings = DB::table('site_settings')->first();
+            $view->with('site_settings', $site_settings);
         });
     }
 }

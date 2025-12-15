@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ClergyController;
 use App\Http\Controllers\EventsCalendarController;
+use App\Http\Controllers\FaviconController;
 use App\Http\Controllers\GalleryCategoryController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\NewsController;
@@ -148,6 +149,10 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
     Route::get('temple-page/derzhavnaya-ikona/edit', [TemplePageController::class, 'derzhavnayaIkonaEdit'])
         ->name('temple.derzhavnayaIkona.edit');
     Route::post('temple-page/derzhavnaya-ikona/update', [TemplePageController::class, 'derzhavnayaIkonaUpdate'])->name('temple.derzhavnayaIkona.update');
+
+    Route::post('seo-settings/favicon', [FaviconController::class, 'update'])
+        ->name('seo-settings.favicon.update');
+
 });
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
