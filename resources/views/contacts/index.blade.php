@@ -6,7 +6,7 @@
     @include('partials.head')
 
     <!-- Стили страницы Zapiski -->
-    @vite(['resources/css/contact.css', 'resources/js/contact.js'])
+    @vite(['resources/css/contact.css'])
 </head>
 
 <body class="d-flex flex-column min-vh-100">
