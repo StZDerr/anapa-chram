@@ -90,10 +90,10 @@
     font-size: 1.2rem;
     cursor: pointer;
 }
-.btn-calendar-nav:hover {
+/* .btn-calendar-nav:hover {
     background: var(--main-color);
     color: #fff;
-}
+} */
 
 @media (max-width: 992px) {
     .calendar-card {
@@ -133,10 +133,10 @@
     max-width: 350px;
 }
 
-.calendar-card:hover {
+/* .calendar-card:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-2);
-}
+} */
 
 .calendar-card--today {
     border: 2px solid var(--main-color);
@@ -210,9 +210,9 @@
     z-index: 10;
 }
 
-.calendar-modal-close:hover {
+/* .calendar-modal-close:hover {
     background: var(--beige-alt);
-}
+} */
 
 .calendar-modal-header {
     padding: 2rem 2.5rem 1.5rem;
@@ -249,9 +249,9 @@
     text-decoration: underline;
 }
 
-.calendar-modal-body a:hover {
+/* .calendar-modal-body a:hover {
     color: var(--dark);
-}
+} */
 
 .calendar-modal-loading {
     text-align: center;
@@ -388,10 +388,10 @@
     transition: all 0.2s ease;
 }
 
-.ui-state-default:hover {
+/* .ui-state-default:hover {
     background: var(--beige-alt);
     color: var(--main-color);
-}
+} */
 
 .ui-state-active {
     color: #fff;
