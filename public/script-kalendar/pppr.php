@@ -25,9 +25,11 @@ if (! is_dir($cacheDir)) {
 // Log incoming request (helpful for debugging in prod) — move after paths are initialized
 logMsg("REQUEST: month={$month} today={$today} year={$year} url={$url}");
 
-$cacheKey = 'pppr_'.md5($url).'.html';
+// Create cache key from meaningful parameters only (ignore sid and other random params)
+$cacheKeyString = "m{$month}_d{$today}_y{$year}_dt{$dt}_h{$header}_l{$lives}_t{$trp}_s{$scripture}";
+$cacheKey = 'pppr_'.md5($cacheKeyString).'.html';
 $cacheFile = $cacheDir.'/'.$cacheKey;
-$cacheTtl = 60 * 60 * 24 * 7; // 7 дней
+$cacheTtl = 60 * 60 * 24 * 30; // 30 дней
 
 function logMsg($msg)
 {
