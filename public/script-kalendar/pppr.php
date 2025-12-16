@@ -92,9 +92,9 @@ for ($i = 0; $i < $attempts; $i++) {
     $method = function_exists('curl_init') ? 'curl' : 'fopen';
     logMsg("ATTEMPT: i={$i} method={$method} httpCode={$httpCode} len={$len}");
     if ($len) {
-        $snippet = preg_replace("/\s+/, ' ', strip_tags($samp));
+        $snippet = preg_replace('/\s+/', ' ', strip_tags((string) $samp));
         // limit snippet length to 300 chars
-        logMsg("SNIPPET: " . mb_substr($snippet, 0, 300));
+        logMsg('SNIPPET: '.mb_substr($snippet, 0, 300));
     }
     if ($httpCode === 200 && $len > 0) {
         logMsg("SUCCESS: url={$url} attempt={$i} len={$len}");
