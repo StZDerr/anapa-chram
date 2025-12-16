@@ -52,10 +52,18 @@ function logMsg($msg)
 // Log that script was invoked (will create pppr.log if writable)
 logMsg("CALL: month={$month} today={$today} year={$year} url={$url}");
 
+// Check if cache exists and is valid first (before making external request)
+if (file_exists($cacheFile) && (time() - filemtime($cacheFile)) <= $cacheTtl) {
+    logMsg('CACHE HIT: serving from cache file (age: '.(time() - filemtime($cacheFile)).' sec)');
+    $cached = file_get_contents($cacheFile);
+    echo $cached;
+    exit;
+}
+
 $contents = false;
 $httpCode = 0;
-$attempts = 3;
-$wait = [0, 1, 2];
+$attempts = 5; // увеличено с 3 до 5
+$wait = [0, 2, 4, 6, 10]; // более агрессивный бэкофф
 
 for ($i = 0; $i < $attempts; $i++) {
     // try cURL if available
@@ -65,8 +73,8 @@ for ($i = 0; $i < $attempts; $i++) {
             CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_TIMEOUT => 10,
-            CURLOPT_CONNECTTIMEOUT => 5,
+            CURLOPT_TIMEOUT => 15, // увеличено с 10 до 15
+            CURLOPT_CONNECTTIMEOUT => 8, // увеличено с 5 до 8
             CURLOPT_USERAGENT => 'Mozilla/5.0 (compatible; pppr-proxy/1.0)',
             CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_ENCODING => '', // поддержать gzip/deflate
@@ -136,18 +144,29 @@ if ($contents !== false && $httpCode === 200) {
     exit;
 }
 
-// На ошибке: логируем и пробуем вернуть кеш
+// На ошибке: логируем и пробуем вернуть старый кеш (даже если просрочен)
 logMsg("Request failed httpCode={$httpCode} url={$url}");
 
+// Сначала пробуем вернуть актуальный кеш (в пределах TTL)
 if (file_exists($cacheFile) && (time() - filemtime($cacheFile)) <= $cacheTtl) {
-    // вернуть кешированный ответ с небольшим предупреждением в HTML комменте
+    logMsg('FALLBACK: serving valid cache (age: '.(time() - filemtime($cacheFile)).' sec)');
     $cached = file_get_contents($cacheFile);
-    echo '<!-- Served from cache: '.date('Y-m-d H:i:s', filemtime($cacheFile))." -->\n";
+    echo '<!-- Served from cache (fallback): '.date('Y-m-d H:i:s', filemtime($cacheFile))." -->\n";
     echo $cached;
     exit;
 }
 
-// Если нет кеша — вернуть понятное сообщение и HTTP 503
+// Если нет актуального кеша, но есть старый — отдаём его (лучше старые данные, чем ошибка)
+if (file_exists($cacheFile)) {
+    logMsg('FALLBACK: serving STALE cache (age: '.(time() - filemtime($cacheFile)).' sec)');
+    $cached = file_get_contents($cacheFile);
+    echo '<!-- Served from STALE cache: '.date('Y-m-d H:i:s', filemtime($cacheFile))." -->\n";
+    echo $cached;
+    exit;
+}
+
+// Если вообще нет кеша — вернуть понятное сообщение и HTTP 503
+logMsg('ERROR: no cache available, returning 503');
 http_response_code(503);
 echo '<p style="color:#666; text-align:center;">Сервис православного календаря временно недоступен. Попробуйте обновить страницу позже.</p>';
 exit;
