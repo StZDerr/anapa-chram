@@ -14,6 +14,9 @@ $dt = intval($_GET['dt'] ?? 0);
 
 $url = "http://www.holytrinityorthodox.com/ru/calendar/calendar.php?month={$month}&today={$today}&year={$year}&dt={$dt}&header={$header}&lives={$lives}&trp={$trp}&scripture={$scripture}";
 
+// Log incoming request (helpful for debugging in prod)
+logMsg("REQUEST: month={$month} today={$today} year={$year} url={$url}");
+
 // cache/log paths
 $dir = __DIR__;
 $cacheDir = $dir.'/cache';
@@ -32,6 +35,9 @@ function logMsg($msg)
     $line = date('Y-m-d H:i:s').' '.$msg.PHP_EOL;
     @file_put_contents($logFile, $line, FILE_APPEND | LOCK_EX);
 }
+
+// Log that script was invoked (will create pppr.log if writable)
+logMsg("CALL: month={$month} today={$today} year={$year} url={$url}");
 
 $contents = false;
 $httpCode = 0;
@@ -78,6 +84,20 @@ for ($i = 0; $i < $attempts; $i++) {
                 }
             }
         }
+    }
+
+    // --- debug logging for each attempt ---
+    $len = is_string($contents) ? strlen($contents) : 0;
+    $samp = $len ? substr($contents, 0, 300) : '';
+    $method = function_exists('curl_init') ? 'curl' : 'fopen';
+    logMsg("ATTEMPT: i={$i} method={$method} httpCode={$httpCode} len={$len}");
+    if ($len) {
+        $snippet = preg_replace("/\s+/, ' ', strip_tags($samp));
+        // limit snippet length to 300 chars
+        logMsg("SNIPPET: " . mb_substr($snippet, 0, 300));
+    }
+    if ($httpCode === 200 && $len > 0) {
+        logMsg("SUCCESS: url={$url} attempt={$i} len={$len}");
     }
 
     // Если 200 и нет явной 503 в тексте — считаем успехом
