@@ -132,12 +132,13 @@
             return text || 'Загрузка...';
         }
 
-        // Создать слайды
-        function createSlides() {
+        // Создать слайды (загрузка последовательная для обхода rate limit)
+        async function createSlides() {
             const dates = getWeekDates();
             const slidesContainer = document.getElementById('calendar-slides');
             slidesContainer.innerHTML = '';
 
+            // Сначала создаём все слайды с плейсхолдерами
             dates.forEach((date, index) => {
                 const slide = document.createElement('div');
                 slide.className = 'swiper-slide';
@@ -153,15 +154,29 @@
             `;
 
                 slidesContainer.appendChild(slide);
-
-                // Загрузить данные для слайда
-                loadCalendarData(date, function(html) {
-                    const descEl = slide.querySelector('.calendar-desc');
-                    if (descEl) {
-                        descEl.textContent = extractShortText(html);
-                    }
-                });
             });
+
+            // Затем загружаем данные последовательно с задержкой (обход rate limit)
+            for (let i = 0; i < dates.length; i++) {
+                const date = dates[i];
+                const slide = slidesContainer.children[i];
+                
+                // Загружаем данные
+                await new Promise(resolve => {
+                    loadCalendarData(date, function(html) {
+                        const descEl = slide.querySelector('.calendar-desc');
+                        if (descEl) {
+                            descEl.textContent = extractShortText(html);
+                        }
+                        resolve();
+                    });
+                });
+                
+                // Задержка 300ms между запросами (чтобы не превысить rate limit 1r/s с burst=5)
+                if (i < dates.length - 1) {
+                    await new Promise(r => setTimeout(r, 300));
+                }
+            }
         }
 
         // Инициализировать Swiper
