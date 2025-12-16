@@ -36,7 +36,15 @@
     justify-content: center;
     background: #000;
 }
-.gallery-top img {
+/* Ensure anchor wraps fill the slide so image can be 100% height without gaps */
+.gallery-top .swiper-slide a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.gallery-top img,
+.gallery-top .swiper-slide a img {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -93,13 +101,13 @@
     }
 }
 
-.gallery-top-prev:hover,
+/* .gallery-top-prev:hover,
 .gallery-top-next:hover,
 .gallery-top-2-prev:hover,
 .gallery-top-2-next:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
     transform: scale(1.05);
-}
+} */
 
 .gallery-top-prev,
 .gallery-top-2-prev {
@@ -136,7 +144,15 @@
     justify-content: center;
     background: #000;
 }
-.gallery-top-2 img {
+/* Ensure anchor wraps fill the slide so image can be 100% height without gaps */
+.gallery-top-2 .swiper-slide a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.gallery-top-2 img,
+.gallery-top-2 .swiper-slide a img {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -294,4 +310,34 @@
     line-height: 24px;
     font-variant: small-caps;
     color: #25282f;
+}
+
+.pswp__button--custom-close-button {
+    /* behave like standard PhotoSwipe buttons in the top bar */
+    position: relative;
+    width: 50px;
+    height: 60px;
+    display: block;
+    margin-right: 6px;
+    background: transparent !important;
+    border-radius: 0;
+    cursor: pointer;
+    padding: 0;
+    align-self: center;
+    left: 1.2rem;
+}
+.pswp__button--custom-close-button .pswp__icn svg {
+    width: 28px;
+    height: 28px;
+    display: block;
+    color: var(--pswp-icon-color);
+    stroke: currentColor;
+}
+.pswp__button--custom-close-button:hover {
+    transform: scale(1.05);
+}
+
+/* Скрываем стандартную кнопку закрытия, если нужно */
+.pswp__button--close {
+    display: none !important;
 }

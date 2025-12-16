@@ -98,6 +98,42 @@ document.addEventListener("DOMContentLoaded", () => {
             bgOpacity: 0.95,
             padding: { top: 50, bottom: 50, left: 50, right: 50 },
         });
+
+        // Подставляем размеры (data-pswp-width/height) из внутренних изображений, если возможно
+        document.querySelectorAll(".gallery-swiper a").forEach((a) => {
+            const img = a.querySelector("img");
+            if (!img) return;
+            const setSize = () => {
+                a.setAttribute(
+                    "data-pswp-width",
+                    img.naturalWidth || img.width
+                );
+                a.setAttribute(
+                    "data-pswp-height",
+                    img.naturalHeight || img.height
+                );
+            };
+            if (img.complete) setSize();
+            else img.addEventListener("load", setSize);
+        });
+
+        // Добавляем кастомную кнопку закрытия для всех галерей (вставляется в top-bar)
+        lightbox.on("uiRegister", function () {
+            lightbox.pswp.ui.registerElement({
+                name: "custom-close-button",
+                order: 9,
+                isButton: true,
+                appendTo: "top-bar",
+                html:
+                    '<button class="pswp__button pswp__button--custom-close-button" title="Закрыть">' +
+                    '<span class="pswp__icn">' +
+                    '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>' +
+                    "</span>" +
+                    "</button>",
+                onClick: "close",
+            });
+        });
+
         lightbox.init();
     } catch (e) {
         console.error("PhotoSwipe init failed:", e);

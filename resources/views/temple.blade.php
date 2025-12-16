@@ -30,7 +30,7 @@
                     <div class="col-sm-12 col-lg-6 d-flex align-items-center">
                         <div class="swiper-container-wrapper w-100 sticky-swiper">
                             <!-- Большое изображение -->
-                            <div class="swiper gallery-top">
+                            <div class="swiper gallery-top gallery-swiper">
                                 <div class="swiper-wrapper">
                                     @php
                                         $gallery1 = $templePage->gallery_1_images ?? [
@@ -41,8 +41,11 @@
                                     @endphp
                                     @foreach ($gallery1 as $image)
                                         <div class="swiper-slide">
-                                            <img src="{{ asset(str_starts_with($image, 'http') ? $image : 'storage/' . $image) }}"
-                                                alt="Храм святого князя Владимира">
+                                            <a
+                                                href="{{ asset(str_starts_with($image, 'http') ? $image : 'storage/' . $image) }}">
+                                                <img src="{{ asset(str_starts_with($image, 'http') ? $image : 'storage/' . $image) }}"
+                                                    alt="Храм святого князя Владимира">
+                                            </a>
                                         </div>
                                     @endforeach
                                 </div>
@@ -98,7 +101,7 @@
                     <div class="col-sm-12 col-lg-6 d-flex align-items-center">
                         <div class="swiper-container-wrapper w-100 sticky-swiper">
                             <!-- Большое изображение (второй свайпер) -->
-                            <div class="swiper gallery-top-2">
+                            <div class="swiper gallery-top-2 gallery-swiper">
                                 <div class="swiper-wrapper">
                                     @php
                                         $gallery2 = $templePage->gallery_2_images ?? [
@@ -109,8 +112,11 @@
                                     @endphp
                                     @foreach ($gallery2 as $image)
                                         <div class="swiper-slide">
-                                            <img src="{{ asset(str_starts_with($image, 'http') ? $image : 'storage/' . $image) }}"
-                                                alt="Храм святого князя Владимира">
+                                            <a
+                                                href="{{ asset(str_starts_with($image, 'http') ? $image : 'storage/' . $image) }}">
+                                                <img src="{{ asset(str_starts_with($image, 'http') ? $image : 'storage/' . $image) }}"
+                                                    alt="Храм святого князя Владимира">
+                                            </a>
                                         </div>
                                     @endforeach
                                 </div>
@@ -160,12 +166,12 @@
 
     @include('partials.scripts')
 
-    <!-- PhotoSwipe v5 JS (Core + Lightbox) -->
+    {{-- <!-- PhotoSwipe v5 JS (Core + Lightbox) -->
     <script src="https://cdn.jsdelivr.net/npm/photoswipe@5/dist/umd/photoswipe.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/photoswipe@5/dist/umd/photoswipe-lightbox.umd.min.js"></script>
 
     <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script> --}}
 </body>
 
 </html>
