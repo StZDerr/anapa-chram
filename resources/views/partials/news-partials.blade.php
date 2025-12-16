@@ -26,9 +26,9 @@
                             <div class="slide-inner">
                                 <img src="{{ $newsItem->img_preview ? asset('storage/' . $newsItem->img_preview) : asset('images/newsOne.jpg') }}"
                                     alt="{{ $newsItem->title }}" class="slide-img">
-                                <div class="slide-title">{{ $newsItem->title }}</div>
+                                <div class="slide-title">{{ Str::limit(strip_tags($newsItem->title), 20) }}</div>
                                 <div class="slide-desc">
-                                    {{ Str::limit(strip_tags($newsItem->content), 200) }}
+                                    {{ Str::limit(strip_tags($newsItem->content), 100) }}
                                 </div>
                                 <div class="slide-read">
                                     <a href="{{ route('news.read', $newsItem->slug) }}">

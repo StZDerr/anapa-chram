@@ -332,12 +332,12 @@
                                 </li>
                                 <li>
                                     <a class="dropdown-item" href="{{ route('temple') }}">
-                                        Храм святого равноапостольного великого князя Владимира
+                                        Храм князя Владимира
                                     </a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item" href="{{ route('temple.kupelOlgi') }}">
-                                        Купель святой равноапостольной княгини Ольги
+                                        Купель княгини Ольги
                                     </a>
                                 </li>
                                 <li>
