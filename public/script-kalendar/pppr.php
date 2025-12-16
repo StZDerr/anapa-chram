@@ -14,9 +14,6 @@ $dt = intval($_GET['dt'] ?? 0);
 
 $url = "http://www.holytrinityorthodox.com/ru/calendar/calendar.php?month={$month}&today={$today}&year={$year}&dt={$dt}&header={$header}&lives={$lives}&trp={$trp}&scripture={$scripture}";
 
-// Log incoming request (helpful for debugging in prod)
-logMsg("REQUEST: month={$month} today={$today} year={$year} url={$url}");
-
 // cache/log paths
 $dir = __DIR__;
 $cacheDir = $dir.'/cache';
@@ -25,6 +22,9 @@ if (! is_dir($cacheDir)) {
     @mkdir($cacheDir, 0755, true);
 }
 
+// Log incoming request (helpful for debugging in prod) — move after paths are initialized
+logMsg("REQUEST: month={$month} today={$today} year={$year} url={$url}");
+
 $cacheKey = 'pppr_'.md5($url).'.html';
 $cacheFile = $cacheDir.'/'.$cacheKey;
 $cacheTtl = 60 * 60 * 24 * 7; // 7 дней
@@ -32,6 +32,17 @@ $cacheTtl = 60 * 60 * 24 * 7; // 7 дней
 function logMsg($msg)
 {
     global $logFile;
+    // safety: do not attempt to write if log path not set
+    if (empty($logFile)) {
+        return;
+    }
+
+    // ensure directory is writable
+    $logDir = dirname($logFile);
+    if (! is_dir($logDir)) {
+        @mkdir($logDir, 0755, true);
+    }
+
     $line = date('Y-m-d H:i:s').' '.$msg.PHP_EOL;
     @file_put_contents($logFile, $line, FILE_APPEND | LOCK_EX);
 }
