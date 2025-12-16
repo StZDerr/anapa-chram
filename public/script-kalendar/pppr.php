@@ -1,58 +1,120 @@
 <?php
 
+// public/script-kalendar/pppr.php
 header('Content-Type: text/html; charset=utf-8');
 
-$month = $_GET['month'] ?? 1;
-$year = $_GET['year'] ?? date('Y');
-$today = $_GET['today'] ?? date('d');
-$trp = $_GET['trp'] ?? 0;
-$header = $_GET['header'] ?? 1;
-$lives = $_GET['lives'] ?? 1;
-$scripture = $_GET['scripture'] ?? 0;
-$dt = $_GET['dt'] ?? 0;
+$month = intval($_GET['month'] ?? 1);
+$year = intval($_GET['year'] ?? date('Y'));
+$today = intval($_GET['today'] ?? date('d'));
+$trp = intval($_GET['trp'] ?? 0);
+$header = intval($_GET['header'] ?? 1);
+$lives = intval($_GET['lives'] ?? 1);
+$scripture = intval($_GET['scripture'] ?? 0);
+$dt = intval($_GET['dt'] ?? 0);
 
-$url = "http://www.holytrinityorthodox.com/ru/calendar/calendar.php?month=$month&today=$today&year=$year&dt=$dt&header=$header&lives=$lives&trp=$trp&scripture=$scripture";
+$url = "http://www.holytrinityorthodox.com/ru/calendar/calendar.php?month={$month}&today={$today}&year={$year}&dt={$dt}&header={$header}&lives={$lives}&trp={$trp}&scripture={$scripture}";
+
+// cache/log paths
+$dir = __DIR__;
+$cacheDir = $dir.'/cache';
+$logFile = $dir.'/pppr.log';
+if (! is_dir($cacheDir)) {
+    @mkdir($cacheDir, 0755, true);
+}
+
+$cacheKey = 'pppr_'.md5($url).'.html';
+$cacheFile = $cacheDir.'/'.$cacheKey;
+$cacheTtl = 60 * 60 * 24 * 7; // 7 дней
+
+function logMsg($msg)
+{
+    global $logFile;
+    $line = date('Y-m-d H:i:s').' '.$msg.PHP_EOL;
+    @file_put_contents($logFile, $line, FILE_APPEND | LOCK_EX);
+}
 
 $contents = false;
+$httpCode = 0;
+$attempts = 3;
+$wait = [0, 1, 2];
 
-// Пробуем cURL (более надежный способ)
-if (function_exists('curl_init')) {
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-    curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36');
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+for ($i = 0; $i < $attempts; $i++) {
+    // try cURL if available
+    if (function_exists('curl_init')) {
+        $ch = curl_init();
+        curl_setopt_array($ch, [
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_TIMEOUT => 10,
+            CURLOPT_CONNECTTIMEOUT => 5,
+            CURLOPT_USERAGENT => 'Mozilla/5.0 (compatible; pppr-proxy/1.0)',
+            CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_ENCODING => '', // поддержать gzip/deflate
+        ]);
+        $contents = @curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE) ?: 0;
+        $curlError = curl_error($ch);
+        curl_close($ch);
+        if ($curlError) {
+            logMsg("cURL error: {$curlError} for URL: {$url}");
+        }
+    } else {
+        // fallback на file_get_contents
+        $context = stream_context_create([
+            'http' => [
+                'timeout' => 10,
+                'header' => "User-Agent: Mozilla/5.0 (compatible; pppr-proxy/1.0)\r\n",
+            ],
+        ]);
+        $contents = @file_get_contents($url, false, $context);
+        // попытка извлечь http-код из $http_response_header
+        $httpCode = 0;
+        if (! empty($http_response_header)) {
+            foreach ($http_response_header as $hdr) {
+                if (preg_match('#HTTP/\d+\.\d+\s+(\d+)#', $hdr, $m)) {
+                    $httpCode = intval($m[1]);
+                    break;
+                }
+            }
+        }
+    }
 
-    $contents = curl_exec($ch);
-    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    $error = curl_error($ch);
-    curl_close($ch);
+    // Если 200 и нет явной 503 в тексте — считаем успехом
+    if ($httpCode === 200 && $contents !== false && stripos($contents, '503 Service Temporarily Unavailable') === false) {
+        break;
+    }
 
-    if ($httpCode !== 200 || $contents === false) {
-        $contents = false;
+    // небольшой бэкофф перед повтором
+    if ($i < $attempts - 1) {
+        sleep($wait[$i + 1]);
     }
 }
 
-// Fallback на file_get_contents
-if ($contents === false && ini_get('allow_url_fopen')) {
-    $context = stream_context_create([
-        'http' => [
-            'timeout' => 10,
-            'user_agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-        ],
-    ]);
-    $contents = @file_get_contents($url, false, $context);
-}
-
-// Если не удалось получить данные
-if ($contents === false) {
-    echo '<p style="color: #666; text-align: center;">Не удалось загрузить данные православного календаря. Попробуйте позже.</p>';
+// Если получили контент — попробуем детект кодировки и конвертировать в UTF-8
+if ($contents !== false && $httpCode === 200) {
+    $detected = mb_detect_encoding($contents, ['UTF-8', 'Windows-1251', 'CP1251', 'ISO-8859-1'], true);
+    if ($detected && stripos($detected, 'UTF') === false) {
+        $contents = mb_convert_encoding($contents, 'UTF-8', $detected);
+    }
+    // Записываем в кеш
+    @file_put_contents($cacheFile, $contents, LOCK_EX);
+    echo $contents;
     exit;
 }
 
-// Конвертируем из Windows-1251 в UTF-8
-$contents = mb_convert_encoding($contents, 'UTF-8', 'Windows-1251');
+// На ошибке: логируем и пробуем вернуть кеш
+logMsg("Request failed httpCode={$httpCode} url={$url}");
 
-echo $contents;
+if (file_exists($cacheFile) && (time() - filemtime($cacheFile)) <= $cacheTtl) {
+    // вернуть кешированный ответ с небольшим предупреждением в HTML комменте
+    $cached = file_get_contents($cacheFile);
+    echo '<!-- Served from cache: '.date('Y-m-d H:i:s', filemtime($cacheFile))." -->\n";
+    echo $cached;
+    exit;
+}
+
+// Если нет кеша — вернуть понятное сообщение и HTTP 503
+http_response_code(503);
+echo '<p style="color:#666; text-align:center;">Сервис православного календаря временно недоступен. Попробуйте обновить страницу позже.</p>';
+exit;
