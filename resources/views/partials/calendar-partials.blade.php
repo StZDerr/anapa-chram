@@ -160,7 +160,7 @@
             for (let i = 0; i < dates.length; i++) {
                 const date = dates[i];
                 const slide = slidesContainer.children[i];
-                
+
                 // Загружаем данные
                 await new Promise(resolve => {
                     loadCalendarData(date, function(html) {
@@ -171,7 +171,7 @@
                         resolve();
                     });
                 });
-                
+
                 // Задержка 300ms между запросами (чтобы не превысить rate limit 1r/s с burst=5)
                 if (i < dates.length - 1) {
                     await new Promise(r => setTimeout(r, 300));

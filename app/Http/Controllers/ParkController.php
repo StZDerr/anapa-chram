@@ -33,7 +33,7 @@ class ParkController extends Controller
     {
         $validated = $request->validate([
             'title' => 'nullable|string|max:255',
-            'description' => 'nullable|string|max:255',
+            'description' => 'nullable|string',
             'link' => 'nullable|string|max:255',
             'link_text' => 'nullable|string|max:100',
             'order' => 'nullable|integer|min:0',
@@ -45,6 +45,11 @@ class ParkController extends Controller
         $validated['is_active'] = $request->has('is_active');
         $validated['order'] = $validated['order'] ?? 0;
         $validated['link_text'] = $validated['link_text'] ?? 'Узнать больше';
+
+        // sanitize description HTML
+        if (! empty($validated['description'])) {
+            $validated['description'] = \Purifier::clean($validated['description']);
+        }
 
         // Загрузка изображения
         if ($request->hasFile('image')) {
@@ -85,7 +90,7 @@ class ParkController extends Controller
     {
         $validated = $request->validate([
             'title' => 'nullable|string|max:255',
-            'description' => 'nullable|string|max:255',
+            'description' => 'nullable|string',
             'link' => 'nullable|string|max:255',
             'link_text' => 'nullable|string|max:100',
             'order' => 'nullable|integer|min:0',
@@ -96,6 +101,11 @@ class ParkController extends Controller
 
         $validated['is_active'] = $request->has('is_active');
         $validated['link_text'] = $validated['link_text'] ?? 'Узнать больше';
+
+        // sanitize description HTML
+        if (! empty($validated['description'])) {
+            $validated['description'] = \Purifier::clean($validated['description']);
+        }
 
         // Загрузка нового изображения
         if ($request->hasFile('image')) {

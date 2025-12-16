@@ -217,7 +217,7 @@
                             <div class="construction-info">
                                 <h3 class="construction-subtitle">{{ $construction->title }}</h3>
                                 <p class="construction-text">
-                                    {{ $construction->description }}
+                                    {!! $construction->description !!}
                                 </p>
                             </div>
                         </div>

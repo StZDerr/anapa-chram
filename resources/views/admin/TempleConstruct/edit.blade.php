@@ -78,14 +78,16 @@
                                 @enderror
                             </div>
 
-                            <div class="mb-3">
-                                <label class="form-label" for="description">Описание</label>
-                                <textarea id="description" name="description" class="form-control @error('description') is-invalid @enderror"
-                                    rows="8">{{ old('description', $templeConstruction->description) }}</textarea>
-                                @error('description')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
+                            @include('admin.partials.editor', [
+                                'id' => 'description',
+                                'name' => 'description',
+                                'value' => old('description', $templeConstruction->description),
+                                'label' => 'Описание',
+                                // 'uploadUrl' => route('admin.temple-construction.upload-image') // опционально: ваш маршрут загрузки картинок
+                            ])
+                            @error('description')
+                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                            @enderror
 
                             <div class="mb-4">
                                 <label class="form-label" for="images">Добавить новые изображения</label>
@@ -172,11 +174,11 @@
                                     // Обновляем номера порядка на странице
                                     sortable.querySelectorAll('.image-item').forEach((item,
                                         index) => {
-                                            const orderText = item.querySelector('.text-muted');
-                                            if (orderText) {
-                                                orderText.textContent = 'Порядок: ' + index;
-                                            }
-                                        });
+                                        const orderText = item.querySelector('.text-muted');
+                                        if (orderText) {
+                                            orderText.textContent = 'Порядок: ' + index;
+                                        }
+                                    });
                                 }
                             })
                             .catch(err => console.error('Ошибка:', err));

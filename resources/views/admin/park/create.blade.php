@@ -38,9 +38,13 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="description" class="form-label">Описание</label>
-                                <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description"
-                                    rows="4" placeholder="Описание слайда...">{{ old('description') }}</textarea>
+                                @include('admin.partials.editor', [
+                                    'id' => 'description',
+                                    'name' => 'description',
+                                    'value' => old('description'),
+                                    'label' => 'Описание',
+                                    'uploadUrl' => url('admin/news/upload-image'),
+                                ])
                                 @error('description')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -114,9 +118,8 @@
                                     <div class="mb-3">
                                         <label class="form-label d-block">Статус</label>
                                         <div class="form-check form-switch">
-                                            <input type="checkbox" class="form-check-input" id="is_active"
-                                                name="is_active" value="1"
-                                                {{ old('is_active', true) ? 'checked' : '' }}>
+                                            <input type="checkbox" class="form-check-input" id="is_active" name="is_active"
+                                                value="1" {{ old('is_active', true) ? 'checked' : '' }}>
                                             <label class="form-check-label" for="is_active">Активен (показывать на
                                                 сайте)</label>
                                         </div>

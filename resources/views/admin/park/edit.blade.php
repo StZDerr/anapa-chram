@@ -39,9 +39,13 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="description" class="form-label">Описание</label>
-                                <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description"
-                                    rows="4" placeholder="Описание слайда...">{{ old('description', $park->description) }}</textarea>
+                                @include('admin.partials.editor', [
+                                    'id' => 'description',
+                                    'name' => 'description',
+                                    'value' => old('description', $park->description),
+                                    'label' => 'Описание',
+                                    'uploadUrl' => url('admin/news/upload-image'),
+                                ])
                                 @error('description')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -192,7 +196,8 @@
                                 <div style="position: absolute; bottom: 15px; left: 15px; right: 15px;">
                                     @if ($park->description)
                                         <p style="font-size: 12px; margin-bottom: 10px;">
-                                            {{ Str::limit($park->description, 100) }}</p>
+                                            {!! \Purifier::clean($park->description) !!}
+                                        </p>
                                     @endif
                                     @if ($park->link)
                                         <span

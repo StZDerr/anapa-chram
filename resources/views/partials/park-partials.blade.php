@@ -32,7 +32,7 @@
                                 @if ($slide->description || $slide->link)
                                     <div class="slide-footer">
                                         @if ($slide->description)
-                                            <p class="slide-description">{{ $slide->description }}</p>
+                                            <div class="slide-description">{!! \Purifier::clean($slide->description) !!}</div>
                                         @endif
                                         @if ($slide->link)
                                             <a href="{{ $slide->link }}">

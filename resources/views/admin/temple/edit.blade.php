@@ -46,9 +46,13 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="about_text" class="form-label">Текст "О храме"</label>
-                                <textarea class="form-control @error('about_text') is-invalid @enderror" id="about_text" name="about_text"
-                                    rows="6">{{ old('about_text', $page->about_text ?? '') }}</textarea>
+                                @include('admin.partials.editor', [
+                                    'id' => 'about_text',
+                                    'name' => 'about_text',
+                                    'value' => old('about_text', $page->about_text ?? ''),
+                                    'label' => 'Текст "О храме"',
+                                    'uploadUrl' => url('admin/news/upload-image'),
+                                ])
                                 @error('about_text')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -124,9 +128,13 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="opening_details" class="form-label">Подробный текст</label>
-                                <textarea class="form-control @error('opening_details') is-invalid @enderror" id="opening_details"
-                                    name="opening_details" rows="4">{{ old('opening_details', $page->opening_details ?? '') }}</textarea>
+                                @include('admin.partials.editor', [
+                                    'id' => 'opening_details',
+                                    'name' => 'opening_details',
+                                    'value' => old('opening_details', $page->opening_details ?? ''),
+                                    'label' => 'Подробный текст',
+                                    'uploadUrl' => url('admin/news/upload-image'),
+                                ])
                                 @error('opening_details')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

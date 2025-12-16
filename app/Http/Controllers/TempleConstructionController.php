@@ -6,6 +6,7 @@ use App\Models\TempleConstruction;
 use App\Models\TempleConstructionImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Mews\Purifier\Facades\Purifier;
 
 class TempleConstructionController extends Controller
 {
@@ -52,7 +53,7 @@ class TempleConstructionController extends Controller
 
         $construction = TempleConstruction::create([
             'title' => $validated['title'],
-            'description' => $validated['description'],
+            'description' => Purifier::clean($validated['description'] ?? null),
         ]);
 
         // Загружаем изображения если есть
@@ -103,7 +104,7 @@ class TempleConstructionController extends Controller
 
         $templeConstruction->update([
             'title' => $validated['title'],
-            'description' => $validated['description'],
+            'description' => Purifier::clean($validated['description'] ?? null),
         ]);
 
         // Добавляем новые изображения если загружены

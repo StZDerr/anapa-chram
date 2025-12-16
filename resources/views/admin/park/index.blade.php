@@ -65,7 +65,7 @@
                                                     <strong>{{ $slide->title ?? 'Без заголовка' }}</strong>
                                                     @if ($slide->description)
                                                         <br><small
-                                                            class="text-muted">{{ Str::limit($slide->description, 50) }}</small>
+                                                            class="text-muted">{{ Str::limit(strip_tags($slide->description), 100) }}</small>
                                                     @endif
                                                 </td>
                                                 <td>
