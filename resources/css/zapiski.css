@@ -4,7 +4,7 @@
     --main-color: #4a5b6f;
     --beige-color: #e2daca;
     --font-title: "Tenor Sans", sans-serif;
-    --font-text: "Montserrat", sans-serif;
+    --font-ui: "Montserrat", sans-serif;
     --font-size-title: clamp(1.5rem, 1rem + 2vw, 3.5rem);
 } */
 
@@ -82,7 +82,7 @@
 
 /* Заголовок карточки */
 .zapiski-card-title {
-    font-family: var(--font-text);
+    font-family: var(--font-ui);
     font-weight: 400;
     font-size: 16px;
     line-height: 1.4;
@@ -93,7 +93,7 @@
 
 /* Цена */
 .zapiski-card-price {
-    font-family: var(--font-text);
+    font-family: var(--font-ui);
     font-weight: 600;
     font-size: 20px;
     color: var(--main-color);
@@ -102,7 +102,7 @@
 
 /* Кнопка */
 .zapiski-btn {
-    font-family: var(--font-text);
+    font-family: var(--font-ui);
     font-weight: 500;
     font-size: 16px;
     font-variant: small-caps;
@@ -145,7 +145,7 @@
 }
 
 .form-label {
-    font-family: var(--font-text);
+    font-family: var(--font-ui);
     font-weight: 500;
     font-size: 14px;
     color: #333;
@@ -155,7 +155,7 @@
     border-radius: 10px;
     border: 1px solid #ddd;
     padding: 10px 15px;
-    font-family: var(--font-text);
+    font-family: var(--font-ui);
 }
 
 .form-control:focus {
@@ -168,7 +168,7 @@
     border: none;
     border-radius: 25px;
     padding: 12px 30px;
-    font-family: var(--font-text);
+    font-family: var(--font-ui);
     font-weight: 500;
     font-size: 16px;
     transition: all 0.3s ease;

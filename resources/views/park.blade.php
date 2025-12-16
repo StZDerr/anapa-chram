@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <!-- Стили страницы Park -->
-    @vite(['resources/css/park.css', 'resources/js/park.js', 'resources/css/park-swiper.css'])
+    @vite(['resources/css/park.css', 'resources/js/park.js', 'resources/css/park-swiper.css', 'resources/css/app.css'])
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -216,9 +216,9 @@
                         <div class="col-12 col-lg-6">
                             <div class="construction-info">
                                 <h3 class="construction-subtitle">{{ $construction->title }}</h3>
-                                <p class="construction-text">
+                                <div class="construction-text">
                                     {!! $construction->description !!}
-                                </p>
+                                </div>
                             </div>
                         </div>
                     </div>

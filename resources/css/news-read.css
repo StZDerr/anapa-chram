@@ -44,7 +44,7 @@
     background: rgba(196, 151, 90, 0.9);
     padding: 8px 20px;
     border-radius: 20px;
-    font-family: var(--font-text);
+    font-family: var(--font-ui);
     font-size: 14px;
     font-weight: 600;
     text-transform: uppercase;
@@ -73,7 +73,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    font-family: var(--font-text);
+    font-family: var(--font-ui);
     font-size: 16px;
     font-weight: 500;
 }
@@ -94,7 +94,7 @@
 }
 
 .news-lead {
-    font-family: var(--font-text);
+    font-family: var(--font-ui);
     font-size: 22px;
     line-height: 1.6;
     color: #333;
@@ -107,7 +107,7 @@
 }
 
 .news-article p {
-    font-family: var(--font-text);
+    font-family: var(--font-ui);
     font-size: 18px;
     line-height: 1.8;
     color: #444;
@@ -309,7 +309,7 @@
 }
 
 .other-news-date {
-    font-family: var(--font-text);
+    font-family: var(--font-ui);
     font-size: 14px;
     color: #999;
     margin-bottom: 10px;
@@ -326,7 +326,7 @@
 }
 
 .other-news-excerpt {
-    font-family: var(--font-text);
+    font-family: var(--font-ui);
     font-size: 15px;
     line-height: 1.6;
     color: #666;
@@ -483,7 +483,7 @@
 
 /* Стили для контента из CKEditor */
 .news-content-display {
-    font-family: var(--font-text);
+    font-family: var(--font-ui);
     font-size: 18px;
     line-height: 1.8;
     color: #444;

@@ -16,6 +16,9 @@
 /public/build
 /public/hot
 /public/storage
+"public/script-kalendar/cache/*"
+"!public/script-kalendar/cache/.gitkeep"
+"public/script-kalendar/pppr.log"
 /storage/*.key
 /storage/pail
 /vendor

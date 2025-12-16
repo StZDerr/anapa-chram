@@ -3,7 +3,7 @@
 /* :root {
     --main-color: #4a5b6f;
     --font-title: "Tenor Sans", sans-serif;
-    --font-text: "Montserrat", sans-serif;
+    --font-ui: "Montserrat", sans-serif;
     --font-size-title: clamp(1.5rem, 1rem + 2vw, 3.5rem);
     --font-size-subtitle: clamp(1rem, 0.8364rem + 0.7273vw, 2rem);
 } */
@@ -88,7 +88,7 @@
 }
 
 .attractionsSwiper .swiper-slide-description {
-    font-family: var(--font-text);
+    font-family: var(--font-ui);
     font-size: 14px;
     line-height: 1.6;
     text-align: justify;
@@ -153,7 +153,7 @@
 }
 
 .attractionsSwiper .swiper-slide-description {
-    font-family: var(--font-text);
+    font-family: var(--font-ui);
     font-weight: 400;
     font-size: 14px;
     line-height: 1.6;
@@ -248,7 +248,7 @@
 }
 
 .attractions .swiper-slide-description {
-    font-family: var(--font-text);
+    font-family: var(--font-ui);
     font-weight: 500;
     font-size: clamp(0.5rem, 0.4182rem + 0.3636vw, 1rem);
     line-height: 24px;
@@ -312,7 +312,7 @@
 }
 
 .rules-subtitle {
-    font-family: var(--font-text);
+    font-family: var(--font-ui);
     font-weight: 500;
     font-size: 16px;
     line-height: 24px;
@@ -338,7 +338,7 @@
     align-items: flex-start;
     margin-bottom: 16px;
 
-    font-family: var(--font-text);
+    font-family: var(--font-ui);
     font-weight: 500;
     font-size: 16px;
     line-height: 24px;
@@ -435,7 +435,7 @@
 }
 
 .rules-list-prohibited span {
-    font-family: var(--font-text);
+    font-family: var(--font-ui);
     font-weight: 500;
     font-size: 16px;
     line-height: 24px;
@@ -445,7 +445,7 @@
 }
 
 .rules-list-prohibited span {
-    font-family: var(--font-text);
+    font-family: var(--font-ui);
     font-weight: 500;
     font-size: 16px;
     line-height: 24px;
@@ -639,13 +639,18 @@
 }
 
 .construction-text {
-    font-family: var(--font-text);
+    font-family: var(--font-ui);
     font-weight: 400;
     font-size: 16px;
     line-height: 26px;
     color: #333;
     text-align: justify;
     margin-bottom: 20px;
+}
+/* Гарантировать единый шрифт для всего содержимого строительства */
+.construction-text,
+.construction-text * {
+    font-family: var(--font-ui) !important;
 }
 
 .construction-text:last-child {
@@ -747,7 +752,7 @@
 }
 
 .construction .concept {
-    font-family: var(--font-text);
+    font-family: var(--font-ui);
     font-weight: 500;
     font-size: 16px;
     line-height: 24px;

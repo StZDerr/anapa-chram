@@ -3,7 +3,7 @@
     --main-color: #4a5b6f;
     --beige-color: #e2daca;
     --font-title: "Tenor Sans", sans-serif;
-    --font-text: "Montserrat", sans-serif;
+    --font-ui: "Montserrat", sans-serif;
     --font-size-title: clamp(1rem, 0.5962rem + 1.8149vw, 3.5rem);
     --font-size-details: clamp(0.75rem, 0.5481rem + 0.9074vw, 2rem);
 } */

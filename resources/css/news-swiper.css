@@ -70,7 +70,7 @@
     border-radius: 0.5rem;
 }
 .slide-title {
-    font-family: var(--font-title);
+    font-family: var(--news-title);
     font-weight: 400;
     font-size: 28px;
     line-height: 24px;

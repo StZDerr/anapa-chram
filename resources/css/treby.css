@@ -4,7 +4,7 @@
     --main-color: #4a5b6f;
     --beige-color: #e2daca;
     --font-title: "Tenor Sans", sans-serif;
-    --font-text: "Montserrat", sans-serif;
+    --font-ui: "Montserrat", sans-serif;
     --font-size-title: clamp(1.5rem, 1rem + 2vw, 3.5rem);
 } */
 
@@ -80,7 +80,7 @@
 
 /* Заголовок карточки */
 .treby-card-title {
-    font-family: var(--font-text);
+    font-family: var(--font-ui);
     font-weight: 400;
     font-size: 18px;
     line-height: 1.4;
@@ -90,7 +90,7 @@
 
 /* Цена */
 .treby-card-price {
-    font-family: var(--font-text);
+    font-family: var(--font-ui);
     font-weight: 600;
     font-size: 20px;
     color: var(--main-color);
@@ -99,7 +99,7 @@
 
 /* Кнопка */
 .treby-btn {
-    font-family: var(--font-text);
+    font-family: var(--font-ui);
     font-weight: 500;
     font-size: 16px;
     font-variant: small-caps;
