@@ -32,6 +32,7 @@ export default defineConfig({
                 "resources/css/quick.css",
                 "resources/css/clergy.css",
                 "resources/css/donation.css",
+                "resources/css/timetable.css",
 
                 "resources/js/app.js",
                 "resources/js/welcome.js",
