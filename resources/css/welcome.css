@@ -6,8 +6,7 @@ body {
     font-family: var(--font-ui);
     color: var(--dark);
 }
-.calendar .title,
-.timetable .title {
+.calendar .title {
     font-family: var(--font-title);
     font-weight: 400;
     color: var(--main-color);
@@ -290,106 +289,6 @@ body {
         transform: none;
         opacity: 1;
     }
-}
-
-/* ---------- Дни недели / расписание ---------- */
-.background-color-light-beige .timetable .title {
-    font-size: var(--font-size-title);
-    line-height: 64px;
-    text-align: center;
-}
-.day-circle {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin: 0 5px;
-    background: var(--beige-light);
-    border: 1px solid var(--accent-border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s;
-    font-family: var(--font-ui);
-    font-weight: 600;
-    font-size: 18px;
-    color: var(--main-color);
-    text-align: center;
-}
-
-/* Desktop: expand active day button */
-@media (min-width: 768px) {
-    .day-circle.active {
-        width: 360px;
-        border-radius: 40px;
-        background: #fff;
-    }
-}
-
-/* Mobile: only change color, no expansion */
-@media (max-width: 767.98px) {
-    .day-circle.active {
-        background: #fff;
-    }
-
-    /* Show short day names on mobile */
-    .day-circle {
-        width: 60px;
-        height: 60px;
-        font-size: 16px;
-        margin: 0 3px;
-    }
-}
-.schedule-container {
-    display: flex;
-    margin: 20px auto 0;
-    max-width: 700px;
-    gap: 20px;
-}
-.schedule-half {
-    width: 50%;
-    background: #fff;
-    border: 1px solid var(--accent-border);
-    border-radius: 20px;
-    padding: 20px;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-    color: #6e634c;
-}
-
-@media (max-width: 600px) {
-    .schedule-container {
-        flex-direction: column;
-    }
-    .schedule-half {
-        width: 100%;
-    }
-}
-.schedule-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 12px;
-}
-.schedule-header .period {
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 32px;
-    font-variant: small-caps;
-    color: var(--main-color);
-}
-.schedule-header .time {
-    font-weight: 700;
-    font-size: 28px;
-    line-height: 36px;
-    text-align: right;
-    font-variant: small-caps;
-    color: var(--main-color);
-}
-.schedule-text {
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 100%;
-    font-variant: small-caps;
-    color: #6e634c;
 }
 
 /* ===== Позиционирование кнопок: на малых экранах внутрь слайдера ===== */

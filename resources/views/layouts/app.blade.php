@@ -66,14 +66,31 @@
                             Храмы и иконы
                         </a>
                         <ul class="collapse list-unstyled ps-3" id="templeSubmenu">
-                            <li><a href="{{ route('admin.temple.edit') }}" class="nav-link text-white"><i
-                                        class="bi bi-bank2"></i> Храм святого князя Владимира</a></li>
-                            <li><a href="{{ route('admin.temple.kupelOlgi.edit') }}" class="nav-link text-white"><i
-                                        class="bi bi-droplet"></i> Храм-купель святой княгини Ольги</a></li>
-                            <li><a href="{{ route('admin.temple.derzhavnayaIkona.edit') }}" class="nav-link text-white"><i
-                                        class="bi bi-award"></i> Державная икона Божией Матери</a></li>
-                            <li><a href="{{ route('admin.clergy.index') }}" class="nav-link text-white"><i
-                                        class="bi bi-person-badge"></i> Служители храма</a></li>
+                            <li>
+                                <a href="{{ route('admin.temple.edit') }}" class="nav-link text-white">
+                                    <i class="bi bi-bank2"></i> Храм святого князя Владимира
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.temple.kupelOlgi.edit') }}" class="nav-link text-white">
+                                    <i class="bi bi-droplet"></i> Храм-купель святой княгини Ольги
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.temple.derzhavnayaIkona.edit') }}" class="nav-link text-white">
+                                    <i class="bi bi-award"></i> Державная икона Божией Матери
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.clergy.index') }}" class="nav-link text-white">
+                                    <i class="bi bi-person-badge"></i> Служители храма
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.content-blocks.index') }}" class="nav-link text-white">
+                                    <i class="bi bi-person-badge"></i> Требы и пожертвования
+                                </a>
+                            </li>
                         </ul>
                     </li>
 

@@ -3,8 +3,8 @@
 /* :root {
     --main-color: #4a5b6f;
     --beige-color: #e2daca;
-    --font-title: "Tenor Sans", sans-serif;
-    --font-ui: "Montserrat", sans-serif;
+    --font-title: var(--font-ui), sans-serif;
+   var(--font-ui): "Montserrat", sans-serif;
     --font-size-title: clamp(1.5rem, 1rem + 2vw, 3.5rem);
 } */
 

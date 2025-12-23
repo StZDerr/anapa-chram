@@ -194,7 +194,7 @@
                                     </div>
 
                                     <!-- Превью (миниатюры) -->
-                                    <div class="swiper construction-gallery-thumbs mt-3">
+                                    <div class="swiper construction-gallery-thumbs ">
                                         <div class="swiper-wrapper">
                                             @foreach ($construction->images as $image)
                                                 <div class="swiper-slide">

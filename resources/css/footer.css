@@ -56,7 +56,7 @@
 /* Правая колонка - Деятельность */
 .footer-activity-section-title,
 .footer-services-section .title {
-    font-family: "Tenor Sans", sans-serif;
+    font-family: var(--font-ui);
     font-weight: 400;
     font-size: 20px;
     line-height: 28px;
@@ -140,5 +140,22 @@
     .footer-activity-section li,
     .footer-services-section li {
         font-size: 12px;
+    }
+}
+.yandex-badge.compact {
+    display: inline-block;
+    margin-left: 12px;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    background: #fff;
+}
+.yandex-badge.compact iframe {
+    display: block;
+}
+@media (max-width: 576px) {
+    .yandex-badge.compact {
+        transform: scale(0.9);
+        margin-left: 8px;
     }
 }

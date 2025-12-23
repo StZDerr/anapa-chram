@@ -5,6 +5,7 @@ use App\Http\Controllers\AttractionController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ClergyController;
+use App\Http\Controllers\ContentBlockController;
 use App\Http\Controllers\EventsCalendarController;
 use App\Http\Controllers\FaviconController;
 use App\Http\Controllers\GalleryCategoryController;
@@ -44,6 +45,10 @@ Route::get('/clergy', [PageController::class, 'clergy'])->name('clergy');
 
 Route::get('/park', [PageController::class, 'park'])->name('park');
 
+Route::get('/treby', [PageController::class, 'treby'])->name('treby');
+
+Route::get('/treby/{slug}', [PageController::class, 'trebyShow'])->name('treby.show');
+
 Route::get('/about', function () {
     return view('about');
 })->name('about');
@@ -55,10 +60,6 @@ Route::get('/gallery/desc', function () {
 Route::get('/zapiski', function () {
     return view('zapiskiAndTreby/zapiski');
 })->name('zapiski');
-
-Route::get('/treby', function () {
-    return view('zapiskiAndTreby/treby');
-})->name('treby');
 
 Route::get('/api/calendar/events', [CalendarController::class, 'index'])->name('calendar.events');
 
@@ -119,8 +120,11 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
         'attractions' => AttractionController::class,
         'temple-construction' => TempleConstructionController::class,
         'park-rules' => ParkRuleController::class,
+        'content-blocks' => ContentBlockController::class,
     ]);
 
+    Route::delete('content-blocks/images/{image}', [ContentBlockController::class, 'deleteImage'])->name('content-blocks.images.destroy');
+    Route::post('content-blocks/update-order', [ContentBlockController::class, 'updateOrder'])->name('content-blocks.update-order');
     Route::get('events', [EventsCalendarController::class, 'index'])->name('events.index');
     Route::get('api/events', [EventsCalendarController::class, 'apiIndex'])->name('events.apiIndex');
     Route::get('events/create', [EventsCalendarController::class, 'create'])->name('events.create');

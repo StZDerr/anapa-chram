@@ -61,7 +61,7 @@
     padding: 20px;
 }
 .activity-slide-title {
-    font-family: "Tenor Sans", sans-serif;
+    font-family: var(--font-ui);
     font-weight: 400;
     font-size: 28px;
     line-height: 100%;
@@ -71,7 +71,7 @@
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
 }
 .activity-slide-desc {
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-ui);
     font-weight: 500;
     font-size: 16px;
     line-height: 24px;

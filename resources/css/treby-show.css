@@ -1,0 +1,277 @@
+.treby-show {
+    background-color: var(--background-color) !important;
+}
+
+.treby-show .treby-title {
+    font-family: var(--font-title);
+    font-weight: 400;
+    font-size: var(--font-size-title);
+    line-height: 64px;
+    text-transform: uppercase;
+    color: var(--main-color);
+}
+.treby-show .title-desc {
+    font-family: var(--font-ui);
+    font-weight: 500;
+    line-height: 24px;
+    font-size: var(--font-size-base);
+    text-transform: uppercase;
+    color: var(--dark);
+}
+/* Treby — адаптированные стили (аналог блока "Строительство храма") */
+
+.treby-show {
+    padding: 80px 0;
+    background-color: #ffffff;
+}
+
+.treby-show .treby-title {
+    font-family: var(--font-title);
+    font-weight: 400;
+    font-size: var(--font-size-title);
+    line-height: 64px;
+    text-transform: uppercase;
+    color: var(--main-color);
+    margin-bottom: 50px;
+}
+
+/* Общая обёртка свайпера */
+.swiper-container-wrapper {
+    display: flex;
+    gap: 10px;
+}
+
+/* Основной слайдер */
+.treby-gallery-top {
+    width: 80%;
+    height: 33.5rem;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.treby-gallery-top .swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+}
+
+.treby-gallery-top img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Миниатюры */
+.treby-gallery-thumbs {
+    width: 20%;
+    height: 33.5rem;
+}
+
+.treby-gallery-thumbs .swiper-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.treby-gallery-thumbs .swiper-slide {
+    height: 25%;
+    opacity: 0.5;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.treby-gallery-thumbs .swiper-slide-thumb-active {
+    opacity: 1;
+    border: 2px solid var(--main-color);
+}
+
+.treby-gallery-thumbs img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Кнопки навигации */
+.treby-gallery-top .swiper-button-next,
+.treby-gallery-top .swiper-button-prev {
+    color: #fff;
+    background: rgba(0, 0, 0, 0.5);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+}
+
+.treby-gallery-top .swiper-button-next:after,
+.treby-gallery-top .swiper-button-prev:after {
+    font-size: 20px;
+}
+
+.treby-gallery-top .swiper-button-next,
+.treby-gallery-top .swiper-button-prev {
+    color: #fff;
+    background: rgba(0, 0, 0, 0.5);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.treby-gallery-top .swiper-button-next svg,
+.treby-gallery-top .swiper-button-prev svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+
+/* Описание справа */
+.construction-info {
+    padding: 0 20px;
+}
+
+.title-desc {
+    font-family: var(--font-ui);
+    font-weight: 500;
+    font-size: 16px;
+    color: #6b7280;
+    margin-bottom: 16px;
+}
+
+.construction-text {
+    font-family: var(--font-ui);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+    color: #333;
+    text-align: justify;
+    margin-bottom: 20px;
+}
+
+/* Единый шрифт для контента */
+.construction-text,
+.construction-text * {
+    font-family: var(--font-ui) !important;
+}
+
+.construction-text:last-child {
+    margin-bottom: 0;
+}
+
+/* Адаптив */
+@media (max-width: 991px) {
+    .treby-show {
+        padding: 60px 0;
+    }
+
+    .treby-show .treby-title {
+        font-size: 36px;
+        line-height: 48px;
+        margin-bottom: 40px;
+    }
+
+    .swiper-container-wrapper {
+        flex-direction: column;
+    }
+
+    .treby-gallery-top {
+        width: 100%;
+        height: 400px;
+    }
+
+    .treby-gallery-thumbs {
+        width: 100%;
+        height: 100px;
+        margin-top: 10px;
+    }
+
+    .treby-gallery-thumbs .swiper-wrapper {
+        flex-direction: row;
+    }
+
+    .treby-gallery-thumbs .swiper-slide {
+        width: 25%;
+        height: 100%;
+    }
+
+    .construction-info {
+        margin-top: 30px;
+        padding: 0;
+    }
+
+    .construction-text {
+        font-size: 15px;
+        line-height: 24px;
+    }
+}
+
+@media (max-width: 576px) {
+    .treby-show {
+        padding: 40px 0;
+    }
+
+    .treby-show .treby-title {
+        font-size: 28px;
+        line-height: 36px;
+        margin-bottom: 30px;
+    }
+
+    .treby-gallery-top {
+        height: 300px;
+        border-radius: 15px;
+    }
+
+    .treby-gallery-thumbs {
+        height: 80px;
+    }
+
+    .construction-text {
+        font-size: 14px;
+        line-height: 22px;
+        margin-bottom: 15px;
+    }
+
+    .treby-gallery-top .swiper-button-next,
+    .treby-gallery-top .swiper-button-prev {
+        width: 36px;
+        height: 36px;
+    }
+
+    .treby-gallery-top .swiper-button-next:after,
+    .treby-gallery-top .swiper-button-prev:after {
+        font-size: 16px;
+    }
+}
+
+/* Вспомогательные: отступ для заголовка и контейнера */
+.treby-show .container {
+    max-width: 1200px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.treby-show .block-2 {
+    background-color: #efe9e0;
+    border-radius: 24px;
+    padding: 1rem;
+}
+.treby-show .block-2-title {
+    font-family: var(--news-title);
+    font-weight: 400;
+    font-size: var(--font-size-subtitle);
+    line-height: 100%;
+    font-variant: small-caps;
+    color: var(--main-color);
+}
+
+.treby-show .block-2-desc {
+    font-family: var(--font-ui);
+    font-weight: 500;
+    font-size: var(--font-size-base);
+    line-height: 24px;
+    font-variant: small-caps;
+    color: var(--dark);
+}

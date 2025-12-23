@@ -33,7 +33,7 @@
     transform: rotate(90deg);
 }
 .donation-modal-title {
-    font-family: Tenor Sans;
+    font-family: var(--font-ui);
     font-weight: 400;
     font-size: clamp(1rem, 0.8364rem + 0.7273vw, 2rem);
     line-height: 100%;

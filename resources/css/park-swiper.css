@@ -96,7 +96,7 @@
     object-fit: contain;
 }
 .mySwiper .slide-title {
-    font-family: "Tenor Sans", sans-serif;
+    font-family: var(--font-ui), sans-serif;
     font-size: 24px;
     font-weight: 400;
     color: white;

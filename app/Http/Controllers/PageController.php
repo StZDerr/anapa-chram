@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Activity;
 use App\Models\Attraction;
 use App\Models\Clergy;
+use App\Models\ContentBlock;
 use App\Models\Event;
 use App\Models\News;
 use App\Models\OrthodoxCalendar;
@@ -128,13 +129,22 @@ class PageController extends Controller
             ->where('status', 'published')
             ->firstOrFail();
 
-        $otherActivity = Activity::where('status', 'published')
+        $activitys = Activity::where('status', 'published')
             ->where('id', '!=', $activity->id)
             ->orderBy('published_at', 'desc')
             ->take(6)
             ->get();
 
-        return view('activity.read', compact('activity', 'otherActivity'));
+        // Подготовка данных расписания (для timetable-partials)
+        $today = Carbon::today();
+        $startOfWeek = $today->copy()->startOfWeek(Carbon::MONDAY)->startOfDay();
+        $endOfWeek = $today->copy()->endOfWeek(Carbon::SUNDAY)->endOfDay();
+
+        $weekEvents = Event::whereBetween('start', [$startOfWeek, $endOfWeek])
+            ->orderBy('start')
+            ->get();
+
+        return view('activity.read', compact('activity', 'activitys', 'weekEvents', 'today', 'startOfWeek', 'endOfWeek'));
     }
 
     public function temple()
@@ -204,5 +214,22 @@ class PageController extends Controller
         $parkRule = ParkRule::first();
 
         return view('park', compact('attractions', 'construction', 'parkRule'));
+    }
+
+    public function treby()
+    {
+        $blocks = ContentBlock::with('images')->get();
+
+        return view('zapiskiAndTreby/treby', compact('blocks'));
+    }
+
+    public function trebyShow(string $slug)
+    {
+        // Ищем сначала по slug, затем — по id (позволяет работать пока не у всех есть slug)
+        $block = ContentBlock::where('slug', $slug)
+            ->orWhere('id', $slug)
+            ->firstOrFail();
+
+        return view('zapiskiAndTreby.treby-show', compact('block'));
     }
 }

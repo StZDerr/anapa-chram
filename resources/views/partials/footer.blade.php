@@ -431,4 +431,13 @@
             </div>
         </div>
     </div>
+    <div class="yandex-badge compact" aria-label="Рейтинг на Яндексе">
+        <a href="https://yandex.ru/maps/org/83711300257" target="_blank" rel="noopener">
+            <iframe src="https://yandex.ru/sprav/widget/rating-badge/83711300257?type=rating" width="150"
+                height="50" frameborder="0" loading="lazy" referrerpolicy="no-referrer"
+                title="Рейтинг на Яндексе"></iframe>
+        </a>
+    </div>
+    <iframe frameborder="0" width="150px" height="50px"
+        src="https://widget.2gis.ru/api/widget?org_id=70000001080263387&branch_id=70000001080263388&size=medium&theme=light"></iframe>
 </div>
