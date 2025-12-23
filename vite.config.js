@@ -33,6 +33,7 @@ export default defineConfig({
                 "resources/css/clergy.css",
                 "resources/css/donation.css",
                 "resources/css/timetable.css",
+                "resources/css/treby-show.css",
 
                 "resources/js/app.js",
                 "resources/js/welcome.js",
@@ -49,6 +50,7 @@ export default defineConfig({
                 "resources/js/activity-swiper.js",
                 "resources/js/photo-section.js",
                 "resources/js/news-swiper.js",
+                "resources/js/treby-show.js",
             ],
             refresh: true,
         }),
