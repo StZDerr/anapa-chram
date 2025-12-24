@@ -34,6 +34,7 @@ export default defineConfig({
                 "resources/css/donation.css",
                 "resources/css/timetable.css",
                 "resources/css/treby-show.css",
+                "resources/css/content-blocks.css",
 
                 "resources/js/app.js",
                 "resources/js/welcome.js",
