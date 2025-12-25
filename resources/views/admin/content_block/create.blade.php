@@ -34,6 +34,28 @@
                 @enderror
             </div>
 
+            <div class="mb-3 text-center">
+                <label for="price" class="form-label">Цена (руб.)</label>
+                <input id="price" name="price" type="number" step="0.01" min="0"
+                    class="form-control @error('price') is-invalid @enderror" value="{{ old('price') }}">
+                @error('price')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
+            @if ($contentBlock->preview_img && Storage::disk('public')->exists($contentBlock->preview_img))
+                <div class="mb-2">
+                    <img src="{{ Storage::url($contentBlock->preview_img) }}" class="img-fluid" alt="">
+                </div>
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" name="remove_preview_img" id="remove_preview_img"
+                        value="1">
+                    <label class="form-check-label" for="remove_preview_img">Удалить превью</label>
+                </div>
+            @endif
+
+            <input id="preview_img" name="preview_img" type="file" accept="image/*" class="form-control">
+
             <div class="row align-items-start gap-4">
                 {{-- LEFT: Gallery + uploader --}}
                 <div class="col-lg-6">

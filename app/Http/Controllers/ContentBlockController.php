@@ -32,6 +32,8 @@ class ContentBlockController extends Controller
             'block_2_desc' => 'nullable|string',
             'block_2_img' => 'nullable|image|mimes:webp,jpg,jpeg,png|max:2048',
             'images.*' => 'nullable|image|mimes:webp,jpg,jpeg,png|max:2048',
+            'price' => 'nullable|numeric|min:0',
+            'preview_img' => 'nullable|image|mimes:webp,jpg,jpeg,png|max:2048',
         ]);
 
         // Чистка HTML (если установлен Purifier) — fallback на strip_tags с разрешёнными тегами
@@ -51,12 +53,18 @@ class ContentBlockController extends Controller
             'block_2_title' => $validated['block_2_title'] ?? null,
             'block_2_desc' => $clean($validated['block_2_desc'] ?? null),
             'block_2_img' => null,
+            'price' => $validated['price'] ?? null,
         ]);
 
         // Загрузить block_2_img (если есть)
         if ($request->hasFile('block_2_img')) {
             $path = $request->file('block_2_img')->store('content-blocks', 'public');
             $block->update(['block_2_img' => $path]);
+        }
+
+        if ($request->hasFile('preview_img')) {
+            $path = $request->file('preview_img')->store('content-blocks', 'public');
+            $block->update(['preview_img' => $path]);
         }
 
         // Загрузить изображения (gallery)
@@ -96,6 +104,8 @@ class ContentBlockController extends Controller
             'block_2_desc' => 'nullable|string',
             'block_2_img' => 'nullable|image|mimes:webp,jpg,jpeg,png|max:2048',
             'images.*' => 'nullable|image|mimes:webp,jpg,jpeg,png|max:2048',
+            'price' => 'nullable|numeric|min:0',
+            'preview_img' => 'nullable|image|mimes:webp,jpg,jpeg,png|max:2048',
         ]);
 
         $clean = function ($html) {
@@ -124,6 +134,7 @@ class ContentBlockController extends Controller
             'block_2_title' => $validated['block_2_title'] ?? null,
             'block_2_desc' => $clean($validated['block_2_desc'] ?? null),
             'slug' => $slug,
+            'price' => $validated['price'] ?? null,
         ]);
 
         // Block 2 image replace
@@ -133,6 +144,23 @@ class ContentBlockController extends Controller
             }
             $path = $request->file('block_2_img')->store('content-blocks', 'public');
             $contentBlock->update(['block_2_img' => $path]);
+        }
+
+        // Preview image replace
+        if ($request->hasFile('preview_img')) {
+            if ($contentBlock->preview_img && Storage::disk('public')->exists($contentBlock->preview_img)) {
+                Storage::disk('public')->delete($contentBlock->preview_img);
+            }
+            $path = $request->file('preview_img')->store('content-blocks', 'public');
+            $contentBlock->update(['preview_img' => $path]);
+        }
+
+        // Optionally: remove preview if checkbox checked
+        if ($request->boolean('remove_preview_img')) {
+            if ($contentBlock->preview_img && Storage::disk('public')->exists($contentBlock->preview_img)) {
+                Storage::disk('public')->delete($contentBlock->preview_img);
+            }
+            $contentBlock->update(['preview_img' => null]);
         }
 
         // Добавляем новые изображения
@@ -162,6 +190,11 @@ class ContentBlockController extends Controller
         // Также удалить block_2_img
         if ($contentBlock->block_2_img && Storage::disk('public')->exists($contentBlock->block_2_img)) {
             Storage::disk('public')->delete($contentBlock->block_2_img);
+        }
+
+        // Удаляем preview_img, если есть
+        if ($contentBlock->preview_img && Storage::disk('public')->exists($contentBlock->preview_img)) {
+            Storage::disk('public')->delete($contentBlock->preview_img);
         }
 
         $contentBlock->delete();

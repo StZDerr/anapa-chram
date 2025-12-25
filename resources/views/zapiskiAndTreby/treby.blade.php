@@ -22,12 +22,16 @@
                     @forelse ($blocks as $block)
                         <div class="treby-card">
                             <div class="treby-card-image">
-                                <img src="{{ asset('storage/' . $block->block_2_img) }}" alt="{{ $block->title }}">
+                                <img src="{{ asset('storage/' . $block->preview_img) }}" alt="{{ $block->title }}">
                             </div>
                             <div class="treby-card-body">
                                 <h3 class="treby-card-title">{{ $block->title }}</h3>
                                 <p class="treby-card-price">
-                                    {{ \Illuminate\Support\Str::limit(strip_tags($block->title_desc ?? ''), 100) }}
+                                    @if ($block->price)
+                                        {{ number_format($block->price, 2, '.', '') }} руб.
+                                    @elseif($block->title_desc)
+                                        {{ \Illuminate\Support\Str::limit(strip_tags($block->title_desc), 50) }}
+                                    @endif
                                 </p>
                                 <a href="{{ route('treby.show', $block->slug ?? $block->id) }}" class="treby-btn">
                                     Подробнее

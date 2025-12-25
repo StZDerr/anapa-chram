@@ -18,6 +18,8 @@ class ContentBlock extends Model
         'block_2_desc',
         'block_2_img',
         'slug',
+        'price',
+        'preview_img',
     ];
 
     protected static function booted()
