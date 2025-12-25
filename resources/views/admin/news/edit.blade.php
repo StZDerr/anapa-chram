@@ -141,3 +141,33 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const imagesList = document.getElementById('news-images-list');
+            if (imagesList) {
+                imagesList.querySelectorAll('.news-image-remove-btn').forEach(function(btn) {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const thumb = btn.closest('.news-image-thumb');
+                        // визуальная пометка
+                        thumb.classList.toggle('opacity-50');
+
+                        // скрытое поле в пределах миниатюры
+                        const input = thumb.querySelector('input[name="remove_images[]"]');
+                        if (!input) return;
+
+                        if (thumb.classList.contains('opacity-50')) {
+                            input.value = thumb.dataset.imageId;
+                            input.disabled = false;
+                        } else {
+                            input.value = '';
+                            input.disabled = true;
+                        }
+                    });
+                });
+            }
+        });
+    </script>
+@endpush
