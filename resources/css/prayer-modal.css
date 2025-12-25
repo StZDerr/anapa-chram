@@ -23,7 +23,7 @@
     padding: 0.7rem 1rem;
     font-family: "Montserrat", sans-serif;
     background: #fff;
-    color: #c2c5ce;
+    color: var(--dark);
     transition: border-color 0.2s;
 }
 #prayer-names-list input[type="text"]:focus {
