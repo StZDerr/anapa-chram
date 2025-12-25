@@ -1014,3 +1014,7 @@ body {
         font-size: 0.65rem;
     }
 }
+
+.montserrat-font {
+    font-family: var(--font-ui);
+}

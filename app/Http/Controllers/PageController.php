@@ -82,14 +82,22 @@ class PageController extends Controller
     {
         $today = Carbon::today();
 
-        $start = $today->copy()->subDays(3)->startOfDay(); // 3 дня до, начало дня
-        $end = $today->copy()->addDays(3)->endOfDay();   // 3 дня после, конец дня
+        $start = $today->copy()->subDays(3)->startOfDay();
+        $end = $today->copy()->addDays(3)->endOfDay();
 
         $orthodoxCalendars = OrthodoxCalendar::whereBetween('date', [$start, $end])
             ->orderBy('date')
             ->get();
 
-        return view('calendar', compact('orthodoxCalendars', 'today', 'start', 'end'));
+        // События за текущий день
+        $startOfDay = $today->copy()->startOfDay();
+        $endOfDay = $today->copy()->endOfDay();
+
+        $dayEvents = \App\Models\Event::whereBetween('start', [$startOfDay, $endOfDay])
+            ->orderBy('start')
+            ->get();
+
+        return view('calendar', compact('orthodoxCalendars', 'today', 'start', 'end', 'dayEvents'));
     }
 
     public function news()

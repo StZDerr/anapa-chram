@@ -19,6 +19,39 @@
         <div class="container calendar-container">
             <h1 class="calendar-title">ЕЖЕДНЕВНОЕ РАСПИСАНИЕ</h1>
 
+            <div class="today-events mb-4">
+                <h2 class="h4 mb-3 montserrat-font">Мероприятия на {{ $today->format('d.m.Y') }}</h2>
+
+                @if (isset($dayEvents) && $dayEvents->isNotEmpty())
+                    @foreach ($dayEvents as $event)
+                        <article class="card mb-2">
+                            <div class="card-body d-flex justify-content-between align-items-start">
+                                <div>
+                                    <div class="text-muted small mb-1 montserrat-font">
+                                        {{ $event->start->format('H:i') }}
+                                        @if ($event->end)
+                                            — {{ $event->end->format('H:i') }}
+                                        @endif
+                                    </div>
+                                    <h3 class="h5 mb-1 montserrat-font">{{ $event->title }}</h3>
+                                    @if ($event->description)
+                                        <div class="text-muted montserrat-font">{!! nl2br(e($event->description)) !!}</div>
+                                    @endif
+                                </div>
+
+                                @if (!empty($event->color))
+                                    <div class="ms-3"
+                                        style="width:12px;height:48px;background:{{ $event->color }};border-radius:6px;">
+                                    </div>
+                                @endif
+                            </div>
+                        </article>
+                    @endforeach
+                @else
+                    <p class="text-muted">Сегодня мероприятий нет.</p>
+                @endif
+            </div>
+
             <!-- Селекторы месяца и года -->
             <div class="calendar-controls">
                 <select id="month-select" class="month-select">
