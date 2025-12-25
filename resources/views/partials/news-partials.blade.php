@@ -30,7 +30,7 @@
                                 <div class="slide-desc">
                                     {{ Str::limit(strip_tags($newsItem->content), 100) }}
                                 </div>
-                                <div class="slide-read">
+                                <div class="slide-read mt-3">
                                     <a href="{{ route('news.read', $newsItem->slug) }}">
                                         Читать
                                     </a>

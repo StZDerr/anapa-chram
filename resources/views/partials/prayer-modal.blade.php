@@ -26,6 +26,10 @@
                         <!-- Сюда будут добавляться инпуты -->
                     </div>
                     <div class="d-flex align-items-center gap-2 mb-3">
+                        <button type="button" class="btn btn-outline-secondary" id="copy-names-btn">Копировать все
+                            имена</button>
+                        <button type="button" class="btn btn-outline-secondary" id="paste-names-btn">Вставить
+                            имена</button>
                         <button type="button" class="btn btn-outline-secondary flex-grow-1" id="add-names-btn">Добавить
                             еще 10 имен</button>
                     </div>
